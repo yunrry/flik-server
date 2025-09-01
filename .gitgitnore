@@ -53,3 +53,6 @@ csv/**
 /python/emd.shx
 /emd_dong_names.txt
 /logs/safewalk.log
+
+# vibe coding configuration file
+CLAUDE.md
