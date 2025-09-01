@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="yunrry.flik.FlikApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-01T06:40:14.192Z" hostname="MacBook-Air.local" time="0.395">
+  <properties/>
+  <testcase name="contextLoads()" classname="yunrry.flik.FlikApplicationTests" time="0.395"/>
+  <system-out><![CDATA[15:40:12.340 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [yunrry.flik.FlikApplicationTests]: FlikApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:40:12.436 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration yunrry.flik.FlikApplication for test class yunrry.flik.FlikApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.5)
+
+15:40:12.736 [Test worker] INFO  yunrry.flik.FlikApplicationTests - Starting FlikApplicationTests using Java 21.0.5 with PID 20518 (started by nyoung in /Users/nyoung/WorkSpace/flik-server)
+15:40:12.737 [Test worker] INFO  yunrry.flik.FlikApplicationTests - The following 1 profile is active: "test"
+15:40:13.627 [Test worker] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+15:40:13.877 [Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15:40:14.184 [Test worker] INFO  yunrry.flik.FlikApplicationTests - Started FlikApplicationTests in 1.656 seconds (process running for 2.496)
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/Users/nyoung/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.7/fbf3d6d649ed37fc9e9c59480a05be0a26e3c2da/byte-buddy-agent-1.17.7.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
