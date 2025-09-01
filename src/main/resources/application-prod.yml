@@ -55,10 +55,10 @@ logging:
 # Security for production
 management:
   security:
-    enabled: true
+    enabled: false  # true에서 false로 변경
   endpoint:
     health:
-      show-details: when-authorized
+      show-details: always
   metrics:
     tags:
       service: flik
