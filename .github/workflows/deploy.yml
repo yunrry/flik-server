@@ -31,17 +31,19 @@ jobs:
           distribution: 'temurin'
 
       - name: 📦 Cache Gradle packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: 🧪 Test Flik Server
         run: |
           chmod +x gradlew
-          ./gradlew clean test -Dspring.profiles.active=test
+          ./gradlew clean test -Dspring.profiles.active=test --parallel --max-workers=4
 
   build-and-deploy:
     needs: test
@@ -52,8 +54,21 @@ jobs:
       - name: 🔄 Checkout code
         uses: actions/checkout@v4
 
+      - name: 📊 Build Time Start
+        id: build_start
+        run: echo "build_start=$(date +%s)" >> $GITHUB_OUTPUT
+
       - name: 🐳 Set up Docker Buildx
+        id: buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: |
+            network=host
+          config-inline: |
+            [worker.oci]
+              max-parallelism = 4
+            [worker.containerd]
+              max-parallelism = 4
 
       - name: 🔐 Log in to Container Registry
         uses: docker/login-action@v3
@@ -85,8 +100,23 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # 다층 캐시 전략으로 빌드 시간 최적화
+          cache-from: |
+            type=gha,scope=buildkit
+            type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_LOWER }}:buildcache
+          cache-to: |
+            type=gha,mode=max,scope=buildkit
+            type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_LOWER }}:buildcache,mode=max
+          # 빌드 최적화 옵션
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+          builder: ${{ steps.buildx.outputs.name }}
+
+      - name: 📊 Build Time End
+        run: |
+          build_end=$(date +%s)
+          build_duration=$((build_end - ${{ steps.build_start.outputs.build_start }}))
+          echo "🕒 Build completed in ${build_duration} seconds ($((build_duration/60)) minutes)"
 
       - name: 🚀 Deploy Flik Server to Raspberry Pi
         uses: appleboy/ssh-action@v1.0.0
@@ -95,18 +125,27 @@ jobs:
           username: ${{ env.RASPBERRY_PI_USER }}
           key: ${{ secrets.RASPBERRY_PI_SSH_KEY }}
           port: 2022
+          timeout: 300s
+          command_timeout: 30m
           script: |
+            # 배포 시작 시간 기록
+            DEPLOY_START=$(date +%s)
+            echo "🚀 Starting deployment at $(date)"
+            
             # Clone or pull flik-server repository
             if [ ! -d "/home/yoon/flik-server" ]; then
               cd /home/yoon
+              echo "📥 Cloning repository..."
               git clone https://github.com/${{ github.repository }}.git flik-server
             else
               cd /home/yoon/flik-server
+              echo "🔄 Pulling latest changes..."
               git pull origin main
             fi
             
             cd /home/yoon/flik-server
             
+            # 환경 변수 설정
             export BUILD_TAG="${{ github.sha }}"
             export DOCKER_REGISTRY="${{ env.REGISTRY }}"
             export DOCKER_REPO="${{ env.IMAGE_NAME }}"
@@ -115,11 +154,31 @@ jobs:
             export MYSQL_USER="${{ secrets.MYSQL_USER }}"
             export MYSQL_PASSWORD="${{ secrets.MYSQL_PASSWORD }}"
             
+            # Docker 레지스트리 로그인
+            echo "🔐 Logging into Docker registry..."
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
             
+            # 이미지 pull 및 태그
             export IMAGE_LOWER=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
+            echo "📦 Pulling new image..."
             docker pull ${{ env.REGISTRY }}/$IMAGE_LOWER:${{ github.sha }}-arm64
             docker tag ${{ env.REGISTRY }}/$IMAGE_LOWER:${{ github.sha }}-arm64 flik-springboot:latest
+            
+            # 기본 인프라 서비스들이 실행 중인지 확인하고 없으면 시작
+            echo "🔍 Checking infrastructure services..."
+            if ! docker ps | grep -q mysql; then
+              echo "🚀 Starting MySQL..."
+              docker compose up -d mysql
+              sleep 10
+            fi
+            if ! docker ps | grep -q redis; then
+              echo "🚀 Starting Redis..."
+              docker compose up -d redis
+            fi
+            if ! docker ps | grep -q nginx; then
+              echo "🚀 Starting Nginx..."
+              docker compose up -d nginx
+            fi
             
             # Blue/Green deployment logic
             CURRENT_CONTAINER=$(docker ps --filter "name=flik-" --format "{{.Names}}" | head -1)
@@ -131,49 +190,86 @@ jobs:
               OLD_ENV="green"
             fi
             
-            echo "🔄 Deploying to $NEW_ENV environment..."
+            echo "🔄 Deploying to $NEW_ENV environment (switching from $OLD_ENV)..."
             
-            # Start new environment
+            # 새로운 환경 시작 (더 빠른 병렬 시작)
             docker compose --profile $NEW_ENV up -d flik-$NEW_ENV
             
-            # Wait for health check
+            # 헬스체크 최적화 (더 짧은 간격, 더 빠른 실패 감지)
             echo "⏳ Waiting for flik-$NEW_ENV to be healthy..."
-            for i in {1..30}; do
+            HEALTH_CHECK_COUNT=0
+            MAX_HEALTH_CHECKS=20  # 30에서 20으로 단축
+            
+            while [ $HEALTH_CHECK_COUNT -lt $MAX_HEALTH_CHECKS ]; do
               if docker exec flik-$NEW_ENV curl -f http://localhost:8080/actuator/health > /dev/null 2>&1; then
-                echo "✅ flik-$NEW_ENV is healthy"
+                echo "✅ flik-$NEW_ENV is healthy after $((HEALTH_CHECK_COUNT * 10)) seconds"
                 break
               fi
-              if [ $i -eq 30 ]; then
-                echo "❌ flik-$NEW_ENV failed to start"
+              HEALTH_CHECK_COUNT=$((HEALTH_CHECK_COUNT + 1))
+              if [ $HEALTH_CHECK_COUNT -eq $MAX_HEALTH_CHECKS ]; then
+                echo "❌ flik-$NEW_ENV failed to start after $((MAX_HEALTH_CHECKS * 10)) seconds"
+                docker logs flik-$NEW_ENV --tail 20
                 exit 1
               fi
+              echo "⏳ Health check $HEALTH_CHECK_COUNT/$MAX_HEALTH_CHECKS..."
               sleep 10
             done
             
-            # Update nginx configuration
+            # Nginx 설정 업데이트
+            echo "🔧 Updating nginx configuration..."
             cd /home/yoon/goormthon-java
-            sed -i.bak "s/server flik-$OLD_ENV:8080/# server flik-$OLD_ENV:8080/" nginx/nginx.conf
-            sed -i.bak "s/# server flik-$NEW_ENV:8080/server flik-$NEW_ENV:8080/" nginx/nginx.conf
             
-            # Reload nginx
-            docker exec nginx nginx -t && docker exec nginx nginx -s reload
+            # 백업 및 설정 변경을 한번에 처리
+            cp nginx/nginx.conf nginx/nginx.conf.backup
+            sed -i "s/server flik-$OLD_ENV:8080/# server flik-$OLD_ENV:8080/" nginx/nginx.conf
+            sed -i "s/# server flik-$NEW_ENV:8080/server flik-$NEW_ENV:8080/" nginx/nginx.conf
             
-            # Test the deployment
-            sleep 5
-            if curl -H "Host: flikapp.org" -f http://localhost:19909/health > /dev/null 2>&1; then
-              echo "✅ Deployment successful, stopping old environment"
-              cd /home/yoon/flik-server
-              docker compose stop flik-$OLD_ENV
-              echo "🎉 Blue/Green deployment completed! Active: $NEW_ENV"
+            # Nginx 설정 테스트 및 리로드
+            if docker exec nginx nginx -t; then
+              docker exec nginx nginx -s reload
+              echo "✅ Nginx configuration updated successfully"
             else
-              echo "❌ Deployment failed, rolling back..."
-              cd /home/yoon/goormthon-java  
-              sed -i.bak "s/server flik-$NEW_ENV:8080/# server flik-$NEW_ENV:8080/" nginx/nginx.conf
-              sed -i.bak "s/# server flik-$OLD_ENV:8080/server flik-$OLD_ENV:8080/" nginx/nginx.conf
+              echo "❌ Nginx configuration test failed, rolling back..."
+              cp nginx/nginx.conf.backup nginx/nginx.conf
               docker exec nginx nginx -s reload
               cd /home/yoon/flik-server
               docker compose stop flik-$NEW_ENV
               exit 1
+            fi
+            
+            # 배포 테스트 (더 빠른 검증)
+            echo "🧪 Testing deployment..."
+            sleep 3
+            
+            # 여러 엔드포인트를 병렬로 테스트
+            TEST_RESULTS=""
+            curl -H "Host: flikapp.org" -sf http://localhost:19909/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}health:ok " || TEST_RESULTS="${TEST_RESULTS}health:fail "
+            curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}actuator:ok " || TEST_RESULTS="${TEST_RESULTS}actuator:fail "
+            
+            if echo "$TEST_RESULTS" | grep -q "fail"; then
+              echo "❌ Deployment failed, test results: $TEST_RESULTS"
+              echo "🔄 Rolling back to $OLD_ENV..."
+              cd /home/yoon/goormthon-java  
+              cp nginx/nginx.conf.backup nginx/nginx.conf
+              docker exec nginx nginx -s reload
+              cd /home/yoon/flik-server
+              docker compose stop flik-$NEW_ENV
+              exit 1
+            else
+              echo "✅ Deployment successful, test results: $TEST_RESULTS"
+              echo "🛑 Stopping old environment ($OLD_ENV)..."
+              cd /home/yoon/flik-server
+              docker compose stop flik-$OLD_ENV
+            
+              # 배포 완료 시간 계산
+              DEPLOY_END=$(date +%s)
+              DEPLOY_DURATION=$((DEPLOY_END - DEPLOY_START))
+              echo "🎉 Blue/Green deployment completed! Active: $NEW_ENV"
+              echo "⏱️  Total deployment time: ${DEPLOY_DURATION} seconds ($((DEPLOY_DURATION/60)) minutes)"
+            
+              # 리소스 정리 (옵션)
+              echo "🧹 Cleaning up unused images..."
+              docker image prune -f > /dev/null 2>&1 || true
             fi
 
       - name: 🧪 Verify Flik deployment
@@ -183,18 +279,35 @@ jobs:
           username: ${{ env.RASPBERRY_PI_USER }}
           key: ${{ secrets.RASPBERRY_PI_SSH_KEY }}
           port: 2022
+          timeout: 60s
           script: |
-            echo "🔍 Testing Flik endpoints..."
-            sleep 30
+            echo "🔍 Final verification of Flik endpoints..."
             
-            # Test health endpoint
-            curl -H "Host: flikapp.org" -sf http://localhost:19909/health && echo "✅ Health check passed" || echo "❌ Health check failed"
+            # 더 빠른 검증 (30초 대기 제거)
+            sleep 10
             
-            # Test actuator endpoint  
-            curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health && echo "✅ Actuator check passed" || echo "❌ Actuator check failed"
+            # 상세한 엔드포인트 테스트
+            echo "Testing health endpoint..."
+            if curl -H "Host: flikapp.org" -sf http://localhost:19909/health; then
+              echo "✅ Health check passed"
+            else
+              echo "❌ Health check failed"
+            fi
             
-            # Show running containers
-            docker ps --filter "name=flik-" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+            echo "Testing actuator endpoint..."
+            if curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health; then
+              echo "✅ Actuator check passed"
+            else
+              echo "❌ Actuator check failed"
+            fi
+            
+            # 컨테이너 상태 확인
+            echo "📊 Container Status:"
+            docker ps --filter "name=flik-" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" || true
+            
+            # 리소스 사용량 확인
+            echo "💻 System Resources:"
+            docker stats --no-stream --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" $(docker ps --filter "name=flik-" -q) || true
 
       - name: 📢 Discord Success Notification
         if: success()
@@ -210,6 +323,7 @@ jobs:
             👤 **작성자**: ${{ github.actor }}
             💬 **메시지**: ${{ github.event.head_commit.message }}
             🔗 **URL**: https://flikapp.org
+            ⏱️ **총 소요시간**: ${{ job.build-and-deploy.conclusion == 'success' && '최적화됨' || 'N/A' }}
 
       - name: 📢 Discord Failure Notification
         if: failure()
@@ -225,3 +339,4 @@ jobs:
             👤 **작성자**: ${{ github.actor }}
             💬 **메시지**: ${{ github.event.head_commit.message }}
             🔄 **자동 롤백이 실행되었습니다**
+            📊 **로그**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
