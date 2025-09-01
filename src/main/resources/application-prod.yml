@@ -10,7 +10,7 @@ spring:
       idle-timeout: 300000
       connection-timeout: 20000
       validation-timeout: 5000
-  
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -23,7 +23,7 @@ spring:
           batch_size: 20
         order_inserts: true
         order_updates: true
-  
+
   data:
     redis:
       host: ${SPRING_DATA_REDIS_HOST:redis}
@@ -36,23 +36,19 @@ spring:
           min-idle: 0
           max-wait: -1ms
 
+  # Spring Security 설정 - actuator 엔드포인트 보안 해제
+  security:
+    user:
+      name: admin
+      password: admin
+
 server:
   port: ${SERVER_PORT:8080}
   tomcat:
     max-threads: 200
     min-spare-threads: 10
 
-# Production logging
-logging:
-  level:
-    root: INFO
-    yunrry.flik: INFO
-    org.springframework.security: WARN
-    org.springframework.web: WARN
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-},%X{spanId:-}] %logger{36} - %msg%n"
-
-# Security for production
+# Management endpoints
 management:
   endpoints:
     web:
@@ -69,10 +65,6 @@ management:
       enabled: true
     info:
       enabled: true
-  security:
-    enabled: false
-  server:
-    port: 8080  # 메인 애플리케이션과 같은 포트 사용
   metrics:
     export:
       prometheus:
@@ -90,4 +82,12 @@ management:
     diskspace:
       enabled: true
 
-
+# Production logging
+logging:
+  level:
+    root: INFO
+    yunrry.flik: INFO
+    org.springframework.security: WARN
+    org.springframework.web: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-},%X{spanId:-}] %logger{36} - %msg%n"
