@@ -1,5 +1,5 @@
 # Multi-stage build for Spring Boot application
-FROM eclipse-temurin:21-jdk AS builder
+FROM gradle:8.5-jdk21-alpine AS builder
 
 WORKDIR /app
 
