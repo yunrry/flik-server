@@ -14,7 +14,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect  # 경고 해결
+        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: false
 
   data:
@@ -22,16 +22,10 @@ spring:
       host: ${SPRING_DATA_REDIS_HOST:redis}
       port: ${SPRING_DATA_REDIS_PORT:6379}
 
-  # Spring Security - actuator 완전 보안 해제
-  security:
-    user:
-      name: admin
-      password: admin
-
 server:
   port: ${SERVER_PORT:8080}
 
-# Management endpoints - 보안 완전 해제
+# Management endpoints - Spring Security가 이미 허용하므로 추가 설정 불필요
 management:
   endpoints:
     web:
@@ -41,14 +35,8 @@ management:
   endpoint:
     health:
       show-details: always
-  # 핵심: Spring Boot 3.x에서 actuator 보안 완전 해제
-  security:
-    enabled: false
-  server:
-    add-application-context-header: false
 
 logging:
   level:
     root: INFO
     yunrry.flik: INFO
-    org.springframework.security: WARN
