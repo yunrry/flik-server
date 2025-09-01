@@ -2,7 +2,6 @@ package yunrry.flik.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -12,28 +11,26 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    @Profile("!prod")  // 운영환경이 아닐 때만 보안 적용
-    public SecurityFilterChain devFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/actuator/**", "/health").permitAll()
+                        // Actuator 엔드포인트 허용
+                        .requestMatchers("/actuator/**").permitAll()
+                        // Health 엔드포인트 허용
+                        .requestMatchers("/health").permitAll()
+                        // API
+                        .requestMatchers("/api/**").permitAll()
+                        // 기타 모든 요청은 인증 필요
                         .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> httpBasic.realmName("Realm"))
-                .csrf(csrf -> csrf.disable());
-
-        return http.build();
-    }
-
-    @Bean
-    @Profile("prod")  // 운영환경에서는 모든 요청 허용
-    public SecurityFilterChain prodFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authz -> authz
-                        .anyRequest().permitAll()  // 운영환경에서는 모든 요청 허용
+                // HTTP Basic 인증 사용
+                .httpBasic(httpBasic -> httpBasic
+                        .realmName("Flik Application")
                 )
+                // CSRF 비활성화 (REST API이므로)
                 .csrf(csrf -> csrf.disable())
-                .httpBasic(httpBasic -> httpBasic.disable());  // HTTP Basic 완전 비활성화
+                // CORS 설정 (nginx에서 처리하므로 허용)
+                .cors(cors -> cors.disable());
 
         return http.build();
     }
