@@ -27,9 +27,6 @@ management:
     info:
       enabled: true
   metrics:
-    export:
-      prometheus:
-        enabled: true
     tags:
       application: ${spring.application.name}
       environment: ${spring.profiles.active}
