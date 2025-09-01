@@ -41,7 +41,7 @@ jobs:
       - name: 🧪 Test Flik Server
         run: |
           chmod +x gradlew
-          ./gradlew clean test
+          ./gradlew clean test -Dspring.profiles.active=test
 
   build-and-deploy:
     needs: test
