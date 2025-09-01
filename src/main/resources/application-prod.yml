@@ -30,42 +30,7 @@ spring:
       port: ${SPRING_DATA_REDIS_PORT:6379}
       timeout: 2000ms
       jedis:
-        pool:management:
-          endpoints:
-            web:
-              exposure:
-                include: health,metrics,prometheus,info,beans,env
-              base-path: /actuator
-          endpoint:
-            health:
-              show-details: always
-              show-components: always
-            metrics:
-              enabled: true
-            prometheus:
-              enabled: true
-            info:
-              enabled: true
-          security:
-            enabled: false
-          server:
-            port: 8080  # 메인 애플리케이션과 같은 포트 사용
-          metrics:
-            export:
-              prometheus:
-                enabled: true
-            tags:
-              service: flik
-              environment: production
-              deployment: ${DEPLOYMENT_ENV:unknown}
-              build: ${BUILD_INFO:unknown}
-          health:
-            redis:
-              enabled: true
-            db:
-              enabled: true
-            diskspace:
-              enabled: true
+        pool:
           max-active: 8
           max-idle: 8
           min-idle: 0
@@ -89,16 +54,40 @@ logging:
 
 # Security for production
 management:
-  security:
-    enabled: false  # true에서 false로 변경
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus,info,beans,env
+      base-path: /actuator
   endpoint:
     health:
       show-details: always
+      show-components: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    info:
+      enabled: true
+  security:
+    enabled: false
+  server:
+    port: 8080  # 메인 애플리케이션과 같은 포트 사용
   metrics:
+    export:
+      prometheus:
+        enabled: true
     tags:
       service: flik
       environment: production
       deployment: ${DEPLOYMENT_ENV:unknown}
       build: ${BUILD_INFO:unknown}
+  health:
+    redis:
+      enabled: true
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
 
 
