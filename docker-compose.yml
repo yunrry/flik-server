@@ -1,0 +1,69 @@
+# Flik Server - Blue/Green Deployment
+services:
+  # Flik Application - Blue
+  flik-blue:
+    profiles:
+      - blue
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flik-springboot:latest
+    container_name: flik-blue
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-dormung_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER:-dormung_user}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD:-dormung_password}
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SERVER_PORT=8080
+      - JAVA_OPTS=-Xms256m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+      - BUILD_INFO=${BUILD_TAG:-latest}
+      - DEPLOYMENT_ENV=blue
+    ports:
+      - "8083:8080"
+    networks:
+      - goormthon-java_dormung-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 120s
+
+  # Flik Application - Green
+  flik-green:
+    profiles:
+      - green
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flik-springboot:latest
+    container_name: flik-green
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-dormung_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER:-dormung_user}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD:-dormung_password}
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SERVER_PORT=8080
+      - JAVA_OPTS=-Xms256m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+      - BUILD_INFO=${BUILD_TAG:-latest}
+      - DEPLOYMENT_ENV=green
+    ports:
+      - "8084:8080"
+    networks:
+      - goormthon-java_dormung-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 120s
+
+networks:
+  goormthon-java_dormung-network:
+    external: true
