@@ -12,14 +12,16 @@ COPY settings.gradle .
 # 실행 권한 부여
 RUN chmod +x gradlew
 
-# 의존성 다운로드 (캐시 활용)
-RUN ./gradlew dependencies --no-daemon
+# 의존성 다운로드 (캐시 활용) - 메모리 최적화
+RUN GRADLE_OPTS="-Xmx512m -XX:MaxMetaspaceSize=256m" \
+    ./gradlew dependencies --no-daemon --max-workers=2
 
 # 소스 코드 복사
 COPY src src
 
-# 빌드 실행 (테스트 제외)
-RUN ./gradlew clean build -x test --no-daemon
+# 빌드 실행 (테스트 제외) - 메모리 최적화
+RUN GRADLE_OPTS="-Xmx1g -XX:MaxMetaspaceSize=256m" \
+    ./gradlew clean build -x test --no-daemon --max-workers=2
 
 # 빌드 결과 확인
 RUN echo "=== JAR files created ===" && \
