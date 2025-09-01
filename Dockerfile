@@ -15,15 +15,15 @@ COPY src src
 RUN gradle bootJar --no-daemon
 
 # Runtime stage
-FROM openjdk:21-jre-slim
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
 # Install curl for health checks
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl
 
 # Create non-root user for security
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN addgroup -S appuser && adduser -S appuser -G appuser
 
 # Copy built jar from builder stage
 COPY --from=builder /app/build/libs/*.jar app.jar
