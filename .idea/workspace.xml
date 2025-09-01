@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="deploy settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +108,7 @@
       <method v="2" />
     </configuration>
     <configuration name="FlikApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="ACTIVE_PROFILES" value="local" />
+      <option name="ACTIVE_PROFILES" value="prod" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="flik.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="yunrry.flik.FlikApplication" />
@@ -153,7 +152,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756695400799</updated>
-      <workItem from="1756695402126" duration="30129000" />
+      <workItem from="1756695402126" duration="32197000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -427,7 +426,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756737364355</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="deploy settings">
+      <option name="closed" value="true" />
+      <created>1756740650508</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1756740650508</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
