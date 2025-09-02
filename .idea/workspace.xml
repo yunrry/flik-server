@@ -5,53 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/RestaurantDetailResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/RestaurantController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/RestaurantAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/RestaurantEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/RestaurantJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/CacheConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/RestaurantErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/RestaurantNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/common/BaseErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/common/ErrorReason.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/common/FlikException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/common/RequestErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Restaurant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/GetRestaurantService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetRestaurantQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/RestaurantUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/RestaurantRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/RestaurantControllerIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestCacheConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/RestaurantTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/GetRestaurantServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/in/web/TouristSpotController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/out/external/KakaoMapApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/external/KakaoMapApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/out/external/NaverLocalSearchApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/external/NaverLocalSearchApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/out/persistence/PopularTouristSpotsAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/out/persistence/PopularTouristSpotsJPARepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/out/persistence/entity/AccidentStatics.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adatpters/out/persistence/entity/EmdData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/EmdService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/TouristSpotCoordinateNaverService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/TouristSpotCoordinateService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/TouristSpotSigunguUpdateNaverService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetEmdUseCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetTouristSpotAccidentsUseCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/EmdDetailPort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/GetTouristSpotAccidentsQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/LoadAccidentHotspotsPort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +296,7 @@
       <updated>1756695400799</updated>
       <workItem from="1756695402126" duration="47558000" />
       <workItem from="1756811487183" duration="422000" />
-      <workItem from="1756811912749" duration="10655000" />
+      <workItem from="1756811912749" duration="11648000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />

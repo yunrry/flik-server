@@ -84,10 +84,10 @@ class RestaurantTest {
                 .build();
 
         // when
-        restaurant.updateRating(BigDecimal.valueOf(4.8));
+        Restaurant newRestaurant = restaurant.updateRating(BigDecimal.valueOf(4.8));
 
         // then
-        assertThat(restaurant.getRating()).isEqualTo(BigDecimal.valueOf(4.8));
+        assertThat(newRestaurant.getRating()).isEqualTo(BigDecimal.valueOf(4.8));
     }
 
     @Test
