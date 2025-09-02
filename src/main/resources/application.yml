@@ -10,6 +10,19 @@ server:
   servlet:
       context-path: /api
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    display-request-duration: true
+    groups-order: desc
+  api-docs:
+    path: /v3/api-docs
+
+security:
+  swagger-bypass:
+    enabled: true
 
 # Actuator endpoints for monitoring
 management:
