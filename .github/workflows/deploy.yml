@@ -295,7 +295,7 @@ jobs:
             fi
             
             echo "Testing actuator endpoint..."
-            if curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health; then
+            if curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health; then
               echo "✅ Actuator check passed"
             else
               echo "❌ Actuator check failed"

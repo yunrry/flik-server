@@ -57,5 +57,6 @@ csv/**
 # vibe coding configuration file
 CLAUDE.md
 
+note.md
 
 logs/

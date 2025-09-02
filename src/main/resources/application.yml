@@ -7,6 +7,8 @@ spring:
 
 server:
   port: 8080
+  servlet:
+      context-path: /api
 
 
 # Actuator endpoints for monitoring
@@ -48,3 +50,13 @@ logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+kakao:
+  api:
+    key: ${KAKAO_API_KEY:your-kakao-api-key}
+
+naver:
+  api:
+    client-id: iR0esJl2LAiYkZGwXukQ
+    client-secret: ${NAVER_SECRET:your-naver-api-key}
+
