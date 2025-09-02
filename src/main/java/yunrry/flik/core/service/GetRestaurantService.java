@@ -1,6 +1,7 @@
 package yunrry.flik.core.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import yunrry.flik.core.domain.exception.RestaurantNotFoundException;
 import yunrry.flik.core.domain.model.Restaurant;
@@ -15,6 +16,7 @@ public class GetRestaurantService implements RestaurantUseCase {
     private final RestaurantRepository restaurantRepository;
 
     @Override
+    @Cacheable(value = "restaurants", key = "#query.restaurantId")
     public Restaurant getRestaurant(GetRestaurantQuery query) {
         return restaurantRepository.findById(query.getRestaurantId())
                 .orElseThrow(() -> new RestaurantNotFoundException(query.getRestaurantId()));

@@ -1,4 +1,3 @@
 package yunrry.flik.adapters.in.dto;
 
-public class ErrorResponse {
-}
+public record ErrorResponse(int status, String message) {}

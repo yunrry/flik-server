@@ -16,7 +16,15 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/health",
                                 "/actuator",
                                 "/actuator/**",
-                                "/api/actuator/health").permitAll()
+                                "/api/actuator/health",
+                                "/swagger-ui/**",
+                                "/api/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/swagger-resources/**",
+                                "/api/swagger-ui/**",
+                                "/api/swagger-ui.html",
+                                "/api/v1/**",
+                                "/v1/**").permitAll()
                         .requestMatchers("/actuator/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 );

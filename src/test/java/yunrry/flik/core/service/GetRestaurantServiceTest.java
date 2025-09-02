@@ -121,4 +121,6 @@ class GetRestaurantServiceTest {
         assertThat(result.isOpenAt(LocalTime.of(14, 0), "월")).isTrue();
         assertThat(result.isOpenAt(LocalTime.of(14, 0), "화")).isFalse();
     }
+
+
 }
