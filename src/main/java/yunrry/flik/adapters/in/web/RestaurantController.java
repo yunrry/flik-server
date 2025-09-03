@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.RestaurantDetailResponse;
 import yunrry.flik.core.domain.model.Restaurant;
-import yunrry.flik.ports.in.usecase.GetRestaurantQuery;
+import yunrry.flik.ports.in.query.GetRestaurantQuery;
 import yunrry.flik.ports.in.usecase.RestaurantUseCase;
 
 @Tag(name = "Restaurant", description = "음식점 API")
