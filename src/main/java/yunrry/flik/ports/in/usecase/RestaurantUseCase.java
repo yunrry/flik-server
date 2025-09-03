@@ -6,3 +6,4 @@ import yunrry.flik.ports.in.query.GetRestaurantQuery;
 public interface RestaurantUseCase {
     Restaurant getRestaurant(GetRestaurantQuery query);
 }
+
