@@ -1,14 +1,14 @@
-package yunrry.flik.adapters.in.dto.restaurant;
+package yunrry.flik.adapters.in.dto.festival;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import yunrry.flik.core.domain.exception.RestaurantRunningTimeNullException;
-import yunrry.flik.core.domain.model.Restaurant;
+import yunrry.flik.core.domain.model.Festival;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 
-public record RestaurantDetailResponse(
+
+public record FestivalDetailResponse(
         Long id,
         String name,
         String category,
@@ -22,27 +22,27 @@ public record RestaurantDetailResponse(
         Boolean isOpen,
         List<String> imageUrls
 ) {
-    public static RestaurantDetailResponse from(Restaurant restaurant) {
-        String operatingHours = formatOperatingHours(restaurant.getOpenTime(), restaurant.getCloseTime());
+    public static FestivalDetailResponse from(Festival festival) {
+        String operatingHours = formatOperatingHours(festival.getOpenTime(), festival.getCloseTime());
         Boolean isOpen;
         try {
-            isOpen = restaurant.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
-        } catch (RestaurantRunningTimeNullException e) {
+            isOpen = festival.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
+        } catch (Exception e) {
             isOpen = null;
         }
 
-        return new RestaurantDetailResponse(
-                restaurant.getId(),
-                restaurant.getName(),
-                restaurant.getCategory(),
-                restaurant.getRating(),
-                restaurant.getDescription(),
-                restaurant.getAddress(),
-                restaurant.getDistance(),
+        return new FestivalDetailResponse(
+                festival.getId(),
+                festival.getName(),
+                festival.getCategory(),
+                festival.getRating(),
+                festival.getDescription(),
+                festival.getAddress(),
+                festival.getDistance(),
                 operatingHours,
-                restaurant.getDayOff(),
+                festival.getDayOff(),
                 isOpen,
-                restaurant.getImageUrls()
+                festival.getImageUrls()
         );
     }
 

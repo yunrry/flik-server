@@ -7,36 +7,37 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import yunrry.flik.adapters.in.dto.*;
-import yunrry.flik.adapters.in.dto.spot.SpotDetailResponse;
-import yunrry.flik.adapters.in.dto.spot.SpotSearchResponse;
-import yunrry.flik.core.domain.model.Spot;
-import yunrry.flik.ports.in.query.GetSpotQuery;
-import yunrry.flik.ports.in.query.SearchSpotsQuery;
-import yunrry.flik.ports.in.usecase.SpotUseCase;
-import yunrry.flik.ports.in.usecase.SearchSpotsUseCase;
+import yunrry.flik.adapters.in.dto.Response;
+import yunrry.flik.adapters.in.dto.SliceSearchResponse;
+import yunrry.flik.adapters.in.dto.festival.FestivalDetailResponse;
+import yunrry.flik.adapters.in.dto.festival.FestivalSearchResponse;
+import yunrry.flik.core.domain.model.Festival;
+import yunrry.flik.ports.in.query.GetFestivalQuery;
+import yunrry.flik.ports.in.query.SearchFestivalsQuery;
+import yunrry.flik.ports.in.usecase.SearchFestivalsUseCase;
+import yunrry.flik.ports.in.usecase.FestivalUseCase;
 
-@Tag(name = "Spot", description = "음식점 API")
+@Tag(name = "Festival", description = "음식점 API")
 @RestController
-@RequestMapping("/v1/spots")
+@RequestMapping("/v1/festivals")
 @RequiredArgsConstructor
-public class SpotController {
+public class FestivalController {
 
-    private final SpotUseCase spotUseCase;
-    private final SearchSpotsUseCase searchSpotsUseCase;
+    private final FestivalUseCase festivalUseCase;
+    private final SearchFestivalsUseCase searchFestivalsUseCase;
 
     @Operation(summary = "음식점 상세 조회", description = "음식점 ID로 상세 정보를 조회합니다.")
     @GetMapping("/{id}")
-    public ResponseEntity<Response<SpotDetailResponse>> getSpot(@PathVariable Long id) {
-        GetSpotQuery query = new GetSpotQuery(id);
-        Spot spot = spotUseCase.getSpot(query);
-        SpotDetailResponse response = SpotDetailResponse.from(spot);
+    public ResponseEntity<Response<FestivalDetailResponse>> getFestival(@PathVariable Long id) {
+        GetFestivalQuery query = new GetFestivalQuery(id);
+        Festival festival = festivalUseCase.getFestival(query);
+        FestivalDetailResponse response = FestivalDetailResponse.from(festival);
         return ResponseEntity.ok(Response.success(response));
     }
 
     @Operation(summary = "음식점 검색", description = "조건에 따라 음식점을 검색합니다.")
     @GetMapping
-    public ResponseEntity<Response<SliceSearchResponse>> searchSpots(
+    public ResponseEntity<Response<SliceSearchResponse>> searchFestivals(
             @Parameter(description = "페이지 번호", example = "0")
             @RequestParam(defaultValue = "0") int page,
 
@@ -55,9 +56,9 @@ public class SpotController {
             @Parameter(description = "주소 검색어", example = "성수동")
             @RequestParam(required = false) String address) {
 
-        SearchSpotsQuery query = new SearchSpotsQuery(page, size, category, sort, keyword, address);
-        Slice<Spot> spots = searchSpotsUseCase.searchSpots(query);
-        SliceSearchResponse response = SpotSearchResponse.from(spots);
+        SearchFestivalsQuery query = new SearchFestivalsQuery(page, size, category, sort, keyword, address);
+        Slice<Festival> festivals = searchFestivalsUseCase.searchFestivals(query);
+        SliceSearchResponse response = FestivalSearchResponse.from(festivals);
 
         return ResponseEntity.ok(Response.success(response));
     }
