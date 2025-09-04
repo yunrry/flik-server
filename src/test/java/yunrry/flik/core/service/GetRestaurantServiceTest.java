@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import yunrry.flik.core.domain.exception.RestaurantNotFoundException;
 import yunrry.flik.core.domain.model.Restaurant;
+import yunrry.flik.core.service.card.GetRestaurantService;
 import yunrry.flik.ports.in.query.GetRestaurantQuery;
 import yunrry.flik.ports.out.repository.RestaurantRepository;
 

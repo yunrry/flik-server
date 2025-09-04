@@ -1,4 +1,4 @@
-package yunrry.flik.core.service;
+package yunrry.flik.core.service.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,7 +11,7 @@ import yunrry.flik.ports.out.repository.FestivalRepository;
 
 @Service
 @RequiredArgsConstructor
-public class FestivalsService implements SearchFestivalsUseCase {
+public class SearchFestivalsService implements SearchFestivalsUseCase {
 
     private final FestivalRepository festivalRepository;
 
