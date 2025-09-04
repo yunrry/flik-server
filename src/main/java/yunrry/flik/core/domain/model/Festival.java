@@ -3,7 +3,7 @@ package yunrry.flik.core.domain.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import yunrry.flik.core.domain.exception.RestaurantRunningTimeNullException;
+import yunrry.flik.core.domain.exception.FestivalRunningTimeNullException;
 import yunrry.flik.core.domain.exception.SpotRunningTimeNullException;
 
 import java.math.BigDecimal;
@@ -13,7 +13,8 @@ import java.util.List;
 @Getter
 @RequiredArgsConstructor
 @Builder
-public class Restaurant {
+public class Festival {
+
     private final Long id;
     private final String name;
     private final String category;
@@ -35,12 +36,12 @@ public class Restaurant {
             return (!currentTime.isBefore(openTime) && !currentTime.isAfter(closeTime));
 
         }else{
-            throw new RestaurantRunningTimeNullException(id);
+            throw new FestivalRunningTimeNullException(id);
         }
     }
 
-    public Restaurant updateRating(BigDecimal newRating) {
-        return Restaurant.builder()
+    public Festival updateRating(BigDecimal newRating) {
+        return Festival.builder()
                 .id(this.id)
                 .name(this.name)
                 .category(this.category)
@@ -56,8 +57,8 @@ public class Restaurant {
     }
 
 
-    public Restaurant updateDistance(Integer newDistance) {
-        return Restaurant.builder()
+    public Festival updateDistance(Integer newDistance) {
+        return Festival.builder()
                 .id(this.id)
                 .name(this.name)
                 .category(this.category)

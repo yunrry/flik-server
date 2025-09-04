@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import yunrry.flik.core.domain.model.Spot;
+import yunrry.flik.core.domain.model.Festival;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -13,12 +13,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-@Table(name = "spots")
+@Table(name = "festivals")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SpotEntity {
+public class FestivalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,8 +53,8 @@ public class SpotEntity {
     @Column(name = "day_off")
     private String dayOff;
 
-    public Spot toDomain() {
-        return Spot.builder()
+    public Festival toDomain() {
+        return Festival.builder()
                 .id(this.id)
                 .name(this.name)
                 .category(this.category)
@@ -69,19 +69,19 @@ public class SpotEntity {
                 .build();
     }
 
-    public static SpotEntity fromDomain(Spot spot) {
+    public static FestivalEntity fromDomain(Festival festival) {
         return builder()
-                .id(spot.getId())
-                .name(spot.getName())
-                .category(spot.getCategory())
-                .description(spot.getDescription())
-                .address(spot.getAddress())
-                .imageUrls(joinImageUrls(spot.getImageUrls()))
-                .rating(spot.getRating())
-                .distance(spot.getDistance())
-                .openTime(spot.getOpenTime())
-                .closeTime(spot.getCloseTime())
-                .dayOff(spot.getDayOff())
+                .id(festival.getId())
+                .name(festival.getName())
+                .category(festival.getCategory())
+                .description(festival.getDescription())
+                .address(festival.getAddress())
+                .imageUrls(joinImageUrls(festival.getImageUrls()))
+                .rating(festival.getRating())
+                .distance(festival.getDistance())
+                .openTime(festival.getOpenTime())
+                .closeTime(festival.getCloseTime())
+                .dayOff(festival.getDayOff())
                 .build();
 
     }
