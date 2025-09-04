@@ -5,10 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/restaurant/RestaurantSearchResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotDetailResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotSearchResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/SpotEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/SpotJpaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/SpotErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/SpotNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/SpotRunningTimeNullException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Spot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/GetSpotService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/SearchSpotsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/GetSpotQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/SearchSpotsQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchSpotsUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SpotUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/SpotRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/SpotControllerIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/SpotTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/RestaurantDetailResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/restaurant/RestaurantDetailResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/RestaurantSearchResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/SliceSearchResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/RestaurantUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/RestaurantUseCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/RestaurantControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/RestaurantControllerIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,11 +65,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Kotlin Class" />
+        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Record" />
-        <option value="Kotlin Class" />
         <option value="Class" />
-        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -67,6 +88,9 @@
     &quot;accountId&quot;: &quot;7b1b8d32-013c-455e-ba5b-29afb67cd84c&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.7/74ce314034383548a84df323bf6c3dd2ab1648a/spring-data-commons-3.3.7-sources.jar!/org/springframework/data/repository/CrudRepository.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -91,6 +115,10 @@
     "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank.executor": "Run",
     "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank.executor": "Run",
     "Gradle.SearchRestaurantsServiceTest.executor": "Run",
+    "Gradle.SpotControllerIntegrationTest.executor": "Run",
+    "Gradle.SpotTest.executor": "Run",
+    "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
+    "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -101,7 +129,7 @@
     "Spring Boot.FlikApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "2-feat-restaurant-search-api",
+    "git-widget-placeholder": "4-feat-spot-card-api",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server/src/main/java/yunrry/flik/core/domain/exception",
     "node.js.detected.package.eslint": "true",
@@ -109,10 +137,18 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "copyright.filetypes.JAVA",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="yunrry.flik.adapters.in.web" />
+      <recent name="yunrry.flik.ports.in.usecase" />
+      <recent name="yunrry.flik.adapters.out.persistence" />
+      <recent name="yunrry.flik.core.domain.exception" />
+      <recent name="yunrry.flik.ports.in.query" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception" />
     </key>
@@ -125,13 +161,20 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="yunrry.flik.core.domain.model" />
       <recent name="yunrry.flik.adapters.in.web" />
       <recent name="yunrry.flik.ports.in.query" />
       <recent name="yunrry.flik.core.service" />
-      <recent name="yunrry.flik.core.domain.model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="yunrry.flik.adapters.in.web" />
+      <recent name="yunrry.flik.adapters.in.dto" />
+      <recent name="yunrry.flik.core.service" />
+      <recent name="yunrry.flik.adapters.out.persistence" />
+      <recent name="yunrry.flik.ports.in.usecase" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.FlikApplication">
+  <component name="RunManager" selected="Gradle.SpotControllerIntegrationTest">
     <configuration name="RestaurantControllerIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -156,7 +199,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RestaurantSearchControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotControllerIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -169,7 +212,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.web.RestaurantSearchControllerTest&quot;" />
+            <option value="&quot;yunrry.flik.adapters.in.web.SpotControllerIntegrationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -180,7 +223,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -193,7 +236,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.ports.in.query.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank&quot;" />
+            <option value="&quot;yunrry.flik.core.domain.model.SpotTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -204,7 +247,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -217,7 +260,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.ports.in.query.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank&quot;" />
+            <option value="&quot;yunrry.flik.core.domain.model.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -228,7 +271,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchRestaurantsServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -241,7 +284,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.SearchRestaurantsServiceTest&quot;" />
+            <option value="&quot;yunrry.flik.core.domain.model.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -273,20 +316,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.SpotControllerIntegrationTest" />
+      <item itemvalue="Gradle.SpotTest" />
+      <item itemvalue="Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime" />
+      <item itemvalue="Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff" />
       <item itemvalue="Gradle.RestaurantControllerIntegrationTest" />
-      <item itemvalue="Gradle.RestaurantSearchControllerTest" />
-      <item itemvalue="Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank" />
-      <item itemvalue="Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank" />
-      <item itemvalue="Gradle.SearchRestaurantsServiceTest" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.SpotControllerIntegrationTest" />
+        <item itemvalue="Gradle.SpotTest" />
+        <item itemvalue="Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime" />
+        <item itemvalue="Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff" />
         <item itemvalue="Gradle.RestaurantControllerIntegrationTest" />
-        <item itemvalue="Gradle.RestaurantSearchControllerTest" />
-        <item itemvalue="Gradle.SearchRestaurantsServiceTest" />
-        <item itemvalue="Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank" />
-        <item itemvalue="Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank" />
       </list>
     </recent_temporary>
   </component>
@@ -308,7 +351,10 @@
       <updated>1756695400799</updated>
       <workItem from="1756695402126" duration="47558000" />
       <workItem from="1756811487183" duration="422000" />
-      <workItem from="1756811912749" duration="20105000" />
+      <workItem from="1756811912749" duration="24317000" />
+      <workItem from="1756955974892" duration="75000" />
+      <workItem from="1756956069662" duration="6797000" />
+      <workItem from="1756964195807" duration="1917000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
