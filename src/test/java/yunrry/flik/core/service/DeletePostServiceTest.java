@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import yunrry.flik.core.domain.exception.PostAccessDeniedException;
 import yunrry.flik.core.domain.exception.PostNotFoundException;
 import yunrry.flik.core.domain.model.Post;
+import yunrry.flik.core.service.post.DeletePostService;
 import yunrry.flik.ports.in.command.DeletePostCommand;
 import yunrry.flik.ports.out.repository.PostRepository;
 

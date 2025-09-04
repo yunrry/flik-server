@@ -1,4 +1,4 @@
-package yunrry.flik.core.service;
+package yunrry.flik.core.service.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;

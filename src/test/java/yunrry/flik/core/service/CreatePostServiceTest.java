@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
+import yunrry.flik.core.service.post.CreatePostService;
 import yunrry.flik.ports.in.command.CreatePostCommand;
 import yunrry.flik.ports.out.repository.PostRepository;
 

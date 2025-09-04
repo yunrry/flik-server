@@ -11,6 +11,7 @@ import org.springframework.data.domain.SliceImpl;
 import yunrry.flik.core.domain.exception.PostNotFoundException;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
+import yunrry.flik.core.service.post.GetPostService;
 import yunrry.flik.ports.in.query.GetPostQuery;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
 import yunrry.flik.ports.out.repository.PostRepository;

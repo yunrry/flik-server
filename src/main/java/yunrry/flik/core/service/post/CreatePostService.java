@@ -1,4 +1,4 @@
-package yunrry.flik.core.service;
+package yunrry.flik.core.service.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

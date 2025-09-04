@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import yunrry.flik.core.domain.model.Restaurant;
+import yunrry.flik.core.service.card.SearchRestaurantsService;
 import yunrry.flik.ports.in.query.SearchRestaurantsQuery;
 import yunrry.flik.ports.out.repository.RestaurantRepository;
 
