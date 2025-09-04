@@ -1,19 +1,19 @@
 package yunrry.flik.adapters.in.dto;
 
 import org.springframework.data.domain.Slice;
-import yunrry.flik.core.domain.model.Restaurant;
 
 import java.util.List;
+import java.util.function.Function;
 
-public record RestaurantSearchResponse(
-        List<RestaurantDetailResponse> content,
+public record SliceSearchResponse<T>(
+        List<T> content,
         PageableInfo pageable,
         boolean hasNext,
         int numberOfElements
 ) {
-    public static RestaurantSearchResponse from(Slice<Restaurant> slice) {
-        List<RestaurantDetailResponse> content = slice.getContent().stream()
-                .map(RestaurantDetailResponse::from)
+    public static <S, T> SliceSearchResponse<T> from(Slice<S> slice, Function<S, T> mapper) {
+        List<T> content = slice.getContent().stream()
+                .map(mapper)
                 .toList();
 
         PageableInfo pageableInfo = new PageableInfo(
@@ -22,7 +22,7 @@ public record RestaurantSearchResponse(
                 slice.getSort().toString()
         );
 
-        return new RestaurantSearchResponse(
+        return new SliceSearchResponse<>(
                 content,
                 pageableInfo,
                 slice.hasNext(),

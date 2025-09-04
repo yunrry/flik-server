@@ -1,6 +1,7 @@
-package yunrry.flik.adapters.in.dto;
+package yunrry.flik.adapters.in.dto.restaurant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import yunrry.flik.core.domain.exception.SpotRunningTimeNullException;
 import yunrry.flik.core.domain.model.Restaurant;
 
 import java.math.BigDecimal;
@@ -23,7 +24,12 @@ public record RestaurantDetailResponse(
 ) {
     public static RestaurantDetailResponse from(Restaurant restaurant) {
         String operatingHours = formatOperatingHours(restaurant.getOpenTime(), restaurant.getCloseTime());
-        Boolean isOpen = restaurant.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
+        Boolean isOpen;
+        try {
+            isOpen = restaurant.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
+        } catch (SpotRunningTimeNullException e) {
+            isOpen = null;
+        }
 
         return new RestaurantDetailResponse(
                 restaurant.getId(),

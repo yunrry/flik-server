@@ -1,42 +1,42 @@
 package yunrry.flik.adapters.in.web;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.*;
-import yunrry.flik.adapters.in.dto.restaurant.RestaurantDetailResponse;
-import yunrry.flik.adapters.in.dto.restaurant.RestaurantSearchResponse;
-import yunrry.flik.core.domain.model.Restaurant;
-import yunrry.flik.ports.in.query.GetRestaurantQuery;
-import yunrry.flik.ports.in.query.SearchRestaurantsQuery;
-import yunrry.flik.ports.in.usecase.RestaurantUseCase;
-import yunrry.flik.ports.in.usecase.SearchRestaurantsUseCase;
+import yunrry.flik.adapters.in.dto.spot.SpotDetailResponse;
+import yunrry.flik.adapters.in.dto.spot.SpotSearchResponse;
+import yunrry.flik.core.domain.model.Spot;
+import yunrry.flik.ports.in.query.GetSpotQuery;
+import yunrry.flik.ports.in.query.SearchSpotsQuery;
+import yunrry.flik.ports.in.usecase.SpotUseCase;
+import yunrry.flik.ports.in.usecase.SearchSpotsUseCase;
 
-@Tag(name = "Restaurant", description = "음식점 API")
+@Tag(name = "Spot", description = "음식점 API")
 @RestController
-@RequestMapping("/v1/restaurants")
+@RequestMapping("/v1/spots")
 @RequiredArgsConstructor
-public class RestaurantController {
+public class SpotController {
 
-    private final RestaurantUseCase restaurantUseCase;
-    private final SearchRestaurantsUseCase searchRestaurantsUseCase;
+    private final SpotUseCase restaurantUseCase;
+    private final SearchSpotsUseCase searchSpotsUseCase;
 
     @Operation(summary = "음식점 상세 조회", description = "음식점 ID로 상세 정보를 조회합니다.")
     @GetMapping("/{id}")
-    public ResponseEntity<Response<RestaurantDetailResponse>> getRestaurant(@PathVariable Long id) {
-        GetRestaurantQuery query = new GetRestaurantQuery(id);
-        Restaurant restaurant = restaurantUseCase.getRestaurant(query);
-        RestaurantDetailResponse response = RestaurantDetailResponse.from(restaurant);
+    public ResponseEntity<Response<SpotDetailResponse>> getSpot(@PathVariable Long id) {
+        GetSpotQuery query = new GetSpotQuery(id);
+        Spot restaurant = restaurantUseCase.getSpot(query);
+        SpotDetailResponse response = SpotDetailResponse.from(restaurant);
         return ResponseEntity.ok(Response.success(response));
     }
 
     @Operation(summary = "음식점 검색", description = "조건에 따라 음식점을 검색합니다.")
     @GetMapping
-    public ResponseEntity<Response<SliceSearchResponse>> searchRestaurants(
+    public ResponseEntity<Response<SliceSearchResponse>> searchSpots(
             @Parameter(description = "페이지 번호", example = "0")
             @RequestParam(defaultValue = "0") int page,
 
@@ -55,9 +55,9 @@ public class RestaurantController {
             @Parameter(description = "주소 검색어", example = "성수동")
             @RequestParam(required = false) String address) {
 
-        SearchRestaurantsQuery query = new SearchRestaurantsQuery(page, size, category, sort, keyword, address);
-        Slice<Restaurant> restaurants = searchRestaurantsUseCase.searchRestaurants(query);
-        SliceSearchResponse response = RestaurantSearchResponse.from(restaurants);
+        SearchSpotsQuery query = new SearchSpotsQuery(page, size, category, sort, keyword, address);
+        Slice<Spot> spots = searchSpotsUseCase.searchSpots(query);
+        SliceSearchResponse response = SpotSearchResponse.from(spots);
 
         return ResponseEntity.ok(Response.success(response));
     }
