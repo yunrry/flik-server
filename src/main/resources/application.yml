@@ -97,3 +97,13 @@ jwt:
   secret: ${JWT_SECRET:your-secret-key-here-must-be-at-least-256-bits}
   access-token-expiry: 3600    # 1시간
   refresh-token-expiry: 604800 # 7일
+
+rate-limit:
+  login:
+    max-attempts: 5
+    lock-duration: 15m
+
+
+admin:
+  master-key: ${ADMIN_MASTER_KEY:ADMIN_MASTER_KEY}
+  default-token: ${ADMIN_DEFAULT_TOKEN:}

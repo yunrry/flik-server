@@ -1,6 +1,5 @@
 package yunrry.flik.adapters.in.web;
 
-import com.nimbusds.openid.connect.sdk.LogoutRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -28,6 +27,7 @@ public class AuthController {
 
     private final LoginUseCase loginUseCase;
     private final SignupUseCase signupUseCase;
+    private final LogoutUseCase logoutUseCase;
     private final OAuthSignupUseCase oAuthSignupUseCase;
     private final RefreshTokenUseCase refreshTokenUseCase;
     private final OAuth2Service oAuth2Service;
@@ -131,7 +131,7 @@ public class AuthController {
     @Operation(summary = "로그아웃", description = "사용자를 로그아웃 처리합니다.")
     @PostMapping("/logout")
     public ResponseEntity<Response<Void>> logout(@RequestBody LogoutRequest request) {
-        // 리프레시 토큰 삭제 로직 추가 필요
+        logoutUseCase.logout(request.refreshToken());
         return ResponseEntity.ok(Response.success(null));
     }
 }
