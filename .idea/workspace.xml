@@ -5,26 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/OAuthSignupRequiredException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/LoginService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/OAuthSignupService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/RefreshTokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/SignupService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/CompleteOAuthSignupCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/LoginCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/OAuthLoginCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/RefreshTokenCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/SignupCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/AuthTokens.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/LoginUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/OAuthSignupUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/RefreshTokenUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SignupUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/RefreshTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/CompleteOAuthSignupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/LoginResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/LogoutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/OAuthCallbackRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/OAuthSignupResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/OAuthUrlResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/RefreshTokenRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/RefreshTokenResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/SignupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/auth/SignupResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/user/UpdateProfileRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/user/UserProfileResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/GetUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/UpdateUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetUserUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/UpdateUserUseCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/UserErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/UserErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/cache/RedisRefreshTokenAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/cache/RedisRefreshTokenAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/UserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/UserAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/UserJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/UserJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/out/persistence/UserAdapterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/out/persistence/UserAdapterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,12 +65,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
-        <option value="Record" />
         <option value="Enum" />
+        <option value="Exception" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="Record" />
         <option value="Class" />
-        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -133,6 +138,7 @@
     "Gradle.SpotTest.executor": "Run",
     "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
     "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
+    "Gradle.UserAdapterTest.executor": "Run",
     "Gradle.UserTest.executor": "Run",
     "Gradle.UserTest.shouldCreateUserWithRequiredFields.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -178,11 +184,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="yunrry.flik.adapters.out.persistence" />
       <recent name="yunrry.flik.adapters.out.oauth" />
       <recent name="yunrry.flik.core.service" />
       <recent name="yunrry.flik.core.domain.model" />
       <recent name="yunrry.flik.adapters.in.web" />
-      <recent name="yunrry.flik.adapters.out.persistence" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="yunrry.flik.core.domain.exception" />
@@ -192,7 +198,7 @@
       <recent name="yunrry.flik.ports.out.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.GoogleOAuth2ClientTest">
+  <component name="RunManager" selected="Gradle.UserAdapterTest">
     <configuration name="GoogleOAuth2ClientTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -265,6 +271,30 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="UserAdapterTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.adapters.out.persistence.UserAdapterTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="UserTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -279,30 +309,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;yunrry.flik.core.domain.model.UserTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="UserTest.shouldCreateUserWithRequiredFields" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.domain.model.UserTest.shouldCreateUserWithRequiredFields&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -337,17 +343,17 @@
       <item itemvalue="Gradle.GoogleOAuth2ClientTest" />
       <item itemvalue="Gradle.JwtTokenProviderTest" />
       <item itemvalue="Gradle.OAuth2ServiceTest" />
+      <item itemvalue="Gradle.UserAdapterTest" />
       <item itemvalue="Gradle.UserTest" />
-      <item itemvalue="Gradle.UserTest.shouldCreateUserWithRequiredFields" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.UserAdapterTest" />
         <item itemvalue="Gradle.GoogleOAuth2ClientTest" />
         <item itemvalue="Gradle.JwtTokenProviderTest" />
         <item itemvalue="Gradle.OAuth2ServiceTest" />
         <item itemvalue="Gradle.UserTest" />
-        <item itemvalue="Gradle.UserTest.shouldCreateUserWithRequiredFields" />
       </list>
     </recent_temporary>
   </component>
@@ -375,7 +381,7 @@
       <workItem from="1756811912749" duration="24317000" />
       <workItem from="1756955974892" duration="75000" />
       <workItem from="1756956069662" duration="6797000" />
-      <workItem from="1756964195807" duration="20643000" />
+      <workItem from="1756964195807" duration="22155000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
