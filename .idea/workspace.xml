@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/OAuth2Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/EmailAlreadyExistsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/InvalidPasswordException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/InvalidTokenException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/UserErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/UserNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/AuthProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/OAuthUserInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/RefreshToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/UserTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/oauth/GoogleOAuth2Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/oauth/KakaoOAuth2Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/oauth/OAuth2AuthenticationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/JwtTokenProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/OAuth2Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/oauth/OAuth2Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/out/oauth/GoogleOAuth2ClientTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/JwtTokenProviderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/OAuth2ServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +52,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
-        <option value="Interface" />
         <option value="Record" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Exception" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -100,6 +100,7 @@
     "Gradle.FlikApplicationTests.executor": "Run",
     "Gradle.GetRestaurantServiceTest.executor": "Run",
     "Gradle.GetRestaurantServiceTest.shouldUseCacheOnSecondCall.executor": "Run",
+    "Gradle.OAuth2ServiceTest.executor": "Run",
     "Gradle.PostAdapterTest.executor": "Run",
     "Gradle.PostControllerTest.executor": "Run",
     "Gradle.PostControllerTest.shouldGetPostSuccessfully.executor": "Run",
@@ -167,11 +168,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="yunrry.flik.adapters.out.oauth" />
+      <recent name="yunrry.flik.core.service" />
       <recent name="yunrry.flik.core.domain.model" />
       <recent name="yunrry.flik.adapters.in.web" />
-      <recent name="yunrry.flik.core.service" />
       <recent name="yunrry.flik.adapters.out.persistence" />
-      <recent name="yunrry.flik.ports.in.query" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="yunrry.flik.core.domain.exception" />
@@ -181,8 +182,8 @@
       <recent name="yunrry.flik.ports.out.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserTest">
-    <configuration name="FlikApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.GoogleOAuth2ClientTest">
+    <configuration name="GoogleOAuth2ClientTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -195,7 +196,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.FlikApplicationTests&quot;" />
+            <option value="&quot;yunrry.flik.adapters.out.oauth.GoogleOAuth2ClientTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -206,7 +207,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PostControllerTest.shouldGetPostWithoutAuth" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="JwtTokenProviderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -219,7 +220,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.web.PostControllerTest.shouldGetPostWithoutAuth&quot;" />
+            <option value="&quot;yunrry.flik.core.service.JwtTokenProviderTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -230,7 +231,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PostControllerTest.shouldSearchPostsWithoutAuth" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="OAuth2ServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -243,7 +244,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.web.PostControllerTest.shouldSearchPostsWithoutAuth&quot;" />
+            <option value="&quot;yunrry.flik.core.service.OAuth2ServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -323,20 +324,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.FlikApplicationTests" />
-      <item itemvalue="Gradle.PostControllerTest.shouldGetPostWithoutAuth" />
-      <item itemvalue="Gradle.PostControllerTest.shouldSearchPostsWithoutAuth" />
+      <item itemvalue="Gradle.GoogleOAuth2ClientTest" />
+      <item itemvalue="Gradle.JwtTokenProviderTest" />
+      <item itemvalue="Gradle.OAuth2ServiceTest" />
       <item itemvalue="Gradle.UserTest" />
       <item itemvalue="Gradle.UserTest.shouldCreateUserWithRequiredFields" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.GoogleOAuth2ClientTest" />
+        <item itemvalue="Gradle.JwtTokenProviderTest" />
+        <item itemvalue="Gradle.OAuth2ServiceTest" />
         <item itemvalue="Gradle.UserTest" />
         <item itemvalue="Gradle.UserTest.shouldCreateUserWithRequiredFields" />
-        <item itemvalue="Gradle.FlikApplicationTests" />
-        <item itemvalue="Gradle.PostControllerTest.shouldSearchPostsWithoutAuth" />
-        <item itemvalue="Gradle.PostControllerTest.shouldGetPostWithoutAuth" />
       </list>
     </recent_temporary>
   </component>
@@ -364,7 +365,7 @@
       <workItem from="1756811912749" duration="24317000" />
       <workItem from="1756955974892" duration="75000" />
       <workItem from="1756956069662" duration="6797000" />
-      <workItem from="1756964195807" duration="17289000" />
+      <workItem from="1756964195807" duration="19135000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
