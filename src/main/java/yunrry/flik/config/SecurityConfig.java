@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableWebSecurity
@@ -13,7 +14,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/actuator/health",
+                        .requestMatchers(HttpMethod.GET, "/v1/posts/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/restaurants/**").permitAll()
+                        .requestMatchers("/v1/auth/**").permitAll()  // 인증 API는 허용
+                        .requestMatchers(
+                                "/actuator/health",
                                 "/actuator",
                                 "/actuator/**",
                                 "/api/actuator/health",

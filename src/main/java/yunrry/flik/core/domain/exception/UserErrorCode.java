@@ -16,7 +16,8 @@ public enum UserErrorCode implements BaseErrorCode {
     TOKEN_EXPIRED(401, "TOKEN_EXPIRED", "만료된 토큰입니다"),
     USER_DEACTIVATED(403, "USER_DEACTIVATED", "비활성화된 사용자입니다"),
     OAUTH_AUTHENTICATION_FAILED(401, "OAUTH_AUTHENTICATION_FAILED", "소셜 로그인 인증에 실패했습니다"),
-    INVALID_PROVIDER(400, "INVALID_PROVIDER", "지원하지 않는 인증 제공자입니다");
+    INVALID_PROVIDER(400, "INVALID_PROVIDER", "지원하지 않는 인증 제공자입니다"),
+    OAUTH_SIGNUP_REQUIRED(200, "OAUTH_SIGNUP_REQUIRED", "소셜 로그인 회원가입이 필요합니다");
 
     private final int status;
     private final String code;
