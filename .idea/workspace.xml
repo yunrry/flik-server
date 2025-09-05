@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/ActivityDetailPostResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/CreatePostRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/CreatePostResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/PostSearchResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/UpdatePostRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/UpdatePostResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/UserActivityPostResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/PostControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/OAuth2Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/EmailAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/InvalidPasswordException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/InvalidTokenException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/UserErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/UserNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/AuthProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/OAuthUserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/RefreshToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/UserTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,12 +52,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="Interface" />
+        <option value="Record" />
         <option value="Enum" />
         <option value="Exception" />
-        <option value="Interface" />
-        <option value="Class" />
-        <option value="Record" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -120,6 +122,8 @@
     "Gradle.SpotTest.executor": "Run",
     "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
     "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
+    "Gradle.UserTest.executor": "Run",
+    "Gradle.UserTest.shouldCreateUserWithRequiredFields.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -163,10 +167,10 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="yunrry.flik.core.domain.model" />
       <recent name="yunrry.flik.adapters.in.web" />
       <recent name="yunrry.flik.core.service" />
       <recent name="yunrry.flik.adapters.out.persistence" />
-      <recent name="yunrry.flik.core.domain.model" />
       <recent name="yunrry.flik.ports.in.query" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -177,7 +181,7 @@
       <recent name="yunrry.flik.ports.out.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PostControllerTest.shouldSearchPostsWithoutAuth">
+  <component name="RunManager" selected="Gradle.UserTest">
     <configuration name="FlikApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -192,54 +196,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;yunrry.flik.FlikApplicationTests&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="PostControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.web.PostControllerTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="PostControllerTest.shouldGetPostSuccessfully" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.web.PostControllerTest.shouldGetPostSuccessfully&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -298,6 +254,54 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="UserTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.domain.model.UserTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserTest.shouldCreateUserWithRequiredFields" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.domain.model.UserTest.shouldCreateUserWithRequiredFields&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="FlikApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" value="local" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -320,19 +324,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.FlikApplicationTests" />
-      <item itemvalue="Gradle.PostControllerTest" />
-      <item itemvalue="Gradle.PostControllerTest.shouldGetPostSuccessfully" />
       <item itemvalue="Gradle.PostControllerTest.shouldGetPostWithoutAuth" />
       <item itemvalue="Gradle.PostControllerTest.shouldSearchPostsWithoutAuth" />
+      <item itemvalue="Gradle.UserTest" />
+      <item itemvalue="Gradle.UserTest.shouldCreateUserWithRequiredFields" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.UserTest" />
+        <item itemvalue="Gradle.UserTest.shouldCreateUserWithRequiredFields" />
+        <item itemvalue="Gradle.FlikApplicationTests" />
         <item itemvalue="Gradle.PostControllerTest.shouldSearchPostsWithoutAuth" />
         <item itemvalue="Gradle.PostControllerTest.shouldGetPostWithoutAuth" />
-        <item itemvalue="Gradle.PostControllerTest.shouldGetPostSuccessfully" />
-        <item itemvalue="Gradle.PostControllerTest" />
-        <item itemvalue="Gradle.FlikApplicationTests" />
       </list>
     </recent_temporary>
   </component>
@@ -360,7 +364,7 @@
       <workItem from="1756811912749" duration="24317000" />
       <workItem from="1756955974892" duration="75000" />
       <workItem from="1756956069662" duration="6797000" />
-      <workItem from="1756964195807" duration="13570000" />
+      <workItem from="1756964195807" duration="17289000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -712,7 +716,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/SearchRestaurantsServiceTest.java</url>
-          <line>25</line>
+          <line>26</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -727,12 +731,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/CreatePostServiceTest.java</url>
-          <line>23</line>
+          <line>24</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/PostControllerTest.java</url>
-          <line>77</line>
+          <line>73</line>
           <properties class="yunrry.flik.adapters.in.web.PostControllerTest" method="shouldGetPostWithoutAuth">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
