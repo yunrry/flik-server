@@ -15,7 +15,7 @@ import yunrry.flik.ports.in.usecase.UpdateUserUseCase;
 
 @Tag(name = "User", description = "사용자 API")
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/v1/users")
 @RequiredArgsConstructor
 public class UserController {
 

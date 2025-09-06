@@ -3,13 +3,20 @@ package yunrry.flik.adapters.in.web;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import yunrry.flik.adapters.in.dto.OAuthUserInfoCache;
 import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.auth.*;
+import yunrry.flik.adapters.out.oauth.OAuth2AuthenticationException;
 import yunrry.flik.core.domain.exception.OAuthSignupRequiredException;
 import yunrry.flik.core.domain.model.AuthProvider;
+import yunrry.flik.core.domain.model.OAuthUserInfo;
 import yunrry.flik.core.domain.model.User;
 import yunrry.flik.core.service.OAuth2Service;
 import yunrry.flik.ports.in.command.CompleteOAuthSignupCommand;
@@ -19,11 +26,23 @@ import yunrry.flik.ports.in.command.RefreshTokenCommand;
 import yunrry.flik.ports.in.usecase.*;
 import yunrry.flik.ports.in.usecase.SignupCommand;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.util.UUID;
+
+@Slf4j
 @Tag(name = "Authentication", description = "인증 API")
 @RestController
 @RequestMapping("/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
+
+    private final RedisTemplate redisTemplate;
+
+    @Value("${app.frontend.url:http://localhost:5713}")
+    private String frontendUrl;
 
     private final LoginUseCase loginUseCase;
     private final SignupUseCase signupUseCase;
@@ -102,13 +121,89 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/oauth/callback/{provider}")
+    public void handleOAuthRedirect(
+            @PathVariable String provider,
+            @RequestParam String code,
+            @RequestParam(required = false) String state,
+            HttpServletResponse response) throws IOException {
+            log.info("OAuth callback received - provider: {}, code: {}, state: {}", provider, code, state);
+        try {
+            // OAuth 로그인 처리
+            log.info("Starting OAuth login process...");
+            OAuthLoginCommand command = OAuthLoginCommand.builder()
+                    .provider(AuthProvider.fromCode(provider))
+                    .code(code)
+                    .state(state)
+                    .build();
+
+            log.info("Calling loginUseCase.oauthLogin...");
+            AuthTokens tokens = loginUseCase.oauthLogin(command);
+            LoginResponse loginResponse = LoginResponse.from(tokens);
+
+            // 로그인 성공 시 토큰과 함께 프론트엔드로 리다이렉트
+            String successUrl = String.format(
+                    "%s/auth/success?access_token=%s&refresh_token=%s",
+                    frontendUrl,
+                    URLEncoder.encode(loginResponse.accessToken(), StandardCharsets.UTF_8),
+                    URLEncoder.encode(loginResponse.refreshToken(), StandardCharsets.UTF_8)
+            );
+            log.info("Redirecting to success URL: {}", successUrl);
+            response.sendRedirect(successUrl);
+
+        } catch (OAuthSignupRequiredException e) {
+            log.info("OAuth signup required for new user");
+
+            // Redis에 사용자 정보 임시 저장 (JSON으로 직렬화됨)
+            String tempKey = "oauth_signup:" + UUID.randomUUID().toString();
+            OAuthUserInfoCache cacheData = OAuthUserInfoCache.from(e.getOAuthUserInfo());
+
+            // Redis에 10분간 저장
+            redisTemplate.opsForValue().set(tempKey, cacheData, Duration.ofMinutes(10));
+
+            String signupUrl = String.format(
+                "%s/auth/signup?provider=%s&temp_key=%s",
+                frontendUrl,
+                provider,
+                URLEncoder.encode(tempKey, StandardCharsets.UTF_8)
+            );
+
+            log.info("Redirecting to signup URL: {}", signupUrl);
+            response.sendRedirect(signupUrl);
+
+        } catch (Exception e) {
+            log.error("OAuth callback failed", e);
+
+            String errorUrl = String.format(
+                    "%s/login?error=oauth_error&message=%s",
+                    frontendUrl,
+                    URLEncoder.encode("OAUTH-" + e.getMessage(), StandardCharsets.UTF_8)
+            );
+
+            log.info("Redirecting to error URL: {}", errorUrl);
+            response.sendRedirect(errorUrl);
+        }
+    }
+
     @Operation(summary = "OAuth 회원가입 완료", description = "OAuth 첫 로그인 시 닉네임을 설정하여 회원가입을 완료합니다.")
     @PostMapping("/oauth/signup")
     public ResponseEntity<Response<LoginResponse>> completeOAuthSignup(@RequestBody CompleteOAuthSignupRequest request) {
+        String tempKey = request.tempKey();
+
+        // GenericJackson2JsonRedisSerializer가 자동으로 역직렬화
+        OAuthUserInfoCache cachedData = (OAuthUserInfoCache) redisTemplate.opsForValue().get(tempKey);
+        if (cachedData == null) {
+            throw new OAuth2AuthenticationException("OAUTH-회원가입 세션이 만료되었습니다");
+        }
+
+        OAuthUserInfo userInfo = cachedData.toOAuthUserInfo();
+
+        // Redis 데이터 삭제 (일회용)
+        redisTemplate.delete(tempKey);
+
+        // 회원가입 처리
         CompleteOAuthSignupCommand command = CompleteOAuthSignupCommand.builder()
-                .provider(AuthProvider.fromCode(request.provider()))
-                .code(request.code())
-                .state(request.state())
+                .oAuthUserInfo(userInfo)
                 .nickname(request.nickname())
                 .build();
 

@@ -7,6 +7,7 @@ public record OAuthSignupResponse(
         String defaultNickname,
         String profileImageUrl,
         String provider,
+        String providerId,
         boolean signupRequired
 ) {
     public static OAuthSignupResponse from(OAuthUserInfo oAuthUserInfo) {
@@ -15,6 +16,7 @@ public record OAuthSignupResponse(
                 oAuthUserInfo.getNickname(),
                 oAuthUserInfo.getProfileImageUrl(),
                 oAuthUserInfo.getProvider().getCode(),
+                oAuthUserInfo.getProviderId(),
                 true
         );
     }

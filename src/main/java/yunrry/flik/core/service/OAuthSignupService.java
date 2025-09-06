@@ -41,11 +41,7 @@ public class OAuthSignupService implements OAuthSignupUseCase {
         command.validate();
 
         // OAuth 사용자 정보 다시 조회
-        OAuthUserInfo oAuthUserInfo = oAuth2Service.getUserInfo(
-                command.getProvider(),
-                command.getCode(),
-                command.getState()
-        );
+        OAuthUserInfo oAuthUserInfo = command.getOAuthUserInfo();
 
         // 이미 가입된 사용자 확인 (이메일 또는 providerId로)
         Optional<User> existingUser = userRepository.findByEmail(oAuthUserInfo.getEmail());
@@ -54,7 +50,7 @@ public class OAuthSignupService implements OAuthSignupUseCase {
         }
 
         Optional<User> existingOAuthUser = userRepository.findByProviderAndProviderId(
-                command.getProvider(),
+                oAuthUserInfo.getProvider(),
                 oAuthUserInfo.getProviderId()
         );
         if (existingOAuthUser.isPresent()) {
@@ -68,7 +64,7 @@ public class OAuthSignupService implements OAuthSignupUseCase {
                 .password(null)  // OAuth 사용자는 비밀번호 없음
                 .nickname(command.getNickname())  // 사용자 입력 닉네임
                 .profileImageUrl(oAuthUserInfo.getProfileImageUrl())
-                .authProvider(command.getProvider())
+                .authProvider(oAuthUserInfo.getProvider())
                 .providerId(oAuthUserInfo.getProviderId())
                 .isActive(true)
                 .createdAt(LocalDateTime.now())

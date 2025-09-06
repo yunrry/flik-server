@@ -5,6 +5,10 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+app:
+  frontend:
+    url: ${FRONTEND_URL}
+
 server:
   port: 8080
   servlet:
@@ -95,7 +99,7 @@ oauth2:
 
 jwt:
   secret: ${JWT_SECRET:your-secret-key-here-must-be-at-least-256-bits}
-  access-token-expiry: 3600    # 1시간
+  access-token-expiry: 36000    # 10시간
   refresh-token-expiry: 604800 # 7일
 
 rate-limit:
@@ -106,4 +110,3 @@ rate-limit:
 
 admin:
   master-key: ${ADMIN_MASTER_KEY:ADMIN_MASTER_KEY}
-  default-token: ${ADMIN_DEFAULT_TOKEN:}

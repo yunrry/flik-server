@@ -8,10 +8,7 @@ public record CompleteOAuthSignupRequest(
         String provider,
 
         @Schema(description = "인증 코드")
-        String code,
-
-        @Schema(description = "상태값")
-        String state,
+        String tempKey,
 
         @Schema(description = "사용자 설정 닉네임", example = "새로운닉네임")
         String nickname

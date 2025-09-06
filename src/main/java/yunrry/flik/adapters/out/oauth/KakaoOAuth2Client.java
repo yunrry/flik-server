@@ -88,18 +88,36 @@ public class KakaoOAuth2Client implements OAuth2Client {
             );
 
             JsonNode userInfo = objectMapper.readTree(response.getBody());
+
+            // 응답 로그 추가 (디버깅용)
+            System.out.println("Kakao API Response: " + response.getBody());
+
             JsonNode kakaoAccount = userInfo.get("kakao_account");
-            JsonNode profile = kakaoAccount.get("profile");
+
+            // null 체크와 함께 안전하게 값 추출
+            String providerId = userInfo.has("id") ? userInfo.get("id").asText() : null;
+            String email = (kakaoAccount != null && kakaoAccount.has("email")) ?
+                    kakaoAccount.get("email").asText() : providerId+"@kakao.com"; // 이메일이 없으면 대체 이메일 생성
+
+            // 필수 필드 검증 (providerId만)
+            if (providerId == null) {
+                throw new OAuth2AuthenticationException("OAUTH-카카오 사용자 ID를 가져올 수 없습니다");
+            }
 
             return OAuthUserInfo.builder()
-                    .providerId(userInfo.get("id").asText())
-                    .email(kakaoAccount.get("email").asText())
-                    .nickname(profile.get("nickname").asText())
-                    .profileImageUrl(profile.get("profile_image_url").asText())
+                    .providerId(providerId)
+                    .email(email) // null일 수 있음
+                    .nickname(null) // 사용자가 나중에 설정
+                    .profileImageUrl(null) // 사용하지 않음
                     .provider(AuthProvider.KAKAO)
                     .build();
+
+        } catch (OAuth2AuthenticationException e) {
+            throw e;
         } catch (Exception e) {
-            throw new OAuth2AuthenticationException();
+            System.err.println("Error parsing Kakao response: " + e.getMessage());
+            e.printStackTrace();
+            throw new OAuth2AuthenticationException("OAUTH-소셜 로그인 인증에 실패했습니다");
         }
     }
 }
