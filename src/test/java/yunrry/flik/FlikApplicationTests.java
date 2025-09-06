@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class FlikApplicationTests {
+class FlikApplicationTests extends IntegrationTestBase {
 
     @Test
     void contextLoads() {

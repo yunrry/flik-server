@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import yunrry.flik.IntegrationTestBase;
 import yunrry.flik.adapters.out.persistence.entity.FestivalEntity;
 import yunrry.flik.adapters.out.persistence.repository.FestivalJpaRepository;
 
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @Transactional
 @DisplayName("축제 API 통합 테스트")
-class FestivalControllerIntegrationTest {
+class FestivalControllerIntegrationTest extends IntegrationTestBase{
 
     @Autowired
     private MockMvc mockMvc;
