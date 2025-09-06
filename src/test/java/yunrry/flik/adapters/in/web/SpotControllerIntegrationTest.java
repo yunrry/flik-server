@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import yunrry.flik.IntegrationTestBase;
 import yunrry.flik.adapters.out.persistence.entity.SpotEntity;
 import yunrry.flik.adapters.out.persistence.repository.SpotJpaRepository;
 
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @Transactional
 @DisplayName("장소 API 통합 테스트")
-class SpotControllerIntegrationTest {
+class SpotControllerIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private MockMvc mockMvc;

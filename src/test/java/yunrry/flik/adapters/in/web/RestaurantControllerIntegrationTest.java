@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import yunrry.flik.IntegrationTestBase;
 import yunrry.flik.adapters.out.persistence.entity.RestaurantEntity;
 import yunrry.flik.adapters.out.persistence.repository.RestaurantJpaRepository;
 
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @Transactional
 @DisplayName("음식점 API 통합 테스트")
-class RestaurantControllerIntegrationTest {
+class RestaurantControllerIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private MockMvc mockMvc;
