@@ -8,7 +8,7 @@ import yunrry.flik.core.domain.exception.PostNotFoundException;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.ports.in.query.GetPostQuery;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
-import yunrry.flik.ports.in.usecase.GetPostUseCase;
+import yunrry.flik.ports.in.usecase.post.GetPostUseCase;
 import yunrry.flik.ports.out.repository.PostRepository;
 
 @Service

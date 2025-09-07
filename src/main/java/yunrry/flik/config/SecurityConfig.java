@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
                         // 모니터링
-                        .requestMatchers("/actuator/health").permitAll()
+                        .requestMatchers("/actuator/health","/api/actuator/health").permitAll()
                         .requestMatchers("/actuator/**").hasRole("ADMIN")
 
                         // 나머지는 인증 필요

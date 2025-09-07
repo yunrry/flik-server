@@ -17,7 +17,10 @@ import yunrry.flik.ports.in.command.DeletePostCommand;
 import yunrry.flik.ports.in.command.UpdatePostCommand;
 import yunrry.flik.ports.in.query.GetPostQuery;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
-import yunrry.flik.ports.in.usecase.*;
+import yunrry.flik.ports.in.usecase.post.CreatePostUseCase;
+import yunrry.flik.ports.in.usecase.post.DeletePostUseCase;
+import yunrry.flik.ports.in.usecase.post.GetPostUseCase;
+import yunrry.flik.ports.in.usecase.post.UpdatePostUseCase;
 
 @Tag(name = "Post", description = "사용자 활동 게시물 API")
 @RestController

@@ -7,7 +7,7 @@ import yunrry.flik.core.domain.exception.PostAccessDeniedException;
 import yunrry.flik.core.domain.exception.PostNotFoundException;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.ports.in.command.DeletePostCommand;
-import yunrry.flik.ports.in.usecase.DeletePostUseCase;
+import yunrry.flik.ports.in.usecase.post.DeletePostUseCase;
 import yunrry.flik.ports.out.repository.PostRepository;
 
 @Service
