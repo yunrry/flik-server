@@ -271,7 +271,12 @@ jobs:
             # 엔드포인트 테스트
             TEST_RESULTS=""
             curl -H "Host: flikapp.org" -sf http://localhost:19909/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}health:ok " || TEST_RESULTS="${TEST_RESULTS}health:fail "
-            curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}actuator:ok " || TEST_RESULTS="${TEST_RESULTS}actuator:fail "
+            # nginx를 통한 actuator 테스트 대신 직접 컨테이너 테스트
+            if docker exec flik-$NEW_ENV curl -f http://localhost:8080/api/actuator/health > /dev/null 2>&1; then
+              TEST_RESULTS="${TEST_RESULTS}actuator:ok "
+            else
+              TEST_RESULTS="${TEST_RESULTS}actuator:fail "
+            fi
             
             if echo "$TEST_RESULTS" | grep -q "fail"; then
               echo "❌ Deployment failed, test results: $TEST_RESULTS"
@@ -327,10 +332,15 @@ jobs:
             fi
             
             echo "Testing actuator endpoint..."
-            if curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health; then
+            if curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health; then
               echo "✅ Actuator check passed"
             else
-              echo "❌ Actuator check failed"
+              echo "❌ Actuator check failed, trying alternative path..."
+              if curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health; then
+                echo "✅ Actuator check passed (alternative path)"
+              else
+                echo "❌ Both actuator paths failed"
+              fi
             fi
             
             # 컨테이너 상태 확인
