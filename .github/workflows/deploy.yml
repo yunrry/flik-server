@@ -164,6 +164,17 @@ jobs:
             export MYSQL_DATABASE="${{ secrets.MYSQL_DATABASE }}"
             export MYSQL_USER="${{ secrets.MYSQL_USER }}"
             export MYSQL_PASSWORD="${{ secrets.MYSQL_PASSWORD }}"
+            export KAKAO_API_KEY="${{ secrets.KAKAO_API_KEY }}"
+            export NAVER_SECRET="${{ secrets.NAVER_SECRET }}"
+            export GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+            export GOOGLE_CLIENT_SECRET="${{ secrets.GOOGLE_CLIENT_SECRET }}"
+            export GOOGLE_REDIRECT_URI="${{ secrets.GOOGLE_REDIRECT_URI }}"
+            export KAKAO_CLIENT_ID="${{ secrets.KAKAO_CLIENT_ID }}"
+            export KAKAO_CLIENT_SECRET="${{ secrets.KAKAO_CLIENT_SECRET }}"
+            export KAKAO_REDIRECT_URI="${{ secrets.KAKAO_REDIRECT_URI }}"
+            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
+            export ADMIN_MASTER_KEY="${{ secrets.ADMIN_MASTER_KEY }}"
+            export FRONTEND_URL="${{ secrets.FRONTEND_URL }}"
             
             # Docker 레지스트리 로그인
             echo "🔐 Logging into Docker registry..."
