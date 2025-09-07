@@ -156,25 +156,28 @@ jobs:
             
             cd /home/yoon/flik-server
             
-            # 환경 변수 설정
-            export BUILD_TAG="${{ github.sha }}"
-            export DOCKER_REGISTRY="${{ env.REGISTRY }}"
-            export DOCKER_REPO="${{ env.IMAGE_NAME }}"
-            export MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}"
-            export MYSQL_DATABASE="${{ secrets.MYSQL_DATABASE }}"
-            export MYSQL_USER="${{ secrets.MYSQL_USER }}"
-            export MYSQL_PASSWORD="${{ secrets.MYSQL_PASSWORD }}"
-            export KAKAO_API_KEY="${{ secrets.KAKAO_API_KEY }}"
-            export NAVER_SECRET="${{ secrets.NAVER_SECRET }}"
-            export GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
-            export GOOGLE_CLIENT_SECRET="${{ secrets.GOOGLE_CLIENT_SECRET }}"
-            export GOOGLE_REDIRECT_URI="${{ secrets.GOOGLE_REDIRECT_URI }}"
-            export KAKAO_CLIENT_ID="${{ secrets.KAKAO_CLIENT_ID }}"
-            export KAKAO_CLIENT_SECRET="${{ secrets.KAKAO_CLIENT_SECRET }}"
-            export KAKAO_REDIRECT_URI="${{ secrets.KAKAO_REDIRECT_URI }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export ADMIN_MASTER_KEY="${{ secrets.ADMIN_MASTER_KEY }}"
-            export FRONTEND_URL="${{ secrets.FRONTEND_URL }}"
+            # .env 파일 생성 (환경 변수를 파일로 작성)
+            echo "📝 Creating .env file..."
+            cat > .env << EOF
+            BUILD_TAG=${{ github.sha }}
+            DOCKER_REGISTRY=${{ env.REGISTRY }}
+            DOCKER_REPO=${{ env.IMAGE_NAME }}
+            MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+            MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+            MYSQL_USER=${{ secrets.MYSQL_USER }}
+            MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            KAKAO_API_KEY=${{ secrets.KAKAO_API_KEY }}
+            NAVER_SECRET=${{ secrets.NAVER_SECRET }}
+            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
+            GOOGLE_REDIRECT_URI=${{ secrets.GOOGLE_REDIRECT_URI }}
+            KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}
+            KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}
+            KAKAO_REDIRECT_URI=${{ secrets.KAKAO_REDIRECT_URI }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            ADMIN_MASTER_KEY=${{ secrets.ADMIN_MASTER_KEY }}
+            FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+            EOF
             
             # Docker 레지스트리 로그인
             echo "🔐 Logging into Docker registry..."
@@ -214,8 +217,9 @@ jobs:
             
             echo "🔄 Deploying to $NEW_ENV environment (switching from $OLD_ENV)..."
             
-            # 새로운 환경 시작 (더 빠른 병렬 시작)
-            docker compose --profile $NEW_ENV up -d flik-$NEW_ENV
+            # 새로운 환경 시작 (환경 변수 파일 사용)
+            docker compose --env-file .env --profile $NEW_ENV up -d flik-$NEW_ENV
+            
             
             # 헬스체크 최적화 (더 짧은 간격, 더 빠른 실패 감지)
             echo "⏳ Waiting for flik-$NEW_ENV to be healthy..."
