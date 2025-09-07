@@ -266,7 +266,7 @@ jobs:
             # 여러 엔드포인트를 병렬로 테스트
             TEST_RESULTS=""
             curl -H "Host: flikapp.org" -sf http://localhost:19909/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}health:ok " || TEST_RESULTS="${TEST_RESULTS}health:fail "
-            curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}actuator:ok " || TEST_RESULTS="${TEST_RESULTS}actuator:fail "
+            curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}actuator:ok " || TEST_RESULTS="${TEST_RESULTS}actuator:fail "
             
             if echo "$TEST_RESULTS" | grep -q "fail"; then
               echo "❌ Deployment failed, test results: $TEST_RESULTS"
