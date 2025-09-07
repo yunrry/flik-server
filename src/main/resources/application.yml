@@ -99,7 +99,7 @@ oauth2:
 
 jwt:
   secret: ${JWT_SECRET:your-secret-key-here-must-be-at-least-256-bits}
-  access-token-expiry: 36000    # 10시간
+  access-token-expiry: 36000 # 10시간
   refresh-token-expiry: 604800 # 7일
 
 rate-limit:

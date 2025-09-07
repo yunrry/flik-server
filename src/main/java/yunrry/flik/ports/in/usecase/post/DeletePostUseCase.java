@@ -1,4 +1,4 @@
-package yunrry.flik.ports.in.usecase;
+package yunrry.flik.ports.in.usecase.post;
 
 import yunrry.flik.ports.in.command.DeletePostCommand;
 

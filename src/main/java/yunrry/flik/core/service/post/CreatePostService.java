@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostMetadata;
 import yunrry.flik.ports.in.command.CreatePostCommand;
-import yunrry.flik.ports.in.usecase.CreatePostUseCase;
+import yunrry.flik.ports.in.usecase.post.CreatePostUseCase;
 import yunrry.flik.ports.out.repository.PostRepository;
 
 import java.time.LocalDateTime;

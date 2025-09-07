@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/CreatePostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/CreatePostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/DeletePostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/DeletePostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/UpdatePostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/UpdatePostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/CreatePostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/CreatePostUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/DeletePostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/DeletePostUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetPostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/UpdatePostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/UpdatePostUseCase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +194,7 @@
       <recent name="yunrry.flik.ports.out.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'yunrry'">
+  <component name="RunManager" selected="Spring Boot.FlikApplication">
     <configuration name="Tests in 'yunrry'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -368,7 +377,7 @@
       <workItem from="1756811912749" duration="24317000" />
       <workItem from="1756955974892" duration="75000" />
       <workItem from="1756956069662" duration="6797000" />
-      <workItem from="1756964195807" duration="61320000" />
+      <workItem from="1756964195807" duration="66135000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />

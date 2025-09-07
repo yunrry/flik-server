@@ -1,4 +1,4 @@
-package yunrry.flik.ports.in.usecase;
+package yunrry.flik.ports.in.usecase.post;
 
 import org.springframework.data.domain.Slice;
 import yunrry.flik.core.domain.model.Post;
