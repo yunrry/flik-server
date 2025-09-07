@@ -107,6 +107,6 @@ rate-limit:
     max-attempts: 5
     lock-duration: 15m
 
-#
+
 admin:
   master-key: ${ADMIN_MASTER_KEY:ADMIN_MASTER_KEY}
