@@ -2,7 +2,7 @@ name: Build and Deploy Flik Server to Raspberry Pi
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -212,7 +212,7 @@ jobs:
             MAX_HEALTH_CHECKS=20  # 30에서 20으로 단축
             
             while [ $HEALTH_CHECK_COUNT -lt $MAX_HEALTH_CHECKS ]; do
-              if docker exec flik-$NEW_ENV curl -f http://localhost:8080/actuator/health > /dev/null 2>&1; then
+              if docker exec flik-$NEW_ENV curl -f http://localhost:8080/api/actuator/health > /dev/null 2>&1; then
                 echo "✅ flik-$NEW_ENV is healthy after $((HEALTH_CHECK_COUNT * 10)) seconds"
                 break
               fi
@@ -304,7 +304,100 @@ jobs:
             else
               echo "❌ Health check failed"
             fi
+            # Nginx 설정 업데이트
+            echo "🔧 Updating nginx configuration..."
+            cd /home/yoon/goormthon-java
             
+            # 백업 및 설정 변경을 한번에 처리
+            cp nginx/nginx.conf nginx/nginx.conf.backup
+            sed -i "s/server flik-$OLD_ENV:8080/# server flik-$OLD_ENV:8080/" nginx/nginx.conf
+            sed -i "s/# server flik-$NEW_ENV:8080/server flik-$NEW_ENV:8080/" nginx/nginx.conf
+            
+            # Nginx 설정 테스트 및 리로드
+            if docker exec nginx nginx -t; then
+              docker exec nginx nginx -s reload
+              echo "✅ Nginx configuration updated successfully"
+            else
+              echo "❌ Nginx configuration test failed, rolling back..."
+              cp nginx/nginx.conf.backup nginx/nginx.conf
+              docker exec nginx nginx -s reload
+              cd /home/yoon/flik-server
+              docker compose stop flik-$NEW_ENV
+              exit 1
+            fi
+            
+            # 배포 테스트 (더 빠른 검증)
+            echo "🧪 Testing deployment..."
+            sleep 3
+            
+            # 여러 엔드포인트를 병렬로 테스트
+            TEST_RESULTS=""
+            curl -H "Host: flikapp.org" -sf http://localhost:19909/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}health:ok " || TEST_RESULTS="${TEST_RESULTS}health:fail "
+            curl -H "Host: flikapp.org" -sf http://localhost:19909/actuator/health > /dev/null 2>&1 && TEST_RESULTS="${TEST_RESULTS}actuator:ok " || TEST_RESULTS="${TEST_RESULTS}actuator:fail "
+            
+            if echo "$TEST_RESULTS" | grep -q "fail"; then
+              echo "❌ Deployment failed, test results: $TEST_RESULTS"
+              echo "🔄 Rolling back to $OLD_ENV..."
+              cd /home/yoon/goormthon-java  
+              cp nginx/nginx.conf.backup nginx/nginx.conf
+              docker exec nginx nginx -s reload
+              cd /home/yoon/flik-server
+              docker compose stop flik-$NEW_ENV
+              exit 1
+            else
+              echo "✅ Deployment successful, test results: $TEST_RESULTS"
+              echo "🛑 Stopping old environment ($OLD_ENV)..."
+              cd /home/yoon/flik-server
+              docker compose stop flik-$OLD_ENV
+            
+              # 배포 완료 시간 계산
+              DEPLOY_END=$(date +%s)
+              DEPLOY_DURATION=$((DEPLOY_END - DEPLOY_START))
+              echo "🎉 Blue/Green deployment completed! Active: $NEW_ENV"
+              echo "⏱️  Total deployment time: ${DEPLOY_DURATION} seconds ($((DEPLOY_DURATION/60)) minutes)"
+            
+              # 리소스 정리 (옵션)
+              echo "🧹 Cleaning up unused images..."
+              docker image prune -f > /dev/null 2>&1 || true
+            fi
+
+      - name: 🧪 Verify Flik deployment
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ env.RASPBERRY_PI_HOST }}
+          username: ${{ env.RASPBERRY_PI_USER }}
+          key: ${{ secrets.RASPBERRY_PI_SSH_KEY }}
+          port: 2022
+          timeout: 60s
+          script: |
+            echo "🔍 Final verification of Flik endpoints..."
+            
+            # 더 빠른 검증 (30초 대기 제거)
+            sleep 10
+            
+            # 상세한 엔드포인트 테스트
+            echo "Testing health endpoint..."
+            if curl -H "Host: flikapp.org" -sf http://localhost:19909/health; then
+              echo "✅ Health check passed"
+            else
+              echo "❌ Health check failed"
+            fi
+            
+            echo "Testing actuator endpoint..."
+            if curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health; then
+              echo "✅ Actuator check passed"
+            else
+              echo "❌ Actuator check failed"
+            fi
+            
+            # 컨테이너 상태 확인
+            echo "📊 Container Status:"
+            docker ps --filter "name=flik-" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" || true
+            
+            # 리소스 사용량 확인
+            echo "💻 System Resources:"
+            docker stats --no-stream --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" $(docker ps --filter "name=flik-" -q) || true
+
             echo "Testing actuator endpoint..."
             if curl -H "Host: flikapp.org" -sf http://localhost:19909/api/actuator/health; then
               echo "✅ Actuator check passed"
