@@ -1,14 +1,14 @@
-# Flik Server - Blue/Green Deployment
+# Flik Batch Server - Blue/Green Deployment
 services:
-  # Flik Application - Blue
-  flik-blue:
+  # Batch Server - Blue
+  batch-blue:
     profiles:
       - blue
     build:
       context: .
       dockerfile: Dockerfile
-    image: flik-springboot:latest
-    container_name: flik-blue
+    image: flik-batch:latest
+    container_name: batch-blue
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
@@ -16,42 +16,33 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
       - SPRING_DATA_REDIS_HOST=redis
       - SPRING_DATA_REDIS_PORT=6379
-      - SERVER_PORT=8080
-      - JAVA_OPTS=-Xms256m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+      - SERVER_PORT=8081
+      - JAVA_OPTS=-Xms512m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
       - BUILD_INFO=${BUILD_TAG:-latest}
       - DEPLOYMENT_ENV=blue
-      - KAKAO_API_KEY=${KAKAO_API_KEY}
-      - NAVER_SECRET=${NAVER_SECRET}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI}
-      - KAKAO_CLIENT_ID=${KAKAO_CLIENT_ID}
-      - KAKAO_CLIENT_SECRET=${KAKAO_CLIENT_SECRET}
-      - KAKAO_REDIRECT_URI=${KAKAO_REDIRECT_URI}
+      - TOURISM_API_SERVICE_KEY=${TOURISM_API_SERVICE_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_MASTER_KEY=${ADMIN_MASTER_KEY}
-      - FRONTEND_URL=${FRONTEND_URL}
     ports:
-      - "8083:8080"
+      - "8085:8081"
     networks:
       - goormthon-java_dormung-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 15s          # 30s → 15s (더 자주 체크)
-      timeout: 20s           # 10s → 20s (타임아웃 증가)
-      retries: 5             # 3 → 5 (재시도 증가)
-      start_period: 90s      # 60s → 90s (시작 대기 시간 증가)
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 20s
+      retries: 5
+      start_period: 90s
 
-  # Flik Application - Green
-  flik-green:
+  # Batch Server - Green
+  batch-green:
     profiles:
       - green
     build:
       context: .
       dockerfile: Dockerfile
-    image: flik-springboot:latest
-    container_name: flik-green
+    image: flik-batch:latest
+    container_name: batch-green
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
@@ -59,32 +50,23 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
       - SPRING_DATA_REDIS_HOST=redis
       - SPRING_DATA_REDIS_PORT=6379
-      - SERVER_PORT=8080
-      - JAVA_OPTS=-Xms256m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+      - SERVER_PORT=8081
+      - JAVA_OPTS=-Xms512m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
       - BUILD_INFO=${BUILD_TAG:-latest}
       - DEPLOYMENT_ENV=green
-      - KAKAO_API_KEY=${KAKAO_API_KEY}
-      - NAVER_SECRET=${NAVER_SECRET}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI}
-      - KAKAO_CLIENT_ID=${KAKAO_CLIENT_ID}
-      - KAKAO_CLIENT_SECRET=${KAKAO_CLIENT_SECRET}
-      - KAKAO_REDIRECT_URI=${KAKAO_REDIRECT_URI}
+      - TOURISM_API_SERVICE_KEY=${TOURISM_API_SERVICE_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_MASTER_KEY=${ADMIN_MASTER_KEY}
-      - FRONTEND_URL=${FRONTEND_URL}
     ports:
-      - "8084:8080"
+      - "8086:8081"
     networks:
       - goormthon-java_dormung-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 15s          # 30s → 15s (더 자주 체크)
-      timeout: 20s           # 10s → 20s (타임아웃 증가)
-      retries: 5             # 3 → 5 (재시도 증가)
-      start_period: 90s      # 60s → 90s (시작 대기 시간 증가)
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 20s
+      retries: 5
+      start_period: 90s
 
 networks:
   goormthon-java_dormung-network:
