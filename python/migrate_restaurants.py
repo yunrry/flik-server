@@ -122,6 +122,7 @@ class RestaurantsMigrator:
                 'category': item.get('content_type_name', ''),
                 'close_time': None,
                 'content_type_id': item.get('content_type_id', ''),
+                'content_id': item.get('content_id', ''),
                 'day_off': item.get('restdate', ''),
                 'description': item.get('overview', ''),
                 'google_place_id': item.get('google_place_id', ''),
@@ -171,7 +172,7 @@ class RestaurantsMigrator:
             
             insert_query = """
             INSERT INTO spots (
-                spot_type, address, baby_carriage, category, close_time, content_type_id,
+                spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
                 review_count, signgu_cd, tag1, tag2, tag3, tags, time, 
@@ -195,6 +196,7 @@ class RestaurantsMigrator:
                     item.get('category', ''),
                     item.get('close_time'),
                     item.get('content_type_id', ''),
+                    item.get('content_id', ''),
                     item.get('day_off', ''),
                     item.get('description', ''),
                     item.get('google_place_id', ''),

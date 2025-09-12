@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="data: data migration script">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/TravelPlannerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelPlannerServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python/response_1757668259132.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/python/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_accommodations.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_accommodations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_cultural_facilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_cultural_facilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_festivals.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_festivals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_restaurants.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_restaurants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_shopping.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_shopping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_sports_recreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_sports_recreation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_tourist_attractions.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/migrate_tourist_attractions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +138,8 @@
     "Gradle.TravelPlannerServiceTest.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories.executor": "Run",
     "Gradle.UserAdapterTest.executor": "Run",
@@ -177,6 +186,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/python" />
       <recent name="$PROJECT_DIR$/src/test/java/resources" />
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository" />
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out" />
@@ -200,7 +210,7 @@
       <recent name="yunrry.flik.core.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip">
+  <component name="RunManager" selected="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip">
     <configuration name="TravelPlannerServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -215,30 +225,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -273,7 +259,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -286,7 +272,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation&quot;" />
+            <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -343,19 +353,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.TravelPlannerServiceTest" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin" />
       <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation" />
+      <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip" />
+      <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip" />
       <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip" />
+        <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip" />
         <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip" />
         <item itemvalue="Gradle.TravelPlannerServiceTest" />
         <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation" />
       </list>
     </recent_temporary>
   </component>
@@ -778,6 +788,15 @@
           <properties class="org.opentest4j.AssertionFailedError" package="org.opentest4j" />
           <option name="timeStamp" value="17" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelPlannerServiceTest.java</url>
+          <line>717</line>
+          <properties class="yunrry.flik.core.service.TravelPlannerServiceTest" method="testCafeRegularFullDayOneDayTrip">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>

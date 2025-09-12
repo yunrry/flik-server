@@ -175,6 +175,7 @@ class TouristAttractionsMigrator:
             spot_data = {
                 'spot_type': 'TOUR_SPOT',
                 'address': item.get('addr1', ''),
+                'content_id': item.get('content_id', ''),
                 'baby_carriage': item.get('chkbabycarriage', ''),
                 'category': item.get('content_type_name', ''),
                 'close_time': None,  # None으로 설정
@@ -215,12 +216,12 @@ class TouristAttractionsMigrator:
             cursor = connection.cursor()
             insert_query = """
             INSERT INTO spots (
-                spot_type, address, baby_carriage, category, close_time, content_type_id,
+                spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
                 review_count, signgu_cd, tag1, tag2, tag3, tags, time, exp_guide
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             # 배치 삽입을 위한 데이터 준비
@@ -233,6 +234,7 @@ class TouristAttractionsMigrator:
                     item.get('category', ''),
                     item.get('close_time'),  # None
                     item.get('content_type_id', ''),
+                    item.get('content_id', ''),
                     item.get('day_off', ''),
                     item.get('description', ''),
                     item.get('google_place_id', ''),

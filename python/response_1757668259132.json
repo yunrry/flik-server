@@ -1,0 +1,2222 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "0000",
+      "resultMsg": "OK"
+    },
+    "body": {
+      "items": {
+        "item": [
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC01",
+            "lclsSystm2Nm": "호텔",
+            "lclsSystm3Cd": "AC010100",
+            "lclsSystm3Nm": "호텔",
+            "rnum": 1
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC02",
+            "lclsSystm2Nm": "콘도미니엄",
+            "lclsSystm3Cd": "AC020100",
+            "lclsSystm3Nm": "콘도",
+            "rnum": 2
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC02",
+            "lclsSystm2Nm": "콘도미니엄",
+            "lclsSystm3Cd": "AC020200",
+            "lclsSystm3Nm": "레지던스",
+            "rnum": 3
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC03",
+            "lclsSystm2Nm": "펜션/민박",
+            "lclsSystm3Cd": "AC030100",
+            "lclsSystm3Nm": "펜션",
+            "rnum": 4
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC03",
+            "lclsSystm2Nm": "펜션/민박",
+            "lclsSystm3Cd": "AC030200",
+            "lclsSystm3Nm": "한옥스테이",
+            "rnum": 5
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC03",
+            "lclsSystm2Nm": "펜션/민박",
+            "lclsSystm3Cd": "AC030300",
+            "lclsSystm3Nm": "농어촌민박",
+            "rnum": 6
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC03",
+            "lclsSystm2Nm": "펜션/민박",
+            "lclsSystm3Cd": "AC030400",
+            "lclsSystm3Nm": "홈스테이",
+            "rnum": 7
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC04",
+            "lclsSystm2Nm": "모텔",
+            "lclsSystm3Cd": "AC040100",
+            "lclsSystm3Nm": "모텔",
+            "rnum": 8
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC05",
+            "lclsSystm2Nm": "캠핑",
+            "lclsSystm3Cd": "AC050100",
+            "lclsSystm3Nm": "일반야영장",
+            "rnum": 9
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC05",
+            "lclsSystm2Nm": "캠핑",
+            "lclsSystm3Cd": "AC050200",
+            "lclsSystm3Nm": "오토캠핑장",
+            "rnum": 10
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC05",
+            "lclsSystm2Nm": "캠핑",
+            "lclsSystm3Cd": "AC050300",
+            "lclsSystm3Nm": "카라반",
+            "rnum": 11
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC05",
+            "lclsSystm2Nm": "캠핑",
+            "lclsSystm3Cd": "AC050400",
+            "lclsSystm3Nm": "글램핑장",
+            "rnum": 12
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC06",
+            "lclsSystm2Nm": "호스텔",
+            "lclsSystm3Cd": "AC060100",
+            "lclsSystm3Nm": "유스호스텔",
+            "rnum": 13
+          },
+          {
+            "lclsSystm1Cd": "AC",
+            "lclsSystm1Nm": "숙박",
+            "lclsSystm2Cd": "AC06",
+            "lclsSystm2Nm": "호스텔",
+            "lclsSystm3Cd": "AC060200",
+            "lclsSystm3Nm": "게스트하우스",
+            "rnum": 14
+          },
+          {
+            "lclsSystm1Cd": "C01",
+            "lclsSystm1Nm": "추천코스",
+            "lclsSystm2Cd": "C0112",
+            "lclsSystm2Nm": "가족코스",
+            "lclsSystm3Cd": "C01120001",
+            "lclsSystm3Nm": "가족코스",
+            "rnum": 15
+          },
+          {
+            "lclsSystm1Cd": "C01",
+            "lclsSystm1Nm": "추천코스",
+            "lclsSystm2Cd": "C0113",
+            "lclsSystm2Nm": "나홀로코스",
+            "lclsSystm3Cd": "C01130001",
+            "lclsSystm3Nm": "나홀로코스",
+            "rnum": 16
+          },
+          {
+            "lclsSystm1Cd": "C01",
+            "lclsSystm1Nm": "추천코스",
+            "lclsSystm2Cd": "C0114",
+            "lclsSystm2Nm": "힐링코스",
+            "lclsSystm3Cd": "C01140001",
+            "lclsSystm3Nm": "힐링코스",
+            "rnum": 17
+          },
+          {
+            "lclsSystm1Cd": "C01",
+            "lclsSystm1Nm": "추천코스",
+            "lclsSystm2Cd": "C0115",
+            "lclsSystm2Nm": "도보코스",
+            "lclsSystm3Cd": "C01150001",
+            "lclsSystm3Nm": "도보코스",
+            "rnum": 18
+          },
+          {
+            "lclsSystm1Cd": "C01",
+            "lclsSystm1Nm": "추천코스",
+            "lclsSystm2Cd": "C0116",
+            "lclsSystm2Nm": "캠핑코스",
+            "lclsSystm3Cd": "C01160001",
+            "lclsSystm3Nm": "캠핑코스",
+            "rnum": 19
+          },
+          {
+            "lclsSystm1Cd": "C01",
+            "lclsSystm1Nm": "추천코스",
+            "lclsSystm2Cd": "C0117",
+            "lclsSystm2Nm": "맛코스",
+            "lclsSystm3Cd": "C01170001",
+            "lclsSystm3Nm": "맛코스",
+            "rnum": 20
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV01",
+            "lclsSystm2Nm": "축제",
+            "lclsSystm3Cd": "EV010100",
+            "lclsSystm3Nm": "문화관광축제",
+            "rnum": 21
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV01",
+            "lclsSystm2Nm": "축제",
+            "lclsSystm3Cd": "EV010200",
+            "lclsSystm3Nm": "문화예술축제",
+            "rnum": 22
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV01",
+            "lclsSystm2Nm": "축제",
+            "lclsSystm3Cd": "EV010300",
+            "lclsSystm3Nm": "지역특산물축제",
+            "rnum": 23
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV01",
+            "lclsSystm2Nm": "축제",
+            "lclsSystm3Cd": "EV010400",
+            "lclsSystm3Nm": "전통역사축제",
+            "rnum": 24
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV01",
+            "lclsSystm2Nm": "축제",
+            "lclsSystm3Cd": "EV010500",
+            "lclsSystm3Nm": "생태자연축제",
+            "rnum": 25
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV01",
+            "lclsSystm2Nm": "축제",
+            "lclsSystm3Cd": "EV010600",
+            "lclsSystm3Nm": "기타축제",
+            "rnum": 26
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020100",
+            "lclsSystm3Nm": "전통공연",
+            "rnum": 27
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020200",
+            "lclsSystm3Nm": "연극",
+            "rnum": 28
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020300",
+            "lclsSystm3Nm": "뮤지컬",
+            "rnum": 29
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020400",
+            "lclsSystm3Nm": "오페라",
+            "rnum": 30
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020500",
+            "lclsSystm3Nm": "무용",
+            "rnum": 31
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020600",
+            "lclsSystm3Nm": "클래식음악회",
+            "rnum": 32
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020700",
+            "lclsSystm3Nm": "대중콘서트",
+            "rnum": 33
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020800",
+            "lclsSystm3Nm": "영화",
+            "rnum": 34
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV020900",
+            "lclsSystm3Nm": "기타공연",
+            "rnum": 35
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV02",
+            "lclsSystm2Nm": "공연",
+            "lclsSystm3Cd": "EV021000",
+            "lclsSystm3Nm": "넌버벌",
+            "rnum": 36
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV03",
+            "lclsSystm2Nm": "행사",
+            "lclsSystm3Cd": "EV030100",
+            "lclsSystm3Nm": "전시회",
+            "rnum": 37
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV03",
+            "lclsSystm2Nm": "행사",
+            "lclsSystm3Cd": "EV030200",
+            "lclsSystm3Nm": "박람회",
+            "rnum": 38
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV03",
+            "lclsSystm2Nm": "행사",
+            "lclsSystm3Cd": "EV030300",
+            "lclsSystm3Nm": "스포츠경기",
+            "rnum": 39
+          },
+          {
+            "lclsSystm1Cd": "EV",
+            "lclsSystm1Nm": "축제/공연/행사",
+            "lclsSystm2Cd": "EV03",
+            "lclsSystm2Nm": "행사",
+            "lclsSystm3Cd": "EV030400",
+            "lclsSystm3Nm": "기타행사",
+            "rnum": 40
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX01",
+            "lclsSystm2Nm": "전통체험",
+            "lclsSystm3Cd": "EX010100",
+            "lclsSystm3Nm": "전통문화체험",
+            "rnum": 41
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX02",
+            "lclsSystm2Nm": "공예체험",
+            "lclsSystm3Cd": "EX020100",
+            "lclsSystm3Nm": "금속공예체험",
+            "rnum": 42
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX02",
+            "lclsSystm2Nm": "공예체험",
+            "lclsSystm3Cd": "EX020200",
+            "lclsSystm3Nm": "유리공예체험",
+            "rnum": 43
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX02",
+            "lclsSystm2Nm": "공예체험",
+            "lclsSystm3Cd": "EX020300",
+            "lclsSystm3Nm": "가죽공예체험",
+            "rnum": 44
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX02",
+            "lclsSystm2Nm": "공예체험",
+            "lclsSystm3Cd": "EX020400",
+            "lclsSystm3Nm": "기타공예체험",
+            "rnum": 45
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX03",
+            "lclsSystm2Nm": "농.산.어촌 체험",
+            "lclsSystm3Cd": "EX030100",
+            "lclsSystm3Nm": "체험마을",
+            "rnum": 46
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX03",
+            "lclsSystm2Nm": "농.산.어촌 체험",
+            "lclsSystm3Cd": "EX030200",
+            "lclsSystm3Nm": "체험목장",
+            "rnum": 47
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX03",
+            "lclsSystm2Nm": "농.산.어촌 체험",
+            "lclsSystm3Cd": "EX030300",
+            "lclsSystm3Nm": "체험농장",
+            "rnum": 48
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX03",
+            "lclsSystm2Nm": "농.산.어촌 체험",
+            "lclsSystm3Cd": "EX030400",
+            "lclsSystm3Nm": "체험어장",
+            "rnum": 49
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX04",
+            "lclsSystm2Nm": "산사체험",
+            "lclsSystm3Cd": "EX040100",
+            "lclsSystm3Nm": "템플스테이",
+            "rnum": 50
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX04",
+            "lclsSystm2Nm": "산사체험",
+            "lclsSystm3Cd": "EX040200",
+            "lclsSystm3Nm": "사찰문화체험",
+            "rnum": 51
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050100",
+            "lclsSystm3Nm": "온천 / 사우나 / 스파",
+            "rnum": 52
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050200",
+            "lclsSystm3Nm": "찜질방",
+            "rnum": 53
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050300",
+            "lclsSystm3Nm": "한방체험",
+            "rnum": 54
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050400",
+            "lclsSystm3Nm": "힐링명상",
+            "rnum": 55
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050500",
+            "lclsSystm3Nm": "뷰티스파",
+            "rnum": 56
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050600",
+            "lclsSystm3Nm": "기타웰니스",
+            "rnum": 57
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX05",
+            "lclsSystm2Nm": "웰니스관광",
+            "lclsSystm3Cd": "EX050700",
+            "lclsSystm3Nm": "자연치유",
+            "rnum": 58
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060100",
+            "lclsSystm3Nm": "근대산업유산",
+            "rnum": 59
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060200",
+            "lclsSystm3Nm": "게임 등 첨단IT산업",
+            "rnum": 60
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060300",
+            "lclsSystm3Nm": "전통/향토산업",
+            "rnum": 61
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060400",
+            "lclsSystm3Nm": "문화콘텐츠산업",
+            "rnum": 62
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060500",
+            "lclsSystm3Nm": "장수기업/산업테마거리",
+            "rnum": 63
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060600",
+            "lclsSystm3Nm": "자동차/조선/철강 등",
+            "rnum": 64
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060700",
+            "lclsSystm3Nm": "로봇/항공우주산업",
+            "rnum": 65
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060800",
+            "lclsSystm3Nm": "화장품/주류/먹거리",
+            "rnum": 66
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX060900",
+            "lclsSystm3Nm": "친환경/신재생에너지",
+            "rnum": 67
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX06",
+            "lclsSystm2Nm": "산업관광",
+            "lclsSystm3Cd": "EX061000",
+            "lclsSystm3Nm": "기타산업관광지",
+            "rnum": 68
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX07",
+            "lclsSystm2Nm": "기타체험",
+            "lclsSystm3Cd": "EX070100",
+            "lclsSystm3Nm": "유람선/잠수함관광",
+            "rnum": 69
+          },
+          {
+            "lclsSystm1Cd": "EX",
+            "lclsSystm1Nm": "체험관광",
+            "lclsSystm2Cd": "EX07",
+            "lclsSystm2Nm": "기타체험",
+            "lclsSystm3Cd": "EX070200",
+            "lclsSystm3Nm": "기타체험관광",
+            "rnum": 70
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD01",
+            "lclsSystm2Nm": "한식",
+            "lclsSystm3Cd": "FD010100",
+            "lclsSystm3Nm": "관광식당",
+            "rnum": 71
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD01",
+            "lclsSystm2Nm": "한식",
+            "lclsSystm3Cd": "FD010200",
+            "lclsSystm3Nm": "모범음식점",
+            "rnum": 72
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD02",
+            "lclsSystm2Nm": "외국식",
+            "lclsSystm3Cd": "FD020100",
+            "lclsSystm3Nm": "중식",
+            "rnum": 73
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD02",
+            "lclsSystm2Nm": "외국식",
+            "lclsSystm3Cd": "FD020200",
+            "lclsSystm3Nm": "일식",
+            "rnum": 74
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD02",
+            "lclsSystm2Nm": "외국식",
+            "lclsSystm3Cd": "FD020300",
+            "lclsSystm3Nm": "서양식",
+            "rnum": 75
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD02",
+            "lclsSystm2Nm": "외국식",
+            "lclsSystm3Cd": "FD020400",
+            "lclsSystm3Nm": "기타외국식",
+            "rnum": 76
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD02",
+            "lclsSystm2Nm": "외국식",
+            "lclsSystm3Cd": "FD020500",
+            "lclsSystm3Nm": "퓨전음식",
+            "rnum": 77
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD03",
+            "lclsSystm2Nm": "간이음식",
+            "lclsSystm3Cd": "FD030100",
+            "lclsSystm3Nm": "제과",
+            "rnum": 78
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD03",
+            "lclsSystm2Nm": "간이음식",
+            "lclsSystm3Cd": "FD030200",
+            "lclsSystm3Nm": "피자, 햄버거, 샌드위치 및 유사음식",
+            "rnum": 79
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD03",
+            "lclsSystm2Nm": "간이음식",
+            "lclsSystm3Cd": "FD030300",
+            "lclsSystm3Nm": "치킨",
+            "rnum": 80
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD03",
+            "lclsSystm2Nm": "간이음식",
+            "lclsSystm3Cd": "FD030400",
+            "lclsSystm3Nm": "김밥 분식",
+            "rnum": 81
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD03",
+            "lclsSystm2Nm": "간이음식",
+            "lclsSystm3Cd": "FD030500",
+            "lclsSystm3Nm": "이동음식",
+            "rnum": 82
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD03",
+            "lclsSystm2Nm": "간이음식",
+            "lclsSystm3Cd": "FD030600",
+            "lclsSystm3Nm": "기타간이음식",
+            "rnum": 83
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD04",
+            "lclsSystm2Nm": "주점",
+            "lclsSystm3Cd": "FD040100",
+            "lclsSystm3Nm": "바/펍",
+            "rnum": 84
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD04",
+            "lclsSystm2Nm": "주점",
+            "lclsSystm3Cd": "FD040200",
+            "lclsSystm3Nm": "생맥주전문점",
+            "rnum": 85
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD04",
+            "lclsSystm2Nm": "주점",
+            "lclsSystm3Cd": "FD040300",
+            "lclsSystm3Nm": "클럽",
+            "rnum": 86
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD04",
+            "lclsSystm2Nm": "주점",
+            "lclsSystm3Cd": "FD040400",
+            "lclsSystm3Nm": "전통주/민속주점",
+            "rnum": 87
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD04",
+            "lclsSystm2Nm": "주점",
+            "lclsSystm3Cd": "FD040500",
+            "lclsSystm3Nm": "기타주점",
+            "rnum": 88
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD05",
+            "lclsSystm2Nm": "카페/ 찻집",
+            "lclsSystm3Cd": "FD050100",
+            "lclsSystm3Nm": "카페",
+            "rnum": 89
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD05",
+            "lclsSystm2Nm": "카페/ 찻집",
+            "lclsSystm3Cd": "FD050200",
+            "lclsSystm3Nm": "찻집",
+            "rnum": 90
+          },
+          {
+            "lclsSystm1Cd": "FD",
+            "lclsSystm1Nm": "음식",
+            "lclsSystm2Cd": "FD05",
+            "lclsSystm2Nm": "카페/ 찻집",
+            "lclsSystm3Cd": "FD050300",
+            "lclsSystm3Nm": "기타음료점",
+            "rnum": 91
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010100",
+            "lclsSystm3Nm": "고궁",
+            "rnum": 92
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010200",
+            "lclsSystm3Nm": "성ㆍ산성ㆍ성곽",
+            "rnum": 93
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010300",
+            "lclsSystm3Nm": "문",
+            "rnum": 94
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010400",
+            "lclsSystm3Nm": "고택",
+            "rnum": 95
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010500",
+            "lclsSystm3Nm": "생가",
+            "rnum": 96
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010600",
+            "lclsSystm3Nm": "민속마을",
+            "rnum": 97
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010700",
+            "lclsSystm3Nm": "사적지",
+            "rnum": 98
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010800",
+            "lclsSystm3Nm": "고분, 능",
+            "rnum": 99
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS010900",
+            "lclsSystm3Nm": "사당",
+            "rnum": 100
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS011000",
+            "lclsSystm3Nm": "선사유적지",
+            "rnum": 101
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS011100",
+            "lclsSystm3Nm": "근대건축물",
+            "rnum": 102
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS01",
+            "lclsSystm2Nm": "역사유적지",
+            "lclsSystm3Cd": "HS011200",
+            "lclsSystm3Nm": "기타역사유적지",
+            "rnum": 103
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS02",
+            "lclsSystm2Nm": "역사유물",
+            "lclsSystm3Cd": "HS020100",
+            "lclsSystm3Nm": "탑ㆍ비석ㆍ기념탑",
+            "rnum": 104
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS02",
+            "lclsSystm2Nm": "역사유물",
+            "lclsSystm3Cd": "HS020200",
+            "lclsSystm3Nm": "선사유물",
+            "rnum": 105
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS02",
+            "lclsSystm2Nm": "역사유물",
+            "lclsSystm3Cd": "HS020300",
+            "lclsSystm3Nm": "불상",
+            "rnum": 106
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS02",
+            "lclsSystm2Nm": "역사유물",
+            "lclsSystm3Cd": "HS020400",
+            "lclsSystm3Nm": "기타역사유물",
+            "rnum": 107
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS03",
+            "lclsSystm2Nm": "종교성지",
+            "lclsSystm3Cd": "HS030100",
+            "lclsSystm3Nm": "불교",
+            "rnum": 108
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS03",
+            "lclsSystm2Nm": "종교성지",
+            "lclsSystm3Cd": "HS030200",
+            "lclsSystm3Nm": "기독교",
+            "rnum": 109
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS03",
+            "lclsSystm2Nm": "종교성지",
+            "lclsSystm3Cd": "HS030300",
+            "lclsSystm3Nm": "이슬람",
+            "rnum": 110
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS03",
+            "lclsSystm2Nm": "종교성지",
+            "lclsSystm3Cd": "HS030400",
+            "lclsSystm3Nm": "기타 종교성지",
+            "rnum": 111
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS04",
+            "lclsSystm2Nm": "안보관광지",
+            "lclsSystm3Cd": "HS040100",
+            "lclsSystm3Nm": "안보유적지",
+            "rnum": 112
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS04",
+            "lclsSystm2Nm": "안보관광지",
+            "lclsSystm3Cd": "HS040200",
+            "lclsSystm3Nm": "안보관광시설",
+            "rnum": 113
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS04",
+            "lclsSystm2Nm": "안보관광지",
+            "lclsSystm3Cd": "HS040300",
+            "lclsSystm3Nm": "북한관광지",
+            "rnum": 114
+          },
+          {
+            "lclsSystm1Cd": "HS",
+            "lclsSystm1Nm": "역사관광",
+            "lclsSystm2Cd": "HS04",
+            "lclsSystm2Nm": "안보관광지",
+            "lclsSystm3Cd": "HS040400",
+            "lclsSystm3Nm": "기타안보관광지",
+            "rnum": 115
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010100",
+            "lclsSystm3Nm": "인라인(실내 인라인 포함)",
+            "rnum": 116
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010200",
+            "lclsSystm3Nm": "자전거하이킹",
+            "rnum": 117
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010300",
+            "lclsSystm3Nm": "카트",
+            "rnum": 118
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010400",
+            "lclsSystm3Nm": "골프",
+            "rnum": 119
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010500",
+            "lclsSystm3Nm": "경마",
+            "rnum": 120
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010600",
+            "lclsSystm3Nm": "경륜",
+            "rnum": 121
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010700",
+            "lclsSystm3Nm": "승마",
+            "rnum": 122
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010800",
+            "lclsSystm3Nm": "스키/스노보드",
+            "rnum": 123
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS010900",
+            "lclsSystm3Nm": "스케이트",
+            "rnum": 124
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011000",
+            "lclsSystm3Nm": "썰매장",
+            "rnum": 125
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011100",
+            "lclsSystm3Nm": "수렵장",
+            "rnum": 126
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011200",
+            "lclsSystm3Nm": "사격장",
+            "rnum": 127
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011300",
+            "lclsSystm3Nm": "암벽등반",
+            "rnum": 128
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011400",
+            "lclsSystm3Nm": "서바이벌게임",
+            "rnum": 129
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011500",
+            "lclsSystm3Nm": "ATV",
+            "rnum": 130
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011600",
+            "lclsSystm3Nm": "MTB",
+            "rnum": 131
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011700",
+            "lclsSystm3Nm": "오프로드",
+            "rnum": 132
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011800",
+            "lclsSystm3Nm": "번지점프",
+            "rnum": 133
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS01",
+            "lclsSystm2Nm": "육상레저스포츠",
+            "lclsSystm3Cd": "LS011900",
+            "lclsSystm3Nm": "기타육상레저스포츠",
+            "rnum": 134
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020100",
+            "lclsSystm3Nm": "윈드서핑/제트스키",
+            "rnum": 135
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020200",
+            "lclsSystm3Nm": "카약/카누",
+            "rnum": 136
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020300",
+            "lclsSystm3Nm": "요트",
+            "rnum": 137
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020400",
+            "lclsSystm3Nm": "스노쿨링/스킨스쿠버다이빙",
+            "rnum": 138
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020500",
+            "lclsSystm3Nm": "민물낚시",
+            "rnum": 139
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020600",
+            "lclsSystm3Nm": "바다낚시",
+            "rnum": 140
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020700",
+            "lclsSystm3Nm": "수영",
+            "rnum": 141
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020800",
+            "lclsSystm3Nm": "래프팅",
+            "rnum": 142
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS020900",
+            "lclsSystm3Nm": "수상오토바이",
+            "rnum": 143
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS021000",
+            "lclsSystm3Nm": "수상자전거",
+            "rnum": 144
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS021100",
+            "lclsSystm3Nm": "조정",
+            "rnum": 145
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS021200",
+            "lclsSystm3Nm": "워터슬레드",
+            "rnum": 146
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS021300",
+            "lclsSystm3Nm": "패러세일",
+            "rnum": 147
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS02",
+            "lclsSystm2Nm": "수상레저스포츠",
+            "lclsSystm3Cd": "LS021400",
+            "lclsSystm3Nm": "기타수상레저스포츠",
+            "rnum": 148
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS03",
+            "lclsSystm2Nm": "항공레저스포츠",
+            "lclsSystm3Cd": "LS030100",
+            "lclsSystm3Nm": "스카이다이빙",
+            "rnum": 149
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS03",
+            "lclsSystm2Nm": "항공레저스포츠",
+            "lclsSystm3Cd": "LS030200",
+            "lclsSystm3Nm": "초경량비행",
+            "rnum": 150
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS03",
+            "lclsSystm2Nm": "항공레저스포츠",
+            "lclsSystm3Cd": "LS030300",
+            "lclsSystm3Nm": "헹글라이딩/패러글라이딩",
+            "rnum": 151
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS03",
+            "lclsSystm2Nm": "항공레저스포츠",
+            "lclsSystm3Cd": "LS030400",
+            "lclsSystm3Nm": "열기구",
+            "rnum": 152
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS03",
+            "lclsSystm2Nm": "항공레저스포츠",
+            "lclsSystm3Cd": "LS030500",
+            "lclsSystm3Nm": "무인비행장치(드론)",
+            "rnum": 153
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS03",
+            "lclsSystm2Nm": "항공레저스포츠",
+            "lclsSystm3Cd": "LS030600",
+            "lclsSystm3Nm": "기타항공레저스포츠",
+            "rnum": 154
+          },
+          {
+            "lclsSystm1Cd": "LS",
+            "lclsSystm1Nm": "레저스포츠",
+            "lclsSystm2Cd": "LS04",
+            "lclsSystm2Nm": "복합레저스포츠",
+            "lclsSystm3Cd": "LS040100",
+            "lclsSystm3Nm": "복합레저스포츠",
+            "rnum": 155
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA01",
+            "lclsSystm2Nm": "자연경관(산)",
+            "lclsSystm3Cd": "NA010100",
+            "lclsSystm3Nm": "산, 고개, 오름, 봉우리",
+            "rnum": 156
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA01",
+            "lclsSystm2Nm": "자연경관(산)",
+            "lclsSystm3Cd": "NA010200",
+            "lclsSystm3Nm": "숲",
+            "rnum": 157
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA01",
+            "lclsSystm2Nm": "자연경관(산)",
+            "lclsSystm3Cd": "NA010300",
+            "lclsSystm3Nm": "폭포",
+            "rnum": 158
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA01",
+            "lclsSystm2Nm": "자연경관(산)",
+            "lclsSystm3Cd": "NA010400",
+            "lclsSystm3Nm": "계곡",
+            "rnum": 159
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA01",
+            "lclsSystm2Nm": "자연경관(산)",
+            "lclsSystm3Cd": "NA010500",
+            "lclsSystm3Nm": "약수터",
+            "rnum": 160
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020100",
+            "lclsSystm3Nm": "강",
+            "rnum": 161
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020200",
+            "lclsSystm3Nm": "호수",
+            "rnum": 162
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020300",
+            "lclsSystm3Nm": "저수지",
+            "rnum": 163
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020400",
+            "lclsSystm3Nm": "연못·늪",
+            "rnum": 164
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020500",
+            "lclsSystm3Nm": "섬",
+            "rnum": 165
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020600",
+            "lclsSystm3Nm": "염전",
+            "rnum": 166
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020700",
+            "lclsSystm3Nm": "항구/포구",
+            "rnum": 167
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020800",
+            "lclsSystm3Nm": "해안절경",
+            "rnum": 168
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA02",
+            "lclsSystm2Nm": "자연경관(하천‧해양)",
+            "lclsSystm3Cd": "NA020900",
+            "lclsSystm3Nm": "해변. 해수욕장",
+            "rnum": 169
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA03",
+            "lclsSystm2Nm": "자연생태",
+            "lclsSystm3Cd": "NA030100",
+            "lclsSystm3Nm": "동굴",
+            "rnum": 170
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA03",
+            "lclsSystm2Nm": "자연생태",
+            "lclsSystm3Cd": "NA030200",
+            "lclsSystm3Nm": "희귀동.식물",
+            "rnum": 171
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA03",
+            "lclsSystm2Nm": "자연생태",
+            "lclsSystm3Cd": "NA030300",
+            "lclsSystm3Nm": "기암괴석",
+            "rnum": 172
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA03",
+            "lclsSystm2Nm": "자연생태",
+            "lclsSystm3Cd": "NA030400",
+            "lclsSystm3Nm": "생태습지",
+            "rnum": 173
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA03",
+            "lclsSystm2Nm": "자연생태",
+            "lclsSystm3Cd": "NA030500",
+            "lclsSystm3Nm": "기타자연생태",
+            "rnum": 174
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040100",
+            "lclsSystm3Nm": "국립공원",
+            "rnum": 175
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040200",
+            "lclsSystm3Nm": "도립공원",
+            "rnum": 176
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040300",
+            "lclsSystm3Nm": "군립공원",
+            "rnum": 177
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040400",
+            "lclsSystm3Nm": "지질공원",
+            "rnum": 178
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040500",
+            "lclsSystm3Nm": "생태관광지",
+            "rnum": 179
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040600",
+            "lclsSystm3Nm": "자연휴양림",
+            "rnum": 180
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA04",
+            "lclsSystm2Nm": "자연공원",
+            "lclsSystm3Cd": "NA040700",
+            "lclsSystm3Nm": "수목원ㆍ정원",
+            "rnum": 181
+          },
+          {
+            "lclsSystm1Cd": "NA",
+            "lclsSystm1Nm": "자연관광",
+            "lclsSystm2Cd": "NA05",
+            "lclsSystm2Nm": "기타자연관광",
+            "lclsSystm3Cd": "NA050100",
+            "lclsSystm3Nm": "기타자연관광",
+            "rnum": 182
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH01",
+            "lclsSystm2Nm": "백화점",
+            "lclsSystm3Cd": "SH010100",
+            "lclsSystm3Nm": "백화점",
+            "rnum": 183
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH02",
+            "lclsSystm2Nm": "쇼핑몰",
+            "lclsSystm3Cd": "SH020100",
+            "lclsSystm3Nm": "복합쇼핑몰",
+            "rnum": 184
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH02",
+            "lclsSystm2Nm": "쇼핑몰",
+            "lclsSystm3Cd": "SH020200",
+            "lclsSystm3Nm": "아웃렛",
+            "rnum": 185
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH03",
+            "lclsSystm2Nm": "대형마트",
+            "lclsSystm3Cd": "SH030100",
+            "lclsSystm3Nm": "대형마트",
+            "rnum": 186
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH04",
+            "lclsSystm2Nm": "면세점",
+            "lclsSystm3Cd": "SH040100",
+            "lclsSystm3Nm": "공항면세점",
+            "rnum": 187
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH04",
+            "lclsSystm2Nm": "면세점",
+            "lclsSystm3Cd": "SH040200",
+            "lclsSystm3Nm": "시내면세점",
+            "rnum": 188
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH04",
+            "lclsSystm2Nm": "면세점",
+            "lclsSystm3Cd": "SH040300",
+            "lclsSystm3Nm": "사후면세점",
+            "rnum": 189
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH05",
+            "lclsSystm2Nm": "전문매장/상가",
+            "lclsSystm3Cd": "SH050100",
+            "lclsSystm3Nm": "공방/공예품점",
+            "rnum": 190
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH05",
+            "lclsSystm2Nm": "전문매장/상가",
+            "lclsSystm3Cd": "SH050200",
+            "lclsSystm3Nm": "전문상가",
+            "rnum": 191
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH05",
+            "lclsSystm2Nm": "전문매장/상가",
+            "lclsSystm3Cd": "SH050300",
+            "lclsSystm3Nm": "관광기념품/특산물판매점",
+            "rnum": 192
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH06",
+            "lclsSystm2Nm": "시장",
+            "lclsSystm3Cd": "SH060100",
+            "lclsSystm3Nm": "비상설시장",
+            "rnum": 193
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH06",
+            "lclsSystm2Nm": "시장",
+            "lclsSystm3Cd": "SH060200",
+            "lclsSystm3Nm": "상설시장",
+            "rnum": 194
+          },
+          {
+            "lclsSystm1Cd": "SH",
+            "lclsSystm1Nm": "쇼핑",
+            "lclsSystm2Cd": "SH07",
+            "lclsSystm2Nm": "기타쇼핑시설",
+            "lclsSystm3Cd": "SH070100",
+            "lclsSystm3Nm": "기타쇼핑시설",
+            "rnum": 195
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010100",
+            "lclsSystm3Nm": "건물",
+            "rnum": 196
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010200",
+            "lclsSystm3Nm": "타워 / 전망대",
+            "rnum": 197
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010300",
+            "lclsSystm3Nm": "다리 / 대교",
+            "rnum": 198
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010400",
+            "lclsSystm3Nm": "분수",
+            "rnum": 199
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010500",
+            "lclsSystm3Nm": "동상",
+            "rnum": 200
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010600",
+            "lclsSystm3Nm": "터널",
+            "rnum": 201
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010700",
+            "lclsSystm3Nm": "댐",
+            "rnum": 202
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010800",
+            "lclsSystm3Nm": "등대",
+            "rnum": 203
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE01",
+            "lclsSystm2Nm": "랜드마크관광",
+            "lclsSystm3Cd": "VE010900",
+            "lclsSystm3Nm": "기타 건축/조형물",
+            "rnum": 204
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE02",
+            "lclsSystm2Nm": "테마공원",
+            "lclsSystm3Cd": "VE020100",
+            "lclsSystm3Nm": "테마파크",
+            "rnum": 205
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE02",
+            "lclsSystm2Nm": "테마공원",
+            "lclsSystm3Cd": "VE020200",
+            "lclsSystm3Nm": "워터파크",
+            "rnum": 206
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE02",
+            "lclsSystm2Nm": "테마공원",
+            "lclsSystm3Cd": "VE020300",
+            "lclsSystm3Nm": "동물원",
+            "rnum": 207
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE02",
+            "lclsSystm2Nm": "테마공원",
+            "lclsSystm3Cd": "VE020400",
+            "lclsSystm3Nm": "수족관 / 아쿠라리움",
+            "rnum": 208
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE02",
+            "lclsSystm2Nm": "테마공원",
+            "lclsSystm3Cd": "VE020500",
+            "lclsSystm3Nm": "천문대",
+            "rnum": 209
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE03",
+            "lclsSystm2Nm": "도시공원",
+            "lclsSystm3Cd": "VE030100",
+            "lclsSystm3Nm": "시민공원",
+            "rnum": 210
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE03",
+            "lclsSystm2Nm": "도시공원",
+            "lclsSystm3Cd": "VE030200",
+            "lclsSystm3Nm": "소공원",
+            "rnum": 211
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE03",
+            "lclsSystm2Nm": "도시공원",
+            "lclsSystm3Cd": "VE030300",
+            "lclsSystm3Nm": "어린이공원",
+            "rnum": 212
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE03",
+            "lclsSystm2Nm": "도시공원",
+            "lclsSystm3Cd": "VE030400",
+            "lclsSystm3Nm": "근린공원",
+            "rnum": 213
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE03",
+            "lclsSystm2Nm": "도시공원",
+            "lclsSystm3Cd": "VE030500",
+            "lclsSystm3Nm": "주제공원",
+            "rnum": 214
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE04",
+            "lclsSystm2Nm": "도시.지역문화관광",
+            "lclsSystm3Cd": "VE040100",
+            "lclsSystm3Nm": "골목길, 문화거리",
+            "rnum": 215
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE04",
+            "lclsSystm2Nm": "도시.지역문화관광",
+            "lclsSystm3Cd": "VE040200",
+            "lclsSystm3Nm": "마을관광지",
+            "rnum": 216
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE04",
+            "lclsSystm2Nm": "도시.지역문화관광",
+            "lclsSystm3Cd": "VE040300",
+            "lclsSystm3Nm": "둘레길",
+            "rnum": 217
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE05",
+            "lclsSystm2Nm": "복합관광시설",
+            "lclsSystm3Cd": "VE050100",
+            "lclsSystm3Nm": "관광단지",
+            "rnum": 218
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE05",
+            "lclsSystm2Nm": "복합관광시설",
+            "lclsSystm3Cd": "VE050200",
+            "lclsSystm3Nm": "리조트",
+            "rnum": 219
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE06",
+            "lclsSystm2Nm": "공연시설",
+            "lclsSystm3Cd": "VE060100",
+            "lclsSystm3Nm": "공연장",
+            "rnum": 220
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE06",
+            "lclsSystm2Nm": "공연시설",
+            "lclsSystm3Cd": "VE060200",
+            "lclsSystm3Nm": "영화관",
+            "rnum": 221
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE07",
+            "lclsSystm2Nm": "전시시설",
+            "lclsSystm3Cd": "VE070100",
+            "lclsSystm3Nm": "박물관",
+            "rnum": 222
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE07",
+            "lclsSystm2Nm": "전시시설",
+            "lclsSystm3Cd": "VE070200",
+            "lclsSystm3Nm": "기념관",
+            "rnum": 223
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE07",
+            "lclsSystm2Nm": "전시시설",
+            "lclsSystm3Cd": "VE070300",
+            "lclsSystm3Nm": "전시관",
+            "rnum": 224
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE07",
+            "lclsSystm2Nm": "전시시설",
+            "lclsSystm3Cd": "VE070400",
+            "lclsSystm3Nm": "컨벤션센터",
+            "rnum": 225
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE07",
+            "lclsSystm2Nm": "전시시설",
+            "lclsSystm3Cd": "VE070500",
+            "lclsSystm3Nm": "과학관",
+            "rnum": 226
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE07",
+            "lclsSystm2Nm": "전시시설",
+            "lclsSystm3Cd": "VE070600",
+            "lclsSystm3Nm": "미술관/화랑",
+            "rnum": 227
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE08",
+            "lclsSystm2Nm": "행사시설",
+            "lclsSystm3Cd": "VE080600",
+            "lclsSystm3Nm": "연회장",
+            "rnum": 228
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE09",
+            "lclsSystm2Nm": "교육시설",
+            "lclsSystm3Cd": "VE090100",
+            "lclsSystm3Nm": "한국문화원",
+            "rnum": 229
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE09",
+            "lclsSystm2Nm": "교육시설",
+            "lclsSystm3Cd": "VE090200",
+            "lclsSystm3Nm": "외국문화원",
+            "rnum": 230
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE09",
+            "lclsSystm2Nm": "교육시설",
+            "lclsSystm3Cd": "VE090300",
+            "lclsSystm3Nm": "도서관",
+            "rnum": 231
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE09",
+            "lclsSystm2Nm": "교육시설",
+            "lclsSystm3Cd": "VE090400",
+            "lclsSystm3Nm": "문화전수시설",
+            "rnum": 232
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE09",
+            "lclsSystm2Nm": "교육시설",
+            "lclsSystm3Cd": "VE090500",
+            "lclsSystm3Nm": "어학당",
+            "rnum": 233
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE09",
+            "lclsSystm2Nm": "교육시설",
+            "lclsSystm3Cd": "VE090600",
+            "lclsSystm3Nm": "학교",
+            "rnum": 234
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE10",
+            "lclsSystm2Nm": "레저스포츠시설",
+            "lclsSystm3Cd": "VE100100",
+            "lclsSystm3Nm": "스포츠경기장",
+            "rnum": 235
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE10",
+            "lclsSystm2Nm": "레저스포츠시설",
+            "lclsSystm3Cd": "VE100200",
+            "lclsSystm3Nm": "스포츠센터, 수련시설",
+            "rnum": 236
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE11",
+            "lclsSystm2Nm": "교통시설",
+            "lclsSystm3Cd": "VE110100",
+            "lclsSystm3Nm": "공항",
+            "rnum": 237
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE11",
+            "lclsSystm2Nm": "교통시설",
+            "lclsSystm3Cd": "VE110200",
+            "lclsSystm3Nm": "기차역",
+            "rnum": 238
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE11",
+            "lclsSystm2Nm": "교통시설",
+            "lclsSystm3Cd": "VE110300",
+            "lclsSystm3Nm": "버스터미널",
+            "rnum": 239
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE11",
+            "lclsSystm2Nm": "교통시설",
+            "lclsSystm3Cd": "VE110400",
+            "lclsSystm3Nm": "여객선터미널",
+            "rnum": 240
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE11",
+            "lclsSystm2Nm": "교통시설",
+            "lclsSystm3Cd": "VE110500",
+            "lclsSystm3Nm": "고속도로휴게소",
+            "rnum": 241
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE11",
+            "lclsSystm2Nm": "교통시설",
+            "lclsSystm3Cd": "VE110600",
+            "lclsSystm3Nm": "지하철",
+            "rnum": 242
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE12",
+            "lclsSystm2Nm": "기타문화관광지",
+            "lclsSystm3Cd": "VE120100",
+            "lclsSystm3Nm": "서점",
+            "rnum": 243
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE12",
+            "lclsSystm2Nm": "기타문화관광지",
+            "lclsSystm3Cd": "VE120200",
+            "lclsSystm3Nm": "카지노",
+            "rnum": 244
+          },
+          {
+            "lclsSystm1Cd": "VE",
+            "lclsSystm1Nm": "문화관광",
+            "lclsSystm2Cd": "VE12",
+            "lclsSystm2Nm": "기타문화관광지",
+            "lclsSystm3Cd": "VE120300",
+            "lclsSystm3Nm": "기타문화시설",
+            "rnum": 245
+          }
+        ]
+      },
+      "numOfRows": 245,
+      "pageNo": 1,
+      "totalCount": 245
+    }
+  }
+}

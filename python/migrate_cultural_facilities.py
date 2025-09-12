@@ -122,6 +122,7 @@ class CulturalFacilitiesMigrator:
                 'category': item.get('content_type_name', ''),
                 'close_time': None,
                 'content_type_id': item.get('content_type_id', ''),
+                'content_id': item.get('content_id', ''),
                 'day_off': item.get('restdate', ''),
                 'description': item.get('overview', ''),
                 'google_place_id': item.get('google_place_id', ''),
@@ -179,7 +180,7 @@ class CulturalFacilitiesMigrator:
             # spots 테이블의 정확한 컬럼 순서 (DDL 기준)
             insert_query = """
             INSERT INTO spots (
-                spot_type, address, baby_carriage, category, close_time, content_type_id,
+                spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
                 review_count, signgu_cd, tag1, tag2, tag3, tags, check_in_time,
@@ -188,7 +189,7 @@ class CulturalFacilitiesMigrator:
                 kids_facility, price_range, reservation, take_away, treat_menu,
                 products, exp_guide, time
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -204,6 +205,7 @@ class CulturalFacilitiesMigrator:
                         item.get('category', ''),            # category
                         item.get('close_time'),              # close_time
                         item.get('content_type_id', ''),     # content_type_id
+                        item.get('content_id', ''),          # content_id
                         item.get('day_off', ''),             # day_off
                         item.get('description', ''),         # description
                         item.get('google_place_id', ''),     # google_place_id
