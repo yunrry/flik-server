@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Slice;
+import yunrry.flik.IntegrationTestBase;
 import yunrry.flik.adapters.out.persistence.entity.PostEntity;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;

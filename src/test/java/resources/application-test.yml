@@ -2,6 +2,8 @@ spring:
   sql:
     init:
       mode: never
+      schema-locations: [ ]  # 빈 배열
+      data-locations: [ ]
   jpa:
     hibernate:
       ddl-auto: create-drop
