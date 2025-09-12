@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import yunrry.flik.adapters.out.persistence.entity.RestaurantEntity;
 import yunrry.flik.adapters.out.persistence.repository.RestaurantJpaRepository;
-import yunrry.flik.core.domain.model.Restaurant;
+import yunrry.flik.core.domain.model.card.Restaurant;
 import yunrry.flik.ports.in.query.SearchRestaurantsQuery;
 import yunrry.flik.ports.out.repository.RestaurantRepository;
 

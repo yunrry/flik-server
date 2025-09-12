@@ -1,7 +1,7 @@
 package yunrry.flik.ports.out.repository;
 
 import org.springframework.data.domain.Slice;
-import yunrry.flik.core.domain.model.Festival;
+import yunrry.flik.core.domain.model.card.Festival;
 import yunrry.flik.ports.in.query.SearchFestivalsQuery;
 
 import java.util.Optional;

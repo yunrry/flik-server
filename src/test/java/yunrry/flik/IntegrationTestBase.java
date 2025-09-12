@@ -16,6 +16,7 @@ import yunrry.flik.config.TestCacheConfig;
 @Transactional
 @Import({SecurityConfig.class, TestCacheConfig.class})
 @TestPropertySource(properties = {
+        "spring.sql.init.mode=never",
         "spring.batch.job.enabled=false",
         "management.endpoints.enabled=false",
         "FRONTEND_URL=http://localhost:5713",

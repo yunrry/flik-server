@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.*;
 import yunrry.flik.adapters.in.dto.spot.SpotDetailResponse;
 import yunrry.flik.adapters.in.dto.spot.SpotSearchResponse;
-import yunrry.flik.core.domain.model.Spot;
+import yunrry.flik.core.domain.model.card.Spot;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.in.query.SearchSpotsQuery;
 import yunrry.flik.ports.in.usecase.SpotUseCase;

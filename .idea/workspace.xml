@@ -5,13 +5,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="Archi: init">
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/AccomodationEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/BaseSpotEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/CulturalEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/LeisureEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/ShopEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/TourSpotEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Accomodation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Cultural.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Festival.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Leisure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Restaurant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Shop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Spot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/TourSpot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/testfixture/SpotTestFixture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/python/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/festival/FestivalDetailResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/festival/FestivalSearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/ActivityDetailPostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/ActivityDetailPostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/restaurant/RestaurantDetailResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/restaurant/RestaurantSearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotDetailResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotDetailResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotSearchResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotSearchResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/FestivalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/FestivalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/RestaurantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/external/KakaoMapApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/external/KakaoMapApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/external/NaverLocalSearchApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/external/NaverLocalSearchApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/FestivalAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/FestivalAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/RestaurantAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/RestaurantAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/FestivalEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/FestivalEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/PostEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/RestaurantEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/RestaurantEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/SpotEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/SpotEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/SpotEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/SpotJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/SpotJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Festival.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/PostMetadata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/PostMetadata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Restaurant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Spot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetFestivalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetFestivalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetRestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetRestaurantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetSpotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetSpotService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchFestivalsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchFestivalsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchRestaurantsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchRestaurantsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchSpotsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchSpotsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/SearchSpotsQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/SearchSpotsQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/FestivalUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/FestivalUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/RestaurantUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/RestaurantUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchFestivalsUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchFestivalsUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchRestaurantsUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchRestaurantsUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchSpotsUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SearchSpotsUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SpotUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SpotUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/FestivalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/FestivalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/RestaurantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/SpotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/SpotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/IntegrationTestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/IntegrationTestBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/FestivalControllerIntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/RestaurantControllerIntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/SpotControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/web/SpotControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/PostMetadataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/PostMetadataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/RestaurantTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/SpotTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/UserTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/GetRestaurantServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/SearchRestaurantsServiceTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +115,7 @@
         <option value="JUnit5 Test Class" />
         <option value="Exception" />
         <option value="Enum" />
+        <option value="Python Script" />
         <option value="Class" />
       </list>
     </option>
@@ -73,12 +137,13 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/oauth2-oidc-sdk/9.43.4/8d45816831c72d71b68c5eadd4c5ec8932db96fb/oauth2-oidc-sdk-9.43.4-sources.jar!/com/nimbusds/openid/connect/sdk/LogoutRequest.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/3.3.7/c05ed939a6232d2b4be1d75d8b0458b09d27a79f/spring-boot-autoconfigure-3.3.7-sources.jar!/org/springframework/boot/autoconfigure/jdbc/DataSourceTransactionManagerAutoConfiguration.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.7/74ce314034383548a84df323bf6c3dd2ab1648a/spring-data-commons-3.3.7-sources.jar!/org/springframework/data/repository/CrudRepository.java" root0="SKIP_INSPECTION" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -88,70 +153,74 @@
     <option name="sortByType" value="true" />
     <option name="sortKey" value="BY_TYPE" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.AuthControllerIntegrationTest.executor": "Run",
-    "Gradle.Build flik-server.executor": "Run",
-    "Gradle.CreatePostServiceTest.executor": "Run",
-    "Gradle.FestivalControllerIntegrationTest.executor": "Run",
-    "Gradle.FlikApplicationTests.executor": "Run",
-    "Gradle.GetRestaurantServiceTest.executor": "Run",
-    "Gradle.GetRestaurantServiceTest.shouldUseCacheOnSecondCall.executor": "Run",
-    "Gradle.GoogleOAuth2ClientTest.executor": "Run",
-    "Gradle.JwtTokenProviderTest.executor": "Run",
-    "Gradle.OAuth2ServiceTest.executor": "Run",
-    "Gradle.PostAdapterTest.executor": "Run",
-    "Gradle.PostControllerTest.executor": "Run",
-    "Gradle.PostControllerTest.shouldGetPostSuccessfully.executor": "Run",
-    "Gradle.PostControllerTest.shouldGetPostWithoutAuth.executor": "Run",
-    "Gradle.PostControllerTest.shouldSearchPostsWithoutAuth.executor": "Run",
-    "Gradle.PostMetadataTest.executor": "Run",
-    "Gradle.PostTest.executor": "Run",
-    "Gradle.PostTest.shouldCreatePostWithRequiredFields.executor": "Run",
-    "Gradle.PostTest.shouldInitializeVisitCountWhenNull.executor": "Run",
-    "Gradle.RestaurantControllerIntegrationTest.executor": "Run",
-    "Gradle.RestaurantControllerIntegrationTest.shouldGetRestaurantSuccessfully.executor": "Run",
-    "Gradle.RestaurantSearchControllerTest.executor": "Run",
-    "Gradle.RestaurantTest.executor": "Run",
-    "Gradle.SearchRestaurantsQueryTest.executor": "Run",
-    "Gradle.SearchRestaurantsQueryTest.shouldAllowEmptyValues.executor": "Run",
-    "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank.executor": "Run",
-    "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank.executor": "Run",
-    "Gradle.SearchRestaurantsServiceTest.executor": "Run",
-    "Gradle.SpotControllerIntegrationTest.executor": "Run",
-    "Gradle.SpotTest.executor": "Run",
-    "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
-    "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
-    "Gradle.Tests in 'yunrry'.executor": "Run",
-    "Gradle.Tests in 'yunrry.flik.adapters.in.web'.executor": "Run",
-    "Gradle.Tests in 'yunrry.flik.core.domain.model'.executor": "Run",
-    "Gradle.Tests in 'yunrry.flik.core.service'.executor": "Run",
-    "Gradle.Tests in 'yunrry.flik.ports'.executor": "Run",
-    "Gradle.UserAdapterTest.executor": "Run",
-    "Gradle.UserTest.executor": "Run",
-    "Gradle.UserTest.shouldCreateUserWithRequiredFields.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.FlikApplication.executor": "Run",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "7-feat-post-api",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server/src/main/java/yunrry/flik/adapters/in/dto/festival",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "copyright.filetypes.JAVA",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.AuthControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build flik-server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CreatePostServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FestivalControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FlikApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.GetRestaurantServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.GetRestaurantServiceTest.shouldUseCacheOnSecondCall.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.GoogleOAuth2ClientTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JwtTokenProviderTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.OAuth2ServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostAdapterTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostControllerTest.shouldGetPostSuccessfully.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostControllerTest.shouldGetPostWithoutAuth.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostControllerTest.shouldSearchPostsWithoutAuth.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostMetadataTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostTest.shouldCreatePostWithRequiredFields.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostTest.shouldInitializeVisitCountWhenNull.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RestaurantControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RestaurantControllerIntegrationTest.shouldGetRestaurantSuccessfully.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RestaurantSearchControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RestaurantTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SearchRestaurantsQueryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SearchRestaurantsQueryTest.shouldAllowEmptyValues.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SearchRestaurantsServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SpotControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SpotTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'yunrry'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'yunrry.flik.adapters.in.web'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'yunrry.flik.core.domain.model'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'yunrry.flik.core.service'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'yunrry.flik.ports'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserAdapterTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserTest.shouldCreateUserWithRequiredFields.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.FlikApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;32-data-tour-api-batch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nyoung/WorkSpace/flik-server/src/main/java/yunrry/flik/adapters/in/dto/festival&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.filetypes.JAVA&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -183,14 +252,86 @@
       <recent name="yunrry.flik.core.domain.model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="yunrry.flik.core.domain.model" />
+      <recent name="yunrry.flik.adapters.out.persistence.entity" />
       <recent name="yunrry.flik.core.domain.exception" />
       <recent name="yunrry.flik.adapters.in.web" />
       <recent name="yunrry.flik.core.service" />
-      <recent name="yunrry.flik.adapters.out.persistence" />
-      <recent name="yunrry.flik.ports.out.repository" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.FlikApplication">
+    <configuration name="FlikApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.FlikApplicationTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PostMetadataTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.domain.model.PostMetadataTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="Tests in 'yunrry'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -239,78 +380,6 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Tests in 'yunrry.flik.core.domain.model'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.domain.model.*&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'yunrry.flik.core.service'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.*&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'yunrry.flik.ports'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.ports.*&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="FlikApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" value="local" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -332,20 +401,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.FlikApplicationTests" />
+      <item itemvalue="Gradle.GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully" />
+      <item itemvalue="Gradle.PostMetadataTest" />
       <item itemvalue="Gradle.Tests in 'yunrry'" />
       <item itemvalue="Gradle.Tests in 'yunrry.flik.adapters.in.web'" />
-      <item itemvalue="Gradle.Tests in 'yunrry.flik.core.domain.model'" />
-      <item itemvalue="Gradle.Tests in 'yunrry.flik.core.service'" />
-      <item itemvalue="Gradle.Tests in 'yunrry.flik.ports'" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.FlikApplicationTests" />
+        <item itemvalue="Gradle.PostMetadataTest" />
+        <item itemvalue="Gradle.GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully" />
         <item itemvalue="Gradle.Tests in 'yunrry'" />
         <item itemvalue="Gradle.Tests in 'yunrry.flik.adapters.in.web'" />
-        <item itemvalue="Gradle.Tests in 'yunrry.flik.ports'" />
-        <item itemvalue="Gradle.Tests in 'yunrry.flik.core.service'" />
-        <item itemvalue="Gradle.Tests in 'yunrry.flik.core.domain.model'" />
       </list>
     </recent_temporary>
   </component>
@@ -373,7 +442,9 @@
       <workItem from="1756811912749" duration="24317000" />
       <workItem from="1756955974892" duration="75000" />
       <workItem from="1756956069662" duration="6797000" />
-      <workItem from="1756964195807" duration="68755000" />
+      <workItem from="1756964195807" duration="82822000" />
+      <workItem from="1757320098234" duration="50048000" />
+      <workItem from="1757584883569" duration="2875000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -724,11 +795,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/SearchRestaurantsServiceTest.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/out/persistence/PostAdapterTest.java</url>
           <line>24</line>
           <option name="timeStamp" value="6" />
@@ -739,11 +805,16 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/card/Festival.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="this.jwtAuthenticationFilter" custom="yunrry.flik.config.SecurityConfig" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -2,7 +2,8 @@ package yunrry.flik.adapters.in.dto.spot;
 
 import org.springframework.data.domain.Slice;
 import yunrry.flik.adapters.in.dto.SliceSearchResponse;
-import yunrry.flik.core.domain.model.Spot;
+import yunrry.flik.core.domain.model.card.Spot;
+
 
 public record SpotSearchResponse(
 ) {
