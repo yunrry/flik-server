@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
-import yunrry.flik.core.domain.model.Restaurant;
+import yunrry.flik.core.domain.model.card.Restaurant;
 import yunrry.flik.ports.in.query.SearchRestaurantsQuery;
 import yunrry.flik.ports.in.usecase.SearchRestaurantsUseCase;
 import yunrry.flik.ports.out.repository.RestaurantRepository;

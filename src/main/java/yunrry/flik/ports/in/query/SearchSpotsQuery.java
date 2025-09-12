@@ -16,7 +16,7 @@ public class SearchSpotsQuery {
         this.page = Math.max(page, 0);
         this.size = (size <= 0 || size > 50) ? 20 : size;
         this.category = category;
-        this.sort = sort != null ? sort : "distance";
+        this.sort = sort != null ? sort : "rating";
         this.keyword = validateSearchText(keyword, "검색어");
         this.address = validateSearchText(address, "주소");
     }

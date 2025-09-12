@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import yunrry.flik.core.domain.exception.FestivalNotFoundException;
-import yunrry.flik.core.domain.model.Festival;
+import yunrry.flik.core.domain.model.card.Festival;
 import yunrry.flik.ports.in.query.GetFestivalQuery;
 import yunrry.flik.ports.in.usecase.FestivalUseCase;
 import yunrry.flik.ports.out.repository.FestivalRepository;

@@ -66,3 +66,4 @@ python tour_api_soeul.py
 - content_type_id: 관광지 타입별 검색
 - area_code, sigungu_code: 지역별 검색
 - title: 관광지명 검색
+

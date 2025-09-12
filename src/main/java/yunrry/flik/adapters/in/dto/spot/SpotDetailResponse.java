@@ -1,7 +1,9 @@
 package yunrry.flik.adapters.in.dto.spot;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import yunrry.flik.core.domain.model.Spot;
+import yunrry.flik.core.domain.model.card.Shop;
+import yunrry.flik.core.domain.model.card.Spot;
+import yunrry.flik.core.domain.model.card.TourSpot;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -15,12 +17,17 @@ public record SpotDetailResponse(
         BigDecimal rating,
         String description,
         String address,
-        Integer distance,
         @JsonFormat(pattern = "HH:mm")
         String operatingHours,
         String dayOff,
         Boolean isOpen,
-        List<String> imageUrls
+        List<String> imageUrls,
+
+        // 타입별 특수 정보 (Optional)
+        String products,     // Shop일 때만 값 존재
+        String expGuide,     // TourSpot일 때만 값 존재
+        String ageLimit      // TourSpot일 때만 값 존재
+
 ) {
     public static SpotDetailResponse from(Spot spot) {
         String operatingHours = formatOperatingHours(spot.getOpenTime(), spot.getCloseTime());
@@ -31,6 +38,18 @@ public record SpotDetailResponse(
             isOpen = null;
         }
 
+        // 타입별 특수 정보 추출
+        String products = null;
+        String expGuide = null;
+        String ageLimit = null;
+
+        if (spot instanceof Shop shop) {
+            products = shop.getProducts();
+        } else if (spot instanceof TourSpot tourSpot) {
+            expGuide = tourSpot.getExpGuide();
+            ageLimit = tourSpot.getAgeLimit();
+        }
+
         return new SpotDetailResponse(
                 spot.getId(),
                 spot.getName(),
@@ -38,11 +57,13 @@ public record SpotDetailResponse(
                 spot.getRating(),
                 spot.getDescription(),
                 spot.getAddress(),
-                spot.getDistance(),
                 operatingHours,
                 spot.getDayOff(),
                 isOpen,
-                spot.getImageUrls()
+                spot.getImageUrls(),
+                products,
+                expGuide,
+                ageLimit
         );
     }
 

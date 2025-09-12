@@ -6,16 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import yunrry.flik.adapters.out.persistence.entity.SpotEntity;
-import yunrry.flik.adapters.out.persistence.entity.SpotEntity;
+import yunrry.flik.adapters.out.persistence.entity.BaseSpotEntity;
+import yunrry.flik.adapters.out.persistence.entity.BaseSpotEntity;
 
 @Repository
-public interface SpotJpaRepository extends JpaRepository<SpotEntity, Long> {
-    @Query("SELECT r FROM SpotEntity r WHERE " +
+public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
+    @Query("SELECT r FROM BaseSpotEntity r WHERE " +
             "(:category IS NULL OR r.category = :category) AND " +
             "(:keyword IS NULL OR r.name LIKE %:keyword% OR r.description LIKE %:keyword%) AND " +
             "(:address IS NULL OR r.address LIKE %:address%)")
-    Slice<SpotEntity> findByConditions(
+    Slice<BaseSpotEntity> findByConditions(
             @Param("category") String category,
             @Param("keyword") String keyword,
             @Param("address") String address,

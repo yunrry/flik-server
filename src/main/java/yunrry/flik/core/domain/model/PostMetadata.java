@@ -10,18 +10,18 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @Builder
 public class PostMetadata {
-    private final String restaurantName;
+    private final String spotName;
     private final String location;
     private final BigDecimal rating;
-    private final Long restaurantId;
+    private final Long spotId;
 
     public static PostMetadata empty() {
         return PostMetadata.builder().build();
     }
 
-    public static PostMetadata of(String restaurantName, String location, BigDecimal rating) {
+    public static PostMetadata of(String spotName, String location, BigDecimal rating) {
         return PostMetadata.builder()
-                .restaurantName(restaurantName)
+                .spotName(spotName)
                 .location(location)
                 .rating(rating)
                 .build();

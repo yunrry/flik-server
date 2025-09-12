@@ -52,17 +52,17 @@ public class PostEntity {
     private LocalDateTime updatedAt;
 
     // Metadata fields
-    @Column(name = "restaurant_name")
-    private String restaurantName;
+    @Column(name = "spot_name", length = 500)
+    private String spotName;
 
-    @Column(name = "location")
+    @Column(name = "location", length = 500)
     private String location;
 
     @Column(name = "rating", precision = 2, scale = 1)
     private BigDecimal rating;
 
-    @Column(name = "restaurant_id")
-    private Long restaurantId;
+    @Column(name = "spot_id")
+    private Long spotId;
 
     public Post toDomain() {
         return Post.builder()
@@ -90,10 +90,10 @@ public class PostEntity {
                 .visitCount(post.getVisitCount())
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())
-                .restaurantName(post.getMetadata() != null ? post.getMetadata().getRestaurantName() : null)
+                .spotName(post.getMetadata() != null ? post.getMetadata().getSpotName() : null)
                 .location(post.getMetadata() != null ? post.getMetadata().getLocation() : null)
                 .rating(post.getMetadata() != null ? post.getMetadata().getRating() : null)
-                .restaurantId(post.getMetadata() != null ? post.getMetadata().getRestaurantId() : null)
+                .spotId(post.getMetadata() != null ? post.getMetadata().getSpotId() : null)
                 .build();
     }
 
@@ -113,10 +113,10 @@ public class PostEntity {
 
     private PostMetadata createMetadata() {
         return PostMetadata.builder()
-                .restaurantName(this.restaurantName)
+                .spotName(this.spotName)
                 .location(this.location)
                 .rating(this.rating)
-                .restaurantId(this.restaurantId)
+                .spotId(this.spotId)
                 .build();
     }
 }

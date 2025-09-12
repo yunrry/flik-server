@@ -1,7 +1,7 @@
 package yunrry.flik.ports.out.repository;
 
 import org.springframework.data.domain.Slice;
-import yunrry.flik.core.domain.model.Restaurant;
+import yunrry.flik.core.domain.model.card.Restaurant;
 import yunrry.flik.ports.in.query.SearchRestaurantsQuery;
 
 import java.util.Optional;

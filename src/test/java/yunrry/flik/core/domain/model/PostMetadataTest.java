@@ -21,7 +21,7 @@ class PostMetadataTest {
         );
 
         // then
-        assertThat(metadata.getRestaurantName()).isEqualTo("마리오네");
+        assertThat(metadata.getSpotName()).isEqualTo("마리오네");
         assertThat(metadata.getLocation()).isEqualTo("성수동");
         assertThat(metadata.getRating()).isEqualTo(BigDecimal.valueOf(4.5));
     }
@@ -33,7 +33,7 @@ class PostMetadataTest {
         PostMetadata metadata = PostMetadata.empty();
 
         // then
-        assertThat(metadata.getRestaurantName()).isNull();
+        assertThat(metadata.getSpotName()).isNull();
         assertThat(metadata.getLocation()).isNull();
         assertThat(metadata.getRating()).isNull();
     }

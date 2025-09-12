@@ -5,97 +5,129 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import yunrry.flik.core.domain.model.Festival;
+import yunrry.flik.core.domain.model.card.Festival;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
+
 @Entity
-@Table(name = "festivals")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FestivalEntity {
+@DiscriminatorValue("FESTIVAL")
+public class FestivalEntity extends BaseSpotEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "event_start_date", length = 500)
+    private String eventStartDate;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "event_end_date", length = 500)
+    private String eventEndDate;
 
-    @Column(nullable = false)
-    private String category;
+    @Column(name = "age_limit", length = 500)
+    private String ageLimit;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
+    @Column(name = "sponsor", length = 500)
+    private String sponsor;
 
-    @Column(nullable = false)
-    private String address;
+    @Column(name = "running_time", length = 500)
+    private String runningTime;
 
-    @Column(name = "image_urls", columnDefinition = "TEXT")
-    private String imageUrls;
+    @Column(name = "fee", length = 500)
+    private String fee;
 
-    @Column(precision = 2, scale = 1)
-    private BigDecimal rating;
 
-    private Integer distance;
-
-    @Column(name = "open_time")
-    private LocalTime openTime;
-
-    @Column(name = "close_time")
-    private LocalTime closeTime;
-
-    @Column(name = "day_off")
-    private String dayOff;
+    public FestivalEntity(Long id, String name, String contentTypeId,String category, String description,
+                          String address, String regnCd, String sigunguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
+                          String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String parking, String petCarriage, String babyCarriage,
+                          LocalTime openTime, LocalTime closeTime, String time, String dayOff, String eventStartDate, String eventEndDate, String ageLimit, String sponsor, String runningTime, String fee) {
+        super(id, name, contentTypeId, category, description, address, regnCd, sigunguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+        this.eventStartDate = eventStartDate;
+        this.eventEndDate = eventEndDate;
+        this.ageLimit = ageLimit;
+        this.sponsor = sponsor;
+        this.runningTime = runningTime;
+        this.fee = fee;
+    }
 
     public Festival toDomain() {
-        return Festival.builder()
-                .id(this.id)
-                .name(this.name)
-                .category(this.category)
-                .description(this.description)
-                .address(this.address)
-                .imageUrls(parseImageUrls(this.imageUrls))
-                .rating(this.rating)
-                .distance(this.distance)
-                .openTime(this.openTime)
-                .closeTime(this.closeTime)
-                .dayOff(this.dayOff)
-                .build();
+        return new Festival(
+                this.getId(),
+                this.getName(),
+                this.getContentTypeId(),
+                this.getCategory(),
+                this.getDescription(),
+                this.getAddress(),
+                this.getRegnCd(),
+                this.getSigunguCd(),
+                this.getLatitude(),
+                this.getLongitude(),
+                parseImageUrls(this.getImageUrls()),
+                this.getInfo(),
+                this.getRating(),
+                this.getGooglePlaceId(),
+                this.getReviewCount(),
+                this.getTag1(),
+                this.getTag2(),
+                this.getTag3(),
+                this.getTags(),
+                this.getParking(),
+                this.getPetCarriage(),
+                this.getBabyCarriage(),
+                this.getOpenTime(),
+                this.getCloseTime(),
+                this.getTime(),
+                this.getDayOff(),
+                this.eventStartDate,
+                this.eventEndDate,
+                this.ageLimit,
+                this.sponsor,
+                this.runningTime,
+                this.fee
+
+        );
     }
 
     public static FestivalEntity fromDomain(Festival festival) {
-        return builder()
-                .id(festival.getId())
-                .name(festival.getName())
-                .category(festival.getCategory())
-                .description(festival.getDescription())
-                .address(festival.getAddress())
-                .imageUrls(joinImageUrls(festival.getImageUrls()))
-                .rating(festival.getRating())
-                .distance(festival.getDistance())
-                .openTime(festival.getOpenTime())
-                .closeTime(festival.getCloseTime())
-                .dayOff(festival.getDayOff())
-                .build();
+        return new FestivalEntity(
+                festival.getId(),
+                festival.getName(),
+                festival.getContentTypeId(),
+                festival.getCategory(),
+                festival.getDescription(),
+                festival.getAddress(),
+                festival.getRegnCd(),
+                festival.getSigunguCd(),
+                festival.getLatitude(),
+                festival.getLongitude(),
+                joinImageUrls(festival.getImageUrls()),// String으로 변환 필요
+                festival.getInfo(),
+                festival.getRating(),
+                festival.getGooglePlaceId(),
+                festival.getReviewCount(),
+                festival.getTag1(),
+                festival.getTag2(),
+                festival.getTag3(),
+                festival.getTags(),
+                festival.getParking(),
+                festival.getPetCarriage(),
+                festival.getBabyCarriage(),
+                festival.getOpenTime(),
+                festival.getCloseTime(),
+                festival.getTime(),
+                festival.getDayOff(),
+                festival.getEventStartDate(),
+                festival.getEventEndDate(),
+                festival.getAgeLimit(),
+                festival.getSponsor(),
+                festival.getRunningTime(),
+                festival.getFee()
+        );
+    }
 
-    }
-    private List<String> parseImageUrls(String imageUrls) {
-        if (imageUrls == null || imageUrls.trim().isEmpty()) {
-            return List.of();
-        }
-        return Arrays.asList(imageUrls.split(","));
-    }
 
-    private static String joinImageUrls(List<String> imageUrls) {
-        if (imageUrls == null || imageUrls.isEmpty()) {
-            return null;
-        }
-        return String.join(",", imageUrls);
-    }
+
 }

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import yunrry.flik.adapters.out.persistence.entity.FestivalEntity;
 import yunrry.flik.adapters.out.persistence.repository.FestivalJpaRepository;
-import yunrry.flik.core.domain.model.Festival;
+import yunrry.flik.core.domain.model.card.Festival;
 import yunrry.flik.ports.in.query.SearchFestivalsQuery;
 import yunrry.flik.ports.out.repository.FestivalRepository;
 

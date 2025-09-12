@@ -33,7 +33,7 @@ public record ActivityDetailPostResponse(
     }
 
     public record PostMetadataResponse(
-            String restaurantName,
+            String spotName,
             String location,
             Double rating
     ) {
@@ -41,7 +41,7 @@ public record ActivityDetailPostResponse(
             if (metadata == null) return null;
 
             return new PostMetadataResponse(
-                    metadata.getRestaurantName(),
+                    metadata.getSpotName(),
                     metadata.getLocation(),
                     metadata.getRating() != null ? metadata.getRating().doubleValue() : null
             );
