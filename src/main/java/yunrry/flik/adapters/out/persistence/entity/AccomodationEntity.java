@@ -40,12 +40,12 @@ public class AccomodationEntity extends BaseSpotEntity {
     private String facilities;
 
 
-    public AccomodationEntity(Long id, String name, String contentTypeId,String category, String description,
-                              String address, String regnCd, String sigunguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
-                              String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String parking, String petCarriage, String babyCarriage,
+    public AccomodationEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
+                              String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
+                              String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3,  String parking, String petCarriage, String babyCarriage,
                               LocalTime openTime, LocalTime closeTime, String time, String dayOff, String reservation, String checkInTime,
                               String checkOutTime, boolean cooking, String facilities) {
-        super(id, name, contentTypeId, category, description, address, regnCd, sigunguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
         this.reservation = reservation;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
@@ -58,11 +58,12 @@ public class AccomodationEntity extends BaseSpotEntity {
                 this.getId(),
                 this.getName(),
                 this.getContentTypeId(),
+                this.getContentId(),
                 this.getCategory(),
                 this.getDescription(),
                 this.getAddress(),
                 this.getRegnCd(),
-                this.getSigunguCd(),
+                this.getSignguCd(),
                 this.getLatitude(),
                 this.getLongitude(),
                 parseImageUrls(this.getImageUrls()),
@@ -74,6 +75,9 @@ public class AccomodationEntity extends BaseSpotEntity {
                 this.getTag2(),
                 this.getTag3(),
                 this.getTags(),
+                this.toDomain().getLabelDepth1(),
+                this.toDomain().getLabelDepth2(),
+                this.toDomain().getLabelDepth3(),
                 this.getParking(),
                 this.getPetCarriage(),
                 this.getBabyCarriage(),
@@ -94,11 +98,12 @@ public class AccomodationEntity extends BaseSpotEntity {
                 accomodation.getId(),
                 accomodation.getName(),
                 accomodation.getContentTypeId(),
+                accomodation.getContentId(),
                 accomodation.getCategory(),
                 accomodation.getDescription(),
                 accomodation.getAddress(),
                 accomodation.getRegnCd(),
-                accomodation.getSigunguCd(),
+                accomodation.getSignguCd(),
                 accomodation.getLatitude(),
                 accomodation.getLongitude(),
                 joinImageUrls(accomodation.getImageUrls()),// String으로 변환 필요
@@ -110,6 +115,9 @@ public class AccomodationEntity extends BaseSpotEntity {
                 accomodation.getTag2(),
                 accomodation.getTag3(),
                 accomodation.getTags(),
+                accomodation.getLabelDepth1(),
+                accomodation.getLabelDepth2(),
+                accomodation.getLabelDepth3(),
                 accomodation.getParking(),
                 accomodation.getPetCarriage(),
                 accomodation.getBabyCarriage(),

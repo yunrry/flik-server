@@ -82,7 +82,14 @@ class FestivalsEventsMigrator:
             connection = mysql.connector.connect(**self.db_config)
             cursor = connection.cursor(dictionary=True)
             
-            query = "SELECT * FROM fetched_festivals_events ORDER BY id"
+            query = """
+            SELECT * FROM fetched_sports_recreation 
+            WHERE label_depth1 IS NOT NULL 
+            AND label_depth1 != '' 
+            AND addr1 IS NOT NULL 
+            AND addr1 != '' 
+            ORDER BY id
+            """
             cursor.execute(query)
             data = cursor.fetchall()
             
@@ -142,6 +149,9 @@ class FestivalsEventsMigrator:
                 'tag2': keywords[1] if len(keywords) > 1 else '',
                 'tag3': keywords[2] if len(keywords) > 2 else '',
                 'tags': ','.join(keywords) if keywords else '',
+                'label_depth1': item.get('label_depth1', ''),
+                'label_depth2': item.get('label_depth2', ''),
+                'label_depth3': item.get('label_depth3', ''),
                 'check_in_time': '',  # 축제/이벤트에는 해당없음
                 'check_out_time': '',  # 축제/이벤트에는 해당없음
                 'cooking': None,  # 축제/이벤트에는 해당없음 (bit 타입)
@@ -183,13 +193,13 @@ class FestivalsEventsMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, check_in_time,
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, check_in_time,
                 check_out_time, cooking, facilities, cuisine_type, fee, age_limit,
                 event_end_date, event_start_date, running_time, sponsor, first_menu,
                 kids_facility, price_range, reservation, take_away, treat_menu,
                 products, exp_guide, time
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -225,6 +235,9 @@ class FestivalsEventsMigrator:
                         item.get('tag2', ''),                # tag2
                         item.get('tag3', ''),                # tag3
                         item.get('tags', ''),                # tags
+                        item.get('label_depth1', ''),        # label_depth1
+                        item.get('label_depth2', ''),        # label_depth2
+                        item.get('label_depth3', ''),        # label_depth3
                         item.get('check_in_time', ''),       # check_in_time
                         item.get('check_out_time', ''),      # check_out_time
                         item.get('cooking'),                 # cooking (bit)
@@ -247,10 +260,10 @@ class FestivalsEventsMigrator:
                         item.get('time', '')                 # time
                     )
                     
-                    # 파라미터 개수 검증
-                    if len(row_data) != 45:
-                        logger.error(f"행 {i}: 파라미터 개수 불일치 - 예상: 45, 실제: {len(row_data)}")
-                        continue
+                    # # 파라미터 개수 검증
+                    # if len(row_data) != 45:
+                    #     logger.error(f"행 {i}: 파라미터 개수 불일치 - 예상: 45, 실제: {len(row_data)}")
+                    #     continue
                     
                     insert_data.append(row_data)
                     

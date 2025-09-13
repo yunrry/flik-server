@@ -27,26 +27,29 @@ public abstract class BaseSpotEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false)
     private String contentTypeId;
 
-    @Column(nullable = false, length = 500)
+    @Column(name = "content_id", nullable = false)
+    private String contentId;
+
+    @Column(nullable = false)
     private String category;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false)
     private String address;
 
-    @Column(name = "regn_cd", length = 500)
+    @Column(name = "regn_cd")
     private String regnCd;
 
-    @Column(name = "signgu_cd", length = 500)
-    private String sigunguCd;
+    @Column(name = "signgu_cd")
+    private String signguCd;
 
     @Column(name = "latitude")
     private BigDecimal latitude;
@@ -57,37 +60,46 @@ public abstract class BaseSpotEntity {
     @Column(name = "image_urls", columnDefinition = "TEXT")
     private String imageUrls;
 
-    @Column(name = "info", length = 500)
+    @Column(name = "info")
     private String info;
 
     @Column(precision = 2, scale = 1)
     private BigDecimal rating;
 
-    @Column(name = "google_place_id", length = 500)
+    @Column(name = "google_place_id")
     private String googlePlaceId;
 
     @Column(name = "review_count")
     private Integer reviewCount;
 
-    @Column(name = "tag1", length = 500)
+    @Column(name = "tag1")
     private String tag1;
 
-    @Column(name = "tag2", length = 500)
+    @Column(name = "tag2")
     private String tag2;
 
-    @Column(name = "tag3", length = 500)
+    @Column(name = "tag3")
     private String tag3;
 
-    @Column(name = "tags", length = 500)
+    @Column(name = "tags")
     private String tags;
 
-    @Column(name = "parking", length = 500)
+    @Column(name = "label_depth1")
+    private String labelDepth1;
+
+    @Column(name = "label_depth2")
+    private String labelDepth2;
+
+    @Column(name = "label_depth3")
+    private String labelDepth3;
+
+    @Column(name = "parking")
     private String parking;
 
-    @Column(name = "pet_carriage", length = 500)
+    @Column(name = "pet_carriage")
     private String petCarriage;
 
-    @Column(name = "baby_carriage", length = 500)
+    @Column(name = "baby_carriage")
     private String babyCarriage;
 
     @Column(name = "open_time")
@@ -96,24 +108,25 @@ public abstract class BaseSpotEntity {
     @Column(name = "close_time")
     private LocalTime closeTime;
 
-    @Column(name = "time", length = 500)
+    @Column(name = "time")
     private String time;
 
-    @Column(name = "day_off", length = 500)
+    @Column(name = "day_off")
     private String dayOff;
 
-    protected BaseSpotEntity(Long id, String name, String contentTypeId,String category, String description,
-                             String address, String regnCd, String sigunguCd, BigDecimal latitude, BigDecimal Longitude,String imageUrls, String info,BigDecimal rating,
-                             String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String parking, String petCarriage, String babyCarriage,
+    protected BaseSpotEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
+                             String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude,String imageUrls, String info,BigDecimal rating,
+                             String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3, String parking, String petCarriage, String babyCarriage,
                               LocalTime openTime, LocalTime closeTime, String time, String dayOff) {
         this.id = id;
         this.name = name;
         this.contentTypeId = contentTypeId;
+        this.contentId = contentId;
         this.category = category;
         this.description = description;
         this.address = address;
         this.regnCd = regnCd;
-        this.sigunguCd = sigunguCd;
+        this.signguCd = signguCd;
         this.latitude = latitude;
         this.longitude = Longitude;
         this.imageUrls = imageUrls;
@@ -125,6 +138,9 @@ public abstract class BaseSpotEntity {
         this.tag2 = tag2;
         this.tag3 = tag3;
         this.tags = tags;
+        this.labelDepth1 = labelDepth1;
+        this.labelDepth2 = labelDepth2;
+        this.labelDepth3 = labelDepth3;
         this.parking = parking;
         this.petCarriage = petCarriage;
         this.babyCarriage = babyCarriage;

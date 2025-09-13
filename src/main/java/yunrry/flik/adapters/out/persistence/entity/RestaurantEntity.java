@@ -43,11 +43,11 @@ public class RestaurantEntity extends BaseSpotEntity {
     private String treatMenu;
 
 
-    public RestaurantEntity(Long id, String name, String contentTypeId,String category, String description,
-                            String address, String regnCd, String sigunguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
-                            String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String parking, String petCarriage, String babyCarriage,
+    public RestaurantEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
+                            String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
+                            String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3, String parking, String petCarriage, String babyCarriage,
                             LocalTime openTime, LocalTime closeTime, String time, String dayOff, String cuisineType, String priceRange, String reservation, String kidsFacility, String takeAway, String firstMenu, String treatMenu) {
-        super(id, name, contentTypeId, category, description, address, regnCd, sigunguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1,labelDepth2, labelDepth3, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
         this.cuisineType = cuisineType;
         this.priceRange = priceRange;
         this.reservation = reservation;
@@ -62,11 +62,12 @@ public class RestaurantEntity extends BaseSpotEntity {
                 this.getId(),
                 this.getName(),
                 this.getContentTypeId(),
+                this.getContentId(),
                 this.getCategory(),
                 this.getDescription(),
                 this.getAddress(),
                 this.getRegnCd(),
-                this.getSigunguCd(),
+                this.getSignguCd(),
                 this.getLatitude(),
                 this.getLongitude(),
                 parseImageUrls(this.getImageUrls()),
@@ -78,6 +79,9 @@ public class RestaurantEntity extends BaseSpotEntity {
                 this.getTag2(),
                 this.getTag3(),
                 this.getTags(),
+                this.getLabelDepth1(),
+                this.getLabelDepth2(),
+                this.getLabelDepth3(),
                 this.getParking(),
                 this.getPetCarriage(),
                 this.getBabyCarriage(),
@@ -100,11 +104,12 @@ public class RestaurantEntity extends BaseSpotEntity {
                 restaurant.getId(),
                 restaurant.getName(),
                 restaurant.getContentTypeId(),
+                restaurant.getContentId(),
                 restaurant.getCategory(),
                 restaurant.getDescription(),
                 restaurant.getAddress(),
                 restaurant.getRegnCd(),
-                restaurant.getSigunguCd(),
+                restaurant.getSignguCd(),
                 restaurant.getLatitude(),
                 restaurant.getLongitude(),
                 joinImageUrls(restaurant.getImageUrls()),// String으로 변환 필요
@@ -116,6 +121,9 @@ public class RestaurantEntity extends BaseSpotEntity {
                 restaurant.getTag2(),
                 restaurant.getTag3(),
                 restaurant.getTags(),
+                restaurant.getLabelDepth1(),
+                restaurant.getLabelDepth2(),
+                restaurant.getLabelDepth3(),
                 restaurant.getParking(),
                 restaurant.getPetCarriage(),
                 restaurant.getBabyCarriage(),

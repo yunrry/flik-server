@@ -82,7 +82,15 @@ class RestaurantsMigrator:
             connection = mysql.connector.connect(**self.db_config)
             cursor = connection.cursor(dictionary=True)
             
-            query = "SELECT * FROM fetched_restaurants ORDER BY id"
+            # label_depth1이 존재하는 데이터만 조회
+            query = """
+            SELECT * FROM fetched_restaurants 
+            WHERE label_depth1 IS NOT NULL 
+            AND label_depth1 != '' 
+            AND addr1 IS NOT NULL 
+            AND addr1 != '' 
+            ORDER BY id
+            """
             cursor.execute(query)
             data = cursor.fetchall()
             
@@ -142,6 +150,9 @@ class RestaurantsMigrator:
                 'tag2': keywords[1] if len(keywords) > 1 else '',
                 'tag3': keywords[2] if len(keywords) > 2 else '',
                 'tags': ','.join(keywords) if keywords else '',
+                'label_depth1': item.get('label_depth1', ''),
+                'label_depth2': item.get('label_depth2', ''),
+                'label_depth3': item.get('label_depth3', ''),
                 'time': item.get('usetime', ''),
                 'first_menu': item.get('firstmenu', ''),
                 'treat_menu': item.get('treatmenu', ''),
@@ -175,14 +186,15 @@ class RestaurantsMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, time, 
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, 
                 first_menu, treat_menu, take_away, reservation, kids_facility, cuisine_type, exp_guide
             ) VALUES (
                 %s, %s, %s, %s, %s, %s, 
                  %s, %s, %s, %s, %s, %s, 
                   %s, %s, %s, %s, %s, %s, %s,
                    %s, %s, %s, %s, %s, %s, %s,
-                    %s, %s, %s, %s, %s, %s, %s
+                    %s, %s, %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s
             )
             """
             
@@ -216,6 +228,9 @@ class RestaurantsMigrator:
                     item.get('tag2', ''),
                     item.get('tag3', ''),
                     item.get('tags', ''),
+                    item.get('label_depth1', ''),
+                    item.get('label_depth2', ''),
+                    item.get('label_depth3', ''),
                     item.get('time', ''),
                     item.get('first_menu', ''),
                     item.get('treat_menu', ''),

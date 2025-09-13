@@ -16,11 +16,12 @@ public abstract class Spot {
     public final Long id;
     public final String name;
     public final String contentTypeId;
+    public final String contentId;
     public final String category;
     public final String description;
     public final String address;
     public final String regnCd;
-    public final String sigunguCd;
+    public final String signguCd;
     public final BigDecimal latitude;
     public final BigDecimal longitude;
     public final List<String> imageUrls;
@@ -32,6 +33,9 @@ public abstract class Spot {
     public final String tag2;
     public final String tag3;
     public final String tags;
+    public final String labelDepth1;
+    public final String labelDepth2;
+    public final String labelDepth3;
     public final String parking;
     public final String petCarriage;
     public final String babyCarriage;

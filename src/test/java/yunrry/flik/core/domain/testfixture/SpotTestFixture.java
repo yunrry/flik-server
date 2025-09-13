@@ -13,11 +13,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 음식점", // name
                 "39", // contentTypeId
+                "7836561386",// contentId
                 "한식", // category
                 "테스트용 음식점입니다", // description
                 "서울시 강남구", // address
                 "11", // regnCd
-                "11680", // sigunguCd
+                "11680", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("test1.jpg", "test2.jpg"), // imageUrls
@@ -29,6 +30,9 @@ public class SpotTestFixture {
                 "가족식사", // tag2
                 "데이트", // tag3
                 "맛집,가족식사,데이트", // tags
+                "음식", // labelDepth1
+                "한식", // labelDepth2
+                "모범음식점", // labelDepth3
                 "가능", // parking
                 "불가", // petCarriage
                 "가능", // babyCarriage
@@ -51,11 +55,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 숙박시설", // name
                 "32", // contentTypeId
+                "7836561386",// contentId
                 "호텔", // category
                 "테스트용 숙박시설입니다", // description
                 "서울시 강남구", // address
                 "11", // regnCd
-                "11680", // sigunguCd
+                "11680", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("hotel1.jpg", "hotel2.jpg"), // imageUrls
@@ -67,6 +72,9 @@ public class SpotTestFixture {
                 "호텔", // tag2
                 "출장", // tag3
                 "숙박,호텔,출장", // tags
+                "숙박", // labelDepth1
+                "호텔", // labelDepth2
+                "호텔", // labelDepth3
                 "가능", // parking
                 "불가", // petCarriage
                 "가능", // babyCarriage
@@ -87,11 +95,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 문화시설", // name
                 "14", // contentTypeId
+                "7836561386",// contentId
                 "박물관", // category
                 "테스트용 문화시설입니다", // description
                 "서울시 종로구", // address
                 "11", // regnCd
-                "11110", // sigunguCd
+                "11110", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("museum1.jpg", "museum2.jpg"),// imageUrls
@@ -103,6 +112,9 @@ public class SpotTestFixture {
                 "박물관", // tag2
                 "교육", // tag3
                 "문화,박물관,교육", // tags
+                "문화관광", // labelDepth1
+                "전시시설", // labelDepth2
+                "박물관", // labelDepth3
                 "가능", // parking
                 "가능", // petCarriage
                 "가능", // babyCarriage
@@ -119,11 +131,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 축제", // name
                 "15", // contentTypeId
+                "7836561386",// contentId
                 "문화축제", // category
                 "테스트용 축제입니다", // description
                 "서울시 중구", // address
                 "11", // regnCd
-                "11140", // sigunguCd
+                "11140", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("festival1.jpg", "festival2.jpg"), // imageUrls
@@ -135,6 +148,9 @@ public class SpotTestFixture {
                 "문화", // tag2
                 "이벤트", // tag3
                 "축제,문화,이벤트", // tags
+                "축제/공연/행사", // labelDepth1
+                "축제", // labelDepth2
+                "문화관광축제", // labelDepth3
                 "가능", // parking
                 "가능", // petCarriage
                 "가능", // babyCarriage
@@ -156,11 +172,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 레저시설", // name
                 "28", // contentTypeId
+                "7836561386",// contentId
                 "스포츠", // category
                 "테스트용 레저시설입니다", // description
                 "서울시 송파구", // address
                 "11", // regnCd
-                "11240", // sigunguCd
+                "11240", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("leisure1.jpg", "leisure2.jpg"), // imageUrls
@@ -172,6 +189,9 @@ public class SpotTestFixture {
                 "스포츠", // tag2
                 "운동", // tag3
                 "레저,스포츠,운동", // tags
+                "레저스포츠", // labelDepth1
+                "수상레저스포츠", // labelDepth2
+                "수상오토바이", // labelDepth3
                 "가능", // parking
                 "불가", // petCarriage
                 "가능", // babyCarriage
@@ -188,11 +208,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 쇼핑몰", // name
                 "38", // contentTypeId
+                "7836561386",// contentId
                 "쇼핑센터", // category
                 "테스트용 쇼핑몰입니다", // description
                 "서울시 강남구", // address
                 "11", // regnCd
-                "11680", // sigunguCd
+                "11680", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("shop1.jpg", "shop2.jpg"), // imageUrls
@@ -204,6 +225,9 @@ public class SpotTestFixture {
                 "패션", // tag2
                 "브랜드", // tag3
                 "쇼핑,패션,브랜드", // tags
+                "쇼핑", // labelDepth1
+                "면세점", // labelDepth2
+                "공항면세점", // labelDepth3
                 "가능", // parking
                 "가능", // petCarriage
                 "가능", // babyCarriage
@@ -220,11 +244,12 @@ public class SpotTestFixture {
                 1L, // id
                 "테스트 관광지", // name
                 "12", // contentTypeId
+                "7836561386",// contentId
                 "자연명소", // category
                 "테스트용 관광지입니다", // description
                 "제주도 제주시", // address
                 "50", // regnCd
-                "50110", // sigunguCd
+                "50110", // signguCd
                 BigDecimal.valueOf(342.3425),// latitude
                 BigDecimal.valueOf(123.1234), // longitude
                 List.of("tour1.jpg", "tour2.jpg"), // imageUrls
@@ -236,6 +261,9 @@ public class SpotTestFixture {
                 "자연", // tag2
                 "명소", // tag3
                 "관광,자연,명소", // tags
+                "문화관광", // labelDepth1
+                "랜드마크관광", // labelDepth2
+                "동상", // labelDepth3
                 "가능", // parking
                 "가능", // petCarriage
                 "가능", // babyCarriage

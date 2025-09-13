@@ -28,11 +28,11 @@ public class ShopEntity extends BaseSpotEntity {
     private String products;
 
 
-    public ShopEntity(Long id, String name, String contentTypeId,String category, String description,
-                      String address, String regnCd, String sigunguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
-                      String googlePlaceId, Integer reviewCount, String tag1, String tag2, String tag3, String tags, String parking, String petCarriage, String babyCarriage,
+    public ShopEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
+                      String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
+                      String googlePlaceId, Integer reviewCount, String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3, String parking, String petCarriage, String babyCarriage,
                       LocalTime openTime, LocalTime closeTime, String time, String dayOff, String products) {
-        super(id, name, contentTypeId, category, description, address, regnCd, sigunguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+        super(id, name, contentTypeId, contentId,category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
         this.products = products;
     }
 
@@ -41,11 +41,12 @@ public class ShopEntity extends BaseSpotEntity {
                 this.getId(),
                 this.getName(),
                 this.getContentTypeId(),
+                this.getContentId(),
                 this.getCategory(),
                 this.getDescription(),
                 this.getAddress(),
                 this.getRegnCd(),
-                this.getSigunguCd(),
+                this.getSignguCd(),
                 this.getLatitude(),
                 this.getLongitude(),
                 parseImageUrls(this.getImageUrls()),
@@ -57,6 +58,9 @@ public class ShopEntity extends BaseSpotEntity {
                 this.getTag2(),
                 this.getTag3(),
                 this.getTags(),
+                this.getLabelDepth1(),
+                this.getLabelDepth2(),
+                this.getLabelDepth3(),
                 this.getParking(),
                 this.getPetCarriage(),
                 this.getBabyCarriage(),
@@ -73,11 +77,12 @@ public class ShopEntity extends BaseSpotEntity {
                 shop.getId(),
                 shop.getName(),
                 shop.getContentTypeId(),
+                shop.getContentId(),
                 shop.getCategory(),
                 shop.getDescription(),
                 shop.getAddress(),
                 shop.getRegnCd(),
-                shop.getSigunguCd(),
+                shop.getSignguCd(),
                 shop.getLatitude(),
                 shop.getLongitude(),
                 joinImageUrls(shop.getImageUrls()),// String으로 변환 필요
@@ -89,6 +94,9 @@ public class ShopEntity extends BaseSpotEntity {
                 shop.getTag2(),
                 shop.getTag3(),
                 shop.getTags(),
+                shop.getLabelDepth1(),
+                shop.getLabelDepth2(),
+                shop.getLabelDepth3(),
                 shop.getParking(),
                 shop.getPetCarriage(),
                 shop.getBabyCarriage(),
