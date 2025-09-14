@@ -83,11 +83,17 @@ class SportsRecreationMigrator:
             connection = mysql.connector.connect(**self.db_config)
             cursor = connection.cursor(dictionary=True)
             
-            query = "SELECT * FROM fetched_sports_recreation ORDER BY id"
+            # label_depth1이 존재하는 데이터만 조회
+            query = """
+            SELECT * FROM fetched_sports_recreation 
+            WHERE label_depth1 IS NOT NULL 
+            AND label_depth1 != '' 
+            ORDER BY id
+            """
             cursor.execute(query)
             data = cursor.fetchall()
             
-            logger.info(f"fetched_sports_recreation에서 {len(data)}건 조회")
+            logger.info(f"fetched_sports_recreation에서 label_depth1이 있는 {len(data)}건 조회")
             return data
             
         except Error as e:
@@ -143,6 +149,9 @@ class SportsRecreationMigrator:
                 'tag2': keywords[1] if len(keywords) > 1 else '',
                 'tag3': keywords[2] if len(keywords) > 2 else '',
                 'tags': ','.join(keywords) if keywords else '',
+                'label_depth1': item.get('label_depth1', ''),
+                'label_depth2': item.get('label_depth2', ''),
+                'label_depth3': item.get('label_depth3', ''),
                 'time': item.get('usetime', ''),
                 'reservation': item.get('reservation', ''),  # 레포츠 특화 필드
                 'exp_guide': item.get('expagerangeleports', '')  # 체험연령대
@@ -166,9 +175,9 @@ class SportsRecreationMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, time, reservation, exp_guide
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, reservation, exp_guide
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -202,6 +211,9 @@ class SportsRecreationMigrator:
                     item.get('tag2', ''),
                     item.get('tag3', ''),
                     item.get('tags', ''),
+                    item.get('label_depth1', ''),
+                    item.get('label_depth2', ''),
+                    item.get('label_depth3', ''),
                     item.get('time', ''),
                     item.get('reservation', ''),
                     item.get('exp_guide', '')

@@ -89,7 +89,15 @@ class ShoppingMigrator:
             connection = mysql.connector.connect(**self.db_config)
             cursor = connection.cursor(dictionary=True)
             
-            query = "SELECT * FROM fetched_shopping ORDER BY id"
+            # label_depth1이 존재하는 데이터만 조회
+            query = """
+            SELECT * FROM fetched_sports_recreation 
+            WHERE label_depth1 IS NOT NULL 
+            AND label_depth1 != '' 
+            AND addr1 IS NOT NULL 
+            AND addr1 != '' 
+            ORDER BY id
+            """
             cursor.execute(query)
             data = cursor.fetchall()
             
@@ -149,6 +157,9 @@ class ShoppingMigrator:
                 'tag2': keywords[1] if len(keywords) > 1 else '',
                 'tag3': keywords[2] if len(keywords) > 2 else '',
                 'tags': ','.join(keywords) if keywords else '',
+                'label_depth1': item.get('label_depth1', ''),
+                'label_depth2': item.get('label_depth2', ''),
+                'label_depth3': item.get('label_depth3', ''),
                 'time': item.get('usetime', ''),
                 'products': item.get('saleitem', ''),  # 판매상품
                 'price_range': item.get('saleitemcost', ''),  # 가격대
@@ -174,9 +185,9 @@ class ShoppingMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, time, products, price_range, facilities, exp_guide
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, products, price_range, facilities, exp_guide
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -189,28 +200,37 @@ class ShoppingMigrator:
                     item.get('baby_carriage', ''),
                     item.get('category', ''),
                     item.get('close_time'),
+
                     item.get('content_type_id', ''),
                     item.get('content_id', ''),
                     item.get('day_off', ''),
                     item.get('description', ''),
                     item.get('google_place_id', ''),
+
                     item.get('image_urls', ''),
                     item.get('info', ''),
                     item.get('latitude'),
                     item.get('longitude'),
                     item.get('name', ''),
+                    
                     item.get('open_time'),
                     item.get('parking', ''),
                     item.get('pet_carriage', ''),
                     item.get('rating'),
                     item.get('regn_cd', ''),
+
                     item.get('review_count'),
                     item.get('signgu_cd', ''),
                     item.get('tag1', ''),
                     item.get('tag2', ''),
                     item.get('tag3', ''),
+
                     item.get('tags', ''),
+                    item.get('label_depth1', ''),
+                    item.get('label_depth2', ''),
+                    item.get('label_depth3', ''),
                     item.get('time', ''),
+
                     item.get('products', ''),
                     item.get('price_range', ''),
                     item.get('facilities', ''),

@@ -82,7 +82,14 @@ class AccommodationsMigrator:
             connection = mysql.connector.connect(**self.db_config)
             cursor = connection.cursor(dictionary=True)
             
-            query = "SELECT * FROM fetched_accommodations ORDER BY id"
+            query = """
+            SELECT * FROM fetched_sports_recreation 
+            WHERE label_depth1 IS NOT NULL 
+            AND label_depth1 != '' 
+            AND addr1 IS NOT NULL 
+            AND addr1 != '' 
+            ORDER BY id
+            """
             cursor.execute(query)
             data = cursor.fetchall()
             
@@ -187,6 +194,9 @@ class AccommodationsMigrator:
                 'tag2': keywords[1] if len(keywords) > 1 else '',
                 'tag3': keywords[2] if len(keywords) > 2 else '',
                 'tags': ','.join(keywords) if keywords else '',
+                'label_depth1': item.get('label_depth1', ''),
+                'label_depth2': item.get('label_depth2', ''),
+                'label_depth3': item.get('label_depth3', ''),
                 'check_in_time': item.get('checkintime', ''),  # 체크인 시간
                 'check_out_time': item.get('checkouttime', ''),  # 체크아웃 시간
                 'cooking': self.convert_cooking_to_bit(item.get('chkcooking', '')),  # 요리가능 여부 (bit)
@@ -228,13 +238,13 @@ class AccommodationsMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, check_in_time,
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, check_in_time,
                 check_out_time, cooking, facilities, cuisine_type, fee, age_limit,
                 event_end_date, event_start_date, running_time, sponsor, first_menu,
                 kids_facility, price_range, reservation, take_away, treat_menu,
                 products, exp_guide, time
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -249,43 +259,55 @@ class AccommodationsMigrator:
                         item.get('baby_carriage', ''),       # baby_carriage
                         item.get('category', ''),            # category
                         item.get('close_time'),              # close_time
+
                         item.get('content_type_id', ''),     # content_type_id
                         item.get('content_id', ''),          # content_id
                         item.get('day_off', ''),             # day_off
                         item.get('description', ''),         # description
                         item.get('google_place_id', ''),     # google_place_id
+                        
                         item.get('image_urls'),              # image_urls
                         item.get('info', ''),                # info
                         item.get('latitude'),                # latitude
                         item.get('longitude'),               # longitude
                         item.get('name', ''),                # name
+
                         item.get('open_time'),               # open_time
                         item.get('parking', ''),             # parking
                         item.get('pet_carriage', ''),        # pet_carriage
                         item.get('rating'),                  # rating
                         item.get('regn_cd', ''),             # regn_cd
+
                         item.get('review_count'),            # review_count
                         item.get('signgu_cd', ''),           # signgu_cd
                         item.get('tag1', ''),                # tag1
                         item.get('tag2', ''),                # tag2
                         item.get('tag3', ''),                # tag3
+
                         item.get('tags', ''),                # tags
+                        item.get('label_depth1', ''),        # label_depth1
+                        item.get('label_depth2', ''),        # label_depth2
+                        item.get('label_depth3', ''),        # label_depth3
                         item.get('check_in_time', ''),       # check_in_time
+
                         item.get('check_out_time', ''),      # check_out_time
                         item.get('cooking'),                 # cooking (bit)
                         item.get('facilities', ''),          # facilities
                         item.get('cuisine_type', ''),        # cuisine_type
                         item.get('fee', ''),                 # fee
+                        
                         item.get('age_limit', ''),           # age_limit
                         item.get('event_end_date', ''),      # event_end_date
                         item.get('event_start_date', ''),    # event_start_date
                         item.get('running_time', ''),        # running_time
                         item.get('sponsor', ''),             # sponsor
+
                         item.get('first_menu', ''),          # first_menu
                         item.get('kids_facility', ''),       # kids_facility
                         item.get('price_range', ''),         # price_range
                         item.get('reservation', ''),         # reservation
                         item.get('take_away', ''),           # take_away
+
                         item.get('treat_menu', ''),          # treat_menu
                         item.get('products', ''),            # products
                         item.get('exp_guide', ''),           # exp_guide
@@ -293,8 +315,8 @@ class AccommodationsMigrator:
                     )
                     
                     # 파라미터 개수 검증
-                    if len(row_data) != 45:
-                        logger.error(f"행 {i}: 파라미터 개수 불일치 - 예상: 45, 실제: {len(row_data)}")
+                    if len(row_data) != 49:
+                        logger.error(f"행 {i}: 파라미터 개수 불일치 - 예상: 49, 실제: {len(row_data)}")
                         continue
                     
                     insert_data.append(row_data)

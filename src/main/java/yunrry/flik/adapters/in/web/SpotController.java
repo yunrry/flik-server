@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.*;
 import yunrry.flik.adapters.in.dto.spot.SpotDetailResponse;
 import yunrry.flik.adapters.in.dto.spot.SpotSearchResponse;
+import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
+import yunrry.flik.ports.in.query.FindSpotsByCategoriesQuery;
+import yunrry.flik.ports.in.query.FindSpotsByCategoryQuery;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.in.query.SearchSpotsQuery;
 import yunrry.flik.ports.in.usecase.SpotUseCase;
 import yunrry.flik.ports.in.usecase.SearchSpotsUseCase;
+
+import java.util.List;
 
 @Tag(name = "Spot", description = "음식점 API")
 @RestController
@@ -24,6 +29,60 @@ public class SpotController {
 
     private final SpotUseCase spotUseCase;
     private final SearchSpotsUseCase searchSpotsUseCase;
+
+    @Operation(summary = "카테고리별 스팟 조회", description = "여러 카테고리의 스팟들을 각 카테고리당 최대 20개씩 조회하여 반환합니다.")
+    @GetMapping("/categories")
+    public ResponseEntity<Response<List<Spot>>> getSpotsByCategories(
+            @Parameter(description = "카테고리 목록", example = "FOOD,ATTRACTION,ACCOMMODATION")
+            @RequestParam List<String> categories,
+
+            @Parameter(description = "지역 코드", example = "11")
+            @RequestParam String regionCode,
+
+            @Parameter(description = "각 카테고리별 조회할 개수", example = "21")
+            @RequestParam(defaultValue = "21") int limitPerCategory) {
+
+        try {
+            // 1. 문자열을 MainCategory enum으로 변환 - 유효성 검사 추가
+            List<MainCategory> mainCategories = categories.stream()
+                    .map(category -> {
+                        try {
+                            return MainCategory.valueOf(category.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            throw new IllegalArgumentException("Invalid category: " + category);
+                        }
+                    })
+                    .toList();
+
+            // 2. 비즈니스 로직 실행
+            List<Spot> spots = spotUseCase.findSpotsByCategories(mainCategories, regionCode, limitPerCategory);
+
+            // 3. 응답 반환
+            return ResponseEntity.ok(Response.success(spots));
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(Response.error(e.getMessage()));
+        }
+    }
+
+//    @Operation(summary = "추천 스팟 조회", description = "지역별 추천 스팟들을 조회합니다.")
+//    @GetMapping("/recommendations")
+//    public ResponseEntity<Response<List<Spot>>> getRecommendedSpots(
+//            @Parameter(description = "지역 코드", example = "11")
+//            @RequestParam String regionCode,
+//
+//            @Parameter(description = "개수", example = "5")
+//            @RequestParam(defaultValue = "5") int limit) {
+//
+//        List<Spot> recommendedSpots = spotUseCase.getRecommendedSpots(regionCode, limit);
+//
+//        return ResponseEntity.ok(Response.success(recommendedSpots));
+//    }
+//
+
+
+
 
     @Operation(summary = "음식점 상세 조회", description = "음식점 ID로 상세 정보를 조회합니다.")
     @GetMapping("/{id}")

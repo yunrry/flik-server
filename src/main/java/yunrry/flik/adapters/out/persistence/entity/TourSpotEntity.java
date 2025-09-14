@@ -31,11 +31,11 @@ public class TourSpotEntity extends BaseSpotEntity {
     private String ageLimit;
 
 
-    public TourSpotEntity(Long id, String name, String contentTypeId,String category, String description,
-                          String address, String regnCd, String sigunguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
-                          String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String parking, String petCarriage, String babyCarriage,
+    public TourSpotEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
+                          String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
+                          String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3, String parking, String petCarriage, String babyCarriage,
                           LocalTime openTime, LocalTime closeTime, String time, String dayOff, String expGuide, String ageLimit) {
-        super(id, name, contentTypeId, category, description, address, regnCd, sigunguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
         this.expGuide = expGuide;
         this.ageLimit = ageLimit;
     }
@@ -45,11 +45,12 @@ public class TourSpotEntity extends BaseSpotEntity {
                 this.getId(),
                 this.getName(),
                 this.getContentTypeId(),
+                this.getContentId(),
                 this.getCategory(),
                 this.getDescription(),
                 this.getAddress(),
                 this.getRegnCd(),
-                this.getSigunguCd(),
+                this.getSignguCd(),
                 this.getLatitude(),
                 this.getLongitude(),
                 parseImageUrls(this.getImageUrls()),
@@ -61,6 +62,9 @@ public class TourSpotEntity extends BaseSpotEntity {
                 this.getTag2(),
                 this.getTag3(),
                 this.getTags(),
+                this.getLabelDepth1(),
+                this.getLabelDepth2(),
+                this.getLabelDepth3(),
                 this.getParking(),
                 this.getPetCarriage(),
                 this.getBabyCarriage(),
@@ -78,11 +82,12 @@ public class TourSpotEntity extends BaseSpotEntity {
                 tourSpot.getId(),
                 tourSpot.getName(),
                 tourSpot.getContentTypeId(),
+                tourSpot.getContentId(),
                 tourSpot.getCategory(),
                 tourSpot.getDescription(),
                 tourSpot.getAddress(),
                 tourSpot.getRegnCd(),
-                tourSpot.getSigunguCd(),
+                tourSpot.getSignguCd(),
                 tourSpot.getLatitude(),
                 tourSpot.getLongitude(),
                 joinImageUrls(tourSpot.getImageUrls()),// String으로 변환 필요
@@ -94,6 +99,9 @@ public class TourSpotEntity extends BaseSpotEntity {
                 tourSpot.getTag2(),
                 tourSpot.getTag3(),
                 tourSpot.getTags(),
+                tourSpot.getLabelDepth1(),
+                tourSpot.getLabelDepth2(),
+                tourSpot.getLabelDepth3(),
                 tourSpot.getParking(),
                 tourSpot.getPetCarriage(),
                 tourSpot.getBabyCarriage(),
