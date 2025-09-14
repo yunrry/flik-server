@@ -77,8 +77,13 @@ public class SpotAdapter implements SpotRepository {
     @Override
     public List<Spot> findByCategory(MainCategory category, String regionCode, int limit) {
         List<String> subcategories = categoryMappingService.getSubCategoryNames(category.getCode());
+
+        System.out.println("Category: " + category + ", subcategories: " + subcategories);
+        System.out.println("Original regionCode: " + regionCode);
+
         String regnCd = regionCode.substring(0, 2);
         String signguCd = regionCode.substring(2, 5);
+        System.out.println("regnCd: " + regnCd + ", signguCd: " + signguCd);
 
         Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "rating"));
 

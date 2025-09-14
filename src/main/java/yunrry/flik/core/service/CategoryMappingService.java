@@ -104,11 +104,41 @@ public class CategoryMappingService {
      * 카테고리에 해당하는 한국어 중분류명 목록 반환 (DB 검색용)
      */
     public List<String> getSubCategoryNames(String category) {
-        return CATEGORY_MAPPING.getOrDefault(category, List.of())
+        // String을 MainCategory enum으로 변환
+        MainCategory mainCategory = MainCategory.findByCode(category);
+
+        if (mainCategory == null) {
+            System.out.println("Invalid category code: " + category);
+            return List.of();
+        }
+
+        List<String> result = CATEGORY_MAPPING.getOrDefault(mainCategory, List.of())
+                .stream()
+                .map(SubCategory::getKoreanName)
+                .toList();
+
+        System.out.println("Category: " + category + " -> MainCategory: " + mainCategory + " -> SubCategories: " + result);
+        return result;
+    }
+
+    /**
+     * 카테고리 지원 여부 확인
+     */
+    public boolean isValidCategory(String category) {
+        MainCategory mainCategory = MainCategory.findByCode(category);
+        return mainCategory != null && CATEGORY_MAPPING.containsKey(mainCategory);
+    }
+
+    /**
+     * MainCategory enum으로 직접 조회하는 메서드 추가
+     */
+    public List<String> getSubCategoryNames(MainCategory mainCategory) {
+        return CATEGORY_MAPPING.getOrDefault(mainCategory, List.of())
                 .stream()
                 .map(SubCategory::getKoreanName)
                 .toList();
     }
+
 
     /**
      * 지원하는 카테고리 목록 반환
@@ -117,10 +147,5 @@ public class CategoryMappingService {
         return List.copyOf(CATEGORY_MAPPING.keySet());
     }
 
-    /**
-     * 카테고리 지원 여부 확인
-     */
-    public boolean isValidCategory(String category) {
-        return CATEGORY_MAPPING.containsKey(category);
-    }
+
 }

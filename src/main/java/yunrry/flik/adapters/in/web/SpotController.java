@@ -42,17 +42,28 @@ public class SpotController {
             @Parameter(description = "각 카테고리별 조회할 개수", example = "21")
             @RequestParam(defaultValue = "21") int limitPerCategory) {
 
-        // 1. 문자열을 MainCategory enum으로 변환
-        List<MainCategory> mainCategories = categories.stream()
-                .map(MainCategory::valueOf)
-                .toList();
+        try {
+            // 1. 문자열을 MainCategory enum으로 변환 - 유효성 검사 추가
+            List<MainCategory> mainCategories = categories.stream()
+                    .map(category -> {
+                        try {
+                            return MainCategory.valueOf(category.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            throw new IllegalArgumentException("Invalid category: " + category);
+                        }
+                    })
+                    .toList();
 
+            // 2. 비즈니스 로직 실행
+            List<Spot> spots = spotUseCase.findSpotsByCategories(mainCategories, regionCode, limitPerCategory);
 
-        // 3. 비즈니스 로직 실행
-        List<Spot> spots = spotUseCase.findSpotsByCategories(mainCategories, regionCode, limitPerCategory);
+            // 3. 응답 반환
+            return ResponseEntity.ok(Response.success(spots));
 
-        // 4. 응답 반환
-        return ResponseEntity.ok(Response.success(spots));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(Response.error(e.getMessage()));
+        }
     }
 
 //    @Operation(summary = "추천 스팟 조회", description = "지역별 추천 스팟들을 조회합니다.")
