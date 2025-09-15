@@ -10,7 +10,7 @@ import yunrry.flik.core.domain.exception.SpotNotFoundException;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
 import yunrry.flik.core.domain.testfixture.SpotTestFixture;
-import yunrry.flik.core.service.CategoryMappingService;
+import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
@@ -19,7 +19,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +30,7 @@ class GetSpotServiceTest {
     private SpotRepository spotRepository;
 
     @Mock
-    private CategoryMappingService categoryMappingService;
+    private CategoryMapper categoryMappingService;
 
     @InjectMocks
     private GetSpotService getSpotService;

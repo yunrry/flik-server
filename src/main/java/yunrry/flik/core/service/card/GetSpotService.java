@@ -2,17 +2,14 @@ package yunrry.flik.core.service.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import yunrry.flik.core.domain.exception.SpotNotFoundException;
 
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
-import yunrry.flik.core.service.CategoryMappingService;
-import yunrry.flik.ports.in.query.FindSpotsByCategoriesQuery;
+import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.FindSpotsByCategoriesSliceQuery;
-import yunrry.flik.ports.in.query.FindSpotsByCategoryQuery;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.in.usecase.SpotUseCase;
 import yunrry.flik.ports.out.repository.SpotRepository;
@@ -27,7 +24,7 @@ import java.util.Map;
 public class GetSpotService implements SpotUseCase {
 
     private final SpotRepository spotRepository;
-    private final CategoryMappingService categoryMappingService;
+    private final CategoryMapper categoryMappingService;
 
     @Override
     @Cacheable(value = "spots", key = "#query.spotId")

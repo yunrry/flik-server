@@ -126,9 +126,9 @@ public class SpotTestFixture {
         );
     }
 
-    public static Festival createTestFestival() {
+    public static Festival createTestFestival(Long id) {
         return new Festival(
-                1L, // id
+                id,
                 "테스트 축제", // name
                 "15", // contentTypeId
                 "7836561386",// contentId

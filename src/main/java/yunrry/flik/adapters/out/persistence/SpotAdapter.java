@@ -8,7 +8,7 @@ import yunrry.flik.adapters.out.persistence.entity.BaseSpotEntity;
 import yunrry.flik.adapters.out.persistence.repository.SpotJpaRepository;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
-import yunrry.flik.core.service.CategoryMappingService;
+import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.SearchSpotsQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class SpotAdapter implements SpotRepository {
 
     private final SpotJpaRepository spotJpaRepository;
-    private final CategoryMappingService categoryMappingService;
+    private final CategoryMapper categoryMappingService;
 
     @Override
     public Optional<Spot> findById(Long id) {
