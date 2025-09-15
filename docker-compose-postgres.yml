@@ -1,0 +1,39 @@
+services:
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: flik-embedding-postgres
+    environment:
+      - POSTGRES_DB = flik_vector_db
+      - POSTGRES_USER=${MYSQL_USER}
+      - POSTGRES_PASSWORD=${MYSQL_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-vector.sql:/docker-entrypoint-initdb.d/init-vector.sql
+    networks:
+      - goormthon-java_dormung-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-yoon} -d flik_vector_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command: >
+      postgres
+      -c shared_preload_libraries=vector
+      -c max_connections=200
+      -c shared_buffers=256MB
+      -c effective_cache_size=1GB
+      -c maintenance_work_mem=64MB
+      -c checkpoint_completion_target=0.9
+      -c wal_buffers=16MB
+      -c default_statistics_target=100
+
+
+networks:
+  goormthon-java_dormung-network:
+    external: true
