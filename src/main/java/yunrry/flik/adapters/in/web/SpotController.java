@@ -3,11 +3,14 @@ package yunrry.flik.adapters.in.web;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.*;
+import yunrry.flik.adapters.in.dto.spot.CategorySpotsResponse;
 import yunrry.flik.adapters.in.dto.spot.SpotDetailResponse;
 import yunrry.flik.adapters.in.dto.spot.SpotSearchResponse;
 import yunrry.flik.core.domain.model.MainCategory;
@@ -32,12 +35,16 @@ public class SpotController {
 
     @Operation(summary = "카테고리별 스팟 조회", description = "여러 카테고리의 스팟들을 각 카테고리당 최대 20개씩 조회하여 반환합니다.")
     @GetMapping("/categories")
-    public ResponseEntity<Response<List<Spot>>> getSpotsByCategories(
-            @Parameter(description = "카테고리 목록", example = "FOOD,ATTRACTION,ACCOMMODATION")
+    public ResponseEntity<Response<CategorySpotsResponse>> getSpotsByCategories(
+            @Parameter(description = "카테고리 목록", example = "RESTAURANT,NATURE,ACCOMMODATION, INDOOR, HISTORY_CULTURE, CAFE, ACTIVITY, FESTIVAL, MARKET, THEMEPARK")
+
             @RequestParam List<String> categories,
 
             @Parameter(description = "지역 코드", example = "11")
             @RequestParam String regionCode,
+
+            @Parameter(description = "여행기간", example = "3")
+            @RequestParam @Max(3) @Min(1) int tripDuration,
 
             @Parameter(description = "각 카테고리별 조회할 개수", example = "21")
             @RequestParam(defaultValue = "21") int limitPerCategory) {
@@ -54,11 +61,14 @@ public class SpotController {
                     })
                     .toList();
 
+
             // 2. 비즈니스 로직 실행
-            List<Spot> spots = spotUseCase.findSpotsByCategories(mainCategories, regionCode, limitPerCategory);
+            CategorySpotsResponse response = spotUseCase.findSpotsByCategoriesWithCacheKey(mainCategories, regionCode, limitPerCategory, tripDuration);
+
+
 
             // 3. 응답 반환
-            return ResponseEntity.ok(Response.success(spots));
+            return ResponseEntity.ok(Response.success(response));
 
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest()

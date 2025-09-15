@@ -2,6 +2,7 @@ package yunrry.flik.ports.in.usecase;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import yunrry.flik.adapters.in.dto.spot.CategorySpotsResponse;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
 
@@ -13,7 +14,8 @@ import java.util.List;
 
 public interface SpotUseCase {
     Spot getSpot(GetSpotQuery query);
-    List<Spot> findSpotsByCategories(List<MainCategory> categories, String regionCode, int limitPerCategory);
+    List<Spot> findSpotsByCategories(List<MainCategory> categories, String regionCode, int limitPerCategory, int tripDuration);
     Slice<Spot> findSpotsByCategoriesSlice(FindSpotsByCategoriesSliceQuery query);
+    CategorySpotsResponse findSpotsByCategoriesWithCacheKey(List<MainCategory> categories, String regionCode, int limitPerCategory, int tripDuration);
 }
 

@@ -1,18 +1,17 @@
 package yunrry.flik.core.service.card;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import yunrry.flik.adapters.in.dto.spot.CategorySpotsResponse;
 import yunrry.flik.core.domain.exception.SpotNotFoundException;
-
+import java.util.stream.Collectors;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
-import yunrry.flik.core.service.CategoryMappingService;
-import yunrry.flik.ports.in.query.FindSpotsByCategoriesQuery;
+import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.FindSpotsByCategoriesSliceQuery;
-import yunrry.flik.ports.in.query.FindSpotsByCategoryQuery;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.in.usecase.SpotUseCase;
 import yunrry.flik.ports.out.repository.SpotRepository;
@@ -21,13 +20,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GetSpotService implements SpotUseCase {
 
     private final SpotRepository spotRepository;
-    private final CategoryMappingService categoryMappingService;
+    private final CategoryMapper categoryMappingService;
 
     @Override
     @Cacheable(value = "spots", key = "#query.spotId")
@@ -47,8 +48,8 @@ public class GetSpotService implements SpotUseCase {
 
 
     @Override
-    @Cacheable(value = "spotsByCategories", key = "#categories.toString() + ':' + #regionCode + ':' + #limitPerCategory")
-    public List<Spot> findSpotsByCategories(List<MainCategory> categories, String regionCode, int limitPerCategory) {
+    @Cacheable(value = "spotsByCategories", key = "T(yunrry.flik.core.service.card.GetSpotService).createCacheKey(#categories, #regionCode, #limitPerCategory, #tripDuration)")
+    public List<Spot> findSpotsByCategories(List<MainCategory> categories, String regionCode, int limitPerCategory, int tripDuration ) {
         validateCategoryCount(categories);
 
         Map<MainCategory, List<Spot>> categorySpots = new HashMap<>();
@@ -56,8 +57,13 @@ public class GetSpotService implements SpotUseCase {
         // 각 카테고리별로 limitPerCategory 개수만큼 spots 수집
         for (MainCategory category : categories) {
             List<Spot> spots = spotRepository.findByCategory(category, regionCode, limitPerCategory);
+            log.info("Category: {}, regionCode: {}, found {} spots", category, regionCode, spots.size());
             categorySpots.put(category, spots);
         }
+
+        // 전체 결과 개수 로그
+        int totalSpots = categorySpots.values().stream().mapToInt(List::size).sum();
+        log.info("Total spots found: {}", totalSpots);
 
         // 카테고리별로 균등하게 분배하여 결과 생성
         List<Spot> result = new ArrayList<>();
@@ -87,6 +93,14 @@ public class GetSpotService implements SpotUseCase {
         return result;
     }
 
+    @Override
+    public CategorySpotsResponse findSpotsByCategoriesWithCacheKey(List<MainCategory> categories, String regionCode, int limitPerCategory, int tripDuration) {
+        String cacheKey = createCacheKey(categories, regionCode, limitPerCategory, tripDuration);
+        List<Spot> spots = findSpotsByCategories(categories, regionCode, limitPerCategory, tripDuration);
+        return new CategorySpotsResponse(spots, cacheKey);
+    }
+
+
 
     private List<String> getSubcategoryNames(List<MainCategory> categories) {
         return categories.stream()
@@ -99,5 +113,16 @@ public class GetSpotService implements SpotUseCase {
         if (categories.size() < 2 || categories.size() > 4) {
             throw new IllegalArgumentException("카테고리는 2-4개를 선택해야 합니다.");
         }
+    }
+
+
+
+    public static String createCacheKey(List<MainCategory> categories, String regionCode, int limitPerCategory, int tripDuration) {
+        String sortedCategories = categories.stream()
+                .sorted()
+                .map(MainCategory::name)
+                .collect(Collectors.joining("_"));
+
+        return sortedCategories + ":" + regionCode + ":" + limitPerCategory + ":" + tripDuration;
     }
 }

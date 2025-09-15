@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="data: data migration script">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/CategoryMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/CategoryMappingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/SpotSwipeEventIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/SpotSwipeEventIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,13 +41,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
-        <option value="Interface" />
-        <option value="Record" />
         <option value="Exception" />
         <option value="Python Script" />
+        <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
+        <option value="Record" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -94,6 +89,7 @@
     "Gradle.AuthControllerIntegrationTest.executor": "Run",
     "Gradle.Build flik-server.executor": "Run",
     "Gradle.CreatePostServiceTest.executor": "Run",
+    "Gradle.EventPublishingTest.executor": "Run",
     "Gradle.FestivalControllerIntegrationTest.executor": "Run",
     "Gradle.FlikApplicationTests.executor": "Run",
     "Gradle.GetRestaurantServiceTest.executor": "Run",
@@ -114,6 +110,7 @@
     "Gradle.PostTest.executor": "Run",
     "Gradle.PostTest.shouldCreatePostWithRequiredFields.executor": "Run",
     "Gradle.PostTest.shouldInitializeVisitCountWhenNull.executor": "Run",
+    "Gradle.RecommendationEventListenerTest.executor": "Run",
     "Gradle.RestaurantControllerIntegrationTest.executor": "Run",
     "Gradle.RestaurantControllerIntegrationTest.shouldGetRestaurantSuccessfully.executor": "Run",
     "Gradle.RestaurantSearchControllerTest.executor": "Run",
@@ -123,7 +120,11 @@
     "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank.executor": "Run",
     "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank.executor": "Run",
     "Gradle.SearchRestaurantsServiceTest.executor": "Run",
+    "Gradle.SpotAnalyticsEventListenerTest.executor": "Run",
     "Gradle.SpotControllerIntegrationTest.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success.executor": "Run",
     "Gradle.SpotTest.executor": "Run",
     "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
     "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
@@ -142,6 +143,7 @@
     "Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories.executor": "Run",
     "Gradle.UserAdapterTest.executor": "Run",
+    "Gradle.UserSavedSpotEventListenerTest.executor": "Run",
     "Gradle.UserTest.executor": "Run",
     "Gradle.UserTest.shouldCreateUserWithRequiredFields.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -154,7 +156,7 @@
     "Spring Boot.FlikApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "10-feat-plan-api",
+    "git-widget-placeholder": "38-feature-event-system",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server/src/main/java/yunrry/flik/adapters/in/dto/festival",
     "node.js.detected.package.eslint": "true",
@@ -195,11 +197,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="yunrry.flik.adapters.in.event.listener" />
       <recent name="yunrry.flik.core.service.card" />
       <recent name="yunrry.flik.core.service" />
       <recent name="yunrry.flik.adapters.in.web" />
       <recent name="yunrry.flik.adapters.out.persistence" />
-      <recent name="yunrry.flik.adapters.out.oauth" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="yunrry.flik.core.domain.model" />
@@ -209,8 +211,16 @@
       <recent name="yunrry.flik.core.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.FlikApplication">
-    <configuration name="GetSpotServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="GradleRunConfiguration" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.SpotSwipeEventIntegrationTest">
+    <configuration name="EventPublishingTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -223,7 +233,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.card.GetSpotServiceTest&quot;" />
+            <option value="&quot;yunrry.flik.adapters.in.web.EventPublishingTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -234,7 +244,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="GetSpotServiceTest.shouldFindSpotsByCategoriesWithEvenDistribution" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotAnalyticsEventListenerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -247,7 +257,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.card.GetSpotServiceTest.shouldFindSpotsByCategoriesWithEvenDistribution&quot;" />
+            <option value="&quot;yunrry.flik.adapters.in.event.listener.SpotAnalyticsEventListenerTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -258,7 +268,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="GetSpotServiceTest.shouldGetSpotSuccessfully" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotSwipeEventIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -271,7 +281,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.card.GetSpotServiceTest.shouldGetSpotSuccessfully&quot;" />
+            <option value="&quot;yunrry.flik.adapters.in.event.SpotSwipeEventIntegrationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -282,7 +292,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -295,7 +305,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip&quot;" />
+            <option value="&quot;yunrry.flik.adapters.in.event.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -306,7 +316,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -319,7 +329,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip&quot;" />
+            <option value="&quot;yunrry.flik.adapters.in.event.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -351,20 +361,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.GetSpotServiceTest" />
-      <item itemvalue="Gradle.GetSpotServiceTest.shouldFindSpotsByCategoriesWithEvenDistribution" />
-      <item itemvalue="Gradle.GetSpotServiceTest.shouldGetSpotSuccessfully" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip" />
+      <item itemvalue="Gradle.EventPublishingTest" />
+      <item itemvalue="Gradle.SpotAnalyticsEventListenerTest" />
+      <item itemvalue="Gradle.SpotSwipeEventIntegrationTest" />
+      <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers" />
+      <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.GetSpotServiceTest" />
-        <item itemvalue="Gradle.GetSpotServiceTest.shouldFindSpotsByCategoriesWithEvenDistribution" />
-        <item itemvalue="Gradle.GetSpotServiceTest.shouldGetSpotSuccessfully" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip" />
+        <item itemvalue="Gradle.SpotSwipeEventIntegrationTest" />
+        <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success" />
+        <item itemvalue="Gradle.EventPublishingTest" />
+        <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers" />
+        <item itemvalue="Gradle.SpotAnalyticsEventListenerTest" />
       </list>
     </recent_temporary>
   </component>

@@ -10,7 +10,7 @@ import yunrry.flik.core.domain.exception.SpotNotFoundException;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
 import yunrry.flik.core.domain.testfixture.SpotTestFixture;
-import yunrry.flik.core.service.CategoryMappingService;
+import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
@@ -19,7 +19,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +30,7 @@ class GetSpotServiceTest {
     private SpotRepository spotRepository;
 
     @Mock
-    private CategoryMappingService categoryMappingService;
+    private CategoryMapper categoryMappingService;
 
     @InjectMocks
     private GetSpotService getSpotService;
@@ -101,7 +100,7 @@ class GetSpotServiceTest {
                 .thenReturn(natureSpots);
 
         // when
-        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory);
+        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory, 3);
 
         // then
         assertThat(result).hasSize(12); // 총 12개 (6 + 6)
@@ -154,7 +153,7 @@ class GetSpotServiceTest {
                 .thenReturn(natureSpots);
 
         // when
-        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory);
+        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory, 3);
 
         // then
         assertThat(result).hasSize(9); // 총 9개 (2 + 7)
@@ -188,7 +187,7 @@ class GetSpotServiceTest {
                 .thenReturn(accommodationSpots);
 
         // when
-        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory);
+        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory, 3);
 
         // then
         assertThat(result).hasSize(9); // 총 9개 (3 + 3 + 3)
@@ -208,7 +207,7 @@ class GetSpotServiceTest {
         int limitPerCategory = 10;
 
         // when & then
-        assertThatThrownBy(() -> getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory))
+        assertThatThrownBy(() -> getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory, 3))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("카테고리는 2-4개를 선택해야 합니다.");
     }
@@ -228,7 +227,7 @@ class GetSpotServiceTest {
         int limitPerCategory = 10;
 
         // when & then
-        assertThatThrownBy(() -> getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory))
+        assertThatThrownBy(() -> getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory, 3))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("카테고리는 2-4개를 선택해야 합니다.");
     }
@@ -247,7 +246,7 @@ class GetSpotServiceTest {
                 .thenReturn(List.of());
 
         // when
-        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory);
+        List<Spot> result = getSpotService.findSpotsByCategories(categories, regionCode, limitPerCategory, 3);
 
         // then
         assertThat(result).isEmpty();
