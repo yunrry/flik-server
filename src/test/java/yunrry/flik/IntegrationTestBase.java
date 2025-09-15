@@ -1,6 +1,8 @@
 package yunrry.flik;
 
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -9,16 +11,18 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import yunrry.flik.config.SecurityConfig;
 import yunrry.flik.config.TestCacheConfig;
+import yunrry.flik.config.TestDatabaseConfig;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 @Transactional
-@Import({SecurityConfig.class, TestCacheConfig.class})
+@Import({SecurityConfig.class, TestCacheConfig.class, TestDatabaseConfig.class})
 @TestPropertySource(properties = {
         "management.endpoints.enabled=false",
         "FRONTEND_URL=http://localhost:5713",
         "app.frontend.url=http://localhost:5713"
 })
+@EnableAutoConfiguration(exclude = {BatchAutoConfiguration.class})
 public abstract class IntegrationTestBase {
 }

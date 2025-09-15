@@ -1,7 +1,5 @@
 package yunrry.flik.ports.out.repository;
 
-import yunrry.flik.adapters.out.persistence.entity.SpotSaveStatisticsEntity;
-
 import java.util.Optional;
 
 public interface SpotSaveStatisticsRepository {

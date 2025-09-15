@@ -110,7 +110,10 @@ public class GetSpotService implements SpotUseCase {
     }
 
     private void validateCategoryCount(List<MainCategory> categories) {
-        if (categories.size() < 2 || categories.size() > 4) {
+        long validCategoryCount = categories.stream()
+                .filter(category -> category != MainCategory.RESTAURANT && category != MainCategory.ACCOMMODATION)
+                .count();
+        if (validCategoryCount < 2 || validCategoryCount > 4) {
             throw new IllegalArgumentException("카테고리는 2-4개를 선택해야 합니다.");
         }
     }
