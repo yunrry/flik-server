@@ -27,6 +27,7 @@ import yunrry.flik.core.service.UserSavedSpotService;
 import yunrry.flik.ports.out.repository.SpotSaveStatisticsRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.awaitility.Awaitility.await;
 
 import java.time.Duration;
@@ -145,13 +146,16 @@ class SpotSwipeEventIntegrationTest extends IntegrationTestBase {
         );
         assertThat(firstSave).isTrue();
 
-        // when - 두 번째 저장 시도
-        transactionTemplate.execute(status -> {
-            userSavedSpotService.saveUserSpot(userId, spotId);
-            return null;
-        });
+        // when & then - 두 번째 저장 시도 시 예외 발생 확인
+        assertThatThrownBy(() ->
+                transactionTemplate.execute(status -> {
+                    userSavedSpotService.saveUserSpot(userId, spotId);
+                    return null;
+                })
+        ).isInstanceOf(IllegalStateException.class)
+                .hasMessage("Spot already saved by user");
 
-        // then - 중복 저장 방지 확인
+        // then - 여전히 하나만 저장되어 있는지 확인
         int saveCount = transactionTemplate.execute(status ->
                 userSavedSpotRepository.countByUserIdAndSpotId(userId, spotId)
         );
