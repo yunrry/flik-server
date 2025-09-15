@@ -12,7 +12,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import yunrry.flik.IntegrationTestBase;
 import yunrry.flik.adapters.out.persistence.mysql.entity.FestivalEntity;
-import yunrry.flik.config.TestCacheConfig;
 import yunrry.flik.adapters.out.persistence.mysql.entity.UserEntity;
 import yunrry.flik.adapters.out.persistence.mysql.repository.SpotJpaRepository;
 import yunrry.flik.adapters.out.persistence.mysql.repository.UserJpaRepository;
@@ -34,7 +33,6 @@ import java.time.Duration;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@Import(TestCacheConfig.class)
 @DisplayName("스와이프 저장 이벤트 통합 테스트")
 class SpotSwipeEventIntegrationTest extends IntegrationTestBase {
 
