@@ -10,19 +10,20 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import yunrry.flik.config.SecurityConfig;
-import yunrry.flik.config.TestCacheConfig;
-import yunrry.flik.config.TestDatabaseConfig;
+
+import yunrry.flik.config.TestConfig;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 @Transactional
-@Import({SecurityConfig.class, TestCacheConfig.class, TestDatabaseConfig.class})
+@Import({SecurityConfig.class, TestConfig.class})
 @TestPropertySource(properties = {
         "management.endpoints.enabled=false",
         "FRONTEND_URL=http://localhost:5713",
         "app.frontend.url=http://localhost:5713"
 })
-@EnableAutoConfiguration(exclude = {BatchAutoConfiguration.class})
 public abstract class IntegrationTestBase {
 }
+
