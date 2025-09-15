@@ -5,48 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="data: data migration script">
-      <change afterPath="$PROJECT_DIR$/api.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/SpotSaveRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/swipe/SwipeResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/event/listener/RecommendationEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/event/listener/SpotAnalyticsEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/event/listener/UserSavedSpotEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SwipeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotSaveStatisticsAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/UserCategoryPreferenceAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/UserSavedSpotAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/SpotSaveStatisticsEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/UserCategoryPreferenceEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/entity/UserSavedSpotEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/SpotSaveStatisticsJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/UserCategoryPreferenceJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/repository/UserSavedSpotJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/AsyncConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/event/SpotSwipeEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/DetailCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/SpotAnalyticsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/SwipeEventService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/UserPreferenceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/UserSavedSpotService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SpotAnalyticsUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/UserPreferenceUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/UserSavedSpotUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/SpotSaveStatisticsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserCategoryPreferenceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserSavedSpotRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/SpotSwipeEventIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/listener/RecommendationEventListenerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/listener/SpotAnalyticsEventListenerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/listener/UserSavedSpotEventListenerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/spot/CategorySpotsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/util/CacheKeyParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/SpotAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/MainCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/MainCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/SubCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/SubCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/CategoryMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/mapper/CategoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SpotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetSpotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/GetSpotService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/GetSpotQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/GetSpotQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sampleSchema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sampleSchema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/testfixture/SpotTestFixture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/testfixture/SpotTestFixture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchSpotsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/card/SearchSpotsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/SearchSpotsQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/query/SearchSpotsQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SpotUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/SpotUseCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/card/GetSpotServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/card/GetSpotServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

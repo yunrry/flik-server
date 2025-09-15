@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/v1/restaurants/**", "/api/v1/restaurants/**").permitAll()
                         .requestMatchers("/v1/auth/**", "/api/v1/auth/**").permitAll()  // 이 줄 수정
                         .requestMatchers("/v1/admin/**", "/api/v1/admin/**").permitAll()
+                        .requestMatchers("/error").permitAll()
 
                         // API 문서화
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()

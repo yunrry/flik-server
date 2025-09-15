@@ -27,4 +27,16 @@ public class SearchSpotsQuery {
         }
         return text;
     }
+
+    // 캐시 키 생성 메서드 추가
+    public String toCacheKey() {
+        return String.join("_",
+                String.valueOf(page),
+                String.valueOf(size),
+                category != null ? category : "",
+                sort != null ? sort : "",
+                keyword != null ? keyword : "",
+                address != null ? address : ""
+        );
+    }
 }

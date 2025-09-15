@@ -16,8 +16,7 @@ public class SearchSpotsService implements SearchSpotsUseCase {
     private final SpotRepository spotRepository;
 
     @Override
-    @Cacheable(value = "spot-search",
-            key = "#query.page + '_' + #query.size + '_' + #query.category + '_' + #query.sort + '_' + #query.keyword + '_' + #query.address")
+    @Cacheable(value = "spot-search", key = "#query.toCacheKey()")
     public Slice<Spot> searchSpots(SearchSpotsQuery query) {
         return spotRepository.findByConditions(query);
     }
