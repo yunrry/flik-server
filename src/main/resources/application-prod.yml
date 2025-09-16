@@ -8,6 +8,12 @@ spring:
       maximum-pool-size: 20
       minimum-idle: 5
 
+  vector-datasource:
+    url: jdbc:postgresql://localhost:5432/flik_vector_db
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -22,7 +28,11 @@ spring:
       host: ${SPRING_DATA_REDIS_HOST:redis}
       port: ${SPRING_DATA_REDIS_PORT:6379}
 
-
+openai:
+  api-key: ${OPENAI_API_KEY}
+  base-url: https://api.openai.com/v1
+  embedding:
+    model: text-embedding-3-small
 
 server:
   port: ${SERVER_PORT:8080}

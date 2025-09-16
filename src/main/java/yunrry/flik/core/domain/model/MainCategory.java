@@ -41,4 +41,19 @@ public enum MainCategory {
         return null;
     }
 
+    public static MainCategory findByDisplayName(String displayName) {
+        for (MainCategory category : values()) {
+            if (category.getDisplayName().equals(displayName)) {
+                return category;
+            }
+        }
+        return null;
+    }
+
+    public static MainCategory of(String displayName) {
+        return findByDisplayName(displayName);
+    }
+
+
+
 }

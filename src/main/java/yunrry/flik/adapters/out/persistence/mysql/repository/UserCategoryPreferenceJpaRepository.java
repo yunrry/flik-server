@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import yunrry.flik.adapters.out.persistence.mysql.entity.UserCategoryPreferenceEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -28,4 +29,11 @@ public interface UserCategoryPreferenceJpaRepository extends JpaRepository<UserC
     int incrementPreferenceScore(@Param("userId") Long userId,
                                  @Param("category") String category,
                                  @Param("increment") Double increment);
+
+    List<UserCategoryPreferenceEntity> findByUserIdAndMainCategoryIn(Long userId, List<String> mainCategories);
+
+    @Query("SELECT SUM(u.saveCount) FROM UserCategoryPreferenceEntity u " +
+            "WHERE u.userId = :userId AND u.mainCategory = :mainCategory")
+    Integer sumSaveCountByUserIdAndMainCategory(@Param("userId") Long userId,
+                                                @Param("mainCategory") String mainCategory);
 }

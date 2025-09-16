@@ -18,7 +18,7 @@ import yunrry.flik.core.domain.exception.OAuthSignupRequiredException;
 import yunrry.flik.core.domain.model.AuthProvider;
 import yunrry.flik.core.domain.model.OAuthUserInfo;
 import yunrry.flik.core.domain.model.User;
-import yunrry.flik.core.service.OAuth2Service;
+import yunrry.flik.core.service.auth.RefreshTokenService;
 import yunrry.flik.ports.in.command.CompleteOAuthSignupCommand;
 import yunrry.flik.ports.in.command.LoginCommand;
 import yunrry.flik.ports.in.command.OAuthLoginCommand;
@@ -49,7 +49,7 @@ public class AuthController {
     private final LogoutUseCase logoutUseCase;
     private final OAuthSignupUseCase oAuthSignupUseCase;
     private final RefreshTokenUseCase refreshTokenUseCase;
-    private final OAuth2Service oAuth2Service;
+    private final RefreshTokenService.OAuth2Service oAuth2Service;
 
     @Operation(summary = "이메일 회원가입", description = "이메일과 비밀번호로 회원가입합니다.")
     @PostMapping("/signup")

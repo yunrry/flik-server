@@ -19,6 +19,7 @@ import yunrry.flik.ports.in.query.FindSpotsByCategoriesQuery;
 import yunrry.flik.ports.in.query.FindSpotsByCategoryQuery;
 import yunrry.flik.ports.in.query.GetSpotQuery;
 import yunrry.flik.ports.in.query.SearchSpotsQuery;
+import yunrry.flik.ports.in.usecase.GetSpotUseCase;
 import yunrry.flik.ports.in.usecase.SpotUseCase;
 import yunrry.flik.ports.in.usecase.SearchSpotsUseCase;
 
@@ -30,7 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SpotController {
 
-    private final SpotUseCase spotUseCase;
+    private final GetSpotUseCase getSpotUseCase;
     private final SearchSpotsUseCase searchSpotsUseCase;
 
     @Operation(summary = "카테고리별 스팟 조회", description = "여러 카테고리의 스팟들을 각 카테고리당 최대 20개씩 조회하여 반환합니다.")
@@ -63,7 +64,7 @@ public class SpotController {
 
 
             // 2. 비즈니스 로직 실행
-            CategorySpotsResponse response = spotUseCase.findSpotsByCategoriesWithCacheKey(mainCategories, regionCode, limitPerCategory, tripDuration);
+            CategorySpotsResponse response = getSpotUseCase.findSpotsByCategoriesWithCacheKey(mainCategories, regionCode, limitPerCategory, tripDuration);
 
 
 
@@ -85,7 +86,7 @@ public class SpotController {
 //            @Parameter(description = "개수", example = "5")
 //            @RequestParam(defaultValue = "5") int limit) {
 //
-//        List<Spot> recommendedSpots = spotUseCase.getRecommendedSpots(regionCode, limit);
+//        List<Spot> recommendedSpots = getSpotUseCase.getRecommendedSpots(regionCode, limit);
 //
 //        return ResponseEntity.ok(Response.success(recommendedSpots));
 //    }
@@ -98,7 +99,7 @@ public class SpotController {
     @GetMapping("/{id}")
     public ResponseEntity<Response<SpotDetailResponse>> getSpot(@PathVariable Long id) {
         GetSpotQuery query = new GetSpotQuery(id);
-        Spot spot = spotUseCase.getSpot(query);
+        Spot spot = getSpotUseCase.getSpot(query);
         SpotDetailResponse response = SpotDetailResponse.from(spot);
         return ResponseEntity.ok(Response.success(response));
     }

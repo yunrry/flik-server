@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -21,8 +20,8 @@ import yunrry.flik.adapters.out.persistence.mysql.repository.SpotSaveStatisticsJ
 import yunrry.flik.core.domain.model.AuthProvider;
 import yunrry.flik.core.domain.model.card.Festival;
 import yunrry.flik.core.domain.testfixture.SpotTestFixture;
-import yunrry.flik.core.service.SpotAnalyticsService;
-import yunrry.flik.core.service.UserSavedSpotService;
+import yunrry.flik.core.service.spot.SpotAnalyticsService;
+import yunrry.flik.core.service.user.UserSavedSpotService;
 import yunrry.flik.ports.out.repository.SpotSaveStatisticsRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;

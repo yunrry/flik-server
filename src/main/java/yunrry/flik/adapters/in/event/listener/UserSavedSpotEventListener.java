@@ -8,7 +8,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import yunrry.flik.core.domain.event.SpotSwipeEvent;
-import yunrry.flik.core.service.UserSavedSpotService;
+import yunrry.flik.core.service.user.UserSavedSpotService;
 
 @Component
 @RequiredArgsConstructor

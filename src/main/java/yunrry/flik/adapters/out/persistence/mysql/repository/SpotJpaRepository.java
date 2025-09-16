@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import yunrry.flik.adapters.out.persistence.mysql.entity.BaseSpotEntity;
+import yunrry.flik.core.domain.model.card.Spot;
 
 import java.util.List;
 
@@ -50,4 +51,15 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             @Param("regnCd") String regnCd,
             @Param("signguCd") String signguCd,
             Pageable pageable);
+
+
+    @Query("SELECT s FROM BaseSpotEntity s WHERE s.labelDepth2 IN :subcategories")
+    List<BaseSpotEntity> findByLabelDepth2In(@Param("subcategories") List<String> subcategories);
+
+
+    @Query("SELECT s FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories")
+    List<BaseSpotEntity> findByIdsAndLabelDepth2In(
+            @Param("spotIds") List<Long> spotIds,
+            @Param("labelDepth2Categories") List<String> labelDepth2Categories);
+
 }

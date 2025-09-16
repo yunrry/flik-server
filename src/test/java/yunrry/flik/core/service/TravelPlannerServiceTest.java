@@ -4,20 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
+import yunrry.flik.core.service.plan.TravelPlannerService;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TravelPlannerServiceTest {
@@ -56,8 +49,8 @@ class TravelPlannerServiceTest {
         assertEquals(6, result[0].length, "각 날은 6개 슬롯");
 
         // 기본 식사 확인
-        assertEquals("lunch", result[0][2], "점심은 2번 슬롯");
-        assertEquals("dinner", result[0][4], "저녁은 4번 슬롯");
+        assertEquals("restaurant", result[0][2], "점심은 2번 슬롯");
+        assertEquals("restaurant", result[0][4], "저녁은 4번 슬롯");
 
         // 숙박 없음 확인 (1일 여행)
         assertFalse(Arrays.stream(result[0]).anyMatch(slot -> slot.equals("accommodation")),
@@ -79,8 +72,8 @@ class TravelPlannerServiceTest {
 
         // 모든 날 기본 식사 확인
         for (int i = 0; i < day; i++) {
-            assertEquals("lunch", result[i][2], String.format("%d일차 점심은 2번 슬롯", i + 1));
-            assertEquals("dinner", result[i][4], String.format("%d일차 저녁은 4번 슬롯", i + 1));
+            assertEquals("restaurant", result[i][2], String.format("%d일차 점심은 2번 슬롯", i + 1));
+            assertEquals("restaurant", result[i][4], String.format("%d일차 저녁은 4번 슬롯", i + 1));
         }
 
         // 첫째 날에만 숙박 있음
@@ -130,8 +123,8 @@ class TravelPlannerServiceTest {
         assertEquals("history", result[0][5], "5번 슬롯에 history 배치");
 
         // 기본 구조 확인
-        assertEquals("lunch", result[0][2], "점심은 2번 슬롯");
-        assertEquals("dinner", result[0][4], "저녁은 4번 슬롯");
+        assertEquals("restaurant", result[0][2], "점심은 2번 슬롯");
+        assertEquals("restaurant", result[0][4], "저녁은 4번 슬롯");
     }
 
     @Test
@@ -229,8 +222,8 @@ class TravelPlannerServiceTest {
         assertFalse(result[0][5].isEmpty(), "5번 슬롯도 사용");
 
         // 기본 구조
-        assertEquals("lunch", result[0][2], "점심은 2번 슬롯");
-        assertEquals("dinner", result[0][4], "저녁은 4번 슬롯");
+        assertEquals("restaurant", result[0][2], "점심은 2번 슬롯");
+        assertEquals("restaurant", result[0][4], "저녁은 4번 슬롯");
     }
 
     @Test
@@ -341,8 +334,8 @@ class TravelPlannerServiceTest {
 
         // Then
         // 기본 구조만 있어야 함
-        assertEquals("lunch", result[0][2], "점심은 여전히 배치");
-        assertEquals("dinner", result[0][4], "저녁은 여전히 배치");
+        assertEquals("restaurant", result[0][2], "점심은 여전히 배치");
+        assertEquals("restaurant", result[0][4], "저녁은 여전히 배치");
 
         // 관광 슬롯은 대부분 비어있어야 함
         boolean hasEmptyTouristSlots = result[0][1].isEmpty() || result[0][3].isEmpty();
@@ -373,8 +366,8 @@ class TravelPlannerServiceTest {
             for (int j = 0; j < course[i].length; j++) {
                 String slot = course[i][j];
                 if (!slot.isEmpty() &&
-                        !slot.equals("lunch") &&
-                        !slot.equals("dinner") &&
+                        !slot.equals("restaurant") &&
+                        !slot.equals("restaurant") &&
                         !slot.equals("accommodation")) {
 
                     String category = slot.replace("_continue", "");
@@ -397,8 +390,8 @@ class TravelPlannerServiceTest {
 
         // Then
         assertEquals("cafe", result[0][0], "0번 슬롯에 카페 배치");
-        assertEquals("lunch", result[0][2], "점심은 2번 슬롯");
-        assertEquals("dinner", result[0][4], "저녁은 4번 슬롯");
+        assertEquals("restaurant", result[0][2], "점심은 2번 슬롯");
+        assertEquals("restaurant", result[0][4], "저녁은 4번 슬롯");
 
         // 관광 슬롯(1,3,5)은 비어있음 (카페만 선택했으므로)
         assertTrue(result[0][1].isEmpty(), "1번 슬롯은 비어있음");
@@ -420,8 +413,8 @@ class TravelPlannerServiceTest {
         assertEquals("cafe", result[0][0], "0번 슬롯에 카페");
         assertEquals("activity", result[0][1], "1번 슬롯에 activity");
         assertEquals("activity", result[0][3], "3번 슬롯에 activity");
-        assertEquals("lunch", result[0][2], "점심은 2번 슬롯");
-        assertEquals("dinner", result[0][4], "저녁은 4번 슬롯");
+        assertEquals("restaurant", result[0][2], "점심은 2번 슬롯");
+        assertEquals("restaurant", result[0][4], "저녁은 4번 슬롯");
 
         // 1일 여행에서는 5번 슬롯에도 activity가 추가 배치됨 (빈도수 3)
         assertEquals("activity", result[0][5], "1일 여행에서 5번 슬롯에도 activity 배치");
@@ -541,9 +534,9 @@ class TravelPlannerServiceTest {
         // 첫째 날 구조 확인
         assertEquals("cafe", result[0][0], "첫째 날 카페");
         assertEquals("activity", result[0][1], "첫째 날 1번에 activity");
-        assertEquals("lunch", result[0][2], "첫째 날 점심");
+        assertEquals("restaurant", result[0][2], "첫째 날 점심");
         assertEquals("activity", result[0][3], "첫째 날 3번에 activity");
-        assertEquals("dinner", result[0][4], "첫째 날 저녁");
+        assertEquals("restaurant", result[0][4], "첫째 날 저녁");
 
         // 서비스 로직에 따라 5번 슬롯이 숙박으로 강제 교체됨
         assertEquals("accommodation", result[0][5], "5번 슬롯에 숙박이 강제 배치됨");
@@ -569,8 +562,8 @@ class TravelPlannerServiceTest {
 
         // Then
         assertEquals("cafe", result[0][0], "0번 슬롯에 카페");
-        assertEquals("lunch", result[0][2], "점심");
-        assertEquals("dinner", result[0][4], "저녁");
+        assertEquals("restaurant", result[0][2], "점심");
+        assertEquals("restaurant", result[0][4], "저녁");
 
         // 카페만 선택했으므로 관광 슬롯은 모두 비어있어야 함
         assertTrue(result[0][1].isEmpty(), "1번 슬롯 비어있음");
@@ -678,8 +671,8 @@ class TravelPlannerServiceTest {
 
         // 기본 구조 확인
         for (int i = 0; i < day; i++) {
-            assertEquals("lunch", result[i][2], String.format("%d일차 점심", i + 1));
-            assertEquals("dinner", result[i][4], String.format("%d일차 저녁", i + 1));
+            assertEquals("restaurant", result[i][2], String.format("%d일차 점심", i + 1));
+            assertEquals("restaurant", result[i][4], String.format("%d일차 저녁", i + 1));
         }
 
         // 마지막 날 5번 슬롯은 비움
@@ -702,10 +695,10 @@ class TravelPlannerServiceTest {
         assertEquals("cafe", result[1][0], "둘째 날 카페");
 
         // 기본 구조 확인
-        assertEquals("lunch", result[0][2], "첫째 날 점심");
-        assertEquals("dinner", result[0][4], "첫째 날 저녁");
-        assertEquals("lunch", result[1][2], "둘째 날 점심");
-        assertEquals("dinner", result[1][4], "둘째 날 저녁");
+        assertEquals("restaurant", result[0][2], "첫째 날 점심");
+        assertEquals("restaurant", result[0][4], "첫째 날 저녁");
+        assertEquals("restaurant", result[1][2], "둘째 날 점심");
+        assertEquals("restaurant", result[1][4], "둘째 날 저녁");
 
         // history 배치 확인 (빈도4이므로 여러 번 배치됨)
         Map<String, Integer> placedCount = countCategoryPlacements(result);
@@ -732,8 +725,8 @@ class TravelPlannerServiceTest {
         assertEquals("activity", result[0][3], "3번 슬롯에 activity");
 
         // 기본 식사
-        assertEquals("lunch", result[0][2], "점심은 2번 슬롯");
-        assertEquals("dinner", result[0][4], "저녁은 4번 슬롯");
+        assertEquals("restaurant", result[0][2], "점심은 2번 슬롯");
+        assertEquals("restaurant", result[0][4], "저녁은 4번 슬롯");
 
         // 1일 여행에서는 5번 슬롯도 사용 (activity 빈도3이므로)
         assertEquals("nature", result[0][5], "5번 슬롯에도 nature 배치");
@@ -768,8 +761,8 @@ class TravelPlannerServiceTest {
 
         // 기본 식사 확인
         for (int i = 0; i < day; i++) {
-            assertEquals("lunch", result[i][2], String.format("%d일차 점심", i + 1));
-            assertEquals("dinner", result[i][4], String.format("%d일차 저녁", i + 1));
+            assertEquals("restaurant", result[i][2], String.format("%d일차 점심", i + 1));
+            assertEquals("restaurant", result[i][4], String.format("%d일차 저녁", i + 1));
         }
 
         // 둘째 날: 일반 카테고리 배치 (history, nature)
@@ -814,8 +807,8 @@ class TravelPlannerServiceTest {
 
         // 기본 식사 확인
         for (int i = 0; i < day; i++) {
-            assertEquals("lunch", result[i][2], String.format("%d일차 점심", i + 1));
-            assertEquals("dinner", result[i][4], String.format("%d일차 저녁", i + 1));
+            assertEquals("restaurant", result[i][2], String.format("%d일차 점심", i + 1));
+            assertEquals("restaurant", result[i][4], String.format("%d일차 저녁", i + 1));
         }
 
         // 일반 카테고리들이 둘째, 셋째 날에 배치

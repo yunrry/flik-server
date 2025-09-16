@@ -19,7 +19,7 @@
 //import yunrry.flik.config.SecurityConfig;
 //import yunrry.flik.core.domain.model.AuthProvider;
 //import yunrry.flik.core.domain.model.OAuthUserInfo;
-//import yunrry.flik.core.service.OAuth2Service;
+//import yunrry.flik.core.service.auth.RefreshTokenService.OAuth2Service;
 //import yunrry.flik.ports.out.repository.RefreshTokenRepository;
 //
 //import static org.mockito.ArgumentMatchers.any;

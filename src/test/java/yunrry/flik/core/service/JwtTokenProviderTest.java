@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import yunrry.flik.core.domain.exception.InvalidTokenException;
 import yunrry.flik.core.domain.model.RefreshToken;
+import yunrry.flik.core.service.auth.JwtTokenProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

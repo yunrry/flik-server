@@ -1,6 +1,9 @@
 package yunrry.flik.ports.out.repository;
 
+import org.springframework.data.repository.query.Param;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public interface UserSavedSpotRepository {
@@ -21,4 +24,6 @@ public interface UserSavedSpotRepository {
     void deleteByUserIdAndSpotId(Long userId, Long spotId);
 
     int countBySpotId(Long spotId);
+
+    List<Long> findSpotIdsByUserId(@Param("userId") Long userId);
 }

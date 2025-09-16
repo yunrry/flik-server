@@ -28,8 +28,8 @@ public class LeisureEntity extends BaseSpotEntity {
     public LeisureEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
                          String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
                          String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3,  String parking, String petCarriage, String babyCarriage,
-                         LocalTime openTime, LocalTime closeTime, String time, String dayOff, String fee) {
-        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+                         LocalTime openTime, LocalTime closeTime, String time, String dayOff, String googleReviews, String fee) {
+        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3, parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff, googleReviews);
         this.fee = fee;
     }
 
@@ -65,6 +65,7 @@ public class LeisureEntity extends BaseSpotEntity {
                 this.getCloseTime(),
                 this.getTime(),
                 this.getDayOff(),
+                this.getGoogleReviews(),
                 this.fee
 
         );
@@ -102,6 +103,7 @@ public class LeisureEntity extends BaseSpotEntity {
                 leisure.getCloseTime(),
                 leisure.getTime(),
                 leisure.getDayOff(),
+                leisure.getGoogleReviews(),
                 leisure.getFee()
         );
     }

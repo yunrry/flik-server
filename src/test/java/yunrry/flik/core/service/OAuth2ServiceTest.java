@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import yunrry.flik.core.domain.model.AuthProvider;
 import yunrry.flik.core.domain.model.OAuthUserInfo;
+import yunrry.flik.core.service.auth.RefreshTokenService;
 import yunrry.flik.ports.out.oauth.OAuth2Client;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,12 +29,12 @@ class OAuth2ServiceTest {
     private OAuth2Client kakaoOAuth2Client;
 
     @InjectMocks
-    private OAuth2Service oAuth2Service;
+    private RefreshTokenService.OAuth2Service oAuth2Service;
 
     @BeforeEach
     void setUp() {
         // 수동으로 OAuth2Service 생성하여 Mock 주입
-        oAuth2Service = new OAuth2Service(googleOAuth2Client, kakaoOAuth2Client);
+        oAuth2Service = new RefreshTokenService.OAuth2Service(googleOAuth2Client, kakaoOAuth2Client);
     }
 
 

@@ -40,6 +40,7 @@ public class SpotTestFixture {
                 LocalTime.of(22, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "월", // dayOff
+                "-",
                 "한식", // cuisineType
                 "10,000-20,000원", // priceRange
                 "가능", // reservation
@@ -50,8 +51,8 @@ public class SpotTestFixture {
         );
     }
 
-    public static Accomodation createTestAccomodation() {
-        return new Accomodation(
+    public static Accommodation createTestAccomodation() {
+        return new Accommodation(
                 1L, // id
                 "테스트 숙박시설", // name
                 "32", // contentTypeId
@@ -82,6 +83,7 @@ public class SpotTestFixture {
                 LocalTime.of(11, 0), // closeTime (체크아웃)
                 "매일 08:00 ~ 18:00", // time
                 "연중무휴", // dayOff
+                "-",
                 "가능", // reservation
                 "15:00", // checkInTime
                 "11:00", // checkOutTime
@@ -122,6 +124,7 @@ public class SpotTestFixture {
                 LocalTime.of(18, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "월요일", // dayOff
+                "-",
                 "성인 5,000원, 청소년 3,000원" // fee
         );
     }
@@ -158,6 +161,7 @@ public class SpotTestFixture {
                 LocalTime.of(22, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "없음", // dayOff
+                "-",
                 "2024-05-01", // eventStartDate
                 "2024-05-07", // eventEndDate
                 "전체관람가", // ageLimit
@@ -199,6 +203,8 @@ public class SpotTestFixture {
                 LocalTime.of(23, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "없음", // dayOff
+                "-",
+                "-",
                 "성인 15,000원, 청소년 10,000원" // fee
         );
     }
@@ -235,6 +241,7 @@ public class SpotTestFixture {
                 LocalTime.of(22, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "없음", // dayOff
+                "-",
                 "의류, 화장품, 액세서리" // products
         );
     }
@@ -271,6 +278,7 @@ public class SpotTestFixture {
                 LocalTime.of(18, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "없음", // dayOff
+                "제주도의 아름다운 자연을 만끽할 수 있는 명소입니다", // info
                 "아름다운 자연경관을 감상할 수 있습니다", // expGuide
                 "전체관람가" // ageLimit
         );

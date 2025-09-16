@@ -10,6 +10,7 @@ import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.DetailCategory;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.SubCategory;
+import yunrry.flik.core.domain.model.UserCategoryPreference;
 
 import java.time.LocalDateTime;
 
@@ -83,5 +84,32 @@ public class UserCategoryPreferenceEntity {
         this.preferenceScore += increment;
         this.saveCount++;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public UserCategoryPreference toDomain() {
+        return UserCategoryPreference.builder()
+                .id(this.id)
+                .userId(this.userId)
+                .mainCategory(MainCategory.of(this.mainCategory))
+                .subCategory(SubCategory.findByKoreanName(this.subCategory))
+                .detailCategory(DetailCategory.findByKoreanName(this.detailCategory))
+                .preferenceScore(this.preferenceScore)
+                .saveCount(this.saveCount)
+                .createdAt(this.createdAt)
+                .updatedAt(this.updatedAt)
+                .build();
+    }
+
+    public static UserCategoryPreferenceEntity fromDomain(UserCategoryPreference domain) {
+        return UserCategoryPreferenceEntity.builder()
+                .userId(domain.getUserId())
+                .mainCategory(domain.getMainCategory().getDisplayName())
+                .subCategory(domain.getSubCategory().getKoreanName())
+                .detailCategory(domain.getDetailCategory().getKoreanName())
+                .preferenceScore(domain.getPreferenceScore())
+                .saveCount(domain.getSaveCount())
+                .createdAt(domain.getCreatedAt())
+                .updatedAt(domain.getUpdatedAt())
+                .build();
     }
 }

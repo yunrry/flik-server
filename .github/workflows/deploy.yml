@@ -27,6 +27,7 @@ env:
   ADMIN_MASTER_KEY: ${{ secrets.ADMIN_MASTER_KEY }}
   FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
   DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
 jobs:
   test:
@@ -175,6 +176,7 @@ jobs:
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             ADMIN_MASTER_KEY=${{ secrets.ADMIN_MASTER_KEY }}
             FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
             EOF
             
             # Docker 레지스트리 로그인
