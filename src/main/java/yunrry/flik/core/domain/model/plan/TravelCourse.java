@@ -58,16 +58,17 @@ public class TravelCourse {
         return count;
     }
 
-    public List<Spot> getAllRecommendedSpots() {
-        List<Spot> allSpots = new ArrayList<>();
+    public List<Long> getAllRecommendedSpotIds() {
+        List<Long> allSpotIds = new ArrayList<>();
+
         for (CourseSlot[] day : courseSlots) {
             for (CourseSlot slot : day) {
                 if (slot.hasRecommendations()) {
-                    allSpots.addAll(slot.getRecommendedSpots());
+                    allSpotIds.addAll(slot.getRecommendedSpotIds());
                 }
             }
         }
-        return allSpots;
+        return allSpotIds;
     }
 
     public CourseSlot getSlot(int day, int slotIndex) {
@@ -77,10 +78,10 @@ public class TravelCourse {
         return null;
     }
 
-    public void selectSpotForSlot(int day, int slotIndex, Spot spot) {
+    public void selectSpotForSlot(int day, int slotIndex, Long spotId) {
         CourseSlot slot = getSlot(day, slotIndex);
         if (slot != null) {
-            slot.selectSpot(spot);
+            slot.selectSpot(spotId);
         }
     }
 }

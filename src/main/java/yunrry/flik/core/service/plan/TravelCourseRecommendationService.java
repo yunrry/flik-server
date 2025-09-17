@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.*;
 import yunrry.flik.core.domain.model.card.Spot;
+import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.core.domain.model.plan.CourseSlot;
 import yunrry.flik.core.domain.model.plan.SlotType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
@@ -19,6 +20,7 @@ import yunrry.flik.ports.out.repository.SpotRepository;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -117,14 +119,20 @@ public class TravelCourseRecommendationService {
         MainCategory mainCategory = getMainCategoryFromSlotType(slotType);
         if (mainCategory != null) {
 
-            List<Spot> recommendedSpots = findRecommendedSpotsBySubCategories(userId, locationWeight, tagWeight, 3, mainCategory);
+            List<SpotSimilarity> recommendedSpots = findRecommendedSpotsBySubCategories(userId, locationWeight, tagWeight, 3, mainCategory);
+
+            log.info("Recommended spots for user {} in category {}: {} - {}", userId, mainCategory.getCode(),
+                    recommendedSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), recommendedSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
+
 
             return CourseSlot.builder()
                     .day(day)
                     .slot(slot)
                     .slotType(SlotType.fromMainCategory(mainCategory))
                     .mainCategory(mainCategory)
-                    .recommendedSpots(recommendedSpots)
+                    .recommendedSpotIds(recommendedSpots.stream()
+                            .map(SpotSimilarity::spotId)
+                            .collect(Collectors.toList()))
                     .isContinue(isContinue)
                     .build();
         }
@@ -137,30 +145,41 @@ public class TravelCourseRecommendationService {
     private CourseSlot createRestaurantSlot(Long userId, int day, int slot, double locationWeight, double tagWeight) {
 
 
-        List<Spot> restaurantSpots = findRecommendedSpotsBySubCategories(
+        List<SpotSimilarity> restaurantSpots = findRecommendedSpotsBySubCategories(
                 userId, locationWeight, tagWeight, 3, MainCategory.RESTAURANT);
+
+        log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.RESTAURANT.getCode(),
+                restaurantSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), restaurantSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
+
 
         return CourseSlot.builder()
                 .day(day)
                 .slot(slot)
                 .slotType(SlotType.RESTAURANT)
                 .mainCategory(MainCategory.RESTAURANT)
-                .recommendedSpots(restaurantSpots)
+                .recommendedSpotIds(restaurantSpots.stream()
+                        .map(SpotSimilarity::spotId)
+                        .collect(Collectors.toList()))
                 .build();
     }
 
     private CourseSlot createAccommodationSlot(Long userId, int day, int slot, double locationWeight, double tagWeight) {
 
 
-        List<Spot> accommodationSpots = findRecommendedSpotsBySubCategories(
+        List<SpotSimilarity> accommodationSpots = findRecommendedSpotsBySubCategories(
                 userId, locationWeight, tagWeight, 3, MainCategory.ACCOMMODATION);
+
+        log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.ACCOMMODATION.getCode(),
+                accommodationSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), accommodationSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
 
         return CourseSlot.builder()
                 .day(day)
                 .slot(slot)
                 .slotType(SlotType.ACCOMMODATION)
                 .mainCategory(MainCategory.ACCOMMODATION)
-                .recommendedSpots(accommodationSpots)
+                .recommendedSpotIds(accommodationSpots.stream()
+                        .map(SpotSimilarity::spotId)
+                        .collect(Collectors.toList()))
                 .build();
     }
 
@@ -174,11 +193,11 @@ public class TravelCourseRecommendationService {
 
 
     // 5. Updated findRecommendedSpotsBySubCategories
-    private List<Spot> findRecommendedSpotsBySubCategories(Long userId,
-                                                           double locationWeight,
-                                                           double tagWeight,
-                                                           int limit,
-                                                           MainCategory mainCategory) {
+    private List<SpotSimilarity> findRecommendedSpotsBySubCategories(Long userId,
+                                                                     double locationWeight,
+                                                                     double tagWeight,
+                                                                     int limit,
+                                                                     MainCategory mainCategory) {
 
         List<String> subCategories = categoryMapper.getSubCategoryNames(mainCategory);
 
@@ -207,9 +226,13 @@ public class TravelCourseRecommendationService {
             return List.of();
         }
 
+        List<Long> candidateSpotIds = candidateSpots.stream()
+                .map(Spot::getId)
+                .collect(Collectors.toList());
+
         // 2. 벡터 유사도 기반 추천
         return vectorSimilarityRecommendationService
-                .findRecommendedSpotsByVectorSimilarity(userId, candidateSpots, mainCategory, limit);
+                .findRecommendedSpotsByVectorSimilarity(userId, candidateSpotIds, mainCategory, limit);
     }
 
 

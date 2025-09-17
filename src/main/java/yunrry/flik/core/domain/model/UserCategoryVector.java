@@ -19,6 +19,7 @@ public class UserCategoryVector {
     private Long userId;
     private MainCategory category;
     private List<Double> preferenceVector;
+    private Integer preferenceCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

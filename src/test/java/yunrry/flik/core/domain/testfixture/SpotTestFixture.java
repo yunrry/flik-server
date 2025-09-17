@@ -8,39 +8,39 @@ import java.util.List;
 
 public class SpotTestFixture {
 
-    public static Restaurant createTestRestaurant() {
+    public static Restaurant createTestRestaurant(Long id) {
         return new Restaurant(
-                1L, // id
+                id, // id
                 "테스트 음식점", // name
                 "39", // contentTypeId
                 "7836561386",// contentId
                 "한식", // category
-                "테스트용 음식점입니다", // description
+                "멋진 브런치 카페", // description
                 "서울시 강남구", // address
                 "11", // regnCd
                 "11680", // signguCd
-                BigDecimal.valueOf(342.3425),// latitude
-                BigDecimal.valueOf(123.1234), // longitude
+                BigDecimal.valueOf(37.5665),// latitude
+                BigDecimal.valueOf(126.9780),// longitude
                 List.of("test1.jpg", "test2.jpg"), // imageUrls
                 "02-1234-5678", // call
                 BigDecimal.valueOf(4.5), // rating
                 "35436638", // googlePlaceId
                 150, // reviewCount
-                "맛집", // tag1
-                "가족식사", // tag2
-                "데이트", // tag3
-                "맛집,가족식사,데이트", // tags
-                "음식", // labelDepth1
-                "한식", // labelDepth2
-                "모범음식점", // labelDepth3
-                "가능", // parking
+                null, // tag1
+                null, // tag2
+                null, // tag3
+                null, // tags
+                "음식점", // labelDepth1
+                "카페", // labelDepth2
+                "브런치카페", // labelDepth3
+                "가음식점능", // parking
                 "불가", // petCarriage
                 "가능", // babyCarriage
                 LocalTime.of(9, 0), // openTime
                 LocalTime.of(22, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "월", // dayOff
-                "-",
+                "맛있는 브런치와 좋은 분위기", // googleReviews
                 "한식", // cuisineType
                 "10,000-20,000원", // priceRange
                 "가능", // reservation
@@ -140,17 +140,17 @@ public class SpotTestFixture {
                 "서울시 중구", // address
                 "11", // regnCd
                 "11140", // signguCd
-                BigDecimal.valueOf(342.3425),// latitude
-                BigDecimal.valueOf(123.1234), // longitude
+                BigDecimal.valueOf(37.5665),// latitude
+                BigDecimal.valueOf(126.9780), // longitude
                 List.of("festival1.jpg", "festival2.jpg"), // imageUrls
                 "02-1234-5678", // call
                 BigDecimal.valueOf(4.6), // rating
                 "35436638", // googlePlaceId
                 150, // reviewCount
-                "축제", // tag1
-                "문화", // tag2
-                "이벤트", // tag3
-                "축제,문화,이벤트", // tags
+                null, // tag1
+                null, // tag2
+                null, // tag3
+                null, // tags
                 "축제/공연/행사", // labelDepth1
                 "축제", // labelDepth2
                 "문화관광축제", // labelDepth3
@@ -161,7 +161,7 @@ public class SpotTestFixture {
                 LocalTime.of(22, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "없음", // dayOff
-                "-",
+                "맛있는 브런치와 좋은 분위기",
                 "2024-05-01", // eventStartDate
                 "2024-05-07", // eventEndDate
                 "전체관람가", // ageLimit
@@ -203,7 +203,6 @@ public class SpotTestFixture {
                 LocalTime.of(23, 0), // closeTime
                 "매일 08:00 ~ 18:00", // time
                 "없음", // dayOff
-                "-",
                 "-",
                 "성인 15,000원, 청소년 10,000원" // fee
         );
@@ -283,5 +282,6 @@ public class SpotTestFixture {
                 "전체관람가" // ageLimit
         );
     }
+
 
 }

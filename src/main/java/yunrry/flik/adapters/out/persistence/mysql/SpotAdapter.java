@@ -137,6 +137,11 @@ public class SpotAdapter implements SpotRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories) {
+        return spotJpaRepository.findIdsByIdsAndLabelDepth2In(spotIds, labelDepth2Categories);
+    };
+
 
     private Pageable createPageable(SearchSpotsQuery query) {
         Sort sort = createSort(query.getSort());

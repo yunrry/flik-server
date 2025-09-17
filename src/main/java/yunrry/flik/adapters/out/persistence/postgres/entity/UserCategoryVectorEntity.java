@@ -5,17 +5,26 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.UserCategoryVector;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * 최적화된 UserCategoryVectorEntity
+ * - String 대신 List<Double> 직접 사용으로 파싱 오버헤드 제거
+ * - PostgreSQL vector 타입 직접 매핑
+ * - 선호도 카운트 추가로 가중 평균 계산 지원
+ */
 @Entity
 @Table(name = "user_category_vectors",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "category"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "category"}),
+        indexes = {
+                @Index(name = "idx_user_category_vectors_user_category", columnList = "user_id, category"),
+                @Index(name = "idx_user_category_vectors_category", columnList = "category")
+        })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserCategoryVectorEntity {
@@ -30,8 +39,12 @@ public class UserCategoryVectorEntity {
     @Column(name = "category", nullable = false, length = 50)
     private String category;
 
+    @Type(PostgreSQLVectorType.class)
     @Column(name = "preference_vector", columnDefinition = "vector(1536)")
-    private String preferenceVector;
+    private List<Double> preferenceVector;
+
+    @Column(name = "preference_count", nullable = false)
+    private Integer preferenceCount = 0;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -40,16 +53,23 @@ public class UserCategoryVectorEntity {
     private LocalDateTime updatedAt;
 
     @Builder
-    public UserCategoryVectorEntity(Long userId, String category, String preferenceVector) {
+    public UserCategoryVectorEntity(Long userId, String category, List<Double> preferenceVector, Integer preferenceCount) {
         this.userId = userId;
         this.category = category;
         this.preferenceVector = preferenceVector;
+        this.preferenceCount = preferenceCount != null ? preferenceCount : 0;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void updateVector(String preferenceVector) {
+    public void updateVector(List<Double> preferenceVector, Integer preferenceCount) {
         this.preferenceVector = preferenceVector;
+        this.preferenceCount = preferenceCount != null ? preferenceCount : this.preferenceCount;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void incrementPreferenceCount(int increment) {
+        this.preferenceCount += increment;
         this.updatedAt = LocalDateTime.now();
     }
 
@@ -59,7 +79,8 @@ public class UserCategoryVectorEntity {
                 .id(this.id)
                 .userId(this.userId)
                 .category(MainCategory.findByCode(this.category))
-                .preferenceVector(parseVector(this.preferenceVector))
+                .preferenceVector(this.preferenceVector)
+                .preferenceCount(this.preferenceCount)
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
                 .build();
@@ -69,31 +90,8 @@ public class UserCategoryVectorEntity {
         return UserCategoryVectorEntity.builder()
                 .userId(domain.getUserId())
                 .category(domain.getCategory().getCode())
-                .preferenceVector(formatVector(domain.getPreferenceVector()))
+                .preferenceVector(domain.getPreferenceVector())
+                .preferenceCount(domain.getPreferenceCount())
                 .build();
-    }
-
-    private List<Double> parseVector(String vectorString) {
-        if (vectorString == null || vectorString.trim().isEmpty()) {
-            return List.of();
-        }
-        try {
-            String cleaned = vectorString.replace("[", "").replace("]", "");
-            return Arrays.stream(cleaned.split(","))
-                    .map(String::trim)
-                    .map(Double::parseDouble)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            return List.of();
-        }
-    }
-
-    private static String formatVector(List<Double> vector) {
-        if (vector == null || vector.isEmpty()) {
-            return null;
-        }
-        return "[" + vector.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(",")) + "]";
     }
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.core.domain.model.embedding.SpotEmbedding;
 import yunrry.flik.ports.out.repository.SpotEmbeddingRepository;
 
@@ -17,6 +18,17 @@ import java.util.Optional;
 public class SpotEmbeddingService {
 
     private final SpotEmbeddingRepository spotEmbeddingRepository;
+
+
+    public List<SpotSimilarity> findSimilarSpotsByUserPreference(Long userId,
+                                                          String category,
+                                                          List<Long> spotIds,
+                                                          int limit) {
+        return spotEmbeddingRepository.findSimilarSpotsByUserPreference(userId, category, spotIds, limit);
+    }
+
+
+
 
     public Mono<Optional<SpotEmbedding>> getAsyncEmbeddingById(Long spotId) {
         return Mono.fromCallable(() -> {

@@ -62,4 +62,7 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             @Param("spotIds") List<Long> spotIds,
             @Param("labelDepth2Categories") List<String> labelDepth2Categories);
 
+
+    @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories")
+    List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories);
 }

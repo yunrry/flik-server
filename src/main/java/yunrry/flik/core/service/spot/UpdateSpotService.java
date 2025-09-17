@@ -26,20 +26,24 @@ public class UpdateSpotService implements UpdateSpotUseCase {
     @Transactional
     public Mono<Void> updateSpotTags(Long spotId, List<String> keywords) {
         return Mono.fromCallable(() -> {
-                    Spot spot = spotRepository.findById(spotId);
+                    try {
+                        Spot spot = spotRepository.findById(spotId);
 
-                    String tag1 = keywords.size() > 0 ? keywords.get(0) : null;
-                    String tag2 = keywords.size() > 1 ? keywords.get(1) : null;
-                    String tag3 = keywords.size() > 2 ? keywords.get(2) : null;
-                    String tags = keywords.size() > 3 ?
-                            String.join(",", keywords.subList(3, keywords.size())) : null;
+                        String tag1 = keywords.size() > 0 ? keywords.get(0) : null;
+                        String tag2 = keywords.size() > 1 ? keywords.get(1) : null;
+                        String tag3 = keywords.size() > 2 ? keywords.get(2) : null;
+                        String tags = keywords.size() > 3 ?
+                                String.join(",", keywords.subList(3, keywords.size())) : null;
 
-                    // Spot 도메인 객체 업데이트 (새 인스턴스 생성)
-                    Spot updatedSpot = spot.withTags(tag1, tag2, tag3, tags);
-                    spotRepository.save(updatedSpot);
+                        Spot updatedSpot = spot.withTags(tag1, tag2, tag3, tags);
+                        spotRepository.save(updatedSpot);
 
-                    log.info("Updated tags for spot {}: {}", spotId, keywords);
-                    return null;
+                        log.info("Updated tags for spot {}: {}", spotId, keywords);
+                        return null;
+                    } catch (Exception e) {
+                        log.error("Failed to update tags for spot {}: {}", spotId, e.getMessage(), e);
+                        throw e;
+                    }
                 })
                 .subscribeOn(Schedulers.boundedElastic())
                 .then();

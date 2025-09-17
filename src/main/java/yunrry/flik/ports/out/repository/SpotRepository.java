@@ -34,4 +34,6 @@ public interface SpotRepository {
     List<Spot> findByLabelDepth2In(List<String> subcategories);
 
     List<Spot> findByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories);
+
+    List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories);
 }

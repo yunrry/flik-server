@@ -20,8 +20,8 @@ public class CourseSlot {
     private int slot;
     private SlotType slotType;
     private MainCategory mainCategory;
-    private List<Spot> recommendedSpots;
-    private Spot selectedSpot;
+    private List<Long> recommendedSpotIds;
+    private Long selectedSpotId;
     private Boolean isContinue;
 
     public static CourseSlot empty(int day, int slot) {
@@ -29,36 +29,36 @@ public class CourseSlot {
                 .day(day)
                 .slot(slot)
                 .slotType(SlotType.FREE_TIME)
-                .recommendedSpots(List.of())
+                .recommendedSpotIds(List.of())
                 .build();
     }
 
-    public static CourseSlot of(int day, int slot, SlotType slotType, MainCategory mainCategory, List<Spot> spots) {
+    public static CourseSlot of(int day, int slot, SlotType slotType, MainCategory mainCategory, List<Long> spotIds) {
         return CourseSlot.builder()
                 .day(day)
                 .slot(slot)
                 .slotType(slotType)
                 .mainCategory(mainCategory)
-                .recommendedSpots(spots != null ? spots : List.of())
+                .recommendedSpotIds(spotIds != null ? spotIds : List.of())
                 .build();
     }
 
     public boolean isEmpty() {
         return slotType == SlotType.FREE_TIME ||
-                (recommendedSpots == null || recommendedSpots.isEmpty());
+                (recommendedSpotIds == null || recommendedSpotIds.isEmpty());
     }
 
     public boolean hasRecommendations() {
-        return recommendedSpots != null && !recommendedSpots.isEmpty();
+        return recommendedSpotIds != null && !recommendedSpotIds.isEmpty();
     }
 
     public boolean hasSelectedSpot() {
-        return selectedSpot != null;
+        return selectedSpotId != null;
     }
 
-    public void selectSpot(Spot spot) {
-        if (recommendedSpots != null && recommendedSpots.contains(spot)) {
-            this.selectedSpot = spot;
+    public void selectSpot(Long spotId) {
+        if (recommendedSpotIds != null && recommendedSpotIds.contains(spotId)) {
+            this.selectedSpotId = spotId;
         }
     }
 

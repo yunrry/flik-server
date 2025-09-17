@@ -5,8 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import yunrry.flik.core.domain.model.embedding.EmbeddingStats;
+import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.adapters.out.persistence.postgres.entity.SpotEmbeddingEntity;
-
 import yunrry.flik.adapters.out.persistence.postgres.repository.SpotEmbeddingJpaRepository;
 import yunrry.flik.core.domain.model.embedding.SpotEmbedding;
 import yunrry.flik.ports.out.repository.SpotEmbeddingRepository;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@Transactional(readOnly = true)
+@Transactional("postgresTransactionManager")
 public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
 
     private final SpotEmbeddingJpaRepository spotEmbeddingJpaRepository;
@@ -38,11 +39,20 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
             entity = spotEmbeddingJpaRepository.findById(spotEmbedding.getId())
                     .orElse(SpotEmbeddingEntity.fromDomain(spotEmbedding));
             entity.updateEmbeddings(
-                    spotEmbedding.getLocationEmbeddingAsString(),
-                    spotEmbedding.getTagEmbeddingAsString()
+                    spotEmbedding.getLocationEmbedding(),
+                    spotEmbedding.getTagEmbedding()
             );
         } else {
-            entity = SpotEmbeddingEntity.fromDomain(spotEmbedding);
+            // spot_id로 기존 엔티티 확인 (upsert 방식)
+            entity = spotEmbeddingJpaRepository.findBySpotId(spotEmbedding.getSpotId())
+                    .map(existing -> {
+                        existing.updateEmbeddings(
+                                spotEmbedding.getLocationEmbedding(),
+                                spotEmbedding.getTagEmbedding()
+                        );
+                        return existing;
+                    })
+                    .orElse(SpotEmbeddingEntity.fromDomain(spotEmbedding));
         }
 
         SpotEmbeddingEntity savedEntity = spotEmbeddingJpaRepository.save(entity);
@@ -59,18 +69,34 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
     }
 
     @Override
-    public List<Long> findSimilarSpots(List<Long> spotIds,
-                                       String locationVector,
-                                       String tagVector,
-                                       double locationWeight,
-                                       double tagWeight,
-                                       int limit) {
-        List<Object[]> results = spotEmbeddingJpaRepository.findSimilarSpots(
-                spotIds, locationVector, tagVector, locationWeight, tagWeight, limit);
+    public List<SpotSimilarity> findSimilarSpotsByUserPreference(Long userId,
+                                                                 String category,
+                                                                 List<Long> spotIds,
+                                                                 int limit) {
+        try {
+            List<Object[]> results = spotEmbeddingJpaRepository.findSimilarSpotsByUserPreference(
+                    userId, category, spotIds.toArray(Long[]::new), limit);
 
-        return results.stream()
-                .map(row -> ((SpotEmbeddingEntity) row[0]).getSpotId())
-                .collect(Collectors.toList());
+            return results.stream()
+                    .map(row -> new SpotSimilarity(
+                            ((Number) row[0]).longValue(),      // spot_id
+                            ((Number) row[1]).doubleValue()     // similarity
+                    ))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            log.error("Failed to find similar spots by user preference: {}", e.getMessage());
+            return List.of();
+        }
+    }
+
+    @Override
+    public List<Long> findSpotIdsWithTagEmbedding(List<Long> spotIds) {
+        return spotEmbeddingJpaRepository.findSpotIdsWithTagEmbedding(spotIds);
+    }
+
+    @Override
+    public List<Long> findSpotIdsWithoutTagEmbedding(List<Long> spotIds) {
+        return spotEmbeddingJpaRepository.findSpotIdsWithoutTagEmbedding(spotIds);
     }
 
     @Override
@@ -81,10 +107,30 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
     }
 
     @Override
+    public EmbeddingStats getEmbeddingStats() {
+        long totalSpots = spotEmbeddingJpaRepository.count();
+        long spotsWithTagEmbedding = spotEmbeddingJpaRepository.countSpotsWithTagEmbedding();
+        long spotsWithLocationEmbedding = spotEmbeddingJpaRepository.countSpotsWithLocationEmbedding();
+
+        return new EmbeddingStats(
+                totalSpots,
+                spotsWithTagEmbedding,
+                spotsWithLocationEmbedding,
+                totalSpots - spotsWithTagEmbedding,
+                totalSpots > 0 ? (double) spotsWithTagEmbedding / totalSpots * 100 : 0.0
+        );
+    }
+
+    @Override
     @Transactional
     public void deleteBySpotId(Long spotId) {
         spotEmbeddingJpaRepository.deleteBySpotId(spotId);
         log.debug("Deleted spot embedding for spot: {}", spotId);
+    }
+
+    @Override
+    public boolean existsBySpotId(Long spotId) {
+        return spotEmbeddingJpaRepository.existsBySpotId(spotId);
     }
 
     @Override
@@ -93,4 +139,8 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
                 .map(SpotEmbeddingEntity::toDomain)
                 .collect(Collectors.toList());
     }
+
+    // DTOs
+
+
 }

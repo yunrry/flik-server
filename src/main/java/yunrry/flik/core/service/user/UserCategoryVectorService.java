@@ -2,115 +2,128 @@ package yunrry.flik.core.service.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
+import org.springframework.transaction.annotation.Transactional;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.MainCategory;
-import yunrry.flik.core.domain.model.card.Spot;
-import yunrry.flik.core.domain.model.embedding.SpotEmbedding;
-import yunrry.flik.core.service.embedding.SpotEmbeddingService;
-import yunrry.flik.core.service.embedding.VectorProcessingService;
+import yunrry.flik.core.domain.model.embedding.UserVectorStats;
 import yunrry.flik.ports.out.repository.SpotRepository;
 import yunrry.flik.ports.out.repository.UserCategoryVectorRepository;
 import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 
-
-import java.util.*;
-import java.util.stream.Collectors;
-
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserCategoryVectorService {
 
+    private final UserCategoryVectorRepository userCategoryVectorRepository;
     private final UserSavedSpotRepository userSavedSpotRepository;
     private final SpotRepository spotRepository;
-    private final UserCategoryVectorRepository userCategoryVectorRepository;
-    private final VectorProcessingService vectorProcessingService;
     private final CategoryMapper categoryMapper;
-    private final SpotEmbeddingService spotEmbeddingService;
 
-    @Cacheable(value = "userCategoryVectors", key = "#userId + '_' + #category.code + '_' + #userCategorySavedCount")
-    public String getUserCategoryPreferenceVector(Long userId, MainCategory category, int userCategorySavedCount) {
-        // savedCount가 변경되면 새로 계산하고 DB 업데이트
-        String vector = calculateCategoryPreferenceVector(userId, category);
-
-        // 비동기로 DB 업데이트
-        updateSingleCategoryVector(userId, category, vector);
-
-        return vector;
+    /**
+     * 사용자 카테고리 선호 벡터 조회 (캐시 적용)
+     */
+    @Cacheable(value = "userCategoryVectors", key = "#userId + '_' + #category.code + '_' + #categorySavedCount")
+    public Optional<List<Double>> getUserCategoryPreferenceVector(Long userId, MainCategory category, int categorySavedCount) {
+        // 캐시에 없으면 벡터 업데이트 후 조회
+        updateUserPreferenceVectorIfNeeded(userId, category);
+        return userCategoryVectorRepository.getUserCategoryVector(userId, category);
     }
 
-    private void updateSingleCategoryVector(Long userId, MainCategory category, String vector) {
-        Mono.fromRunnable(() -> {
-                    Map<MainCategory, String> singleCategoryMap = Map.of(category, vector);
-                    userCategoryVectorRepository.saveUserCategoryVectors(userId, singleCategoryMap);
-                    log.debug("Updated vector for user: {}, category: {}", userId, category);
-                })
-                .subscribeOn(Schedulers.boundedElastic())
-                .subscribe();
+    /**
+     * 필요시 벡터 업데이트
+     */
+    private void updateUserPreferenceVectorIfNeeded(Long userId, MainCategory category) {
+        List<Long> allSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
+        if (!allSavedSpotIds.isEmpty()) {
+            recalculateCategoryVector(userId, category, allSavedSpotIds);
+        }
     }
 
-    private String calculateCategoryPreferenceVector(Long userId, MainCategory category) {
-        // 1. 사용자 저장 장소 조회
-        List<Long> savedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
-        if (savedSpotIds.isEmpty()) {
-            return getDefaultCategoryVector(category);
+
+    /**
+     * PostgreSQL 함수를 사용한 선호도 벡터 업데이트
+     * 사용자가 새로운 장소를 저장했을 때 호출
+     */
+    @CacheEvict(value = "userCategoryVectors", key = "#userId + '_' + #category.code")
+    public void updateUserPreferenceVector(Long userId, MainCategory category, List<Long> newFavoriteSpotIds) {
+        try {
+            userCategoryVectorRepository.updateUserPreferenceVector(userId, category, newFavoriteSpotIds);
+        } catch (Exception e) {
+            log.error("Failed to update User category vector: {}", e.getMessage());
+        }
+    }
+
+    /**
+     * 사용자의 모든 저장된 장소를 기반으로 전체 벡터 재계산
+     */
+    @CacheEvict(value = "userCategoryVectors", allEntries = true, condition = "#userId != null")
+    public void recalculateAllUserVectors(Long userId) {
+        List<Long> allSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
+
+        if (allSavedSpotIds.isEmpty()) {
+            log.debug("No saved spots for user: {}", userId);
+            return;
         }
 
+        // 각 카테고리별로 벡터 재계산
+        for (MainCategory category : MainCategory.values()) {
+            List<Long> categorySpots = filterSpotsByCategory(allSavedSpotIds, category);
+            recalculateCategoryVector(userId, category, categorySpots);
+        }
+    }
+
+    private List<Long> filterSpotsByCategory(List<Long> spotIds, MainCategory category) {
         List<String> subCategories = categoryMapper.getSubCategoryNames(category);
 
-        // 2. 해당 카테고리의 장소들만 필터링
-        List<Spot> categorySpots = spotRepository.findByIdsAndLabelDepth2In(savedSpotIds, subCategories);
-        if (categorySpots.isEmpty()) {
-            return getDefaultCategoryVector(category);
+        return spotRepository.findIdsByIdsAndLabelDepth2In(spotIds, subCategories);
+    }
+
+
+    /**
+     * 특정 카테고리 벡터 재계산
+     */
+    @CacheEvict(value = "userCategoryVectors", key = "#userId + '_' + #category.code")
+    public void recalculateCategoryVector(Long userId, MainCategory category, List<Long> allSpotIds) {
+
+
+        try {
+            userCategoryVectorRepository.recalculateCategoryVector(userId, category, allSpotIds);
+        } catch (Exception e) {
+            log.error("Failed to recalculate category vector: {}", e.getMessage());
         }
-
-        // 3. 저장된 장소 태그 임베딩들 조회
-        List<Long> categorySpotIds = categorySpots.stream()
-                .map(Spot::getId)
-                .collect(Collectors.toList());
-
-        List<SpotEmbedding> embeddings = spotEmbeddingService.getEmbeddingsBySpotIds(categorySpotIds);
-
-        if(embeddings.size() < categorySpotIds.size()){
-            log.warn("Some embeddings are missing for user. should wait or skip: {} in category: {}", userId, category);
-
-            try {
-                Thread.sleep(2000); // 2초 대기
-
-                // 재조회 시도
-                embeddings = spotEmbeddingService.getEmbeddingsBySpotIds(categorySpotIds);
-
-                if(embeddings.size() < categorySpotIds.size()){
-                    log.warn("Still missing embeddings after wait for user: {} in category: {}", userId, category);
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                log.error("Thread interrupted while waiting for embeddings: {}", e.getMessage());
-            }
-        }
-
-        List<String> tagVectors = embeddings.stream()
-                .filter(SpotEmbedding::hasTagEmbedding)
-                .map(SpotEmbedding::getTagEmbeddingAsString)
-                .collect(Collectors.toList());
-
-        if (tagVectors.isEmpty()) {
-            log.debug("No tag embeddings found for user: {} in category: {}", userId, category);
-            return getDefaultCategoryVector(category);
-        }
-
-        // 4. 벡터 평균 계산
-        return vectorProcessingService.calculateAverageVector(tagVectors);
     }
 
 
 
-    private String getDefaultCategoryVector(MainCategory category) {
+    /**
+     * 기본 벡터 반환
+     */
+    public List<Double> getDefaultCategoryVector(MainCategory category) {
         return userCategoryVectorRepository.getDefaultCategoryVector(category);
     }
+
+    /**
+     * 사용자 벡터 통계 조회
+     */
+    public UserVectorStats getUserVectorStats(Long userId) {
+        return userCategoryVectorRepository.getUserVectorStats(userId);
+    }
+
+    /**
+     * 벡터 존재 여부 확인
+     */
+    public boolean hasUserVector(Long userId, MainCategory category) {
+        return userCategoryVectorRepository.existsByUserIdAndCategory(userId, category);
+    }
+
+
+
 }
