@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import yunrry.flik.core.domain.event.SpotSwipeEvent;
-import yunrry.flik.core.service.UserPreferenceService;
+import yunrry.flik.core.service.user.UserPreferenceService;
 
 @Component
 @RequiredArgsConstructor

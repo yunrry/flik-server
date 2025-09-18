@@ -154,7 +154,8 @@ class SportsRecreationMigrator:
                 'label_depth3': item.get('label_depth3', ''),
                 'time': item.get('usetime', ''),
                 'reservation': item.get('reservation', ''),  # 레포츠 특화 필드
-                'exp_guide': item.get('expagerangeleports', '')  # 체험연령대
+                'exp_guide': item.get('expagerangeleports', ''),  # 체험연령대
+                'google_reviews': item.get('google_reviews', '')
             }
             
             spots_data.append(spot_data)
@@ -175,9 +176,9 @@ class SportsRecreationMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, reservation, exp_guide
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, reservation, exp_guide, google_reviews
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -216,7 +217,8 @@ class SportsRecreationMigrator:
                     item.get('label_depth3', ''),
                     item.get('time', ''),
                     item.get('reservation', ''),
-                    item.get('exp_guide', '')
+                    item.get('exp_guide', ''),
+                    item.get('google_reviews', '')
                 ))
             
             # 배치 삽입 실행

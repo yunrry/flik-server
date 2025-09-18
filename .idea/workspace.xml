@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="data: data migration script">
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestConfig.java" afterDir="false" />
+    <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/IntegrationTestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/IntegrationTestBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/SpotSwipeEventIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/SpotSwipeEventIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestCacheConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestCacheConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestDatabaseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestDatabaseConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/card/GetSpotServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/card/GetSpotServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/TagServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/TagServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +46,8 @@
         <option value="Python Script" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Record" />
         <option value="JUnit5 Test Class" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -73,9 +68,13 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Override.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/oauth2-oidc-sdk/9.43.4/8d45816831c72d71b68c5eadd4c5ec8932db96fb/oauth2-oidc-sdk-9.43.4-sources.jar!/com/nimbusds/openid/connect/sdk/LogoutRequest.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.persistence/jakarta.persistence-api/3.1.0/8d479b8d71750d5c2b8e58034b80231994cba6ec/jakarta.persistence-api-3.1.0-sources.jar!/jakarta/persistence/Convert.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/3.3.7/c05ed939a6232d2b4be1d75d8b0458b09d27a79f/spring-boot-autoconfigure-3.3.7-sources.jar!/org/springframework/boot/autoconfigure/jdbc/DataSourceTransactionManagerAutoConfiguration.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.7/74ce314034383548a84df323bf6c3dd2ab1648a/spring-data-commons-3.3.7-sources.jar!/org/springframework/data/repository/CrudRepository.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/6.1.16/8059739ef4dd8d2cea8e77bd162bc1300f973cc1/spring-beans-6.1.16-sources.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/6.1.16/d61208379b2bb49495d0f841fd02b706dbcfafec/spring-context-6.1.16-sources.jar!/org/springframework/context/annotation/ConfigurationClassEnhancer.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -107,6 +106,9 @@
     "Gradle.GoogleOAuth2ClientTest.executor": "Run",
     "Gradle.JwtTokenProviderTest.executor": "Run",
     "Gradle.OAuth2ServiceTest.executor": "Run",
+    "Gradle.OpenAIEmbeddingServiceIntegrationTest.executor": "Run",
+    "Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success.executor": "Run",
+    "Gradle.OpenAIEmbeddingServiceTest.executor": "Run",
     "Gradle.PostAdapterTest.executor": "Run",
     "Gradle.PostControllerTest.executor": "Run",
     "Gradle.PostControllerTest.shouldGetPostSuccessfully.executor": "Run",
@@ -135,7 +137,14 @@
     "Gradle.SpotTest.executor": "Run",
     "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
     "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
+    "Gradle.TagServiceTest.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_EmbeddingCreationFails.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_ExistingTagWithoutEmbedding_Success.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_ExistingTags_Success.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_FilterNullAndEmpty_Success.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_NewTags_Success.executor": "Run",
     "Gradle.Tests in 'yunrry'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.adapters'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.adapters.in.web'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.adapters.out'.executor": "Run",
@@ -149,10 +158,23 @@
     "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories.executor": "Run",
+    "Gradle.UpdateSpotServiceTest.executor": "Run",
+    "Gradle.UpdateSpotServiceTest.updateSpotTags_LogsErrorOnFailure.executor": "Run",
+    "Gradle.UpdateSpotServiceTest.updateSpotTags_SaveFailure.executor": "Run",
     "Gradle.UserAdapterTest.executor": "Run",
     "Gradle.UserSavedSpotEventListenerTest.executor": "Run",
     "Gradle.UserTest.executor": "Run",
     "Gradle.UserTest.shouldCreateUserWithRequiredFields.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_PartialTags_ShouldExtractTags.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_SpotNotFound_HandleError.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_TagExtractionFailed_HandleError.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_VectorProcessingFailed_HandleError.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_WithExistingTags_Success.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_WithoutTags_ExtractTagsAndProcess.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.parseVector_InvalidVectorString_ShouldReturnEmptyList.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.parseVector_NullVectorString_ShouldReturnEmptyList.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.parseVector_ValidVectorString_ShouldReturnDoubleList.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -205,18 +227,18 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="yunrry.flik.core.service.embedding" />
+      <recent name="yunrry.flik.core.service.plan" />
+      <recent name="yunrry.flik.core.service.spot" />
       <recent name="yunrry.flik.adapters.in.event.listener" />
       <recent name="yunrry.flik.core.service.card" />
-      <recent name="yunrry.flik.core.service" />
-      <recent name="yunrry.flik.adapters.in.web" />
-      <recent name="yunrry.flik.adapters.out.persistence" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="yunrry.flik.core.service.plan" />
+      <recent name="yunrry.flik.ports.in.usecase" />
       <recent name="yunrry.flik.core.domain.model" />
       <recent name="yunrry.flik.adapters.out.persistence.entity" />
       <recent name="yunrry.flik.core.domain.exception" />
-      <recent name="yunrry.flik.adapters.in.web" />
-      <recent name="yunrry.flik.core.service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -227,7 +249,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'yunrry'">
+  <component name="RunManager" selected="Gradle.Tests in 'yunrry.flik'">
     <configuration name="FlikApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -252,7 +274,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SpotSwipeEventIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="OpenAIEmbeddingServiceIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -265,7 +287,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.event.SpotSwipeEventIntegrationTest&quot;" />
+            <option value="&quot;yunrry.flik.core.service.OpenAIEmbeddingServiceIntegrationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -276,7 +298,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="OpenAIEmbeddingServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -289,7 +311,44 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.event.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers&quot;" />
+            <option value="&quot;yunrry.flik.core.service.embedding.OpenAIEmbeddingServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
+        <extension name="net.ashald.envfile">
+          <option name="IS_ENABLED" value="true" />
+          <option name="IS_SUBST" value="false" />
+          <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+          <option name="IS_IGNORE_MISSING_FILES" value="false" />
+          <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+          <ENTRIES>
+            <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+            <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
+          </ENTRIES>
+        </extension>
+      </EXTENSION>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="OpenAIEmbeddingServiceTest.createEmbedding_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.embedding.OpenAIEmbeddingServiceTest.createEmbedding_Success&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -300,7 +359,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'yunrry.flik'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -313,31 +372,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.in.event.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'yunrry'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.*&quot;" />
+            <option value="&quot;yunrry.flik.*&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -369,20 +404,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.SpotSwipeEventIntegrationTest" />
-      <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers" />
-      <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success" />
-      <item itemvalue="Gradle.Tests in 'yunrry'" />
       <item itemvalue="Gradle.FlikApplicationTests" />
+      <item itemvalue="Gradle.Tests in 'yunrry.flik'" />
+      <item itemvalue="Gradle.OpenAIEmbeddingServiceIntegrationTest" />
+      <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
+      <item itemvalue="Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'yunrry'" />
+        <item itemvalue="Gradle.Tests in 'yunrry.flik'" />
         <item itemvalue="Gradle.FlikApplicationTests" />
-        <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success" />
-        <item itemvalue="Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers" />
-        <item itemvalue="Gradle.SpotSwipeEventIntegrationTest" />
+        <item itemvalue="Gradle.OpenAIEmbeddingServiceIntegrationTest" />
+        <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
+        <item itemvalue="Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -414,6 +449,7 @@
       <workItem from="1757320098234" duration="50048000" />
       <workItem from="1757584883569" duration="2875000" />
       <workItem from="1757640069773" duration="3003000" />
+      <workItem from="1758105270843" duration="66785000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -798,26 +834,68 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/IntegrationTestBase.java</url>
-          <line>18</line>
+          <line>16</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/config/TestConfig.java</url>
-          <line>36</line>
+          <line>97</line>
           <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/listener/VectorEmbeddingEventListenerTest.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/in/event/listener/VectorEmbeddingEventListenerTest.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/spot/UpdateSpotServiceTest.java</url>
+          <line>176</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/TagServiceTest.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="org.opentest4j.AssertionFailedError" package="org.opentest4j" />
           <option name="timeStamp" value="17" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.AssertionError" package="java.lang" />
+          <option name="timeStamp" value="40" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelPlannerServiceTest.java</url>
-          <line>717</line>
+          <line>710</line>
           <properties class="yunrry.flik.core.service.TravelPlannerServiceTest" method="testCafeRegularFullDayOneDayTrip">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/SpotRepository.java</url>
+          <line>30</line>
+          <properties class="yunrry.flik.ports.out.repository.SpotRepository" method="findSliceByLabelDepth2InAndRegnCdAndSignguCd">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/SpotJpaRepository.java</url>
+          <line>62</line>
+          <properties class="yunrry.flik.adapters.out.persistence.mysql.repository.SpotJpaRepository" method="findByIdsAndLabelDepth2In">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

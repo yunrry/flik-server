@@ -51,10 +51,10 @@ public abstract class BaseSpotEntity {
     @Column(name = "signgu_cd")
     private String signguCd;
 
-    @Column(name = "latitude")
+    @Column(name = "latitude", precision = 38, scale = 2)
     private BigDecimal latitude;
 
-    @Column(name = "longitude")
+    @Column(name = "longitude", precision = 38, scale = 2)
     private BigDecimal longitude;
 
     @Column(name = "image_urls", columnDefinition = "TEXT")
@@ -108,18 +108,19 @@ public abstract class BaseSpotEntity {
     @Column(name = "close_time")
     private LocalTime closeTime;
 
-    @Column(name = "time")
+    @Column(name = "time", columnDefinition = "TEXT")
     private String time;
 
     @Column(name = "day_off")
     private String dayOff;
 
-
+    @Column(name = "google_reviews", columnDefinition = "TEXT")
+    private String googleReviews;
 
     protected BaseSpotEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
                              String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude,String imageUrls, String info,BigDecimal rating,
                              String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags, String labelDepth1, String labelDepth2, String labelDepth3, String parking, String petCarriage, String babyCarriage,
-                              LocalTime openTime, LocalTime closeTime, String time, String dayOff) {
+                              LocalTime openTime, LocalTime closeTime, String time, String dayOff, String googleReviews) {
         this.id = id;
         this.name = name;
         this.contentTypeId = contentTypeId;
@@ -150,6 +151,7 @@ public abstract class BaseSpotEntity {
         this.closeTime = closeTime;
         this.time = time;
         this.dayOff = dayOff;
+        this.googleReviews = googleReviews;
     }
 
     public abstract Spot toDomain();

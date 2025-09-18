@@ -41,6 +41,12 @@ oauth2:
       user-info-uri: https://kapi.kakao.com/v2/user/me
       scope: profile_nickname profile_image account_email
 
+openai:
+  api-key: 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
+  base-url: https://api.openai.com/v1
+  embedding:
+    model: text-embedding-3-small
+
 jwt:
   secret: ${JWT_SECRET:your-secret-key-here-must-be-at-least-256-bits}
   access-token-expiry: 3600    # 1시간

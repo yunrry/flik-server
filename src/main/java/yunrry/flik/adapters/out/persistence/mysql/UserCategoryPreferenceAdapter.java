@@ -7,7 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import yunrry.flik.adapters.out.persistence.mysql.entity.UserCategoryPreferenceEntity;
 import yunrry.flik.adapters.out.persistence.mysql.repository.UserCategoryPreferenceJpaRepository;
+import yunrry.flik.core.domain.model.UserCategoryPreference;
 import yunrry.flik.ports.out.repository.UserCategoryPreferenceRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -21,24 +25,17 @@ public class UserCategoryPreferenceAdapter implements UserCategoryPreferenceRepo
     @Transactional
     public void incrementPreferenceScore(Long userId, String detailCategory, Double increment) {
         try {
-            // 기존 선호도 레코드 업데이트 시도
             int updatedRows = userCategoryPreferenceJpaRepository
                     .incrementPreferenceScore(userId, detailCategory, increment);
 
-            // 업데이트된 행이 없으면 새로 생성
             if (updatedRows == 0) {
                 UserCategoryPreferenceEntity newEntity = UserCategoryPreferenceEntity.of(userId, detailCategory);
                 newEntity.incrementPreference(increment);
                 userCategoryPreferenceJpaRepository.save(newEntity);
-                log.debug("Created new category preference - userId: {}, category: {}, score: {}",
-                        userId, detailCategory, increment);
-            } else {
-                log.debug("Updated category preference - userId: {}, category: {}, increment: {}",
-                        userId, detailCategory, increment);
+                log.debug("Created new category preference - userId: {}, category: {}", userId, detailCategory);
             }
         } catch (Exception e) {
-            log.error("Failed to increment preference score - userId: {}, category: {}, increment: {}",
-                    userId, detailCategory, increment, e);
+            log.error("Failed to increment preference score - userId: {}, category: {}", userId, detailCategory, e);
             throw e;
         }
     }
@@ -47,7 +44,27 @@ public class UserCategoryPreferenceAdapter implements UserCategoryPreferenceRepo
     public double getPreferenceScore(Long userId, String detailCategory) {
         return userCategoryPreferenceJpaRepository
                 .findByUserIdAndDetailCategory(userId, detailCategory)
-                .map(UserCategoryPreferenceEntity::getPreferenceScore)
+                .map(entity -> entity.toDomain().getPreferenceScore())
                 .orElse(0.0);
+    }
+
+    @Override
+    public List<UserCategoryPreference> findByUserIdAndMainCategoryIn(Long userId, List<String> mainCategories) {
+        return userCategoryPreferenceJpaRepository.findByUserIdAndMainCategoryIn(userId, mainCategories)
+                .stream()
+                .map(UserCategoryPreferenceEntity::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer sumSaveCountByUserIdAndMainCategory(Long userId, String mainCategory) {
+        return userCategoryPreferenceJpaRepository.sumSaveCountByUserIdAndMainCategory(userId, mainCategory);
+    }
+
+    @Override
+    public UserCategoryPreference save(UserCategoryPreference userCategoryPreference) {
+        UserCategoryPreferenceEntity entity = UserCategoryPreferenceEntity.fromDomain(userCategoryPreference);
+        UserCategoryPreferenceEntity saved = userCategoryPreferenceJpaRepository.save(entity);
+        return saved.toDomain();
     }
 }

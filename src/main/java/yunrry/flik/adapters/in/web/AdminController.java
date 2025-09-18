@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.core.domain.exception.UnauthorizedException;
-import yunrry.flik.core.service.JwtTokenProvider;
+import yunrry.flik.core.service.auth.JwtTokenProvider;
 
 // adapters/in/web/AdminController.java
 @RestController

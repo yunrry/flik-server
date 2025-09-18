@@ -1,9 +1,9 @@
 package yunrry.flik.core.domain.model.card;
 
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 import yunrry.flik.core.domain.exception.SpotRunningTimeNullException;
 
 import java.math.BigDecimal;
@@ -43,6 +43,7 @@ public abstract class Spot {
     public final LocalTime closeTime;
     public final String time;
     public final String dayOff;
+    public final String googleReviews;
 
 
     public boolean isOpenAt(LocalTime currentTime, String dayOfWeek) {
@@ -58,4 +59,5 @@ public abstract class Spot {
         }
     }
 
+    public abstract Spot withTags(String tag1, String tag2, String tag3, String tags);
 }

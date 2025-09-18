@@ -91,7 +91,7 @@ class ShoppingMigrator:
             
             # label_depth1이 존재하는 데이터만 조회
             query = """
-            SELECT * FROM fetched_sports_recreation 
+            SELECT * FROM fetched_shopping
             WHERE label_depth1 IS NOT NULL 
             AND label_depth1 != '' 
             AND addr1 IS NOT NULL 
@@ -164,7 +164,8 @@ class ShoppingMigrator:
                 'products': item.get('saleitem', ''),  # 판매상품
                 'price_range': item.get('saleitemcost', ''),  # 가격대
                 'facilities': item.get('culturecenter', ''),  # 문화센터
-                'exp_guide': item.get('shopguide', '')  # 쇼핑안내
+                'exp_guide': item.get('shopguide', ''),  # 쇼핑안내
+                'google_reviews': item.get('google_reviews', '')
             }
             
             spots_data.append(spot_data)
@@ -185,9 +186,9 @@ class ShoppingMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, products, price_range, facilities, exp_guide
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, products, price_range, facilities, exp_guide, google_reviews
             ) VALUES (
-               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -234,7 +235,8 @@ class ShoppingMigrator:
                     item.get('products', ''),
                     item.get('price_range', ''),
                     item.get('facilities', ''),
-                    item.get('exp_guide', '')
+                    item.get('exp_guide', ''),
+                    item.get('google_reviews', '')
                 ))
             
             # 배치 삽입 실행

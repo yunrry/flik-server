@@ -1,20 +1,26 @@
 package yunrry.flik.adapters.out.persistence.mysql;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
-import yunrry.flik.adapters.out.persistence.mysql.entity.BaseSpotEntity;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+import yunrry.flik.adapters.out.persistence.mysql.entity.*;
 import yunrry.flik.adapters.out.persistence.mysql.repository.SpotJpaRepository;
 import yunrry.flik.core.domain.model.MainCategory;
-import yunrry.flik.core.domain.model.card.Spot;
+import yunrry.flik.core.domain.model.card.*;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.SearchSpotsQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class SpotAdapter implements SpotRepository {
@@ -23,9 +29,29 @@ public class SpotAdapter implements SpotRepository {
     private final CategoryMapper categoryMappingService;
 
     @Override
-    public Optional<Spot> findById(Long id) {
+    public Spot findById(Long id) {
         return spotJpaRepository.findById(id)
-                .map(entity -> ((BaseSpotEntity) entity).toDomain());
+                .map(entity -> ((BaseSpotEntity) entity).toDomain())
+                .orElseThrow(() -> new IllegalArgumentException("Spot not found: " + id));
+    }
+
+    @Override
+    public List<Spot> findAllByIds(Collection<Long> ids) {
+        // Iterable<Long>로 JPA에 전달
+        Iterable<Long> iterableIds = ids;
+
+        List<BaseSpotEntity> entities = spotJpaRepository.findAllById(iterableIds);
+
+        // 엔티티 -> 도메인 변환
+        return entities.stream()
+                .map(BaseSpotEntity::toDomain)  // 또는 ((BaseSpotEntity) e).toDomain()
+                .toList();
+    }
+
+    @Override
+    public Mono<Spot> findByIdAsync(Long id) {
+        return Mono.fromCallable(() -> findById(id))
+                .subscribeOn(Schedulers.boundedElastic());
     }
 
     @Override
@@ -41,6 +67,23 @@ public class SpotAdapter implements SpotRepository {
 
         return entities.map(BaseSpotEntity::toDomain);
     }
+
+    @Override
+    public void save(Spot spot) {
+        BaseSpotEntity entity = switch (spot) {
+            case Cultural cultural -> CulturalEntity.fromDomain(cultural);
+            case Accommodation accommodation -> AccommodationEntity.fromDomain(accommodation);
+            case Restaurant restaurant -> RestaurantEntity.fromDomain(restaurant);
+            case TourSpot tourSpot -> TourSpotEntity.fromDomain(tourSpot);
+            case Shop shop -> ShopEntity.fromDomain(shop);
+            case Festival festival -> FestivalEntity.fromDomain(festival);
+            case Leisure leisure -> LeisureEntity.fromDomain(leisure);
+            // 다른 타입들 추가
+            default -> throw new IllegalArgumentException("Unsupported spot type: " + spot.getClass());
+        };
+        spotJpaRepository.save(entity);
+    }
+
 
     @Override
     public List<Spot> findByLabelDepth2InAndRegnCd(List<String> subcategories, String regionCode) {
@@ -93,6 +136,44 @@ public class SpotAdapter implements SpotRepository {
                 .map(BaseSpotEntity::toDomain)
                 .toList();
     }
+
+
+    @Override
+    public List<Spot> findByLabelDepth2In(List<String> subCategories) {
+        return spotJpaRepository.findByLabelDepth2In(subCategories).stream()
+                .map(BaseSpotEntity::toDomain)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<Spot> findByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories) {
+        log.info("Finding spots with IDs: {} and categories: {}", spotIds, labelDepth2Categories);
+        return spotJpaRepository.findByIdsAndLabelDepth2In(spotIds, labelDepth2Categories).stream()
+                .map(BaseSpotEntity::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories) {
+        return spotJpaRepository.findIdsByIdsAndLabelDepth2In(spotIds, labelDepth2Categories);
+    };
+
+    @Override
+    public List<Long> findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(List<Long> spotIds, List<String> labelDepth2Categories, String regionCode){
+        String regnCd = regionCode.substring(0, 2);
+        String signguCd = regionCode.substring(2, 5);
+        log.info("regnCd: " + regnCd + ", signguCd: " + signguCd);
+        return spotJpaRepository.findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(spotIds, labelDepth2Categories, regnCd, signguCd);
+    }
+
+    @Override
+    public List<Long> findIdsByIdsAndLabelDepth2InAndRegnCd(List<Long> spotIds, List<String> labelDepth2Categories, String regionCode){
+        String regnCd = regionCode.substring(0, 2);
+        log.info("regnCd: " + regnCd );
+        return spotJpaRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(spotIds, labelDepth2Categories, regnCd);
+    }
+
 
     private Pageable createPageable(SearchSpotsQuery query) {
         Sort sort = createSort(query.getSort());

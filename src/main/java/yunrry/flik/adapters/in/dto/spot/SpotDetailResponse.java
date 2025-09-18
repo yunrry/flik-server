@@ -7,6 +7,7 @@ import yunrry.flik.core.domain.model.card.TourSpot;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,6 +18,8 @@ public record SpotDetailResponse(
         BigDecimal rating,
         String description,
         String address,
+        BigDecimal latitude,
+        BigDecimal longitude,
         @JsonFormat(pattern = "HH:mm")
         String operatingHours,
         String dayOff,
@@ -30,13 +33,15 @@ public record SpotDetailResponse(
 
 ) {
     public static SpotDetailResponse from(Spot spot) {
-        String operatingHours = formatOperatingHours(spot.getOpenTime(), spot.getCloseTime());
-        Boolean isOpen;
-        try {
-            isOpen = spot.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
-        } catch (Exception e) {
-            isOpen = null;
-        }
+//        String operatingHours = formatOperatingHours(spot.getOpenTime(), spot.getCloseTime());
+        String operatingHours = spot.getTime();
+        Boolean isOpen = null;
+//        try {
+//            isOpen = spot.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
+//        } catch (Exception e) {
+//            isOpen = null;
+//        }
+
 
         // 타입별 특수 정보 추출
         String products = null;
@@ -57,10 +62,12 @@ public record SpotDetailResponse(
                 spot.getRating(),
                 spot.getDescription(),
                 spot.getAddress(),
+                spot.getLatitude(),
+                spot.getLongitude(),
                 operatingHours,
                 spot.getDayOff(),
                 isOpen,
-                spot.getImageUrls(),
+                normalizeImageUrls(spot.getImageUrls()),
                 products,
                 expGuide,
                 ageLimit
@@ -71,11 +78,20 @@ public record SpotDetailResponse(
         if (openTime == null || closeTime == null) {
             return null;
         }
-        return String.format("%s ~ %s", openTime.toString(), closeTime.toString());
+        return java.lang.String.format("%s ~ %s", openTime.toString(), closeTime.toString());
     }
 
     private static String getCurrentDayOfWeek() {
         return java.time.LocalDate.now().getDayOfWeek().getDisplayName(
                 java.time.format.TextStyle.SHORT, java.util.Locale.KOREAN);
+    }
+
+    private static List<String> normalizeImageUrls(List<String> imageUrls) {
+        if (imageUrls == null) return List.of();
+        return imageUrls.stream()
+                .flatMap(url -> Arrays.stream(url.replace("[", "").replace("]", "").replace("\"", "").split(",")))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
     }
 }

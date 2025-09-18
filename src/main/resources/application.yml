@@ -4,6 +4,14 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 10
+      connection-timeout: 20000      # 20초
+      idle-timeout: 600000           # 10분
+      max-lifetime: 1800000          # 30분
+      validation-timeout: 5000       # 5초
+      connection-test-query: SELECT 1
+      pool-name: FlikHikariPool
 
 app:
   frontend:
@@ -33,7 +41,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,metrics,prometheus,info,beans,env
+        include: health,metrics,prometheus,info,beans,env,hikaricp
       base-path: /actuator
   endpoint:
     health:
@@ -48,7 +56,9 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-      environment: ${spring.profiles.active}
+      environment: ${spring.profiles.active:unknown}
+    enable:
+      hikaricp: true  # HikariCP 메트릭 활성화
   health:
     redis:
       enabled: true
@@ -59,11 +69,42 @@ management:
 
 # Logging configuration
 logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: ./logs
   level:
     root: INFO
+    # 애플리케이션 패키지 로그 레벨
     yunrry.flik: DEBUG
+
+    # 배치 작업 관련 로그
+    yunrry.flik.batch.job.GooglePlacesEnrichmentJob: DEBUG
+
+    # OpenAI 임베딩 서비스 로그
+    yunrry.flik.core.service.embedding.OpenAIEmbeddingService: DEBUG
+
+    # 커스텀 로거들
+    NULL_RATING_LOGGER: INFO
+    NO_PLACE_FOUND_LOGGER: INFO
+
+    # Spring 프레임워크 로그 레벨
     org.springframework.security: INFO
     org.springframework.web: INFO
+    org.springframework.data: INFO
+    org.springframework.boot: INFO
+
+    # WebClient HTTP 로그
+    org.springframework.web.reactive.function.client: INFO
+    reactor.netty.http.client: INFO
+
+    # Hibernate 관련 로그
+    org.hibernate.SQL: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+
+    # HikariCP 로그 (성능 문제 디버깅용)
+    com.zaxxer.hikari: INFO
+
+  # 패턴 설정 (logback-spring.xml에서 오버라이드됨)
   pattern:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

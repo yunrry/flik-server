@@ -83,7 +83,7 @@ class FestivalsEventsMigrator:
             cursor = connection.cursor(dictionary=True)
             
             query = """
-            SELECT * FROM fetched_sports_recreation 
+            SELECT * FROM fetched_festivals_events 
             WHERE label_depth1 IS NOT NULL 
             AND label_depth1 != '' 
             AND addr1 IS NOT NULL 
@@ -171,7 +171,8 @@ class FestivalsEventsMigrator:
                 'treat_menu': '',  # 축제/이벤트에는 해당없음
                 'products': item.get('program', ''),  # 프로그램 정보
                 'exp_guide': item.get('placeinfo', ''),  # 장소정보
-                'time': item.get('usetime', '')  # 이용시간
+                'time': item.get('usetime', ''),  # 이용시간
+                'google_reviews': item.get('google_reviews', '')  # 구글 리뷰
             }
             
             spots_data.append(spot_data)
@@ -197,9 +198,9 @@ class FestivalsEventsMigrator:
                 check_out_time, cooking, facilities, cuisine_type, fee, age_limit,
                 event_end_date, event_start_date, running_time, sponsor, first_menu,
                 kids_facility, price_range, reservation, take_away, treat_menu,
-                products, exp_guide, time
+                products, exp_guide, time, google_reviews
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -257,7 +258,8 @@ class FestivalsEventsMigrator:
                         item.get('treat_menu', ''),          # treat_menu
                         item.get('products', ''),            # products
                         item.get('exp_guide', ''),           # exp_guide
-                        item.get('time', '')                 # time
+                        item.get('time', ''),                 # time
+                        item.get('google_reviews', '')         # google_reviews
                     )
                     
                     # # 파라미터 개수 검증

@@ -34,15 +34,15 @@ public class FestivalEntity extends BaseSpotEntity {
     @Column(name = "running_time", length = 500)
     private String runningTime;
 
-    @Column(name = "fee", length = 500)
+    @Column(name = "fee")
     private String fee;
 
 
     public FestivalEntity(Long id, String name, String contentTypeId, String contentId, String category, String description,
                           String address, String regnCd, String signguCd, BigDecimal latitude, BigDecimal Longitude, String imageUrls, String info,BigDecimal rating,
                           String googlePlaceId, Integer reviewCount  ,String tag1, String tag2, String tag3, String tags,String labelDepth1, String labelDepth2, String labelDepth3,  String parking, String petCarriage, String babyCarriage,
-                          LocalTime openTime, LocalTime closeTime, String time, String dayOff, String eventStartDate, String eventEndDate, String ageLimit, String sponsor, String runningTime, String fee) {
-        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3,parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff);
+                          LocalTime openTime, LocalTime closeTime, String time, String dayOff, String googleReviews, String eventStartDate, String eventEndDate, String ageLimit, String sponsor, String runningTime, String fee) {
+        super(id, name, contentTypeId, contentId, category, description, address, regnCd, signguCd, latitude, Longitude, imageUrls, info, rating, googlePlaceId, reviewCount, tag1, tag2, tag3, tags, labelDepth1, labelDepth2, labelDepth3,parking, petCarriage, babyCarriage, openTime, closeTime, time, dayOff, googleReviews);
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
         this.ageLimit = ageLimit;
@@ -83,6 +83,7 @@ public class FestivalEntity extends BaseSpotEntity {
                 this.getCloseTime(),
                 this.getTime(),
                 this.getDayOff(),
+                this.getGoogleReviews(),
                 this.eventStartDate,
                 this.eventEndDate,
                 this.ageLimit,
@@ -125,6 +126,7 @@ public class FestivalEntity extends BaseSpotEntity {
                 festival.getCloseTime(),
                 festival.getTime(),
                 festival.getDayOff(),
+                festival.getGoogleReviews(),
                 festival.getEventStartDate(),
                 festival.getEventEndDate(),
                 festival.getAgeLimit(),

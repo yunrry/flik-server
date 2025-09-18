@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import yunrry.flik.adapters.out.persistence.mysql.entity.UserSavedSpotEntity;
 
+import java.util.List;
+
 @Repository
 public interface UserSavedSpotJpaRepository extends JpaRepository<UserSavedSpotEntity, Long> {
 
@@ -30,4 +32,8 @@ public interface UserSavedSpotJpaRepository extends JpaRepository<UserSavedSpotE
 
     @Query("SELECT COUNT(u) FROM UserSavedSpotEntity u WHERE u.spotId = :spotId")
     int countBySpotId(Long spotId);
+
+
+    @Query("SELECT uss.spotId FROM UserSavedSpotEntity uss WHERE uss.userId = :userId")
+    List<Long> findSpotIdsByUserId(@Param("userId") Long userId);
 }

@@ -30,7 +30,7 @@ public enum SubCategory {
     INDUSTRIAL_TOURISM("EX06", "산업관광"),
 
     // Cafe
-    CAFE_TEA_HOUSE("FD05", "카페/찻집"),
+    CAFE_TEA_HOUSE("FD05", "카페/ 찻집"),
 
     // Activity
     LAND_LEISURE_SPORTS("LS01", "육상레저스포츠"),

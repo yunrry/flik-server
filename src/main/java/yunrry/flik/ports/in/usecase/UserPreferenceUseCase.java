@@ -13,4 +13,6 @@ public interface UserPreferenceUseCase {
      * 사용자의 카테고리별 선호도 조회
      */
     void updateCategoryPreference(Long userId, String categoryCode, Double increment);
+
+    int getUserMainCategoryCount(Long userId, String categoryCode);
 }

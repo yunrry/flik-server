@@ -10,6 +10,8 @@ import yunrry.flik.adapters.out.persistence.mysql.entity.UserSavedSpotEntity;
 import yunrry.flik.adapters.out.persistence.mysql.repository.UserSavedSpotJpaRepository;
 import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -47,5 +49,12 @@ public class UserSavedSpotAdapter implements UserSavedSpotRepository {
     @Override
     public int countBySpotId(Long spotId) {
         return userSavedSpotJpaRepository.countBySpotId(spotId);
+    }
+
+    @Override
+    public List<Long> findSpotIdsByUserId(Long userId) {
+        List<Long> spotIds = userSavedSpotJpaRepository.findSpotIdsByUserId(userId);
+        log.debug("Found {} saved spots for user: {}", spotIds.size(), userId);
+        return spotIds;
     }
 }

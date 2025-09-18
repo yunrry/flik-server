@@ -1,15 +1,20 @@
 package yunrry.flik.ports.out.repository;
 
 
+import yunrry.flik.adapters.out.persistence.mysql.entity.UserCategoryPreferenceEntity;
+import yunrry.flik.core.domain.model.UserCategoryPreference;
+
+import java.util.List;
+
 public interface UserCategoryPreferenceRepository {
 
-    /**
-     * 사용자의 카테고리 선호도 점수 증가
-     */
     void incrementPreferenceScore(Long userId, String detailCategory, Double increment);
 
-    /**
-     * 사용자의 카테고리 선호도 점수 조회
-     */
-    double getPreferenceScore(Long userId, String categoryCode);
+    double getPreferenceScore(Long userId, String detailCategory);
+
+    List<UserCategoryPreference> findByUserIdAndMainCategoryIn(Long userId, List<String> mainCategories);
+
+    Integer sumSaveCountByUserIdAndMainCategory(Long userId, String mainCategory);
+
+    UserCategoryPreference save(UserCategoryPreference userCategoryPreference);
 }

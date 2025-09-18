@@ -83,7 +83,7 @@ class CulturalFacilitiesMigrator:
             cursor = connection.cursor(dictionary=True)
             
             query = """
-            SELECT * FROM fetched_sports_recreation 
+            SELECT * FROM fetched_cultural_facilities
             WHERE label_depth1 IS NOT NULL 
             AND label_depth1 != '' 
             AND addr1 IS NOT NULL 
@@ -168,7 +168,8 @@ class CulturalFacilitiesMigrator:
                 'treat_menu': '',  # 문화시설에는 해당없음
                 'products': '',  # 문화시설에는 해당없음
                 'exp_guide': item.get('scale', ''),  # 규모 정보
-                'time': item.get('usetime', '')  # 이용시간
+                'time': item.get('usetime', ''),  # 이용시간
+                'google_reviews': item.get('google_reviews', '')  # 구글 리뷰
             }
             
             spots_data.append(spot_data)
@@ -194,9 +195,9 @@ class CulturalFacilitiesMigrator:
                 check_out_time, cooking, facilities, cuisine_type, fee, age_limit,
                 event_end_date, event_start_date, running_time, sponsor, first_menu,
                 kids_facility, price_range, reservation, take_away, treat_menu,
-                products, exp_guide, time
+                products, exp_guide, time, google_reviews
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             
@@ -254,12 +255,13 @@ class CulturalFacilitiesMigrator:
                         item.get('treat_menu', ''),          # treat_menu
                         item.get('products', ''),            # products
                         item.get('exp_guide', ''),           # exp_guide
-                        item.get('time', '')                 # time
+                        item.get('time', ''),                 # time
+                        item.get('google_reviews', '')         # google_reviews
                     )
                     
                     # 파라미터 개수 검증
-                    if len(row_data) != 49:
-                        logger.error(f"행 {i}: 파라미터 개수 불일치 - 예상: 49, 실제: {len(row_data)}")
+                    if len(row_data) != 50:
+                        logger.error(f"행 {i}: 파라미터 개수 불일치 - 예상: 50, 실제: {len(row_data)}")
                         continue
                     
                     insert_data.append(row_data)

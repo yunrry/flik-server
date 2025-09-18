@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import yunrry.flik.adapters.out.persistence.mysql.entity.BaseSpotEntity;
+import yunrry.flik.core.domain.model.card.Spot;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             @Param("address") String address,
             Pageable pageable
     );
+
+    List<BaseSpotEntity> findAllById(Iterable<Long> ids);
 
     @Query("SELECT s FROM BaseSpotEntity s WHERE s.labelDepth2 IN :subcategories AND s.regnCd = :regnCd AND s.signguCd = :signguCd")
     List<BaseSpotEntity> findByLabelDepth2InAndRegnCdAndSignguCd(
@@ -50,4 +53,27 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             @Param("regnCd") String regnCd,
             @Param("signguCd") String signguCd,
             Pageable pageable);
+
+
+    @Query("SELECT s FROM BaseSpotEntity s WHERE s.labelDepth2 IN :subcategories")
+    List<BaseSpotEntity> findByLabelDepth2In(@Param("subcategories") List<String> subcategories);
+
+
+    @Query("SELECT s FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories")
+    List<BaseSpotEntity> findByIdsAndLabelDepth2In(
+            @Param("spotIds") List<Long> spotIds,
+            @Param("labelDepth2Categories") List<String> labelDepth2Categories);
+
+
+    @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories")
+    List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories);
+
+    @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories AND s.regnCd = :regnCd AND s.signguCd = :signguCd")
+    List<Long> findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(List<Long> spotIds, List<String> labelDepth2Categories,
+                                            @Param("regnCd") String regnCd,
+                                            @Param("signguCd") String signguCd);
+
+    @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories AND s.regnCd = :regnCd")
+    List<Long> findIdsByIdsAndLabelDepth2InAndRegnCd(List<Long> spotIds, List<String> labelDepth2Categories,
+                                                                @Param("regnCd") String regnCd);
 }

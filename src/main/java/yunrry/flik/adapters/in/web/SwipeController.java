@@ -12,9 +12,8 @@ import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.spot.SpotSaveRequest;
 
 import yunrry.flik.adapters.in.dto.swipe.SwipeResponse;
-import yunrry.flik.core.domain.event.SpotSwipeEvent;
 import yunrry.flik.core.service.SwipeEventService;
-import yunrry.flik.core.service.UserSavedSpotService;
+import yunrry.flik.core.service.user.UserSavedSpotService;
 
 import jakarta.validation.Valid;
 

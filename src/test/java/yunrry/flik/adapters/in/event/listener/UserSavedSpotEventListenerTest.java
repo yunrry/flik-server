@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import yunrry.flik.core.domain.event.SpotSwipeEvent;
-import yunrry.flik.core.service.UserSavedSpotService;
+import yunrry.flik.core.service.user.UserSavedSpotService;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
