@@ -42,7 +42,7 @@ oauth2:
       scope: profile_nickname profile_image account_email
 
 openai:
-  api-key: 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
+  api-key: ${OPENAI_API_KEY:your-openai-api-key}
   base-url: https://api.openai.com/v1
   embedding:
     model: text-embedding-3-small
