@@ -73,4 +73,10 @@ public class SpotEmbeddingService {
     public List<SpotEmbedding> getEmbeddingsBySpotIds(List<Long> spotIds) {
         return spotEmbeddingRepository.findBySpotIds(spotIds);
     }
+
+    public Mono<SpotEmbedding> findBySpotId(Long spotId) {
+        return Mono.fromCallable(() -> spotEmbeddingRepository.findBySpotId(spotId))
+                .flatMap(optional -> optional.map(Mono::just).orElse(Mono.empty()))
+                .subscribeOn(Schedulers.boundedElastic());
+    }
 }

@@ -51,37 +51,61 @@ public class VectorEmbeddingEventListener {
     }
 
     private Mono<Void> processSpotEmbedding(Long spotId) {
-        return updateSpotService.findById(spotId)
-                .flatMap(spot -> {
-                    // 1. 태그가 없다면 AI로 추출
-                    if (needsTagExtraction(spot)) {
-                        return extractAndSaveTags(spot)
-                                .then(updateSpotService.findById(spotId));
+        return spotEmbeddingService.findBySpotId(spotId)
+                .hasElement() // SpotEmbedding 존재 여부만 확인
+                .flatMap(exists -> {
+                    if (exists) {
+                        log.info("SpotEmbedding already exists for spotId: {}", spotId);
+                        return Mono.empty(); // 이미 존재하면 아무 작업도 하지 않음
                     }
-                    return Mono.just(spot);
-                })
-                .flatMap(spot -> {
-                    // 2. 위치 임베딩 생성
-                    Mono<String> locationEmbedding = vectorProcessingService
-                            .createLocationEmbedding(spot.getLatitude(), spot.getLongitude());
 
-                    // 3. 태그 임베딩 생성
-                    Mono<String> tagEmbedding = vectorProcessingService
-                            .createTagEmbedding(spot.getTag1(), spot.getTag2(), spot.getTag3(),
-                                    spot.getTags(), spot.getLabelDepth1(), spot.getLabelDepth2(), spot.getLabelDepth3());
-
-                    // 4. PostgreSQL에 저장
-                    return Mono.zip(locationEmbedding, tagEmbedding)
-                            .flatMap(tuple -> {
-                                SpotEmbedding embedding = SpotEmbedding.builder()
-                                        .spotId(spotId)
-                                        .locationEmbedding(parseVector(tuple.getT1()))
-                                        .tagEmbedding(parseVector(tuple.getT2()))
-                                        .build();
-                                return spotEmbeddingService.saveOrUpdateEmbedding(embedding);
+                    // 존재하지 않을 경우 생성 로직 수행
+                    return updateSpotService.findById(spotId)
+                            .flatMap(spot -> {
+                                // 1. 태그가 없으면 AI로 태그 추출 후 최신 Spot 정보 다시 조회
+                                if (needsTagExtraction(spot)) {
+                                    log.info("Extracting tags for spotId: {}", spotId);
+                                    return extractAndSaveTags(spot)
+                                            .then(updateSpotService.findById(spotId));
+                                }
+                                log.info("Spot already has tags for spotId: {}", spotId);
+                                return Mono.just(spot);
                             })
-                            .then();
-                });
+                            .flatMap(spot -> {
+                                // 2. 위치 임베딩 생성
+                                Mono<String> locationEmbeddingMono =
+                                        vectorProcessingService.createLocationEmbedding(
+                                                spot.getLatitude(),
+                                                spot.getLongitude()
+                                        );
+
+                                // 3. 태그 임베딩 생성
+                                Mono<String> tagEmbeddingMono =
+                                        vectorProcessingService.createTagEmbedding(
+                                                spot.getTag1(),
+                                                spot.getTag2(),
+                                                spot.getTag3(),
+                                                spot.getTags(),
+                                                spot.getLabelDepth1(),
+                                                spot.getLabelDepth2(),
+                                                spot.getLabelDepth3()
+                                        );
+
+                                // 4. PostgreSQL에 임베딩 저장
+                                return Mono.zip(locationEmbeddingMono, tagEmbeddingMono)
+                                        .flatMap(tuple -> {
+                                            SpotEmbedding newEmbedding = SpotEmbedding.builder()
+                                                    .spotId(spotId)
+                                                    .locationEmbedding(parseVector(tuple.getT1()))
+                                                    .tagEmbedding(parseVector(tuple.getT2()))
+                                                    .build();
+
+                                            return spotEmbeddingService.saveOrUpdateEmbedding(newEmbedding)
+                                                    .doOnSuccess(v -> log.info("Created SpotEmbedding for spotId: {}", spotId));
+                                        });
+                            });
+                })
+                .then();
     }
 
     private boolean needsTagExtraction(Spot spot) {

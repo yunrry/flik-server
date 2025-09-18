@@ -15,6 +15,7 @@ import yunrry.flik.core.domain.model.plan.SlotType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.core.service.user.UserPreferenceService;
 import yunrry.flik.ports.in.query.CourseQuery;
+import yunrry.flik.ports.out.repository.UserRepository;
 import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
@@ -38,7 +39,7 @@ public class TravelCourseRecommendationService {
      * 사용자 맞춤 여행 코스 생성
      */
     public Mono<TravelCourse> generatePersonalizedTravelCourse(CourseQuery query) {
-
+        String regionCode = query.getSelectedRegion();
         Long userId = query.getUserId();
         List<String> selectedCategoriesList = query.getSelectedCategories();
         String[] selectedCategories = selectedCategoriesList.toArray(new String[selectedCategoriesList.size()]);
@@ -58,8 +59,8 @@ public class TravelCourseRecommendationService {
 
 
                     // 2. 각 슬롯에 실제 장소 할당
-                    return fillCourseWithRecommendedSpots(userId, courseStructure)
-                            .map(filledCourse -> TravelCourse.of(userId, days, filledCourse));
+                    return fillCourseWithRecommendedSpots(userId, courseStructure, regionCode)
+                            .map(filledCourse -> TravelCourse.of(userId, days, filledCourse, selectedCategoriesList, regionCode));
                 })
                 .doOnSuccess(course -> log.info("Generated personalized course for user: {} with {} days", userId, days));
     }
@@ -82,7 +83,7 @@ public class TravelCourseRecommendationService {
     }
 
     private Mono<CourseSlot[][]> fillCourseWithRecommendedSpots(Long userId,
-                                                                String[][] courseStructure) {
+                                                                String[][] courseStructure, String regionCode) {
         CourseSlot[][] filledCourse = new CourseSlot[courseStructure.length][courseStructure[0].length];
 
         return Mono.fromCallable(() -> {
@@ -93,7 +94,7 @@ public class TravelCourseRecommendationService {
                     if (slotType.isEmpty()) {
                         filledCourse[day][slot] = CourseSlot.empty(day, slot);
                     } else {
-                        CourseSlot courseSlot = createCourseSlot(userId, day, slot, slotType);
+                        CourseSlot courseSlot = createCourseSlot(userId, day, slot, slotType, regionCode);
                         filledCourse[day][slot] = courseSlot;
                     }
                 }
@@ -104,30 +105,30 @@ public class TravelCourseRecommendationService {
 
 
 
-    private CourseSlot createCourseSlot(Long userId, int day, int slot, String slotType) {
+    private CourseSlot createCourseSlot(Long userId, int day, int slot, String slotType, String regionCode) {
 
         Boolean isContinue = slotType.contains("_continue");
 
         if (slotType.equals("restaurant")) {
-            return createRestaurantSlot(userId, day, slot);
+            return createRestaurantSlot(userId, day, slot, regionCode);
         }
 
         if (slotType.equals("accommodation")) {
-            return createAccommodationSlot(userId, day, slot);
+            return createAccommodationSlot(userId, day, slot, regionCode);
         }
 
         // 관광 슬롯 처리
         MainCategory mainCategory = getMainCategoryFromSlotType(slotType);
         if (mainCategory != null) {
 
-            List<SpotSimilarity> recommendedSpots = findRecommendedSpotsBySubCategories(userId, 3, mainCategory);
+            List<SpotSimilarity> recommendedSpots = findRecommendedSpotsBySubCategories(userId, 3, mainCategory, regionCode);
 
             log.info("Recommended spots for user {} in category {}: {} - {}", userId, mainCategory.getCode(),
                     recommendedSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), recommendedSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
 
 
             return CourseSlot.builder()
-                    .day(day)
+                    .day(day+1)
                     .slot(slot)
                     .slotType(SlotType.fromMainCategory(mainCategory))
                     .mainCategory(mainCategory)
@@ -143,18 +144,18 @@ public class TravelCourseRecommendationService {
 
 
 
-    private CourseSlot createRestaurantSlot(Long userId, int day, int slot) {
+    private CourseSlot createRestaurantSlot(Long userId, int day, int slot, String reginCode) {
 
 
         List<SpotSimilarity> restaurantSpots = findRecommendedSpotsBySubCategories(
-                userId, 3, MainCategory.RESTAURANT);
+                userId, 10, MainCategory.RESTAURANT, reginCode);
 
         log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.RESTAURANT.getCode(),
                 restaurantSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), restaurantSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
 
 
         return CourseSlot.builder()
-                .day(day)
+                .day(day+1)
                 .slot(slot)
                 .slotType(SlotType.RESTAURANT)
                 .mainCategory(MainCategory.RESTAURANT)
@@ -164,17 +165,17 @@ public class TravelCourseRecommendationService {
                 .build();
     }
 
-    private CourseSlot createAccommodationSlot(Long userId, int day, int slot) {
+    private CourseSlot createAccommodationSlot(Long userId, int day, int slot, String reginCode) {
 
 
         List<SpotSimilarity> accommodationSpots = findRecommendedSpotsBySubCategories(
-                userId, 3, MainCategory.ACCOMMODATION);
+                userId, 5, MainCategory.ACCOMMODATION, reginCode);
 
         log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.ACCOMMODATION.getCode(),
                 accommodationSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), accommodationSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
 
         return CourseSlot.builder()
-                .day(day)
+                .day(day+1)
                 .slot(slot)
                 .slotType(SlotType.ACCOMMODATION)
                 .mainCategory(MainCategory.ACCOMMODATION)
@@ -196,14 +197,15 @@ public class TravelCourseRecommendationService {
     // 5. Updated findRecommendedSpotsBySubCategories
     private List<SpotSimilarity> findRecommendedSpotsBySubCategories(Long userId,
                                                                      int limit,
-                                                                     MainCategory mainCategory) {
+                                                                     MainCategory mainCategory,
+                                                                     String regionCode) {
 
         List<String> subCategories = categoryMapper.getSubCategoryNames(mainCategory);
 
         // 1. 사용자가 저장한 장소들 조회
         List<Long> userSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
 //        List<Spot> candidateSpots;
-        List<Spot> candidateSpots = spotRepository.findByIdsAndLabelDepth2In(userSavedSpotIds, subCategories);
+        List<Long> candidateSpotIds = spotRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(userSavedSpotIds, subCategories, regionCode);
 
 //        if (userSavedSpotIds.isEmpty()) {
 //            // 저장한 장소가 없으면 전체에서 선택
@@ -223,14 +225,11 @@ public class TravelCourseRecommendationService {
 //            }
 //        }
 
-        if (candidateSpots.isEmpty()) {
+        if (candidateSpotIds.isEmpty()) {
             log.warn("No candidate spots found for user: {} in category: {}", userId, mainCategory);
             return List.of();
         }
 
-        List<Long> candidateSpotIds = candidateSpots.stream()
-                .map(Spot::getId)
-                .collect(Collectors.toList());
 
         log.info("Candidate spot IDs for {}: {}", mainCategory, candidateSpotIds);
         // 2. 벡터 유사도 기반 추천

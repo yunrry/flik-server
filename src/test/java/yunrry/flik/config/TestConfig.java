@@ -13,7 +13,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @TestConfiguration
 @EnableCaching
@@ -22,14 +28,69 @@ public class TestConfig {
 
     // Database 설정
     @Primary
-    @Bean
+    @Bean(name = "mysqlDataSource")
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
     }
 
-    // Cache 설정
+
+    @Bean(name = "postgresDataSource")
+    public DataSource dataSourcePostgres() {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .build();
+    }
+
+    @Primary
+    @Bean(name = "mysqlEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setDataSource(dataSource());
+        factory.setPackagesToScan("yunrry.flik.adapters.out.persistence.mysql.entity");
+        factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
+        Properties props = new Properties();
+        props.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect"); // Changed to H2
+        props.setProperty("hibernate.hbm2ddl.auto", "create-drop"); // Better for tests
+        factory.setJpaProperties(props);
+
+        return factory;
+    }
+
+    @Bean(name = "postgresEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean postgresEntityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setDataSource(dataSourcePostgres());
+        factory.setPackagesToScan("yunrry.flik.adapters.out.persistence.postgres.entity");
+        factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
+        Properties props = new Properties();
+        props.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect"); // Changed to H2
+        props.setProperty("hibernate.hbm2ddl.auto", "create-drop"); // Better for tests
+        factory.setJpaProperties(props);
+
+        return factory;
+    }
+
+    // ADD THESE TRANSACTION MANAGERS
+    @Primary
+    @Bean(name = "mysqlTransactionManager")
+    public PlatformTransactionManager mysqlTransactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(mysqlEntityManagerFactory().getObject());
+        return transactionManager;
+    }
+
+    @Bean(name = "postgresTransactionManager")
+    public PlatformTransactionManager postgresTransactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(postgresEntityManagerFactory().getObject());
+        return transactionManager;
+    }
+
+    // Cache 설정 (unchanged)
     @Bean
     @Primary
     public CacheManager cacheManager() {

@@ -15,6 +15,7 @@ import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.SearchSpotsQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +33,19 @@ public class SpotAdapter implements SpotRepository {
         return spotJpaRepository.findById(id)
                 .map(entity -> ((BaseSpotEntity) entity).toDomain())
                 .orElseThrow(() -> new IllegalArgumentException("Spot not found: " + id));
+    }
+
+    @Override
+    public List<Spot> findAllByIds(Collection<Long> ids) {
+        // Iterable<Long>로 JPA에 전달
+        Iterable<Long> iterableIds = ids;
+
+        List<BaseSpotEntity> entities = spotJpaRepository.findAllById(iterableIds);
+
+        // 엔티티 -> 도메인 변환
+        return entities.stream()
+                .map(BaseSpotEntity::toDomain)  // 또는 ((BaseSpotEntity) e).toDomain()
+                .toList();
     }
 
     @Override
@@ -144,6 +158,21 @@ public class SpotAdapter implements SpotRepository {
     public List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories) {
         return spotJpaRepository.findIdsByIdsAndLabelDepth2In(spotIds, labelDepth2Categories);
     };
+
+    @Override
+    public List<Long> findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(List<Long> spotIds, List<String> labelDepth2Categories, String regionCode){
+        String regnCd = regionCode.substring(0, 2);
+        String signguCd = regionCode.substring(2, 5);
+        log.info("regnCd: " + regnCd + ", signguCd: " + signguCd);
+        return spotJpaRepository.findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(spotIds, labelDepth2Categories, regnCd, signguCd);
+    }
+
+    @Override
+    public List<Long> findIdsByIdsAndLabelDepth2InAndRegnCd(List<Long> spotIds, List<String> labelDepth2Categories, String regionCode){
+        String regnCd = regionCode.substring(0, 2);
+        log.info("regnCd: " + regnCd );
+        return spotJpaRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(spotIds, labelDepth2Categories, regnCd);
+    }
 
 
     private Pageable createPageable(SearchSpotsQuery query) {

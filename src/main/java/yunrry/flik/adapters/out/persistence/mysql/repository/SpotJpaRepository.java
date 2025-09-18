@@ -25,6 +25,8 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             Pageable pageable
     );
 
+    List<BaseSpotEntity> findAllById(Iterable<Long> ids);
+
     @Query("SELECT s FROM BaseSpotEntity s WHERE s.labelDepth2 IN :subcategories AND s.regnCd = :regnCd AND s.signguCd = :signguCd")
     List<BaseSpotEntity> findByLabelDepth2InAndRegnCdAndSignguCd(
             @Param("subcategories") List<String> subcategories,
@@ -65,4 +67,13 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
 
     @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories")
     List<Long> findIdsByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories);
+
+    @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories AND s.regnCd = :regnCd AND s.signguCd = :signguCd")
+    List<Long> findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(List<Long> spotIds, List<String> labelDepth2Categories,
+                                            @Param("regnCd") String regnCd,
+                                            @Param("signguCd") String signguCd);
+
+    @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories AND s.regnCd = :regnCd")
+    List<Long> findIdsByIdsAndLabelDepth2InAndRegnCd(List<Long> spotIds, List<String> labelDepth2Categories,
+                                                                @Param("regnCd") String regnCd);
 }

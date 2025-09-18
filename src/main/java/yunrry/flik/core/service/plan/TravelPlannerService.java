@@ -19,6 +19,11 @@ public class TravelPlannerService {
      */
     public String[][] generateTravelCourse(String[] userSelect, int day, Map<String, Integer> saveCount) {
 
+        List<String> filteredCategories = Arrays.stream(userSelect)
+                .filter(cat -> !cat.equalsIgnoreCase("restaurant") && !cat.equalsIgnoreCase("accommodation"))
+                .collect(Collectors.toList());
+
+
         // 1. 초기화
         Map<String, Integer> selected = new HashMap<>();
         String[][] course = new String[day][MAX_PLACES_PER_DAY];
@@ -74,11 +79,6 @@ public class TravelPlannerService {
             daySchedule[5] = "accommodation";
         } else if (daySchedule[3].isEmpty()) {
             daySchedule[3] = "accommodation";
-        } else if (daySchedule[1].isEmpty()) {
-            daySchedule[1] = "accommodation";
-        } else {
-            // 모든 슬롯이 찬 경우 5번 슬롯을 숙박으로 강제 교체
-            daySchedule[5] = "accommodation";
         }
     }
 

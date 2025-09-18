@@ -9,21 +9,20 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
-import yunrry.flik.config.DatabaseConfig;
-import yunrry.flik.config.SecurityConfig;
-
-import yunrry.flik.config.TestConfig;
+import yunrry.flik.config.*;
 
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 @Transactional
-@Import({SecurityConfig.class, TestConfig.class, DatabaseConfig.class})
+@Import({SecurityConfig.class, TestConfig.class, OpenAIConfig.class})
 @TestPropertySource(properties = {
         "management.endpoints.enabled=false",
         "FRONTEND_URL=http://localhost:5713",
-        "app.frontend.url=http://localhost:5713"
+        "app.frontend.url=http://localhost:5713",
+        "openai.api-key=test-api-key",
+        "openai.base-url=http://localhost:8081/v1",
 })
 public abstract class IntegrationTestBase {
 }

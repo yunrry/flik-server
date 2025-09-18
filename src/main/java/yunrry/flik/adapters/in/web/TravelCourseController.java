@@ -5,12 +5,17 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import yunrry.flik.adapters.in.dto.Response;
+import yunrry.flik.adapters.in.dto.TravelCourseResponse;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.core.service.plan.CreateTravelCourseService;
 import yunrry.flik.ports.in.query.CourseQuery;
@@ -21,32 +26,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/travel-courses")
 @RequiredArgsConstructor
+@Slf4j
 public class TravelCourseController {
 
     private final CreateTravelCourseService createTravelCourseService;
 
     @Operation(summary = "개인 맞춤 여행 코스 생성", description = "사용자 ID, 선택 카테고리, 여행 기간 등을 기반으로 개인화된 여행 코스를 생성합니다.")
     @PostMapping("/generate")
-    public Mono<ResponseEntity<Response<TravelCourse>>> generateTravelCourse(
-            @Parameter(description = "카테고리 목록", example = "restaurant,nature,accommodation, indoor, history_culture, cafe, activity, festival, market, themepark")
-            @RequestParam List<String> categories,
+    public Mono<ResponseEntity<Response<TravelCourseResponse>>> generateTravelCourse(
+            @Parameter(description = "카테고리 목록", example = "restaurant,nature,accommodation,indoor,history_culture,cafe,activity,festival,market,themepark")
+            @RequestParam @NotEmpty(message = "카테고리는 최소 1개 이상 선택해야 합니다") List<String> categories,
 
             @Parameter(description = "지역 코드", example = "11100")
-            @RequestParam String regionCode,
+            @RequestParam @NotBlank(message = "지역 코드는 필수입니다") String regionCode,
 
             @Parameter(description = "여행기간", example = "3")
-            @RequestParam @Max(3) @Min(1) int tripDuration,
+            @RequestParam @Max(value = 3, message = "여행 기간은 최대 3일입니다")
+            @Min(value = 1, message = "여행 기간은 최소 1일입니다") int tripDuration,
 
             @AuthenticationPrincipal Long userId
-            ) {
+    ) {
+        if (userId == null) {
+            return Mono.just(ResponseEntity.badRequest()
+                    .body(Response.error("USER_NOT_AUTHENTICATED")));
+        }
 
         CourseQuery query = CourseQuery.of(userId, categories, regionCode, tripDuration);
 
         return createTravelCourseService.create(query)
-                .map(travelCourse -> ResponseEntity.ok(Response.success(travelCourse)))
-                .doOnError(err -> {
-                    // 필요시 로깅
-                    System.err.println("Error generating travel course: " + err.getMessage());
+                .map(travelCourse -> TravelCourseResponse.from(travelCourse)) // Convert to DTO
+                .map(response -> ResponseEntity.ok(Response.success(response)))
+                .onErrorResume(ex -> {
+                    log.error("Error generating travel course for user: {}", userId, ex);
+                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body(Response.error("COURSE_GENERATION_FAILED")));
                 });
     }
 }
