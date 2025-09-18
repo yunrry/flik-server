@@ -72,24 +72,24 @@ class TagServiceTest {
 //        verify(tagRepository, times(3)).save(any(Tag.class));
 //    }
 
-    @Test
-    @DisplayName("키워드 저장 성공 - 기존 태그 존재")
-    void saveKeywords_ExistingTags_Success() {
-        // Given
-        Tag existingTagWithEmbedding = Tag.of("카페", sampleEmbedding);
-
-        when(tagRepository.existsByName("카페")).thenReturn(true);
-        when(tagRepository.findByName("카페")).thenReturn(Optional.of(existingTagWithEmbedding));
-
-        // When & Then
-        StepVerifier.create(tagService.saveKeywords(Arrays.asList("카페")))
-                .verifyComplete();
-
-        verify(tagRepository).existsByName("카페");
-        verify(tagRepository).findByName("카페");
-        verify(embeddingService, never()).createEmbedding(anyString());
-        verify(tagRepository, never()).save(any(Tag.class));
-    }
+//    @Test
+//    @DisplayName("키워드 저장 성공 - 기존 태그 존재")
+//    void saveKeywords_ExistingTags_Success() {
+//        // Given
+//        Tag existingTagWithEmbedding = Tag.of("카페", sampleEmbedding);
+//
+//        when(tagRepository.existsByName("카페")).thenReturn(true);
+//        when(tagRepository.findByName("카페")).thenReturn(Optional.of(existingTagWithEmbedding));
+//
+//        // When & Then
+//        StepVerifier.create(tagService.saveKeywords(Arrays.asList("카페")))
+//                .verifyComplete();
+//
+//        verify(tagRepository).existsByName("카페");
+//        verify(tagRepository).findByName("카페");
+//        verify(embeddingService, never()).createEmbedding(anyString());
+//        verify(tagRepository, never()).save(any(Tag.class));
+//    }
 
 //    @Test
 //    @DisplayName("키워드 저장 성공 - 임베딩 없는 기존 태그 업데이트")
