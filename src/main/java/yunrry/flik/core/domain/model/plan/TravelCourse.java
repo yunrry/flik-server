@@ -24,6 +24,7 @@ public class TravelCourse {
     private CourseType courseType;
     private String regionCode; // Optional, for regional courses
     private List<String> selectedCategories; // Optional, for regional courses
+    private Boolean isPublic; // Optional, for future use
 
     public static TravelCourse of(Long userId, int days, CourseSlot[][] courseSlots, List<String> selectedCategories, String regionCode) {
         return TravelCourse.builder()
@@ -33,6 +34,7 @@ public class TravelCourse {
                 .selectedCategories(selectedCategories)
                 .regionCode(regionCode)
                 .courseType(CourseType.PERSONALIZED)
+                .isPublic(false)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

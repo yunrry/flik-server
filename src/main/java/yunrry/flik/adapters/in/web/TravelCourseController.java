@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.TravelCourseResponse;
+import yunrry.flik.adapters.in.dto.TravelCourseUpdateRequest;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.core.service.plan.CreateTravelCourseService;
 import yunrry.flik.ports.in.query.CourseQuery;
+import yunrry.flik.ports.in.usecase.TravelCourseUseCase;
 
 import java.util.List;
 
@@ -30,7 +32,11 @@ import java.util.List;
 public class TravelCourseController {
 
     private final CreateTravelCourseService createTravelCourseService;
+    private final TravelCourseUseCase travelCourseService;
 
+    /**
+     * 개인 맞춤 여행 코스 생성
+     */
     @Operation(summary = "개인 맞춤 여행 코스 생성", description = "사용자 ID, 선택 카테고리, 여행 기간 등을 기반으로 개인화된 여행 코스를 생성합니다.")
     @PostMapping("/generate")
     public Mono<ResponseEntity<Response<TravelCourseResponse>>> generateTravelCourse(
@@ -54,12 +60,69 @@ public class TravelCourseController {
         CourseQuery query = CourseQuery.of(userId, categories, regionCode, tripDuration);
 
         return createTravelCourseService.create(query)
-                .map(travelCourse -> TravelCourseResponse.from(travelCourse)) // Convert to DTO
+                .map(TravelCourseResponse::from)
                 .map(response -> ResponseEntity.ok(Response.success(response)))
                 .onErrorResume(ex -> {
                     log.error("Error generating travel course for user: {}", userId, ex);
                     return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                             .body(Response.error("COURSE_GENERATION_FAILED")));
                 });
+    }
+
+    /**
+     * 여행 코스 업데이트
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Response<TravelCourseResponse>> updateTravelCourse(
+            @PathVariable Long id,
+            @RequestBody TravelCourseUpdateRequest request
+    ) {
+        TravelCourse updatedCourse = travelCourseService.updateTravelCourse(id, request);
+        return ResponseEntity.ok(Response.success(TravelCourseResponse.from(updatedCourse)));
+    }
+
+    /**
+     * 사용자가 저장한 모든 여행 코스 조회
+     */
+    @GetMapping
+    public ResponseEntity<Response<List<TravelCourseResponse>>> getTravelCourses(
+            @AuthenticationPrincipal Long userId
+    ) {
+        List<TravelCourse> courses = travelCourseService.getTravelCoursesByUserId(userId);
+        List<TravelCourseResponse> response = courses.stream()
+                .map(TravelCourseResponse::from)
+                .toList();
+
+        return ResponseEntity.ok(Response.success(response));
+    }
+
+    /**
+     * 특정 여행 코스 단일 조회
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<TravelCourseResponse>> getTravelCourseById(
+            @PathVariable Long id
+    ) {
+        TravelCourse course = travelCourseService.getTravelCourse(id);
+        return ResponseEntity.ok(Response.success(TravelCourseResponse.from(course)));
+    }
+
+    /**
+     * 여행 코스 삭제
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Void>> deleteTravelCourse(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Long userId
+    ) {
+        TravelCourse course = travelCourseService.getTravelCourse(id);
+
+        if (!course.getUserId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Response.error("FORBIDDEN"));
+        }
+
+        travelCourseService.deleteTravelCourse(id);
+        return ResponseEntity.ok(Response.success(null));
     }
 }

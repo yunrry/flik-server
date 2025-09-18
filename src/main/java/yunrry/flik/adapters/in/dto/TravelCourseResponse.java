@@ -19,13 +19,15 @@ public class TravelCourseResponse {
     private Long id;
     private Long userId;
     private int days;
+    private String regionCode;
     private Double totalDistance;
     private CourseSlotResponse[][] courseSlots;
     private LocalDateTime createdAt;
     private String courseType;
     private int totalSlots;
     private int filledSlots;
-    private List<Long> allRecommendedSpotIds;
+    private List<String> selectedCategories;
+    private Boolean isPublic;
 
     public static TravelCourseResponse from(TravelCourse travelCourse) {
         CourseSlotResponse[][] courseSlotResponses = new CourseSlotResponse[travelCourse.getDays()][];
@@ -43,13 +45,15 @@ public class TravelCourseResponse {
                 .id(travelCourse.getId())
                 .userId(travelCourse.getUserId())
                 .days(travelCourse.getDays())
+                .regionCode(travelCourse.getRegionCode())
                 .totalDistance(travelCourse.getTotalDistance())
                 .courseSlots(courseSlotResponses)
                 .createdAt(travelCourse.getCreatedAt())
                 .courseType(travelCourse.getCourseType() != null ? travelCourse.getCourseType().name() : null)
                 .totalSlots(travelCourse.getTotalSlots())
                 .filledSlots(travelCourse.getFilledSlots())
-                .allRecommendedSpotIds(travelCourse.getAllRecommendedSpotIds())
+                .selectedCategories(travelCourse.getSelectedCategories())
+                .isPublic(travelCourse.getIsPublic())
                 .build();
     }
 

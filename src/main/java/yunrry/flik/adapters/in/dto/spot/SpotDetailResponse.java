@@ -33,13 +33,14 @@ public record SpotDetailResponse(
 
 ) {
     public static SpotDetailResponse from(Spot spot) {
-        String operatingHours = formatOperatingHours(spot.getOpenTime(), spot.getCloseTime());
-        Boolean isOpen;
-        try {
-            isOpen = spot.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
-        } catch (Exception e) {
-            isOpen = null;
-        }
+//        String operatingHours = formatOperatingHours(spot.getOpenTime(), spot.getCloseTime());
+        String operatingHours = spot.getTime();
+        Boolean isOpen = null;
+//        try {
+//            isOpen = spot.isOpenAt(LocalTime.now(), getCurrentDayOfWeek());
+//        } catch (Exception e) {
+//            isOpen = null;
+//        }
 
 
         // 타입별 특수 정보 추출

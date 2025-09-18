@@ -49,6 +49,9 @@ public class TravelCourseEntity {
     @Column(name = "selected_categories")
     private String selectedCategories; // JSON array of categories
 
+    @Column(name = "is_public", nullable = false)
+    private Boolean isPublic;
+
     @PrePersist
     protected void onCreate() {
         if (createdAt == null) {
@@ -58,6 +61,7 @@ public class TravelCourseEntity {
 
     public static TravelCourseEntity from(TravelCourse travelCourse, String courseSlotsJson) {
         return TravelCourseEntity.builder()
+                .id(travelCourse.getId())
                 .userId(travelCourse.getUserId())
                 .days(travelCourse.getDays())
                 .totalDistance(travelCourse.getTotalDistance())
@@ -66,6 +70,7 @@ public class TravelCourseEntity {
                 .courseType(travelCourse.getCourseType())
                 .regionCode(travelCourse.getRegionCode())
                 .selectedCategories(travelCourse.getSelectedCategories().toString())
+                .isPublic(travelCourse.getIsPublic())
                 .build();
     }
 
@@ -80,6 +85,7 @@ public class TravelCourseEntity {
                 .courseType(this.courseType)
                 .regionCode(this.regionCode)
                 .selectedCategories(List.of(this.selectedCategories))
+                .isPublic(this.isPublic)
                 .build();
     }
 }

@@ -1,36 +1,75 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://mysql:3306/flik_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      maximum-pool-size: 20
-      minimum-idle: 5
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/flik_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      username: yoon
+      password: yoon123!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        pool-name: FlikMySQLPool
+        maximum-pool-size: 15         # 로컬 환경에 맞게 조정
+        minimum-idle: 5
+        connection-timeout: 30000     # 30초
+        idle-timeout: 300000          # 5분 (로컬에서는 짧게)
+        max-lifetime: 900000          # 15분 (로컬에서는 짧게)
+        validation-timeout: 5000
+        connection-test-query: SELECT 1
+        leak-detection-threshold: 60000  # 1분 (개발환경에서 커넥션 누수 감지)
 
-  vector-datasource:
-    url: jdbc:postgresql://localhost:5432/flik_vector_db
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    postgres:
+      jdbc-url: jdbc:postgresql://localhost:5432/flik_vector_db
+      username: yoon
+      password: yoon123!
+      driver-class-name: org.postgresql.Driver
+      hikari:
+        pool-name: FlikPostgresPool
+        maximum-pool-size: 10         # Vector DB는 더 적게
+        minimum-idle: 3
+        connection-timeout: 30000
+        idle-timeout: 300000
+        max-lifetime: 900000
+        validation-timeout: 5000
+        connection-test-query: SELECT 1
+        leak-detection-threshold: 60000
 
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: false
+      ddl-auto: validate
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-        format_sql: false
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        # 배치 처리 최적화
+        jdbc:
+          batch_size: 20
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        # 연결 풀 최적화
+        connection:
+          provider_disables_autocommit: true
 
   data:
     redis:
-      host: ${SPRING_DATA_REDIS_HOST:redis}
-      port: ${SPRING_DATA_REDIS_PORT:6379}
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+      jedis:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+
 
 openai:
-  api-key: ${OPENAI_API_KEY}
   base-url: https://api.openai.com/v1
+  api-key: ${OPENAI_API_KEY}
+  chat:
+    options:
+      model: gpt-4o-mini
+      temperature: 0.7
   embedding:
     model: text-embedding-3-small
 
