@@ -1,6 +1,7 @@
 package yunrry.flik.adapters.out.persistence.mysql;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class SpotAdapter implements SpotRepository {
@@ -132,6 +134,7 @@ public class SpotAdapter implements SpotRepository {
 
     @Override
     public List<Spot> findByIdsAndLabelDepth2In(List<Long> spotIds, List<String> labelDepth2Categories) {
+        log.info("Finding spots with IDs: {} and categories: {}", spotIds, labelDepth2Categories);
         return spotJpaRepository.findByIdsAndLabelDepth2In(spotIds, labelDepth2Categories).stream()
                 .map(BaseSpotEntity::toDomain)
                 .collect(Collectors.toList());

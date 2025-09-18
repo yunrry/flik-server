@@ -96,6 +96,7 @@ public class UserCategoryVectorService {
 
         try {
             userCategoryVectorRepository.recalculateCategoryVector(userId, category, allSpotIds);
+            log.debug("Recalculated category vector for user: {}, category: {}, spots: {}", userId, category, allSpotIds.size());
         } catch (Exception e) {
             log.error("Failed to recalculate category vector: {}", e.getMessage());
         }

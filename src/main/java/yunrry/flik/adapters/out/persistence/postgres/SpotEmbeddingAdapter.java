@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@Transactional("postgresTransactionManager")
 public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
 
     private final SpotEmbeddingJpaRepository spotEmbeddingJpaRepository;
@@ -31,7 +30,6 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
     }
 
     @Override
-    @Transactional
     public SpotEmbedding save(SpotEmbedding spotEmbedding) {
         SpotEmbeddingEntity entity;
 
@@ -122,7 +120,6 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
     }
 
     @Override
-    @Transactional
     public void deleteBySpotId(Long spotId) {
         spotEmbeddingJpaRepository.deleteBySpotId(spotId);
         log.debug("Deleted spot embedding for spot: {}", spotId);

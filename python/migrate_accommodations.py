@@ -83,7 +83,7 @@ class AccommodationsMigrator:
             cursor = connection.cursor(dictionary=True)
             
             query = """
-            SELECT * FROM fetched_sports_recreation 
+            SELECT * FROM fetched_accommodations
             WHERE label_depth1 IS NOT NULL 
             AND label_depth1 != '' 
             AND addr1 IS NOT NULL 

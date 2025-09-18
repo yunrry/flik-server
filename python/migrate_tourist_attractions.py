@@ -206,7 +206,9 @@ class TouristAttractionsMigrator:
                 'label_depth2': item.get('label_depth2', ''),
                 'label_depth3': item.get('label_depth3', ''),
                 'time': item.get('usetime', ''),  # 새로 추가한 time 컬럼에 usetime 값 매핑
-                'exp_guide': item.get('expguide', '')
+                'exp_guide': item.get('expguide', ''),
+                'google_reviews': item.get('google_reviews', '')
+
             }
 
             spots_data.append(spot_data)
@@ -225,9 +227,9 @@ class TouristAttractionsMigrator:
                 spot_type, address, baby_carriage, category, close_time, content_type_id, content_id,
                 day_off, description, google_place_id, image_urls, info, latitude,
                 longitude, name, open_time, parking, pet_carriage, rating, regn_cd,
-                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, exp_guide
+                review_count, signgu_cd, tag1, tag2, tag3, tags, label_depth1, label_depth2, label_depth3, time, exp_guide, google_reviews
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """
             # 배치 삽입을 위한 데이터 준비
@@ -264,7 +266,8 @@ class TouristAttractionsMigrator:
                     item.get('label_depth2', ''),
                     item.get('label_depth3', ''),
                     item.get('time', ''),  # usetime 값
-                    item.get('exp_guide', '')
+                    item.get('exp_guide', ''),
+                    item.get('google_reviews', '')
                 ))
             # 배치 삽입 실행
             cursor.executemany(insert_query, insert_data)

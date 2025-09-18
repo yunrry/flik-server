@@ -72,9 +72,9 @@ public class AccommodationEntity extends BaseSpotEntity {
                 this.getTag2(),
                 this.getTag3(),
                 this.getTags(),
-                this.toDomain().getLabelDepth1(),
-                this.toDomain().getLabelDepth2(),
-                this.toDomain().getLabelDepth3(),
+                this.getLabelDepth1(),  // 변경: 자기 자신 호출 제거
+                this.getLabelDepth2(),  // 변경
+                this.getLabelDepth3(),
                 this.getParking(),
                 this.getPetCarriage(),
                 this.getBabyCarriage(),

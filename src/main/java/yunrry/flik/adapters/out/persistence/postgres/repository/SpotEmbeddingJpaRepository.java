@@ -21,7 +21,8 @@ public interface SpotEmbeddingJpaRepository extends JpaRepository<SpotEmbeddingE
 
     // 단순 벡터 유사도 검색용 네이티브 쿼리
     @Query(value = """
-        SELECT 
+
+            SELECT 
             se.spot_id,
             (1 - (ucv.preference_vector <=> se.tag_embedding)) as similarity
         FROM spot_embeddings se
@@ -53,4 +54,39 @@ public interface SpotEmbeddingJpaRepository extends JpaRepository<SpotEmbeddingE
     long countSpotsWithLocationEmbedding();
 
     boolean existsBySpotId(Long spotId);
-}
+
+
+    // 특정 spot에 가장 가까운 spot 찾기
+    //[0] → 첫 번째 슬롯 spot_id
+    //[1] → 두 번째 슬롯 spot_id
+    //[2] → 거리 값(Double)
+    @Query(value = """
+SELECT se.spot_id, se.location_embedding <-> base.location_embedding AS distance
+FROM spot_embeddings se, spot_embeddings base
+WHERE base.spot_id = :baseSpotId
+  AND se.spot_id = ANY(string_to_array(:candidateSpotIds, ',')::bigint[])
+  AND se.location_embedding IS NOT NULL
+  AND base.location_embedding IS NOT NULL
+ORDER BY distance ASC
+LIMIT 1
+""", nativeQuery = true)
+    Object[] findClosestSpot(@Param("baseSpotId") Long baseSpotId,
+                             @Param("candidateSpotIds") String candidateSpotIds);
+
+    @Query(value = """
+SELECT se1.spot_id AS first_spot_id,
+       se2.spot_id AS second_spot_id,
+       se1.location_embedding <-> se2.location_embedding AS distance
+FROM spot_embeddings se1, spot_embeddings se2
+WHERE se1.spot_id = ANY(string_to_array(:firstSpotIds, ',')::bigint[])
+  AND se2.spot_id = ANY(string_to_array(:secondSpotIds, ',')::bigint[])
+  AND se1.location_embedding IS NOT NULL
+  AND se2.location_embedding IS NOT NULL
+ORDER BY distance ASC
+LIMIT 1
+""", nativeQuery = true)
+    Object[] findClosestPair(@Param("firstSpotIds") String firstSpotIds,
+                             @Param("secondSpotIds") String secondSpotIds);
+
+    }
+

@@ -1,11 +1,13 @@
 package yunrry.flik.ports.out.repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import yunrry.flik.core.domain.model.embedding.EmbeddingStats;
 import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.core.domain.model.embedding.SpotEmbedding;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional(transactionManager = "postgresTransactionManager")
 public interface SpotEmbeddingRepository {
 
     Optional<SpotEmbedding> findBySpotId(Long spotId);

@@ -1,5 +1,6 @@
 package yunrry.flik.core.service.plan;
 
+import com.sun.tools.javac.Main;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,8 @@ import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.core.domain.model.plan.CourseSlot;
 import yunrry.flik.core.domain.model.plan.SlotType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
-import yunrry.flik.core.service.user.UserCategoryVectorService;
 import yunrry.flik.core.service.user.UserPreferenceService;
-import yunrry.flik.ports.out.repository.UserCategoryPreferenceRepository;
+import yunrry.flik.ports.in.query.CourseQuery;
 import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 import yunrry.flik.ports.out.repository.SpotRepository;
 
@@ -28,23 +28,22 @@ import java.util.stream.Collectors;
 public class TravelCourseRecommendationService {
 
     private final TravelPlannerService travelPlannerService;
-//    private final TravelPlanRecommendationService travelPlanRecommendationService;
     private final VectorSimilarityRecommendationService vectorSimilarityRecommendationService;
     private final UserSavedSpotRepository userSavedSpotRepository;
-    private final UserCategoryPreferenceRepository userCategoryPreferenceRepository;
     private final UserPreferenceService userPreferenceService;
-    private final UserCategoryVectorService userCategoryVectorService;
     private final SpotRepository spotRepository;
     private final CategoryMapper categoryMapper;
 
     /**
      * 사용자 맞춤 여행 코스 생성
      */
-    public Mono<TravelCourse> generatePersonalizedTravelCourse(Long userId,
-                                                               String[] selectedCategories,
-                                                               int days,
-                                                               double locationWeight,
-                                                               double tagWeight) {
+    public Mono<TravelCourse> generatePersonalizedTravelCourse(CourseQuery query) {
+
+        Long userId = query.getUserId();
+        List<String> selectedCategoriesList = query.getSelectedCategories();
+        String[] selectedCategories = selectedCategoriesList.toArray(new String[selectedCategoriesList.size()]);
+        int days = query.getDays();
+
         return getUserSelectFrequency(userId, selectedCategories)
                 .flatMap(frequencyMap -> {
                     // 1. 기본 코스 구조 생성
@@ -53,9 +52,13 @@ public class TravelCourseRecommendationService {
                             days,
                             frequencyMap
                     );
+                    for(String[] day : courseStructure){
+                        log.info(Arrays.toString(day));
+                    }
+
 
                     // 2. 각 슬롯에 실제 장소 할당
-                    return fillCourseWithRecommendedSpots(userId, courseStructure, locationWeight, tagWeight)
+                    return fillCourseWithRecommendedSpots(userId, courseStructure)
                             .map(filledCourse -> TravelCourse.of(userId, days, filledCourse));
                 })
                 .doOnSuccess(course -> log.info("Generated personalized course for user: {} with {} days", userId, days));
@@ -69,7 +72,8 @@ public class TravelCourseRecommendationService {
 
             // 선택된 카테고리들에 대해 빈도 설정 (없으면 기본값 1)
             for (String category : selectedCategories) {
-                int count = userPreferenceService.getUserMainCategoryCount(userId, category);
+                String mainCategory = MainCategory.findByCode(category).getDisplayName();
+                int count = userPreferenceService.getUserMainCategoryCount(userId, mainCategory);
                 frequencyMap.put(category, count > 0 ? count : 1);
             }
 
@@ -78,9 +82,7 @@ public class TravelCourseRecommendationService {
     }
 
     private Mono<CourseSlot[][]> fillCourseWithRecommendedSpots(Long userId,
-                                                                String[][] courseStructure,
-                                                                double locationWeight,
-                                                                double tagWeight) {
+                                                                String[][] courseStructure) {
         CourseSlot[][] filledCourse = new CourseSlot[courseStructure.length][courseStructure[0].length];
 
         return Mono.fromCallable(() -> {
@@ -91,7 +93,7 @@ public class TravelCourseRecommendationService {
                     if (slotType.isEmpty()) {
                         filledCourse[day][slot] = CourseSlot.empty(day, slot);
                     } else {
-                        CourseSlot courseSlot = createCourseSlot(userId, day, slot, slotType, locationWeight, tagWeight);
+                        CourseSlot courseSlot = createCourseSlot(userId, day, slot, slotType);
                         filledCourse[day][slot] = courseSlot;
                     }
                 }
@@ -102,24 +104,23 @@ public class TravelCourseRecommendationService {
 
 
 
-    private CourseSlot createCourseSlot(Long userId, int day, int slot, String slotType,
-                                        double locationWeight, double tagWeight) {
+    private CourseSlot createCourseSlot(Long userId, int day, int slot, String slotType) {
 
         Boolean isContinue = slotType.contains("_continue");
 
         if (slotType.equals("restaurant")) {
-            return createRestaurantSlot(userId, day, slot, locationWeight, tagWeight);
+            return createRestaurantSlot(userId, day, slot);
         }
 
         if (slotType.equals("accommodation")) {
-            return createAccommodationSlot(userId, day, slot, locationWeight, tagWeight);
+            return createAccommodationSlot(userId, day, slot);
         }
 
         // 관광 슬롯 처리
         MainCategory mainCategory = getMainCategoryFromSlotType(slotType);
         if (mainCategory != null) {
 
-            List<SpotSimilarity> recommendedSpots = findRecommendedSpotsBySubCategories(userId, locationWeight, tagWeight, 3, mainCategory);
+            List<SpotSimilarity> recommendedSpots = findRecommendedSpotsBySubCategories(userId, 3, mainCategory);
 
             log.info("Recommended spots for user {} in category {}: {} - {}", userId, mainCategory.getCode(),
                     recommendedSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), recommendedSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
@@ -142,11 +143,11 @@ public class TravelCourseRecommendationService {
 
 
 
-    private CourseSlot createRestaurantSlot(Long userId, int day, int slot, double locationWeight, double tagWeight) {
+    private CourseSlot createRestaurantSlot(Long userId, int day, int slot) {
 
 
         List<SpotSimilarity> restaurantSpots = findRecommendedSpotsBySubCategories(
-                userId, locationWeight, tagWeight, 3, MainCategory.RESTAURANT);
+                userId, 3, MainCategory.RESTAURANT);
 
         log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.RESTAURANT.getCode(),
                 restaurantSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), restaurantSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
@@ -163,11 +164,11 @@ public class TravelCourseRecommendationService {
                 .build();
     }
 
-    private CourseSlot createAccommodationSlot(Long userId, int day, int slot, double locationWeight, double tagWeight) {
+    private CourseSlot createAccommodationSlot(Long userId, int day, int slot) {
 
 
         List<SpotSimilarity> accommodationSpots = findRecommendedSpotsBySubCategories(
-                userId, locationWeight, tagWeight, 3, MainCategory.ACCOMMODATION);
+                userId, 3, MainCategory.ACCOMMODATION);
 
         log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.ACCOMMODATION.getCode(),
                 accommodationSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), accommodationSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
@@ -194,8 +195,6 @@ public class TravelCourseRecommendationService {
 
     // 5. Updated findRecommendedSpotsBySubCategories
     private List<SpotSimilarity> findRecommendedSpotsBySubCategories(Long userId,
-                                                                     double locationWeight,
-                                                                     double tagWeight,
                                                                      int limit,
                                                                      MainCategory mainCategory) {
 
@@ -203,26 +202,29 @@ public class TravelCourseRecommendationService {
 
         // 1. 사용자가 저장한 장소들 조회
         List<Long> userSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
-        List<Spot> candidateSpots;
+//        List<Spot> candidateSpots;
+        List<Spot> candidateSpots = spotRepository.findByIdsAndLabelDepth2In(userSavedSpotIds, subCategories);
 
-        if (userSavedSpotIds.isEmpty()) {
-            // 저장한 장소가 없으면 전체에서 선택
-            candidateSpots = spotRepository.findByLabelDepth2In(subCategories);
-        } else {
-            // 사용자가 저장한 장소들 중 해당 카테고리 우선, 부족하면 전체에서 보충
-            List<Spot> userSavedSpots = spotRepository.findByIdsAndLabelDepth2In(userSavedSpotIds, subCategories);
-
-            if (userSavedSpots.size() >= limit) {
-                candidateSpots = userSavedSpots;
-            } else {
-                candidateSpots = new ArrayList<>(userSavedSpots);
-                List<Spot> additionalSpots = spotRepository.findByLabelDepth2In(subCategories);
-                additionalSpots.removeIf(spot -> userSavedSpots.contains(spot));
-                candidateSpots.addAll(additionalSpots);
-            }
-        }
+//        if (userSavedSpotIds.isEmpty()) {
+//            // 저장한 장소가 없으면 전체에서 선택
+//            candidateSpots = spotRepository.findByLabelDepth2In(subCategories);
+//        } else {
+//            // 사용자가 저장한 장소들 중 해당 카테고리 우선, 부족하면 전체에서 보충
+//            List<Spot> userSavedSpots = spotRepository.findByIdsAndLabelDepth2In(userSavedSpotIds, subCategories);
+//
+//            if (userSavedSpots.size() >= limit) {
+//                log.info("userSavedSpotsize : {}", userSavedSpots.size());
+//                candidateSpots = userSavedSpots;
+//            } else {
+//                candidateSpots = new ArrayList<>(userSavedSpots);
+//                List<Spot> additionalSpots = spotRepository.findByLabelDepth2In(subCategories);
+//                additionalSpots.removeIf(spot -> userSavedSpots.contains(spot));
+//                candidateSpots.addAll(additionalSpots);
+//            }
+//        }
 
         if (candidateSpots.isEmpty()) {
+            log.warn("No candidate spots found for user: {} in category: {}", userId, mainCategory);
             return List.of();
         }
 
@@ -230,6 +232,7 @@ public class TravelCourseRecommendationService {
                 .map(Spot::getId)
                 .collect(Collectors.toList());
 
+        log.info("Candidate spot IDs for {}: {}", mainCategory, candidateSpotIds);
         // 2. 벡터 유사도 기반 추천
         return vectorSimilarityRecommendationService
                 .findRecommendedSpotsByVectorSimilarity(userId, candidateSpotIds, mainCategory, limit);
