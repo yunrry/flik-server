@@ -35,6 +35,17 @@ public class PostController {
     private final UpdatePostUseCase updatePostUseCase;
     private final DeletePostUseCase deletePostUseCase;
 
+    @GetMapping("/my")
+    public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String type,
+            @AuthenticationPrincipal Long userId
+    ) {
+        PostSearchResponse response = getPostUseCase.getUserPosts(userId, type, page, size);
+        return ResponseEntity.ok(Response.success(response));
+    }
+
 //    @Operation(summary = "게시물 목록 조회", description = "사용자 활동 게시물 목록을 조회합니다.")
 //    @GetMapping
 //    public ResponseEntity<Response<PostSearchResponse>> searchPosts(
@@ -138,14 +149,5 @@ public class PostController {
         return ResponseEntity.ok(Response.success(null));
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(required = false) String type,
-            @AuthenticationPrincipal Long userId
-    ) {
-        PostSearchResponse response = getPostUseCase.getUserPosts(userId, type, page, size);
-        return ResponseEntity.ok(Response.success(response));
-    }
+
 }
