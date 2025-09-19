@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/v1/admin/**", "/api/v1/admin/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/v1/travel-courses/**", "/api/v1/travel-courses/**").permitAll()
+
                         // API 문서화
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
@@ -49,8 +50,8 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/**").hasRole("ADMIN")
 
                         // 나머지는 인증 필요
-//                        .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+                        .anyRequest().authenticated()
+
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
