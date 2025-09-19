@@ -5,6 +5,7 @@ import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
 
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository {

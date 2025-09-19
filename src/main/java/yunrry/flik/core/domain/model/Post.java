@@ -21,6 +21,9 @@ public class Post {
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
     private final Integer visitCount;
+    private final Long spotId;
+    private final Long courseId;
+
 
 
     public Post incrementVisitCount() {
@@ -35,6 +38,8 @@ public class Post {
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
                 .visitCount(this.visitCount==null? 1 : this.visitCount + 1)
+                .spotId(this.spotId)
+                .courseId(this.courseId)
                 .build();
     }
 
@@ -50,6 +55,8 @@ public class Post {
                 .createdAt(this.createdAt)
                 .updatedAt(LocalDateTime.now())
                 .visitCount(this.visitCount)
+                .spotId(this.spotId)
+                .courseId(this.courseId)
                 .build();
     }
 

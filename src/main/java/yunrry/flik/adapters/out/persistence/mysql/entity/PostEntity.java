@@ -64,6 +64,9 @@ public class PostEntity {
     @Column(name = "spot_id")
     private Long spotId;
 
+    @Column(name = "course_id")
+    private Long courseId;
+
     public Post toDomain() {
         return Post.builder()
                 .id(this.id)
@@ -76,6 +79,8 @@ public class PostEntity {
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
                 .visitCount(this.visitCount)
+                .spotId(this.spotId)
+                .courseId(this.courseId)
                 .build();
     }
 
@@ -94,6 +99,7 @@ public class PostEntity {
                 .location(post.getMetadata() != null ? post.getMetadata().getLocation() : null)
                 .rating(post.getMetadata() != null ? post.getMetadata().getRating() : null)
                 .spotId(post.getMetadata() != null ? post.getMetadata().getSpotId() : null)
+                .courseId(post.getCourseId() != null ? post.getMetadata().getCourseId() : null)
                 .build();
     }
 
@@ -117,6 +123,7 @@ public class PostEntity {
                 .location(this.location)
                 .rating(this.rating)
                 .spotId(this.spotId)
+                .courseId(this.courseId)
                 .build();
     }
 }

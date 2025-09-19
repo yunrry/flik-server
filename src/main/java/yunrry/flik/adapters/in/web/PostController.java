@@ -22,6 +22,8 @@ import yunrry.flik.ports.in.usecase.post.DeletePostUseCase;
 import yunrry.flik.ports.in.usecase.post.GetPostUseCase;
 import yunrry.flik.ports.in.usecase.post.UpdatePostUseCase;
 
+import java.util.List;
+
 @Tag(name = "Post", description = "사용자 활동 게시물 API")
 @RestController
 @RequestMapping("/v1/posts")
@@ -33,35 +35,43 @@ public class PostController {
     private final UpdatePostUseCase updatePostUseCase;
     private final DeletePostUseCase deletePostUseCase;
 
-    @Operation(summary = "게시물 목록 조회", description = "사용자 활동 게시물 목록을 조회합니다.")
-    @GetMapping
-    public ResponseEntity<Response<PostSearchResponse>> searchPosts(
-            @Parameter(description = "페이지 번호", example = "0")
-            @RequestParam(defaultValue = "0") int page,
-
-            @Parameter(description = "페이지 크기", example = "20")
-            @RequestParam(defaultValue = "20") int size,
-
-            @Parameter(description = "게시물 타입", example = "review")
-            @RequestParam(required = false) String type,
-
-            @Parameter(description = "사용자 ID")
-            @RequestParam(required = false) Long userId) {
-
-        PostType postType = type != null ? PostType.fromCode(type) : null;
-
-        SearchPostsQuery query = SearchPostsQuery.builder()
-                .page(page)
-                .size(size)
-                .type(postType)
-                .userId(userId)
-                .build();
-
-        Slice<Post> posts = getPostUseCase.searchPosts(query);
-        PostSearchResponse response = PostSearchResponse.from(posts);
-
-        return ResponseEntity.ok(Response.success(response));
-    }
+//    @Operation(summary = "게시물 목록 조회", description = "사용자 활동 게시물 목록을 조회합니다.")
+//    @GetMapping
+//    public ResponseEntity<Response<PostSearchResponse>> searchPosts(
+//            @Parameter(description = "페이지 번호", example = "0")
+//            @RequestParam(defaultValue = "0") int page,
+//
+//            @Parameter(description = "페이지 크기", example = "20")
+//            @RequestParam(defaultValue = "20") int size,
+//
+//            @Parameter(description = "게시물 타입", example = "review")
+//            @RequestParam(required = false) String type,
+//
+//            @AuthenticationPrincipal Long userId) {
+//
+//        PostType postType = type != null ? PostType.fromCode(type) : null;
+//
+//        SearchPostsQuery query = SearchPostsQuery.builder()
+//                .page(page)
+//                .size(size)
+//                .type(postType)
+//                .userId(userId)
+//                .build();
+//
+//        List<Post> postList = getPostUseCase.searchPosts(query); // List<Post>로 안전하게 변환
+//        List<UserActivityPostResponse> content = postList.stream()
+//                .map(UserActivityPostResponse::from)
+//                .toList();
+//
+//        PostSearchResponse response = new PostSearchResponse(
+//                content,
+//                new PostSearchResponse.PageableInfo(page, size),
+//                content.size() == size,
+//                content.size()
+//        );
+//
+//        return ResponseEntity.ok(Response.success(response));
+//    }
 
     @Operation(summary = "게시물 상세 조회", description = "게시물 상세 정보를 조회합니다.")
     @GetMapping("/{id}")
@@ -85,6 +95,8 @@ public class PostController {
                 .title(request.title())
                 .content(request.content())
                 .imageUrls(request.imageUrl())
+                .spotId(request.spotId())
+                .courseId(request.courseId())
                 .build();
 
         Post post = createPostUseCase.createPost(command);
@@ -124,5 +136,16 @@ public class PostController {
         deletePostUseCase.deletePost(command);
 
         return ResponseEntity.ok(Response.success(null));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String type,
+            @AuthenticationPrincipal Long userId
+    ) {
+        PostSearchResponse response = getPostUseCase.getUserPosts(userId, type, page, size);
+        return ResponseEntity.ok(Response.success(response));
     }
 }

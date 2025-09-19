@@ -14,7 +14,8 @@ public class CreatePostCommand {
     private final String title;
     private final String content;
     private final List<String> imageUrls;
-    private final Long restaurantId;
+    private final Long spotId;
+    private final Long courseId;
 
     public void validate() {
         if (title == null || title.trim().isEmpty()) {

@@ -5,12 +5,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
+import yunrry.flik.adapters.in.dto.post.PostSearchResponse;
+import yunrry.flik.adapters.in.dto.post.UserActivityPostResponse;
 import yunrry.flik.adapters.out.persistence.mysql.entity.PostEntity;
 import yunrry.flik.adapters.out.persistence.mysql.repository.PostJpaRepository;
 import yunrry.flik.core.domain.model.Post;
+import yunrry.flik.core.domain.model.PostType;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
 import yunrry.flik.ports.out.repository.PostRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -44,6 +48,9 @@ public class PostAdapter implements PostRepository {
 
         return entities.map(PostEntity::toDomain);
     }
+
+
+
 
     @Override
     public void deleteById(Long id) {
