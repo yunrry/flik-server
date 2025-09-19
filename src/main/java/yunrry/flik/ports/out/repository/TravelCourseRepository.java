@@ -26,4 +26,6 @@ public interface TravelCourseRepository {
     boolean existsByUserIdAndCourseType(Long userId, CourseType courseType);
 
     List<TravelCourse> findByRegionCode(String regionCode);
+
+    List<TravelCourse> findByRegionCodePrefix(String regionPrefix);
 }

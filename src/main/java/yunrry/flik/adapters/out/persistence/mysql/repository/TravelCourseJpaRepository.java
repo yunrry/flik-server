@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import yunrry.flik.adapters.out.persistence.mysql.entity.TravelCourseEntity;
 import yunrry.flik.core.domain.model.plan.CourseType;
+import yunrry.flik.core.domain.model.plan.TravelCourse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,4 +29,7 @@ public interface TravelCourseJpaRepository extends JpaRepository<TravelCourseEnt
     List<TravelCourseEntity> findByUserIdOrderByCreatedAtDesc(@Param("userId") Long userId);
 
     List<TravelCourseEntity> findByRegionCode(String regionCode);
+
+    @Query("SELECT t FROM TravelCourseEntity t WHERE t.regionCode LIKE CONCAT(:regionPrefix, '%')")
+    List<TravelCourseEntity> findByRegionCodePrefix(@Param("regionPrefix") String regionPrefix);
 }

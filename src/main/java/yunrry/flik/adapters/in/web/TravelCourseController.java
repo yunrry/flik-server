@@ -107,12 +107,13 @@ public class TravelCourseController {
         return ResponseEntity.ok(Response.success(TravelCourseResponse.from(course)));
     }
 
-    @GetMapping("/region/{regionCode}")
-    public ResponseEntity<List<TravelCourse>> getCoursesByRegionCode(@PathVariable String regionCode) {
-        log.info("API 요청 - regionCode로 TravelCourse 조회: {}", regionCode);
-        List<TravelCourse> courses = TravelCourseUseCase.getTravelCoursesByRegionCode(regionCode);
+    @GetMapping("/region/{regionCodeFrefix}")
+    public ResponseEntity<List<TravelCourse>> getCoursesByRegionCode(@PathVariable String regionCodeFrefix) {
+        log.info("API 요청 - regionCode로 TravelCourse 조회: {}", regionCodeFrefix);
+        List<TravelCourse> courses = TravelCourseUseCase.getTravelCoursesByRegionPrefix(regionCodeFrefix);
         return ResponseEntity.ok(courses);
     }
+
 
     /**
      * 여행 코스 삭제

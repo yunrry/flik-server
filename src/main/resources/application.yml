@@ -69,9 +69,6 @@ management:
 
 # Logging configuration
 logging:
-  config: classpath:logback-spring.xml
-  file:
-    path: ./logs
   level:
     root: INFO
     # 애플리케이션 패키지 로그 레벨
