@@ -26,4 +26,6 @@ public interface TravelCourseJpaRepository extends JpaRepository<TravelCourseEnt
 
     @Query("SELECT t FROM TravelCourseEntity t WHERE t.userId = :userId ORDER BY t.createdAt DESC")
     List<TravelCourseEntity> findByUserIdOrderByCreatedAtDesc(@Param("userId") Long userId);
+
+    List<TravelCourseEntity> findByRegionCode(String regionCode);
 }

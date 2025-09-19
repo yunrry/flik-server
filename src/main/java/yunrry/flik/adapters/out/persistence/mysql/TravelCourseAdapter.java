@@ -16,6 +16,7 @@ import yunrry.flik.ports.out.repository.TravelCourseRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -90,6 +91,13 @@ public class TravelCourseAdapter implements TravelCourseRepository {
     @Override
     public boolean existsByUserIdAndCourseType(Long userId, CourseType courseType) {
         return travelCourseJpaRepository.existsByUserIdAndCourseType(userId, courseType);
+    }
+
+    @Override
+    public List<TravelCourse> findByRegionCode(String regionCode) {
+        return travelCourseJpaRepository.findByRegionCode(regionCode).stream()
+                .map(this::entityToDomain)
+                .collect(Collectors.toList());
     }
 
     private TravelCourse entityToDomain(TravelCourseEntity entity) {

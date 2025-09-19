@@ -86,4 +86,11 @@ public class TravelCourseService implements TravelCourseUseCase {
         }
         travelCourseRepository.deleteById(courseId);
     }
+
+
+    @Override
+    public List<TravelCourse> getTravelCoursesByRegionCode(String regionCode) {
+        log.info("Finding travel courses by regionCode: {}", regionCode);
+        return travelCourseRepository.findByRegionCode(regionCode);
+    }
 }

@@ -32,7 +32,7 @@ import java.util.List;
 public class TravelCourseController {
 
     private final CreateTravelCourseService createTravelCourseService;
-    private final TravelCourseUseCase travelCourseService;
+    private final TravelCourseUseCase TravelCourseUseCase;
 
     /**
      * 개인 맞춤 여행 코스 생성
@@ -77,7 +77,7 @@ public class TravelCourseController {
             @PathVariable Long id,
             @RequestBody TravelCourseUpdateRequest request
     ) {
-        TravelCourse updatedCourse = travelCourseService.updateTravelCourse(id, request);
+        TravelCourse updatedCourse = TravelCourseUseCase.updateTravelCourse(id, request);
         return ResponseEntity.ok(Response.success(TravelCourseResponse.from(updatedCourse)));
     }
 
@@ -88,7 +88,7 @@ public class TravelCourseController {
     public ResponseEntity<Response<List<TravelCourseResponse>>> getTravelCourses(
             @AuthenticationPrincipal Long userId
     ) {
-        List<TravelCourse> courses = travelCourseService.getTravelCoursesByUserId(userId);
+        List<TravelCourse> courses = TravelCourseUseCase.getTravelCoursesByUserId(userId);
         List<TravelCourseResponse> response = courses.stream()
                 .map(TravelCourseResponse::from)
                 .toList();
@@ -103,8 +103,15 @@ public class TravelCourseController {
     public ResponseEntity<Response<TravelCourseResponse>> getTravelCourseById(
             @PathVariable Long id
     ) {
-        TravelCourse course = travelCourseService.getTravelCourse(id);
+        TravelCourse course = TravelCourseUseCase.getTravelCourse(id);
         return ResponseEntity.ok(Response.success(TravelCourseResponse.from(course)));
+    }
+
+    @GetMapping("/region/{regionCode}")
+    public ResponseEntity<List<TravelCourse>> getCoursesByRegionCode(@PathVariable String regionCode) {
+        log.info("API 요청 - regionCode로 TravelCourse 조회: {}", regionCode);
+        List<TravelCourse> courses = TravelCourseUseCase.getTravelCoursesByRegionCode(regionCode);
+        return ResponseEntity.ok(courses);
     }
 
     /**
@@ -115,14 +122,14 @@ public class TravelCourseController {
             @PathVariable Long id,
             @AuthenticationPrincipal Long userId
     ) {
-        TravelCourse course = travelCourseService.getTravelCourse(id);
+        TravelCourse course = TravelCourseUseCase.getTravelCourse(id);
 
         if (!course.getUserId().equals(userId)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body(Response.error("FORBIDDEN"));
         }
 
-        travelCourseService.deleteTravelCourse(id);
+        TravelCourseUseCase.deleteTravelCourse(id);
         return ResponseEntity.ok(Response.success(null));
     }
 }
