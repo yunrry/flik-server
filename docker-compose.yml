@@ -31,8 +31,11 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_MASTER_KEY=${ADMIN_MASTER_KEY}
       - FRONTEND_URL=${FRONTEND_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "8083:8080"
+    volumes:
+      - ./logs:/app/logs
     networks:
       - goormthon-java_dormung-network
     restart: unless-stopped
@@ -42,6 +45,7 @@ services:
       timeout: 20s           # 10s → 20s (타임아웃 증가)
       retries: 5             # 3 → 5 (재시도 증가)
       start_period: 90s      # 60s → 90s (시작 대기 시간 증가)
+
 
   # Flik Application - Green
   flik-green:
@@ -74,8 +78,11 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_MASTER_KEY=${ADMIN_MASTER_KEY}
       - FRONTEND_URL=${FRONTEND_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "8084:8080"
+    volumes:
+      - ./logs:/app/logs
     networks:
       - goormthon-java_dormung-network
     restart: unless-stopped
