@@ -116,7 +116,12 @@ public class OpenAIEmbeddingService {
                         return List.<String>of();
                     }
                     String content = response.getChoices().get(0).getMessage().getContent();
-                    return Arrays.asList(content.split(",\\s*"));
+                    log.info("Raw OpenAI content: '{}'", content); // 추가
+
+                    String[] keywords = content.split(",\\s*");
+                    log.info("Split keywords: {}", Arrays.toString(keywords)); // 추가
+
+                    return Arrays.asList(keywords);
                 })
                 .onErrorReturn(List.of())
                 .doOnError(error -> log.error("Failed to extract keywords: {}", error.getMessage()));
