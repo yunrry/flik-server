@@ -76,4 +76,9 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
     @Query("SELECT s.id FROM BaseSpotEntity s WHERE s.id IN :spotIds AND s.labelDepth2 IN :labelDepth2Categories AND s.regnCd = :regnCd")
     List<Long> findIdsByIdsAndLabelDepth2InAndRegnCd(List<Long> spotIds, List<String> labelDepth2Categories,
                                                                 @Param("regnCd") String regnCd);
+
+
+    @Query(value = "SELECT * FROM spots ORDER BY RAND() LIMIT :limit OFFSET :offset", nativeQuery = true)
+    List<BaseSpotEntity> findRandomSpots(@Param("offset") int offset, @Param("limit") int limit);
+
 }

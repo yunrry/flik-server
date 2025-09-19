@@ -200,6 +200,11 @@ public class GetSpotService implements GetSpotUseCase {
     }
 
 
+    @Override
+    public List<Spot> getRandomSpots(int pageNumber, int pageSize) {
+        return spotRepository.findRandomSpots(pageNumber, pageSize);
+    }
+
     private List<String> getSubcategoryNames(List<MainCategory> categories) {
         return categories.stream()
                 .flatMap(category -> categoryMappingService.getSubCategoryNames(category.getCode()).stream())

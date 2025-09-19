@@ -202,6 +202,38 @@ public class SpotController {
         }
     }
 
+    @Operation(summary = "랜덤 스팟 페이지 조회", description = "랜덤으로 스팟을 조회하며, 페이지 사이즈는 10입니다.")
+    @GetMapping("/random")
+    public ResponseEntity<Response<RandomSpotsResponse>> getRandomSpots(
+            @RequestParam(defaultValue = "1") int page
+    ) {
+        try {
+            int pageSize = 10;
+
+            // 서비스 호출
+            List<Spot> spots = getSpotUseCase.getRandomSpots(page, pageSize);
+
+            // DTO 변환
+            List<SpotDetailResponse> responseList = spots.stream()
+                    .map(SpotDetailResponse::from)
+                    .toList();
+
+            boolean hasNext = spots.size() == pageSize;
+
+            RandomSpotsResponse response = RandomSpotsResponse.builder()
+                    .page(page)
+                    .pageSize(spots.size())
+                    .spots(responseList)
+                    .hasNext(hasNext)
+                    .build();
+
+            return ResponseEntity.ok(Response.success(response));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to fetch random spots"));
+        }
+    }
 
 
 

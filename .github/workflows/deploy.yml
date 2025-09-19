@@ -135,8 +135,8 @@ jobs:
           username: ${{ env.RASPBERRY_PI_USER }}
           key: ${{ secrets.RASPBERRY_PI_SSH_KEY }}
           port: 2022
-          timeout: 300s
-          command_timeout: 30m
+          timeout: 600s
+          command_timeout: 45m
           script: |
             # 배포 시작 시간 기록
             DEPLOY_START=$(date +%s)
@@ -186,7 +186,7 @@ jobs:
             # 이미지 pull 및 태그
             export IMAGE_LOWER=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
             echo "📦 Pulling new image..."
-            docker pull ${{ env.REGISTRY }}/$IMAGE_LOWER:${{ github.sha }}-arm64
+            docker pull ${{ env.REGISTRY }}/$IMAGE_LOWER:main-$(echo ${{ github.sha }} | cut -c1-7)-arm64
             docker tag ${{ env.REGISTRY }}/$IMAGE_LOWER:${{ github.sha }}-arm64 flik-springboot:latest
             
             # 기본 인프라 서비스들이 실행 중인지 확인하고 없으면 시작

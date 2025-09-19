@@ -175,6 +175,15 @@ public class SpotAdapter implements SpotRepository {
     }
 
 
+    @Override
+    public List<Spot> findRandomSpots(int pageNumber, int pageSize) {
+        int offset = (pageNumber - 1) * pageSize;
+        List<BaseSpotEntity> entities = spotJpaRepository.findRandomSpots(offset, pageSize);
+        return entities.stream()
+                .map(BaseSpotEntity::toDomain)
+                .toList();
+    }
+
     private Pageable createPageable(SearchSpotsQuery query) {
         Sort sort = createSort(query.getSort());
         return PageRequest.of(query.getPage(), query.getSize(), sort);
