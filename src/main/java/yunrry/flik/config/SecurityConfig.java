@@ -49,7 +49,8 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/**").hasRole("ADMIN")
 
                         // 나머지는 인증 필요
-                        .anyRequest().authenticated()
+//                        .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
