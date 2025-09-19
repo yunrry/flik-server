@@ -34,8 +34,6 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "8083:8080"
-    volumes:
-      - ./logs:/app/logs
     networks:
       - goormthon-java_dormung-network
     restart: unless-stopped
@@ -81,8 +79,6 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "8084:8080"
-    volumes:
-      - ./logs:/app/logs
     networks:
       - goormthon-java_dormung-network
     restart: unless-stopped

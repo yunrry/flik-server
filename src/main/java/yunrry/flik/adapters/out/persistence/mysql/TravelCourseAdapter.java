@@ -100,6 +100,16 @@ public class TravelCourseAdapter implements TravelCourseRepository {
                 .collect(Collectors.toList());
     }
 
+
+    @Override
+    public List<TravelCourse> findByRegionCodePrefix(String regionCode) {
+        return travelCourseJpaRepository.findByRegionCodePrefix(regionCode).stream()
+                .map(this::entityToDomain)
+                .collect(Collectors.toList());
+    }
+
+
+
     private TravelCourse entityToDomain(TravelCourseEntity entity) {
         CourseSlot[][] courseSlots = deserializeCourseSlots(entity.getCourseSlotsJson());
         return entity.toDomain(courseSlots);
@@ -113,4 +123,5 @@ public class TravelCourseAdapter implements TravelCourseRepository {
             throw new RuntimeException("Failed to deserialize course slots", e);
         }
     }
+
 }

@@ -93,4 +93,10 @@ public class TravelCourseService implements TravelCourseUseCase {
         log.info("Finding travel courses by regionCode: {}", regionCode);
         return travelCourseRepository.findByRegionCode(regionCode);
     }
+
+
+    @Override
+    public List<TravelCourse> getTravelCoursesByRegionPrefix(String regionPrefix) {
+        return travelCourseRepository.findByRegionCodePrefix(regionPrefix);
+    }
 }
