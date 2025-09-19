@@ -11,9 +11,12 @@ services:
     container_name: flik-blue
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
-      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
-      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
+      - SPRING_DATASOURCE_MYSQL_JDBC_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      - SPRING_DATASOURCE_MYSQL_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - SPRING_DATASOURCE_POSTGRES_JDBC_URL=jdbc:postgresql://flik-embedding-postgres:5432/flik_vector_db
+      - SPRING_DATASOURCE_POSTGRES_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - SPRING_DATA_REDIS_HOST=redis
       - SPRING_DATA_REDIS_PORT=6379
       - SERVER_PORT=8080
@@ -56,9 +59,12 @@ services:
     container_name: flik-green
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
-      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
-      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
+      - SPRING_DATASOURCE_MYSQL_JDBC_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      - SPRING_DATASOURCE_MYSQL_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - SPRING_DATASOURCE_POSTGRES_JDBC_URL=jdbc:postgresql://flik-embedding-postgres:5432/flik_vector_db
+      - SPRING_DATASOURCE_POSTGRES_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - SPRING_DATA_REDIS_HOST=redis
       - SPRING_DATA_REDIS_PORT=6379
       - SERVER_PORT=8080
