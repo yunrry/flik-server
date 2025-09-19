@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/CreatePostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/CreatePostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/PostAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/PostEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/PostJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/PostJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/PostMetadata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/PostMetadata.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/CreatePostCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/command/CreatePostCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/GetPostServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/GetPostServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/PostMetadataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/model/PostMetadataTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +248,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.FlikApplication">
+  <component name="RunManager" selected="Gradle.Tests in 'yunrry'">
     <configuration name="FlikApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -347,7 +334,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="OpenAIEmbeddingServiceTest.createEmbedding_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'yunrry'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -360,7 +347,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.embedding.OpenAIEmbeddingServiceTest.createEmbedding_Success&quot;" />
+            <option value="&quot;yunrry.*&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -417,19 +404,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.FlikApplicationTests" />
+      <item itemvalue="Gradle.Tests in 'yunrry'" />
       <item itemvalue="Gradle.Tests in 'yunrry.flik'" />
       <item itemvalue="Gradle.OpenAIEmbeddingServiceIntegrationTest" />
       <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
-      <item itemvalue="Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'yunrry'" />
         <item itemvalue="Gradle.Tests in 'yunrry.flik'" />
         <item itemvalue="Gradle.FlikApplicationTests" />
         <item itemvalue="Gradle.OpenAIEmbeddingServiceIntegrationTest" />
         <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
-        <item itemvalue="Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -461,7 +448,7 @@
       <workItem from="1757320098234" duration="50048000" />
       <workItem from="1757584883569" duration="2875000" />
       <workItem from="1757640069773" duration="3003000" />
-      <workItem from="1758105270843" duration="87875000" />
+      <workItem from="1758105270843" duration="88282000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
