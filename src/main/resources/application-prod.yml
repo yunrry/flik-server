@@ -23,7 +23,7 @@ spring:
       driver-class-name: org.postgresql.Driver
       hikari:
         pool-name: FlikPostgresPool
-        maximum-pool-size: 10         # Vector DB는 더 적게
+        maximum-pool-size: 10         # Vector DB는 더 적게..
         minimum-idle: 3
         connection-timeout: 30000
         idle-timeout: 300000
