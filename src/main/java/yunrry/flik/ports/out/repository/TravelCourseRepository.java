@@ -24,4 +24,6 @@ public interface TravelCourseRepository {
     void deleteByUserId(Long userId);
 
     boolean existsByUserIdAndCourseType(Long userId, CourseType courseType);
+
+    List<TravelCourse> findByRegionCode(String regionCode);
 }

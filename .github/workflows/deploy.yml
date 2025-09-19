@@ -155,6 +155,10 @@ jobs:
             
             cd /home/yoon/flik-server
             
+            echo "📁 Creating logs directory..."
+            mkdir -p ./logs
+            chmod 755 ./logs
+            
             # .env 파일 생성 (환경 변수를 파일로 작성)
             echo "📝 Creating .env file..."
             cat > .env << EOF

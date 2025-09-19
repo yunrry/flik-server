@@ -14,4 +14,6 @@ public interface TravelCourseUseCase {
     TravelCourse updateTravelCourse(Long id, TravelCourseUpdateRequest request);
 
     void deleteTravelCourse(Long courseId);
+
+    List<TravelCourse> getTravelCoursesByRegionCode(String regionCode);
 }
