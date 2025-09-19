@@ -14,16 +14,19 @@ public class PostMetadata {
     private final String location;
     private final BigDecimal rating;
     private final Long spotId;
+    private final Long courseId;
 
     public static PostMetadata empty() {
         return PostMetadata.builder().build();
     }
 
-    public static PostMetadata of(String spotName, String location, BigDecimal rating) {
+    public static PostMetadata of(String spotName, String location, BigDecimal rating, Long spotId, Long courseId) {
         return PostMetadata.builder()
                 .spotName(spotName)
                 .location(location)
                 .rating(rating)
+                .spotId(spotId)
+                .courseId(courseId)
                 .build();
     }
 }

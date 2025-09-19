@@ -16,6 +16,12 @@ public record CreatePostRequest(
         String content,
 
         @Schema(description = "이미지 URL 목록")
-        List<String> imageUrl
+        List<String> imageUrl,
+
+        @Schema(description = "연관된 장소 ID", example = "123")
+        Long spotId,
+
+        @Schema(description = "연관된 코스 ID", example = "456")
+        Long courseId
 ) {
 }

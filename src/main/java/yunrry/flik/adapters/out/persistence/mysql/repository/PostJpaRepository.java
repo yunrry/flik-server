@@ -21,4 +21,6 @@ public interface PostJpaRepository extends JpaRepository<PostEntity, Long> {
             @Param("userId") Long userId,
             Pageable pageable
     );
+
+
 }
