@@ -24,5 +24,7 @@ public interface GetSpotUseCase {
             int pageNumber);
 
     List<Spot> getUserSavedSpots(Long userId);
+
+    List<Spot> getRandomSpots(int pageNumber, int pageSize);
 }
 

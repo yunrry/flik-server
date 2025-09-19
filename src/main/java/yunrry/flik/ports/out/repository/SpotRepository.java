@@ -44,4 +44,6 @@ public interface SpotRepository {
     List<Long> findIdsByIdsAndLabelDepth2InAndRegnCdAndSignguCd(List<Long> spotIds, List<String> labelDepth2Categories, String regionCode);
 
     List<Long> findIdsByIdsAndLabelDepth2InAndRegnCd(List<Long> spotIds, List<String> labelDepth2Categories, String regionCode);
+
+    List<Spot> findRandomSpots(int pageNumber, int pageSize);
 }
