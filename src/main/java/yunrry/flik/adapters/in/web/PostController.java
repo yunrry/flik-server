@@ -35,7 +35,7 @@ public class PostController {
     private final UpdatePostUseCase updatePostUseCase;
     private final DeletePostUseCase deletePostUseCase;
 
-    @GetMapping("/my")
+    @GetMapping("/my-posts")
     public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
