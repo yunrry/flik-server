@@ -85,7 +85,7 @@ public class PostController {
 //    }
 
     @Operation(summary = "게시물 상세 조회", description = "게시물 상세 정보를 조회합니다.")
-    @GetMapping("/{id}")
+    @GetMapping("{id:[0-9]+}")
     public ResponseEntity<Response<ActivityDetailPostResponse>> getPost(@PathVariable Long id) {
         GetPostQuery query = new GetPostQuery(id);
         Post post = getPostUseCase.getPost(query);
@@ -117,7 +117,7 @@ public class PostController {
     }
 
     @Operation(summary = "게시물 수정", description = "기존 게시물을 수정합니다.")
-    @PutMapping("/{id}")
+    @PutMapping("{id:[0-9]+}")
     public ResponseEntity<Response<UpdatePostResponse>> updatePost(
             @PathVariable Long id,
             @RequestBody UpdatePostRequest request,
@@ -138,7 +138,7 @@ public class PostController {
     }
 
     @Operation(summary = "게시물 삭제", description = "게시물을 삭제합니다.")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id:[0-9]+}")
     public ResponseEntity<Response<Void>> deletePost(
             @PathVariable Long id,
             @AuthenticationPrincipal Long userId) {

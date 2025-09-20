@@ -35,7 +35,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // 공개 엔드포인트
-//                        .requestMatchers(HttpMethod.GET, "/v1/posts/**", "/api/v1/posts/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/v1/restaurants/**", "/api/v1/restaurants/**").permitAll()
                         .requestMatchers("/v1/auth/**", "/api/v1/auth/**").permitAll()  // 이 줄 수정
                         .requestMatchers("/v1/admin/**", "/api/v1/admin/**").permitAll()
