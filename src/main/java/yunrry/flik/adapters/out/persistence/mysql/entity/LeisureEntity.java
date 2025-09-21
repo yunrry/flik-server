@@ -20,8 +20,7 @@ import java.time.LocalTime;
 @DiscriminatorValue("LEISURE")
 public class LeisureEntity extends BaseSpotEntity {
 
-
-    @Column(name = "fee")
+    @Column(name = "fee", length = 500)
     private String fee;
 
 

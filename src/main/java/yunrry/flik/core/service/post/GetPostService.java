@@ -68,6 +68,7 @@ public class GetPostService implements GetPostUseCase {
 
     }
 
+    @Override
     public List<Post> getAllUserPosts(Long userId, String typeCode) {
         SearchPostsQuery query = SearchPostsQuery.builder()
                 .userId(userId)

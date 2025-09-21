@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +25,7 @@ import yunrry.flik.ports.in.usecase.post.UpdatePostUseCase;
 
 import java.util.List;
 
+@Slf4j
 @Tag(name = "Post", description = "사용자 활동 게시물 API")
 @RestController
 @RequestMapping("/v1/posts")
@@ -35,33 +37,13 @@ public class PostController {
     private final UpdatePostUseCase updatePostUseCase;
     private final DeletePostUseCase deletePostUseCase;
 
-//    @GetMapping
-//    public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "20") int size,
-//            @RequestParam(required = false) String type,
-//            @AuthenticationPrincipal Long userId
-//    ) {
-//        Slice<Post> postsSlice = getPostUseCase.getUserPosts(userId, type, page, size);
-//
-//        List<UserActivityPostResponse> content = postsSlice.stream()
-//                .map(UserActivityPostResponse::from)
-//                .toList();
-//
-//        PostSearchResponse response = new PostSearchResponse(
-//                content,
-//                new PostSearchResponse.PageableInfo(postsSlice.getNumber(), postsSlice.getSize()),
-//                postsSlice.hasNext(),
-//                postsSlice.getNumberOfElements()
-//        );
-//        return ResponseEntity.ok(Response.success(response));
-//    }
 
     @GetMapping
     public ResponseEntity<Response<List<UserActivityPostResponse>>> getAllMyPosts(
             @AuthenticationPrincipal Long userId,
             @RequestParam(required = false) String type
     ) {
+        log.info("Get all posts for userId: {}, type: {}", userId, type);
         List<Post> posts = getPostUseCase.getAllUserPosts(userId, type);
 
         List<UserActivityPostResponse> response = posts.stream()

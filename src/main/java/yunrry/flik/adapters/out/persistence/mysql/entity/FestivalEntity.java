@@ -34,7 +34,7 @@ public class FestivalEntity extends BaseSpotEntity {
     @Column(name = "running_time", length = 500)
     private String runningTime;
 
-    @Column(name = "fee")
+    @Column(name = "fee", length = 500)
     private String fee;
 
 
