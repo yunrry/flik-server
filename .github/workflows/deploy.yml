@@ -249,27 +249,29 @@ jobs:
               sleep 10
             done
             
-            # Nginx 설정 업데이트
+            # Nginx 설정 업데이트 (호스트 기준)
             echo "🔧 Updating nginx configuration..."
             cd /home/yoon/goormthon-java
             
-            # 백업 및 설정 변경을 한번에 처리
+            # 백업
             cp nginx/nginx.conf nginx/nginx.conf.backup
+            
+            # Blue/Green 환경 스위칭
             sed -i "s/server flik-$OLD_ENV:8080/# server flik-$OLD_ENV:8080/" nginx/nginx.conf
             sed -i "s/# server flik-$NEW_ENV:8080/server flik-$NEW_ENV:8080/" nginx/nginx.conf
             
-            # Nginx 설정 테스트 및 리로드
-            if docker exec nginx nginx -t; then
-              docker exec nginx nginx -s reload
-              echo "✅ Nginx configuration updated successfully"
-            else
-              echo "❌ Nginx configuration test failed, rolling back..."
-              cp nginx/nginx.conf.backup nginx/nginx.conf
-              docker exec nginx nginx -s reload
-              cd /home/yoon/flik-server
-              docker compose --env-file .env stop flik-$NEW_ENV
-              exit 1
-            fi
+            # 컨테이너 재시작으로 반영
+            echo "🔄 Restarting Nginx container to apply new configuration..."
+            docker compose --env-file .env restart nginx
+            
+            # 옵션: 문법 체크 후 실패 시 복원
+            docker exec nginx nginx -t || {
+                echo "❌ Nginx configuration test failed, rolling back..."
+                cp nginx/nginx.conf.backup nginx/nginx.conf
+                docker compose --env-file .env restart nginx
+                exit 1
+            }
+            echo "✅ Nginx configuration updated successfully"
             
             # 배포 테스트
             echo "🧪 Testing deployment..."
