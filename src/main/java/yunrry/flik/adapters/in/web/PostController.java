@@ -43,7 +43,7 @@ public class PostController {
             @AuthenticationPrincipal Long userId,
             @RequestParam(required = false) String type
     ) {
-        log.info("Get all posts for userId: {}, type: {}", userId, type);
+        log.info("Check Get all posts for userId: {}, type: {}", userId, type);
         List<Post> posts = getPostUseCase.getAllUserPosts(userId, type);
 
         List<UserActivityPostResponse> response = posts.stream()
