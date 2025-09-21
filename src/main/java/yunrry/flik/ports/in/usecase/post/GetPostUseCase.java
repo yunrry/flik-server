@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface GetPostUseCase {
     Post getPost(GetPostQuery query);
-    PostSearchResponse getUserPosts(Long userId, String typeCode, int page, int size);
+    Slice<Post> getUserPosts(Long userId, String typeCode, int page, int size);
 
 }
