@@ -44,7 +44,7 @@ public class GetPostService implements GetPostUseCase {
 
 
     @Override
-    public PostSearchResponse getUserPosts(Long userId, String typeCode, int page, int size) {
+    public Slice<Post> getUserPosts(Long userId, String typeCode, int page, int size) {
 
         PostType postType = typeCode != null ? PostType.fromCode(typeCode) : null;
 
@@ -55,17 +55,8 @@ public class GetPostService implements GetPostUseCase {
                 .userId(userId)
                 .build();
 
-        Slice<Post> postsSlice = postRepository.findByConditions(query);
+        return postRepository.findByConditions(query);
 
-        List<UserActivityPostResponse> content = postsSlice.getContent().stream()
-                .map(UserActivityPostResponse::from)
-                .toList();
 
-        return new PostSearchResponse(
-                content,
-                new PostSearchResponse.PageableInfo(page, size),
-                postsSlice.hasNext(),
-                postsSlice.getNumberOfElements()
-        );
     }
 }

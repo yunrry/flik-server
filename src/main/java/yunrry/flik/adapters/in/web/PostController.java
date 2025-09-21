@@ -42,7 +42,18 @@ public class PostController {
             @RequestParam(required = false) String type,
             @AuthenticationPrincipal Long userId
     ) {
-        PostSearchResponse response = getPostUseCase.getUserPosts(userId, type, page, size);
+        Slice<Post> postsSlice = getPostUseCase.getUserPosts(userId, type, page, size);
+
+        List<UserActivityPostResponse> content = postsSlice.stream()
+                .map(UserActivityPostResponse::from)
+                .toList();
+
+        PostSearchResponse response = new PostSearchResponse(
+                content,
+                new PostSearchResponse.PageableInfo(postsSlice.getNumber(), postsSlice.getSize()),
+                postsSlice.hasNext(),
+                postsSlice.getNumberOfElements()
+        );
         return ResponseEntity.ok(Response.success(response));
     }
 
@@ -85,7 +96,7 @@ public class PostController {
 //    }
 
     @Operation(summary = "게시물 상세 조회", description = "게시물 상세 정보를 조회합니다.")
-    @GetMapping("{id:[0-9]+}")
+    @GetMapping("{id}")
     public ResponseEntity<Response<ActivityDetailPostResponse>> getPost(@PathVariable Long id) {
         GetPostQuery query = new GetPostQuery(id);
         Post post = getPostUseCase.getPost(query);
@@ -117,7 +128,7 @@ public class PostController {
     }
 
     @Operation(summary = "게시물 수정", description = "기존 게시물을 수정합니다.")
-    @PutMapping("{id:[0-9]+}")
+    @PutMapping("{id}")
     public ResponseEntity<Response<UpdatePostResponse>> updatePost(
             @PathVariable Long id,
             @RequestBody UpdatePostRequest request,
@@ -138,7 +149,7 @@ public class PostController {
     }
 
     @Operation(summary = "게시물 삭제", description = "게시물을 삭제합니다.")
-    @DeleteMapping("{id:[0-9]+}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Response<Void>> deletePost(
             @PathVariable Long id,
             @AuthenticationPrincipal Long userId) {

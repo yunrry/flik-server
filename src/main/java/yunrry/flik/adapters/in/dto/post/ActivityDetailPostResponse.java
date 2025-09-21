@@ -2,6 +2,7 @@ package yunrry.flik.adapters.in.dto.post;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import yunrry.flik.core.domain.model.Post;
+import yunrry.flik.core.domain.model.PostMetadata;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,14 +36,18 @@ public record ActivityDetailPostResponse(
     public record PostMetadataResponse(
             String spotName,
             String location,
+            Long spotId,
+            Long courseId,
             Double rating
     ) {
-        public static PostMetadataResponse from(yunrry.flik.core.domain.model.PostMetadata metadata) {
+        public static PostMetadataResponse from(PostMetadata metadata) {
             if (metadata == null) return null;
 
             return new PostMetadataResponse(
                     metadata.getSpotName(),
                     metadata.getLocation(),
+                    metadata.getSpotId(),
+                    metadata.getCourseId(),
                     metadata.getRating() != null ? metadata.getRating().doubleValue() : null
             );
         }
