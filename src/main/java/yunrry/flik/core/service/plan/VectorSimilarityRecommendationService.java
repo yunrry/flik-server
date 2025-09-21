@@ -25,6 +25,7 @@ public class VectorSimilarityRecommendationService {
 
         try {
             userCategoryVectorService.recalculateCategoryVector(userId, category, candidateSpotIds);
+            userCategoryVectorService.recalculateAllUserVectors(userId);
         }catch (Exception e){
             log.error("-Service-Failed to recalculate user category vector for userId: {}, category: {}", userId, category);
         }

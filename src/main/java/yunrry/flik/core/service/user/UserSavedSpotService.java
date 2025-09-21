@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true)
 public class UserSavedSpotService implements UserSavedSpotUseCase {
-
+    private final UserCategoryVectorService userCategoryVectorService;
     private final UserSavedSpotRepository userSavedSpotRepository;
 
     @Override
