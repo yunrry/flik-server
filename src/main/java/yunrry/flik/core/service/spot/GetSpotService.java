@@ -67,7 +67,7 @@ public class GetSpotService implements GetSpotUseCase {
             List<Spot> spots = spotRepository.findByCategory(category, regionCode, limitPerCategory * 2); // 여분 확보
             // 사용자가 저장한 스팟 제외
             List<Spot> filtered = spots.stream()
-                    .filter(spot -> !savedSpotIds.contains(spot.getId()))
+//                    .filter(spot -> !savedSpotIds.contains(spot.getId()))
                     .limit(limitPerCategory) // limitPerCategory 만큼만 선택
                     .toList();
 
@@ -132,7 +132,7 @@ public class GetSpotService implements GetSpotUseCase {
             List<Spot> spots = spotRepository.findByCategory(category, regionCode, limitPerCategory * (pageNumber + 1));
 
             List<Spot> filtered = spots.stream()
-                    .filter(s -> !alreadyExcluded.contains(s.getId()))
+//                    .filter(s -> !alreadyExcluded.contains(s.getId()))
                     .skip((long) (pageNumber - 1) * limitPerCategory)
                     .limit(limitPerCategory)
                     .toList();
