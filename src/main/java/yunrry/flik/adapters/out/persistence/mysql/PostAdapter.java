@@ -49,7 +49,17 @@ public class PostAdapter implements PostRepository {
         return entities.map(PostEntity::toDomain);
     }
 
+    @Override
+    public List<Post> findAllByConditions(SearchPostsQuery query) {
+        List<PostEntity> entities = postJpaRepository.findAllByConditions(
+                query.getType(),
+                query.getUserId()
+        );
 
+        return entities.stream()
+                .map(PostEntity::toDomain)
+                .toList();
+    }
 
 
     @Override

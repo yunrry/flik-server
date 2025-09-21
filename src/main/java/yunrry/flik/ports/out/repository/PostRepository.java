@@ -12,5 +12,6 @@ public interface PostRepository {
     Post save(Post post);
     Optional<Post> findById(Long id);
     Slice<Post> findByConditions(SearchPostsQuery query);
+    List<Post> findAllByConditions(SearchPostsQuery query);
     void deleteById(Long id);
 }

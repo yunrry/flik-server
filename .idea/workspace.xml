@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/ActivityDetailPostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/post/ActivityDetailPostResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/PostAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/PostJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/PostJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/postgres/entity/UserCategoryVectorEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/postgres/entity/UserCategoryVectorEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/PostRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -453,7 +456,7 @@
       <workItem from="1757320098234" duration="50048000" />
       <workItem from="1757584883569" duration="2875000" />
       <workItem from="1757640069773" duration="3003000" />
-      <workItem from="1758105270843" duration="99455000" />
+      <workItem from="1758105270843" duration="101372000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
