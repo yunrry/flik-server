@@ -1,5 +1,6 @@
 package yunrry.flik.core.service.post;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,12 @@ public class GetPostService implements GetPostUseCase {
 
     private final PostRepository postRepository;
 
+    @PostConstruct
+    public void checkRepositoryBean() {
+        System.out.println(">>> PostRepository bean type: " + postRepository.getClass().getName());
+    }
+
+
     @Override
     @Cacheable(value = "posts", key = "#query.postId")
     public Post getPost(GetPostQuery query) {
@@ -47,7 +54,6 @@ public class GetPostService implements GetPostUseCase {
     public Slice<Post> getUserPosts(Long userId, String typeCode, int page, int size) {
 
         PostType postType = typeCode != null ? PostType.fromCode(typeCode) : null;
-
         SearchPostsQuery query = SearchPostsQuery.builder()
                 .page(page)
                 .size(size)
@@ -55,8 +61,22 @@ public class GetPostService implements GetPostUseCase {
                 .userId(userId)
                 .build();
 
-        return postRepository.findByConditions(query);
+        Slice<Post> result = postRepository.findByConditions(query);
+        System.out.println(">>> result class = " + result.getClass().getName());
+        return result;
 
 
     }
+
+    public List<Post> getAllUserPosts(Long userId, String typeCode) {
+        SearchPostsQuery query = SearchPostsQuery.builder()
+                .userId(userId)
+                .type(typeCode != null ? PostType.fromCode(typeCode) : null)
+                .build();
+
+        return postRepository.findAllByConditions(query);
+    }
+
 }
+
+

@@ -35,25 +35,39 @@ public class PostController {
     private final UpdatePostUseCase updatePostUseCase;
     private final DeletePostUseCase deletePostUseCase;
 
-    @GetMapping
-    public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(required = false) String type,
-            @AuthenticationPrincipal Long userId
-    ) {
-        Slice<Post> postsSlice = getPostUseCase.getUserPosts(userId, type, page, size);
+//    @GetMapping
+//    public ResponseEntity<Response<PostSearchResponse>> getMyPosts(
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "20") int size,
+//            @RequestParam(required = false) String type,
+//            @AuthenticationPrincipal Long userId
+//    ) {
+//        Slice<Post> postsSlice = getPostUseCase.getUserPosts(userId, type, page, size);
+//
+//        List<UserActivityPostResponse> content = postsSlice.stream()
+//                .map(UserActivityPostResponse::from)
+//                .toList();
+//
+//        PostSearchResponse response = new PostSearchResponse(
+//                content,
+//                new PostSearchResponse.PageableInfo(postsSlice.getNumber(), postsSlice.getSize()),
+//                postsSlice.hasNext(),
+//                postsSlice.getNumberOfElements()
+//        );
+//        return ResponseEntity.ok(Response.success(response));
+//    }
 
-        List<UserActivityPostResponse> content = postsSlice.stream()
+    @GetMapping
+    public ResponseEntity<Response<List<UserActivityPostResponse>>> getAllMyPosts(
+            @AuthenticationPrincipal Long userId,
+            @RequestParam(required = false) String type
+    ) {
+        List<Post> posts = getPostUseCase.getAllUserPosts(userId, type);
+
+        List<UserActivityPostResponse> response = posts.stream()
                 .map(UserActivityPostResponse::from)
                 .toList();
 
-        PostSearchResponse response = new PostSearchResponse(
-                content,
-                new PostSearchResponse.PageableInfo(postsSlice.getNumber(), postsSlice.getSize()),
-                postsSlice.hasNext(),
-                postsSlice.getNumberOfElements()
-        );
         return ResponseEntity.ok(Response.success(response));
     }
 

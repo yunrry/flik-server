@@ -5,7 +5,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.UserCategoryVector;
 
@@ -46,9 +48,11 @@ public class UserCategoryVectorEntity {
     @Column(name = "preference_count", nullable = false)
     private Integer preferenceCount = 0;
 
+    @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

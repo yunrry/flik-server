@@ -11,5 +11,6 @@ import java.util.List;
 public interface GetPostUseCase {
     Post getPost(GetPostQuery query);
     Slice<Post> getUserPosts(Long userId, String typeCode, int page, int size);
+    List<Post> getAllUserPosts(Long userId, String typeCode);
 
 }
