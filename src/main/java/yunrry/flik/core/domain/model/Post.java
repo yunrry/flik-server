@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Post {
     private final PostMetadata metadata;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
+    private final BigDecimal rating;
     private final Integer visitCount;
     private final Long spotId;
     private final Long courseId;
@@ -37,6 +39,7 @@ public class Post {
                 .metadata(this.metadata)
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
+                .rating(this.rating)
                 .visitCount(this.visitCount==null? 1 : this.visitCount + 1)
                 .spotId(this.spotId)
                 .courseId(this.courseId)
@@ -54,6 +57,7 @@ public class Post {
                 .metadata(this.metadata)
                 .createdAt(this.createdAt)
                 .updatedAt(LocalDateTime.now())
+                .rating(this.rating)
                 .visitCount(this.visitCount)
                 .spotId(this.spotId)
                 .courseId(this.courseId)
