@@ -45,15 +45,16 @@ public interface UserCategoryVectorJpaRepository extends JpaRepository<UserCateg
             FROM user_category_vectors
             WHERE user_id = :userId AND category = :category
         )
-        INSERT INTO user_category_vectors (user_id, category, preference_vector, preference_count)
-        SELECT 
-            :userId, :category, 
-            CASE 
-                WHEN ev.preference_vector IS NULL THEN fv.avg_vector
-                ELSE (ev.preference_vector * ev.preference_count + fv.avg_vector * fv.spot_count) 
-                     / (ev.preference_count + fv.spot_count)
-            END as new_vector,
-            COALESCE(ev.preference_count, 0) + fv.spot_count as new_count
+        INSERT INTO user_category_vectors (user_id, category, preference_vector, preference_count, created_at)
+        SELECT\s
+        :userId, :category,\s
+        CASE\s
+            WHEN ev.preference_vector IS NULL THEN fv.avg_vector
+            ELSE (ev.preference_vector * ev.preference_count + fv.avg_vector * fv.spot_count)\s
+                 / (ev.preference_count + fv.spot_count)
+        END as new_vector,
+        COALESCE(ev.preference_count, 0) + fv.spot_count as new_count,
+        CURRENT_TIMESTAMP        
         FROM favorite_vectors fv
         LEFT JOIN existing_vector ev ON true
         WHERE fv.spot_count > 0
@@ -76,8 +77,8 @@ public interface UserCategoryVectorJpaRepository extends JpaRepository<UserCateg
         WHERE se.spot_id = ANY(:spotIds)
           AND se.tag_embedding IS NOT NULL
     )
-    INSERT INTO user_category_vectors (user_id, category, preference_vector, preference_count)
-    SELECT :userId, :category, preference_vector, spot_count
+    INSERT INTO user_category_vectors (user_id, category, preference_vector, preference_count, created_at)
+    SELECT :userId, :category, preference_vector, spot_count, CURRENT_TIMESTAMP
     FROM avg_vector
     WHERE spot_count > 0
     ON CONFLICT (user_id, category)
