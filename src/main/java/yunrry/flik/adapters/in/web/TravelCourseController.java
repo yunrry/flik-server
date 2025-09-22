@@ -17,12 +17,16 @@ import reactor.core.publisher.Mono;
 import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.TravelCourseResponse;
 import yunrry.flik.adapters.in.dto.TravelCourseUpdateRequest;
+import yunrry.flik.core.domain.model.MainCategory;
+import yunrry.flik.core.domain.model.UserCategoryPreference;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.core.service.plan.CreateTravelCourseService;
+import yunrry.flik.core.service.user.UserCategoryVectorService;
 import yunrry.flik.ports.in.query.CourseQuery;
 import yunrry.flik.ports.in.usecase.TravelCourseUseCase;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Tag(name = "Travel Course", description = "여행 코스 관련 API")
 @RestController
@@ -33,6 +37,7 @@ public class TravelCourseController {
 
     private final CreateTravelCourseService createTravelCourseService;
     private final TravelCourseUseCase TravelCourseUseCase;
+    private final UserCategoryVectorService userCategoryVectorService;
 
     /**
      * 개인 맞춤 여행 코스 생성
@@ -55,6 +60,19 @@ public class TravelCourseController {
         if (userId == null) {
             return Mono.just(ResponseEntity.badRequest()
                     .body(Response.error("USER_NOT_AUTHENTICATED")));
+        }
+
+        // 카테고리 벡터 존재 여부 확인
+        List<MainCategory> mainCategories = categories.stream()
+                .map(MainCategory::findByCode)
+                .collect(Collectors.toList());
+
+        boolean allVectorsExist = mainCategories.stream()
+                .allMatch(category -> userCategoryVectorService.hasUserVector(userId, category));
+
+        if (!allVectorsExist) {
+            return Mono.just(ResponseEntity.badRequest()
+                    .body(Response.error("USER_CATEGORY_VECTORS_NOT_FOUND")));
         }
 
         CourseQuery query = CourseQuery.of(userId, categories, regionCode, tripDuration);

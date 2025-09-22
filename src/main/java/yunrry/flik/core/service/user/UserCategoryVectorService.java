@@ -142,7 +142,19 @@ public class UserCategoryVectorService {
         }
     }
 
-
+    /**
+     * 사용자 카테고리 벡터를 기본값으로 초기화
+     */
+    @CacheEvict(value = "userCategoryVectors", key = "#userId + '_' + #category.code")
+    public void initializeDefaultVector(Long userId, MainCategory category) {
+        try {
+            List<Double> defaultVector = getDefaultCategoryVector(category);
+            userCategoryVectorRepository.saveUserCategoryVector(userId, category, defaultVector);
+            log.debug("Initialized default vector for user: {}, category: {}", userId, category);
+        } catch (Exception e) {
+            log.error("Failed to initialize default vector: {}", e.getMessage());
+        }
+    }
     /**
      * 기본 벡터 반환
      */
