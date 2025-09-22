@@ -39,6 +39,7 @@ public class UserSavedSpotService implements UserSavedSpotUseCase {
 
         userSavedSpotRepository.save(userId, spotId);
         // 벡터 업데이트
+        log.info("Calling updateVectorForSavedSpot for userId: {}, spotId: {}", userId, spotId);
         userCategoryVectorService.updateVectorForSavedSpot(userId, spotId);
 
         log.info("User spot saved - userId: {}, spotId: {}", userId, spotId);
