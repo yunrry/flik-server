@@ -22,7 +22,7 @@ RUN ./gradlew dependencies --no-daemon --parallel --max-workers=4
 COPY src src/
 
 # 빌드 실행 (테스트 제외, 병렬 처리)
-RUN ./gradlew clean build -x test --no-daemon --parallel --max-workers=4 --build-cache
+RUN ./gradlew clean build -x test --no-daemon --parallel --max-workers=4
 
 # 최종 실행용 이미지 (더 가벼운 Alpine JRE 사용)
 FROM eclipse-temurin:21-jre-alpine

@@ -192,7 +192,7 @@ jobs:
             export IMAGE_LOWER=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
             echo "📦 Pulling new image..."
             docker pull ${{ env.REGISTRY }}/$IMAGE_LOWER:main-$(echo ${{ github.sha }} | cut -c1-7)-arm64
-            docker tag ${{ env.REGISTRY }}/$IMAGE_LOWER:${{ github.sha }}-arm64 flik-springboot:latest
+            docker tag ${{ env.REGISTRY }}/$IMAGE_LOWER:main-$(echo ${{ github.sha }} | cut -c1-7)-arm64 flik-springboot:latest
             
             # 기본 인프라 서비스들이 실행 중인지 확인하고 없으면 시작
             echo "🔍 Checking infrastructure services..."
@@ -227,6 +227,8 @@ jobs:
             echo "OLD_ENV=$OLD_ENV" >> /tmp/deploy_env
             
             # 새로운 환경 시작 (환경 변수 파일 사용)
+            docker compose --env-file .env stop flik-$NEW_ENV
+            docker compose --env-file .env rm -f flik-$NEW_ENV
             docker compose --env-file .env --profile $NEW_ENV up -d flik-$NEW_ENV
             
             # 헬스체크 최적화
