@@ -36,4 +36,5 @@ public interface UserCategoryVectorRepository {
 
     boolean existsByUserIdAndCategory(Long userId, MainCategory category);
 
+    void saveUserCategoryVector(Long userId, MainCategory category, List<Double> vector);
 }

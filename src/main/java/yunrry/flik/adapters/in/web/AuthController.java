@@ -16,9 +16,12 @@ import yunrry.flik.adapters.in.dto.auth.*;
 import yunrry.flik.adapters.out.oauth.OAuth2AuthenticationException;
 import yunrry.flik.core.domain.exception.OAuthSignupRequiredException;
 import yunrry.flik.core.domain.model.AuthProvider;
+import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.OAuthUserInfo;
 import yunrry.flik.core.domain.model.User;
+import yunrry.flik.core.service.auth.JwtTokenProvider;
 import yunrry.flik.core.service.auth.RefreshTokenService;
+import yunrry.flik.core.service.user.UserCategoryVectorService;
 import yunrry.flik.ports.in.command.CompleteOAuthSignupCommand;
 import yunrry.flik.ports.in.command.LoginCommand;
 import yunrry.flik.ports.in.command.OAuthLoginCommand;
@@ -50,6 +53,8 @@ public class AuthController {
     private final OAuthSignupUseCase oAuthSignupUseCase;
     private final RefreshTokenUseCase refreshTokenUseCase;
     private final RefreshTokenService.OAuth2Service oAuth2Service;
+    private final UserCategoryVectorService userCategoryVectorService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Operation(summary = "이메일 회원가입", description = "이메일과 비밀번호로 회원가입합니다.")
     @PostMapping("/signup")
@@ -208,9 +213,30 @@ public class AuthController {
                 .build();
 
         AuthTokens tokens = oAuthSignupUseCase.completeOAuthSignup(command);
+        // 새 유저의 모든 카테고리 벡터를 기본값으로 초기화
+        Long userId = extractUserIdFromTokens(tokens); // 토큰에서 userId 추출
+        initializeUserCategoryVectors(userId);
+
         LoginResponse response = LoginResponse.from(tokens);
 
         return ResponseEntity.ok(Response.success(response));
+    }
+
+    /**
+     * AuthTokens에서 userId 추출
+     */
+    private Long extractUserIdFromTokens(AuthTokens tokens) {
+        String accessToken = tokens.getAccessToken();
+        return jwtTokenProvider.getUserIdFromToken(accessToken);
+    }
+
+    /**
+     * 새 사용자의 모든 카테고리 벡터를 기본값으로 초기화
+     */
+    private void initializeUserCategoryVectors(Long userId) {
+        for (MainCategory category : MainCategory.values()) {
+            userCategoryVectorService.initializeDefaultVector(userId, category);
+        }
     }
 
     @Operation(summary = "토큰 갱신", description = "리프레시 토큰으로 새로운 액세스 토큰을 발급받습니다.")

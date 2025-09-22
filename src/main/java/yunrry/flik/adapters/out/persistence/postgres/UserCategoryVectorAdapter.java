@@ -138,5 +138,24 @@ public class UserCategoryVectorAdapter implements UserCategoryVectorRepository {
         return userCategoryVectorJpaRepository.existsByUserIdAndCategory(userId, category.getCode());
     }
 
+    @Override
+    public void saveUserCategoryVector(Long userId, MainCategory category, List<Double> vector) {
+        Optional<UserCategoryVectorEntity> existing =
+                userCategoryVectorJpaRepository.findByUserIdAndCategory(userId, category.getCode());
+
+        if (existing.isPresent()) {
+            existing.get().updateVector(vector, 1);
+            userCategoryVectorJpaRepository.save(existing.get());
+        } else {
+            UserCategoryVectorEntity newEntity = UserCategoryVectorEntity.builder()
+                    .userId(userId)
+                    .category(category.getCode())
+                    .preferenceVector(vector)
+                    .preferenceCount(1)
+                    .build();
+            userCategoryVectorJpaRepository.save(newEntity);
+        }
+        log.debug("Saved category vector for user: {}, category: {}", userId, category);
+    }
 
 }
