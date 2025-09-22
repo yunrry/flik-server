@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.MainCategory;
+import yunrry.flik.core.domain.model.SubCategory;
+import yunrry.flik.core.domain.model.card.Spot;
 import yunrry.flik.core.domain.model.embedding.UserVectorStats;
 import yunrry.flik.ports.out.repository.SpotRepository;
 import yunrry.flik.ports.out.repository.UserCategoryVectorRepository;
@@ -103,6 +105,43 @@ public class UserCategoryVectorService {
     }
 
 
+    /**
+     * 사용자가 단일 장소를 저장했을 때 해당 카테고리 벡터 업데이트
+     * @param userId 사용자 ID
+     * @param spotId 저장된 장소 ID
+     */
+    @CacheEvict(value = "userCategoryVectors", key = "#userId + '_' + #result.code", condition = "#result != null")
+    @Transactional
+    public MainCategory updateVectorForSavedSpot(Long userId, Long spotId) {
+        try {
+            // 1. 장소의 카테고리 조회
+            MainCategory spotCategory = getSpotCategory(spotId);
+            if (spotCategory == null) {
+                log.warn("Category not found for spot: {}", spotId);
+                return null;
+            }
+
+            // 2. 해당 카테고리의 모든 저장된 장소 조회
+            List<Long> categorySpotIds = getCategorySavedSpots(userId, spotCategory);
+
+            // 3. 새로 저장된 장소 추가
+            categorySpotIds.add(spotId);
+
+            // 4. 카테고리 벡터 재계산
+            userCategoryVectorRepository.recalculateCategoryVector(userId, spotCategory, categorySpotIds);
+
+            log.debug("Updated category vector for user: {}, category: {}, total spots: {}",
+                    userId, spotCategory, categorySpotIds.size());
+
+            return spotCategory;
+
+        } catch (Exception e) {
+            log.error("Failed to update vector for saved spot. userId: {}, spotId: {}, error: {}",
+                    userId, spotId, e.getMessage());
+            return null;
+        }
+    }
+
 
     /**
      * 기본 벡터 반환
@@ -125,6 +164,25 @@ public class UserCategoryVectorService {
         return userCategoryVectorRepository.existsByUserIdAndCategory(userId, category);
     }
 
+    /**
+     * 장소의 메인 카테고리 조회
+     */
 
+    private MainCategory getSpotCategory(Long spotId) {
+        Spot spot = spotRepository.findById(spotId);
+        if (spot != null) {
+            SubCategory sub = SubCategory.findByKoreanName(spot.getLabelDepth2());
+            return sub != null ? categoryMapper.getMainCategory(sub) : null;
+        }
+        return null;
+    }
+
+    /**
+     * 사용자가 저장한 특정 카테고리의 장소 ID 목록 조회
+     */
+    private List<Long> getCategorySavedSpots(Long userId, MainCategory category) {
+        List<Long> allSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
+        return filterSpotsByCategory(allSavedSpotIds, category);
+    }
 
 }
