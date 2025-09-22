@@ -78,6 +78,7 @@ public class PostEntity {
                 .metadata(createMetadata())
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
+                .rating(this.rating)
                 .visitCount(this.visitCount)
                 .spotId(this.spotId)
                 .courseId(this.courseId)
@@ -97,8 +98,8 @@ public class PostEntity {
                 .updatedAt(post.getUpdatedAt())
                 .spotName(post.getMetadata() != null ? post.getMetadata().getSpotName() : null)
                 .location(post.getMetadata() != null ? post.getMetadata().getLocation() : null)
-                .rating(post.getMetadata() != null ? post.getMetadata().getRating() : null)
-                .spotId(post.getMetadata() != null ? post.getMetadata().getSpotId() : null)
+                .rating(post.getRating() != null ? post.getMetadata().getRating() : null)
+                .spotId(post.getSpotId() != null ? post.getMetadata().getSpotId() : null)
                 .courseId(post.getCourseId() != null ? post.getMetadata().getCourseId() : null)
                 .build();
     }

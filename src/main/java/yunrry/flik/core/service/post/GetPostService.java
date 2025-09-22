@@ -33,7 +33,7 @@ public class GetPostService implements GetPostUseCase {
 
 
     @Override
-    @Cacheable(value = "posts", key = "#query.postId")
+//    @Cacheable(value = "posts", key = "#query.postId")
     public Post getPost(GetPostQuery query) {
         Post post = postRepository.findById(query.getPostId())
                 .orElseThrow(() -> new PostNotFoundException(query.getPostId()));

@@ -33,8 +33,11 @@ public class TravelCourseResponse {
         CourseSlotResponse[][] courseSlotResponses = new CourseSlotResponse[travelCourse.getDays()][];
 
         for (int day = 0; day < travelCourse.getDays(); day++) {
-            courseSlotResponses[day] = new CourseSlotResponse[6]; // 6 slots per day
-            for (int slot = 0; slot < 6; slot++) {
+            // 실제 도메인의 슬롯 개수만큼 생성
+            int slotsForThisDay = travelCourse.getCourseSlots()[day].length;
+            courseSlotResponses[day] = new CourseSlotResponse[slotsForThisDay];
+
+            for (int slot = 0; slot < slotsForThisDay; slot++) {
                 courseSlotResponses[day][slot] = CourseSlotResponse.from(
                         travelCourse.getCourseSlots()[day][slot]
                 );

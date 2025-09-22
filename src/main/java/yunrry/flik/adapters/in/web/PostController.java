@@ -92,7 +92,7 @@ public class PostController {
 //    }
 
     @Operation(summary = "게시물 상세 조회", description = "게시물 상세 정보를 조회합니다.")
-    @GetMapping("{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Response<ActivityDetailPostResponse>> getPost(@PathVariable Long id) {
         GetPostQuery query = new GetPostQuery(id);
         Post post = getPostUseCase.getPost(query);
