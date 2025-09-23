@@ -30,6 +30,6 @@ public interface TravelCourseJpaRepository extends JpaRepository<TravelCourseEnt
 
     List<TravelCourseEntity> findByRegionCode(String regionCode);
 
-    @Query("SELECT t FROM TravelCourseEntity t WHERE t.regionCode LIKE CONCAT(:regionPrefix, '%')")
+    @Query("SELECT t FROM TravelCourseEntity t WHERE t.regionCode LIKE CONCAT(:regionPrefix, '%') AND t.isPublic = true")
     List<TravelCourseEntity> findByRegionCodePrefix(@Param("regionPrefix") String regionPrefix);
 }

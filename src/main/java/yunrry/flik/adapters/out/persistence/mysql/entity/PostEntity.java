@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import yunrry.flik.adapters.out.persistence.mysql.entity.converter.LongListConverter;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostMetadata;
 import yunrry.flik.core.domain.model.PostType;
@@ -29,6 +30,12 @@ public class PostEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    @Column(name = "user_nickname", nullable = false)
+    private String userNickname;
+
+    @Column(name = "user_profile_image_url")
+    private String userProfileImageUrl;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PostType type;
@@ -52,17 +59,19 @@ public class PostEntity {
     private LocalDateTime updatedAt;
 
     // Metadata fields
-    @Column(name = "spot_name", length = 500)
-    private String spotName;
-
-    @Column(name = "location", length = 500)
-    private String location;
+    @Column(name = "region_code", length = 500)
+    private String regionCode;
 
     @Column(name = "rating", precision = 2, scale = 1)
     private BigDecimal rating;
 
-    @Column(name = "spot_id")
-    private Long spotId;
+    @Column(name = "spot_ids")
+    @Convert(converter = LongListConverter.class)
+    private List<Long> spotIds;
+
+    @Column(name = "all_spot_ids")
+    @Convert(converter = LongListConverter.class)
+    private List<Long> allSpotIds;
 
     @Column(name = "course_id")
     private Long courseId;
@@ -71,6 +80,8 @@ public class PostEntity {
         return Post.builder()
                 .id(this.id)
                 .userId(this.userId)
+                .userNickname(this.userNickname)
+                .userProfileImageUrl(this.userProfileImageUrl)
                 .type(this.type)
                 .title(this.title)
                 .content(this.content)
@@ -78,9 +89,8 @@ public class PostEntity {
                 .metadata(createMetadata())
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
-                .rating(this.rating)
                 .visitCount(this.visitCount)
-                .spotId(this.spotId)
+                .spotIds(this.spotIds)
                 .courseId(this.courseId)
                 .build();
     }
@@ -89,6 +99,8 @@ public class PostEntity {
         return PostEntity.builder()
                 .id(post.getId())
                 .userId(post.getUserId())
+                .userNickname(post.getUserNickname())
+                .userProfileImageUrl(post.getUserProfileImageUrl())
                 .type(post.getType())
                 .title(post.getTitle())
                 .content(post.getContent())
@@ -96,11 +108,10 @@ public class PostEntity {
                 .visitCount(post.getVisitCount())
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())
-                .spotName(post.getMetadata() != null ? post.getMetadata().getSpotName() : null)
-                .location(post.getMetadata() != null ? post.getMetadata().getLocation() : null)
-                .rating(post.getRating() != null ? post.getMetadata().getRating() : null)
-                .spotId(post.getSpotId() != null ? post.getMetadata().getSpotId() : null)
-                .courseId(post.getCourseId() != null ? post.getMetadata().getCourseId() : null)
+                .regionCode(post.getMetadata() != null ? post.getMetadata().getRegionCode() : null)
+                .allSpotIds(post.getMetadata().getSpotIds()!= null ? post.getMetadata().getSpotIds() : null)
+                .spotIds(post.getSpotIds() != null ? post.getSpotIds() : null)
+                .courseId(post.getCourseId() != null ? post.getCourseId() : null)
                 .build();
     }
 
@@ -120,10 +131,9 @@ public class PostEntity {
 
     private PostMetadata createMetadata() {
         return PostMetadata.builder()
-                .spotName(this.spotName)
-                .location(this.location)
+                .regionCode(this.regionCode)
                 .rating(this.rating)
-                .spotId(this.spotId)
+                .spotIds(this.allSpotIds)
                 .courseId(this.courseId)
                 .build();
     }

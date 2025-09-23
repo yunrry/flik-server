@@ -14,6 +14,8 @@ import java.util.List;
 public class Post {
     private final Long id;
     private final Long userId;
+    private final String userNickname;
+    private final String userProfileImageUrl;
     private final PostType type;
     private final String title;
     private final String content;
@@ -21,9 +23,8 @@ public class Post {
     private final PostMetadata metadata;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
-    private final BigDecimal rating;
     private final Integer visitCount;
-    private final Long spotId;
+    private final List<Long> spotIds;
     private final Long courseId;
 
 
@@ -32,6 +33,8 @@ public class Post {
         return Post.builder()
                 .id(this.id)
                 .userId(this.userId)
+                .userNickname(this.userNickname)
+                .userProfileImageUrl(this.userProfileImageUrl)
                 .type(this.type)
                 .title(this.title)
                 .content(this.content)
@@ -39,9 +42,8 @@ public class Post {
                 .metadata(this.metadata)
                 .createdAt(this.createdAt)
                 .updatedAt(this.updatedAt)
-                .rating(this.rating)
                 .visitCount(this.visitCount==null? 1 : this.visitCount + 1)
-                .spotId(this.spotId)
+                .spotIds(this.spotIds)
                 .courseId(this.courseId)
                 .build();
     }
@@ -50,6 +52,8 @@ public class Post {
         return Post.builder()
                 .id(this.id)
                 .userId(this.userId)
+                .userNickname(this.userNickname)
+                .userProfileImageUrl(this.userProfileImageUrl)
                 .type(this.type)
                 .title(title)
                 .content(content)
@@ -57,9 +61,8 @@ public class Post {
                 .metadata(this.metadata)
                 .createdAt(this.createdAt)
                 .updatedAt(LocalDateTime.now())
-                .rating(this.rating)
                 .visitCount(this.visitCount)
-                .spotId(this.spotId)
+                .spotIds(this.spotIds)
                 .courseId(this.courseId)
                 .build();
     }

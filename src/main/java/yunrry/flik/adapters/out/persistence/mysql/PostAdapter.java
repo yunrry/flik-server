@@ -5,13 +5,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
-import yunrry.flik.adapters.in.dto.post.PostSearchResponse;
-import yunrry.flik.adapters.in.dto.post.UserActivityPostResponse;
 import yunrry.flik.adapters.out.persistence.mysql.entity.PostEntity;
 import yunrry.flik.adapters.out.persistence.mysql.repository.PostJpaRepository;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
+import yunrry.flik.ports.in.query.SearchUserPostsQuery;
 import yunrry.flik.ports.out.repository.PostRepository;
 
 import java.util.List;
@@ -37,11 +36,11 @@ public class PostAdapter implements PostRepository {
     }
 
     @Override
-    public Slice<Post> findByConditions(SearchPostsQuery query) {
+    public Slice<Post> findByConditions(SearchUserPostsQuery query) {
         Pageable pageable = createPageable(query);
-
+        PostType postType = query.getType() != null ? PostType.fromCode(query.getType()) : null;
         Slice<PostEntity> entities = postJpaRepository.findByConditions(
-                query.getType(),
+                postType,
                 query.getUserId(),
                 pageable
         );
@@ -50,9 +49,11 @@ public class PostAdapter implements PostRepository {
     }
 
     @Override
-    public List<Post> findAllByConditions(SearchPostsQuery query) {
+    public List<Post> findUserPostsAllByConditions(SearchUserPostsQuery query) {
+        PostType postType = query.getType() != null ? PostType.fromCode(query.getType()) : null;
+
         List<PostEntity> entities = postJpaRepository.findAllByConditions(
-                query.getType(),
+                postType,
                 query.getUserId()
         );
 
@@ -67,7 +68,33 @@ public class PostAdapter implements PostRepository {
         postJpaRepository.deleteById(id);
     }
 
-    private Pageable createPageable(SearchPostsQuery query) {
+
+    @Override
+    public Slice<Post> findBySearchConditions(SearchPostsQuery query) {
+        PageRequest pageRequest = PageRequest.of(query.page(), query.size());
+        PostType postType = query.type() != null ? PostType.fromCode(query.type()) : null;
+
+        return postJpaRepository.findBySearchConditions(
+                postType,
+                query.regionCode(),
+                pageRequest
+        ).map(PostEntity::toDomain);
+    }
+
+    @Override
+    public Slice<Post> findBySearchUserConditions(SearchUserPostsQuery query) {
+        PageRequest pageRequest = PageRequest.of(query.getPage(), query.getSize());
+        PostType postType = query.getType() != null ? PostType.fromCode(query.getType()) : null;
+
+        return postJpaRepository.findBySearchUserConditions(
+                postType,
+                query.getUserId(),
+                pageRequest
+        ).map(PostEntity::toDomain);
+    }
+
+
+    private Pageable createPageable(SearchUserPostsQuery query) {
         return PageRequest.of(query.getPage(), query.getSize());
     }
 }

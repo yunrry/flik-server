@@ -1,34 +1,17 @@
 package yunrry.flik.adapters.in.dto.post;
 
-import org.springframework.data.domain.Slice;
-import yunrry.flik.core.domain.model.Post;
+import lombok.Builder;
 
 import java.util.List;
 
+@Builder
 public record PostSearchResponse(
-        List<UserActivityPostResponse> content,
+        List<ActivityDetailPostResponse> content,
         PageableInfo pageable,
         boolean hasNext,
         int numberOfElements
 ) {
-    public static PostSearchResponse from(Slice<Post> slice) {
-        List<UserActivityPostResponse> content = slice.getContent().stream()
-                .map(UserActivityPostResponse::from)
-                .toList();
-
-        PageableInfo pageableInfo = new PageableInfo(
-                slice.getNumber(),
-                slice.getSize()
-        );
-
-        return new PostSearchResponse(
-                content,
-                pageableInfo,
-                slice.hasNext(),
-                slice.getNumberOfElements()
-        );
-    }
-
+    @Builder
     public record PageableInfo(
             int pageNumber,
             int pageSize

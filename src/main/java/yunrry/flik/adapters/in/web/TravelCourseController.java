@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+import yunrry.flik.adapters.in.dto.CourseVisibilityUpdateRequest;
 import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.TravelCourseResponse;
 import yunrry.flik.adapters.in.dto.TravelCourseUpdateRequest;
@@ -125,11 +126,27 @@ public class TravelCourseController {
         return ResponseEntity.ok(Response.success(TravelCourseResponse.from(course)));
     }
 
+    /**
+     * 지역 코드로 여행 코스 조회
+     */
     @GetMapping("/region/{regionCodeFrefix}")
     public ResponseEntity<List<TravelCourse>> getCoursesByRegionCode(@PathVariable String regionCodeFrefix) {
         log.info("API 요청 - regionCode로 TravelCourse 조회: {}", regionCodeFrefix);
         List<TravelCourse> courses = TravelCourseUseCase.getTravelCoursesByRegionPrefix(regionCodeFrefix);
         return ResponseEntity.ok(courses);
+    }
+
+
+    /**
+     * 여행 코스 공개 여부 업데이트
+     */
+    @PatchMapping("/{id}/visibility")
+    public ResponseEntity<Response<TravelCourseResponse>> updateCourseVisibility(
+            @PathVariable Long id,
+            @RequestBody CourseVisibilityUpdateRequest request
+    ) {
+        TravelCourse updatedCourse = TravelCourseUseCase.updateCourseVisibility(id, request.getIsPublic());
+        return ResponseEntity.ok(Response.success(TravelCourseResponse.from(updatedCourse)));
     }
 
 

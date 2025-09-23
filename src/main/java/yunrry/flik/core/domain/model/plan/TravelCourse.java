@@ -17,6 +17,7 @@ import java.util.List;
 public class TravelCourse {
     private Long id;
     private Long userId;
+    private String name;
     private int days;
     private Double totalDistance;
     private CourseSlot[][] courseSlots;
@@ -55,6 +56,10 @@ public class TravelCourse {
             throw new IllegalArgumentException("총 이동 거리는 0 이상이어야 합니다.");
         }
         this.totalDistance = totalDistance;
+    }
+
+    public void updateName(String name) {
+        this.name = name;
     }
 
     public int getTotalSlots() {

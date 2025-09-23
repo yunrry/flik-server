@@ -2,19 +2,14 @@ package yunrry.flik.core.service.post;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
-import yunrry.flik.adapters.in.dto.post.PostSearchResponse;
-import yunrry.flik.adapters.in.dto.post.UserActivityPostResponse;
-import yunrry.flik.adapters.out.persistence.mysql.entity.PostEntity;
 import yunrry.flik.core.domain.exception.PostNotFoundException;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
 import yunrry.flik.ports.in.query.GetPostQuery;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
+import yunrry.flik.ports.in.query.SearchUserPostsQuery;
 import yunrry.flik.ports.in.usecase.post.GetPostUseCase;
 import yunrry.flik.ports.out.repository.PostRepository;
 
@@ -54,10 +49,10 @@ public class GetPostService implements GetPostUseCase {
     public Slice<Post> getUserPosts(Long userId, String typeCode, int page, int size) {
 
         PostType postType = typeCode != null ? PostType.fromCode(typeCode) : null;
-        SearchPostsQuery query = SearchPostsQuery.builder()
+        SearchUserPostsQuery query = SearchUserPostsQuery.builder()
                 .page(page)
                 .size(size)
-                .type(postType)
+                .type(typeCode)
                 .userId(userId)
                 .build();
 
@@ -70,12 +65,23 @@ public class GetPostService implements GetPostUseCase {
 
     @Override
     public List<Post> getAllUserPosts(Long userId, String typeCode) {
-        SearchPostsQuery query = SearchPostsQuery.builder()
+        SearchUserPostsQuery query = SearchUserPostsQuery.builder()
                 .userId(userId)
-                .type(typeCode != null ? PostType.fromCode(typeCode) : null)
+                .type(typeCode)
                 .build();
 
-        return postRepository.findAllByConditions(query);
+        return postRepository.findUserPostsAllByConditions(query);
+    }
+
+
+    @Override
+    public Slice<Post> searchUserPosts(SearchUserPostsQuery query) {
+        return postRepository.findBySearchUserConditions(query);
+    }
+
+    @Override
+    public Slice<Post> searchPosts(SearchPostsQuery query) {
+        return postRepository.findBySearchConditions(query);
     }
 
 }

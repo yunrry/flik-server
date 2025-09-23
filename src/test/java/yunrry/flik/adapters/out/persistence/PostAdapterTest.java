@@ -11,7 +11,7 @@ import yunrry.flik.adapters.out.persistence.mysql.PostAdapter;
 import yunrry.flik.adapters.out.persistence.mysql.entity.PostEntity;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
-import yunrry.flik.ports.in.query.SearchPostsQuery;
+import yunrry.flik.ports.in.query.SearchUserPostsQuery;
 
 
 import java.time.LocalDateTime;
@@ -104,7 +104,7 @@ class PostAdapterTest {
         entityManager.persist(savePost);
         entityManager.flush();
 
-        SearchPostsQuery query = SearchPostsQuery.builder()
+        SearchUserPostsQuery query = SearchUserPostsQuery.builder()
                 .page(0)
                 .size(20)
                 .type(PostType.REVIEW)

@@ -33,4 +33,24 @@ public interface PostJpaRepository extends JpaRepository<PostEntity, Long> {
             @Param("userId") Long userId
     );
 
+    @Query("SELECT p FROM PostEntity p WHERE " +
+            "(:type IS NULL OR p.type = :type) AND " +
+            "(:regionCode IS NULL OR SUBSTRING(p.regionCode, 1, 2) = :regionCode) " +
+            "ORDER BY p.createdAt DESC")
+    Slice<PostEntity> findBySearchConditions(
+            @Param("type") PostType type,
+            @Param("regionCode") String regionCode,
+            Pageable pageable
+    );
+
+    @Query("SELECT p FROM PostEntity p WHERE " +
+            "(:type IS NULL OR p.type = :type) AND " +
+            "(:userId IS NULL OR p.userId = :userId) " +
+            "ORDER BY p.createdAt DESC")
+    Slice<PostEntity> findBySearchUserConditions(
+            @Param("type") PostType type,
+            @Param("userId") Long userId,
+            Pageable pageable
+    );
+
 }
