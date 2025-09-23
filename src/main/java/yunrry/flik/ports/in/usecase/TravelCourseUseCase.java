@@ -18,4 +18,6 @@ public interface TravelCourseUseCase {
     List<TravelCourse> getTravelCoursesByRegionCode(String regionCode);
 
     List<TravelCourse> getTravelCoursesByRegionPrefix(String regionPrefix);
+
+    TravelCourse updateCourseVisibility(Long id, Boolean isPublic);
 }

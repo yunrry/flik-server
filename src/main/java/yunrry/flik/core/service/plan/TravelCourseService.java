@@ -44,6 +44,10 @@ public class TravelCourseService implements TravelCourseUseCase {
             existing.updateTotalDistance(request.getTotalDistance());
         }
 
+        if(request.getName() != null) {
+            existing.updateName(request.getName());
+        }
+
         // courseSlots 업데이트
         if (request.getCourseSlots() != null) {
             existing = TravelCourse.builder()
@@ -56,6 +60,7 @@ public class TravelCourseService implements TravelCourseUseCase {
                     .courseType(existing.getCourseType())
                     .regionCode(request.getRegionCode() != null ? request.getRegionCode() : existing.getRegionCode())
                     .selectedCategories(request.getSelectedCategories() != null ? request.getSelectedCategories() : existing.getSelectedCategories())
+                    .isPublic(request.getIsPublic() != null ? request.getIsPublic() : existing.getIsPublic())
                     .build();
         } else {
             // regionCode, selectedCategories만 업데이트
@@ -70,9 +75,32 @@ public class TravelCourseService implements TravelCourseUseCase {
                         .courseType(existing.getCourseType())
                         .regionCode(request.getRegionCode())
                         .selectedCategories(request.getSelectedCategories() != null ? request.getSelectedCategories() : existing.getSelectedCategories())
+                        .isPublic(request.getIsPublic() != null ? request.getIsPublic() : existing.getIsPublic())
                         .build();
             }
         }
+
+        return travelCourseRepository.save(existing);
+    }
+
+    @Override
+    @Transactional
+    public TravelCourse updateCourseVisibility(Long id, Boolean isPublic) {
+        TravelCourse existing = travelCourseRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("TravelCourse not found with id: " + id));
+
+        existing = TravelCourse.builder()
+                .id(existing.getId())
+                .userId(existing.getUserId())
+                .days(existing.getDays())
+                .totalDistance(existing.getTotalDistance())
+                .courseSlots(existing.getCourseSlots())
+                .createdAt(existing.getCreatedAt())
+                .courseType(existing.getCourseType())
+                .regionCode(existing.getRegionCode())
+                .selectedCategories(existing.getSelectedCategories())
+                .isPublic(isPublic)
+                .build();
 
         return travelCourseRepository.save(existing);
     }

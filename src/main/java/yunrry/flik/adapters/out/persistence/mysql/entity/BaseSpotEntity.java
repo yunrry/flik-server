@@ -161,6 +161,18 @@ public abstract class BaseSpotEntity {
         if (imageUrls == null || imageUrls.trim().isEmpty()) {
             return List.of();
         }
+
+        // JSON 배열 형태인 경우
+        if (imageUrls.trim().startsWith("[")) {
+            return Arrays.stream(imageUrls
+                            .replaceAll("[\\[\\]\"]", "")  // 대괄호와 따옴표 제거
+                            .split(","))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .toList();
+        }
+
+        // 콤마 구분 형태인 경우
         return Arrays.asList(imageUrls.split(","));
     }
 

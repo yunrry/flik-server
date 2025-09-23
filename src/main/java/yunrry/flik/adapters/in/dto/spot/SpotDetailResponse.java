@@ -18,6 +18,7 @@ public record SpotDetailResponse(
         BigDecimal rating,
         String description,
         String address,
+        String regionCode,
         BigDecimal latitude,
         BigDecimal longitude,
         @JsonFormat(pattern = "HH:mm")
@@ -62,6 +63,7 @@ public record SpotDetailResponse(
                 spot.getRating(),
                 spot.getDescription(),
                 spot.getAddress(),
+                spot.getRegnCd()+spot.getSignguCd(),
                 spot.getLatitude(),
                 spot.getLongitude(),
                 operatingHours,

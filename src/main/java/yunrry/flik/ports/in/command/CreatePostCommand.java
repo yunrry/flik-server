@@ -2,6 +2,7 @@ package yunrry.flik.ports.in.command;
 
 import lombok.Builder;
 import lombok.Getter;
+import yunrry.flik.adapters.in.dto.post.PostCourseMetaResponse;
 import yunrry.flik.core.domain.model.PostType;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public class CreatePostCommand {
     private final String title;
     private final String content;
     private final List<String> imageUrls;
-    private final Long spotId;
+    private final String regionCode;
+    private final List<Long> spotIds;
+    private final List<Long> relatedSpotIds;
     private final Long courseId;
 
     public void validate() {
@@ -30,5 +33,6 @@ public class CreatePostCommand {
         if (content.length() > 5000) {
             throw new IllegalArgumentException("내용은 5000자를 초과할 수 없습니다");
         }
+
     }
 }

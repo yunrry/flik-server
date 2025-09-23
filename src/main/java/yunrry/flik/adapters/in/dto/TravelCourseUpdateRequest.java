@@ -9,8 +9,10 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class TravelCourseUpdateRequest {
+    private String name;
     private Double totalDistance;
     private CourseSlot[][] courseSlots;
     private String regionCode;
     private List<String> selectedCategories;
+    private Boolean isPublic;
 }

@@ -18,10 +18,19 @@ public record CreatePostRequest(
         @Schema(description = "이미지 URL 목록")
         List<String> imageUrl,
 
+        @Schema(description = "지역 코드", example = "11110")
+        String regionCode,
+
+        @Schema(description = "연관된 코스와 장소에 속하는 장소 IDs", example = "123")
+        List<Long> relatedSpotIds,
+
         @Schema(description = "연관된 장소 ID", example = "123")
-        Long spotId,
+        List<Long> spotIds,
 
         @Schema(description = "연관된 코스 ID", example = "456")
         Long courseId
+
+
+
 ) {
 }

@@ -13,11 +13,16 @@ import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.post.*;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
+import yunrry.flik.core.domain.model.card.Spot;
+import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.ports.in.command.CreatePostCommand;
 import yunrry.flik.ports.in.command.DeletePostCommand;
 import yunrry.flik.ports.in.command.UpdatePostCommand;
 import yunrry.flik.ports.in.query.GetPostQuery;
 import yunrry.flik.ports.in.query.SearchPostsQuery;
+import yunrry.flik.ports.in.query.SearchUserPostsQuery;
+import yunrry.flik.ports.in.usecase.GetSpotUseCase;
+import yunrry.flik.ports.in.usecase.TravelCourseUseCase;
 import yunrry.flik.ports.in.usecase.post.CreatePostUseCase;
 import yunrry.flik.ports.in.usecase.post.DeletePostUseCase;
 import yunrry.flik.ports.in.usecase.post.GetPostUseCase;
@@ -36,67 +41,81 @@ public class PostController {
     private final GetPostUseCase getPostUseCase;
     private final UpdatePostUseCase updatePostUseCase;
     private final DeletePostUseCase deletePostUseCase;
+    private final TravelCourseUseCase travelCourseUseCase;
+    private final GetSpotUseCase getSpotUseCase;
 
 
     @GetMapping
-    public ResponseEntity<Response<List<UserActivityPostResponse>>> getAllMyPosts(
+    public ResponseEntity<Response<PostSearchResponse>> getAllMyPosts(
             @AuthenticationPrincipal Long userId,
-            @RequestParam(required = false) String type
-    ) {
-        log.info("Check Get all posts for userId: {}, type: {}", userId, type);
-        List<Post> posts = getPostUseCase.getAllUserPosts(userId, type);
+            @Parameter(description = "페이지 번호 (0부터 시작)")
+            @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "페이지 크기")
+            @RequestParam(defaultValue = "10") int size,
+            @Parameter(description = "게시물 타입 (선택)")
+            @RequestParam(required = false) String type) {
 
-        List<UserActivityPostResponse> response = posts.stream()
-                .map(UserActivityPostResponse::from)
+        log.debug("Searching posts: user={} page={}, size={}, type={}",
+                userId, page, size, type);
+
+        SearchUserPostsQuery query = SearchUserPostsQuery.builder()
+                .page(page)
+                .size(size)
+                .type(type)
+                .userId(userId)
+                .build();
+
+        Slice<Post> postSlice = getPostUseCase.searchUserPosts(query);
+
+        List<ActivityDetailPostResponse> content = postSlice.getContent().stream()
+                .map(post -> {
+                    TravelCourse travelCourse = post.getCourseId() != null
+                            ? travelCourseUseCase.getTravelCourse(post.getCourseId())
+                            : null;
+
+                    List<Spot> spots = (post.getSpotIds() != null && !post.getSpotIds().isEmpty())
+                            ? getSpotUseCase.findSpotsByIds(post.getSpotIds())
+                            : null;
+
+                    return ActivityDetailPostResponse.from(post, travelCourse, spots);
+                })
                 .toList();
+
+        PostSearchResponse response = PostSearchResponse.builder()
+                .content(content)
+                .pageable(PostSearchResponse.PageableInfo.builder()
+                        .pageNumber(postSlice.getNumber())
+                        .pageSize(postSlice.getSize())
+                        .build())
+                .hasNext(postSlice.hasNext())
+                .numberOfElements(postSlice.getNumberOfElements())
+                .build();
 
         return ResponseEntity.ok(Response.success(response));
     }
 
-//    @Operation(summary = "게시물 목록 조회", description = "사용자 활동 게시물 목록을 조회합니다.")
-//    @GetMapping
-//    public ResponseEntity<Response<PostSearchResponse>> searchPosts(
-//            @Parameter(description = "페이지 번호", example = "0")
-//            @RequestParam(defaultValue = "0") int page,
-//
-//            @Parameter(description = "페이지 크기", example = "20")
-//            @RequestParam(defaultValue = "20") int size,
-//
-//            @Parameter(description = "게시물 타입", example = "review")
-//            @RequestParam(required = false) String type,
-//
-//            @AuthenticationPrincipal Long userId) {
-//
-//        PostType postType = type != null ? PostType.fromCode(type) : null;
-//
-//        SearchPostsQuery query = SearchPostsQuery.builder()
-//                .page(page)
-//                .size(size)
-//                .type(postType)
-//                .userId(userId)
-//                .build();
-//
-//        List<Post> postList = getPostUseCase.searchPosts(query); // List<Post>로 안전하게 변환
-//        List<UserActivityPostResponse> content = postList.stream()
-//                .map(UserActivityPostResponse::from)
-//                .toList();
-//
-//        PostSearchResponse response = new PostSearchResponse(
-//                content,
-//                new PostSearchResponse.PageableInfo(page, size),
-//                content.size() == size,
-//                content.size()
-//        );
-//
-//        return ResponseEntity.ok(Response.success(response));
-//    }
-
     @Operation(summary = "게시물 상세 조회", description = "게시물 상세 정보를 조회합니다.")
     @GetMapping("/get/{id}")
     public ResponseEntity<Response<ActivityDetailPostResponse>> getPost(@PathVariable Long id) {
+        log.debug("Fetching post detail for id: {}", id);
+
         GetPostQuery query = new GetPostQuery(id);
         Post post = getPostUseCase.getPost(query);
-        ActivityDetailPostResponse response = ActivityDetailPostResponse.from(post);
+        log.debug("Retrieved post: id={}, courseId={}, spotIds={}",
+                post.getId(), post.getCourseId(), post.getSpotIds());
+
+        TravelCourse travelCourse = post.getCourseId() != null
+                ? travelCourseUseCase.getTravelCourse(post.getCourseId())
+                : null;
+        log.debug("Retrieved travelCourse: {}", travelCourse != null ? travelCourse.getId() : "null");
+
+        List<Spot> spots = (post.getSpotIds() != null && !post.getSpotIds().isEmpty())
+                ? getSpotUseCase.findSpotsByIds(post.getSpotIds())
+                : null;
+        log.debug("Retrieved spots count: {}", spots != null ? spots.size() : 0);
+
+        ActivityDetailPostResponse response = ActivityDetailPostResponse.from(post, travelCourse, spots);
+        log.debug("Created response for post id: {}", id);
 
         return ResponseEntity.ok(Response.success(response));
     }
@@ -113,7 +132,9 @@ public class PostController {
                 .title(request.title())
                 .content(request.content())
                 .imageUrls(request.imageUrl())
-                .spotId(request.spotId())
+                .regionCode(request.regionCode())
+                .spotIds(request.spotIds())
+                .relatedSpotIds(request.relatedSpotIds())
                 .courseId(request.courseId())
                 .build();
 
@@ -156,5 +177,56 @@ public class PostController {
         return ResponseEntity.ok(Response.success(null));
     }
 
+
+    @Operation(summary = "게시물 검색", description = "페이징 처리된 게시물 목록을 조회합니다.")
+    @GetMapping("/search")
+    public ResponseEntity<Response<PostSearchResponse>> searchPosts(
+            @Parameter(description = "페이지 번호 (0부터 시작)")
+            @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "페이지 크기")
+            @RequestParam(defaultValue = "10") int size,
+            @Parameter(description = "게시물 타입 (선택)")
+            @RequestParam(required = false) String type,
+            @Parameter(description = "지역 코드 (선택)")
+            @RequestParam(required = false) String regionCode) {
+
+        log.debug("Searching posts: page={}, size={}, type={}, regionCode={}",
+                page, size, type, regionCode);
+
+        SearchPostsQuery query = SearchPostsQuery.builder()
+                .page(page)
+                .size(size)
+                .type(type)
+                .regionCode(regionCode)
+                .build();
+
+        Slice<Post> postSlice = getPostUseCase.searchPosts(query);
+
+        List<ActivityDetailPostResponse> content = postSlice.getContent().stream()
+                .map(post -> {
+                    TravelCourse travelCourse = post.getCourseId() != null
+                            ? travelCourseUseCase.getTravelCourse(post.getCourseId())
+                            : null;
+
+                    List<Spot> spots = (post.getSpotIds() != null && !post.getSpotIds().isEmpty())
+                            ? getSpotUseCase.findSpotsByIds(post.getSpotIds())
+                            : null;
+
+                    return ActivityDetailPostResponse.from(post, travelCourse, spots);
+                })
+                .toList();
+
+        PostSearchResponse response = PostSearchResponse.builder()
+                .content(content)
+                .pageable(PostSearchResponse.PageableInfo.builder()
+                        .pageNumber(postSlice.getNumber())
+                        .pageSize(postSlice.getSize())
+                        .build())
+                .hasNext(postSlice.hasNext())
+                .numberOfElements(postSlice.getNumberOfElements())
+                .build();
+
+        return ResponseEntity.ok(Response.success(response));
+    }
 
 }
