@@ -34,6 +34,6 @@ public interface UserSavedSpotJpaRepository extends JpaRepository<UserSavedSpotE
     int countBySpotId(Long spotId);
 
 
-    @Query("SELECT uss.spotId FROM UserSavedSpotEntity uss WHERE uss.userId = :userId")
+    @Query("SELECT uss.spotId FROM UserSavedSpotEntity uss WHERE uss.userId = :userId ORDER BY uss.createdAt DESC")
     List<Long> findSpotIdsByUserId(@Param("userId") Long userId);
 }
