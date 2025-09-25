@@ -118,10 +118,8 @@ class ShoppingMigrator:
         
         for item in shopping_data:
             # 주소에서 구 코드 추출
-            signgu_cd = self.parse_address_to_district(item.get('addr1', ''))
-            
-            # 키워드 추출
-            keywords = self.extract_keywords_from_reviews(item.get('google_reviews', ''))
+            signgu_cd = self.parse_address_to_district(item.get('addr1', ''))    
+        
             
             # 이미지 URL 처리
             image_urls = []

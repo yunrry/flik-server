@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import yunrry.flik.adapters.out.persistence.mysql.entity.BaseSpotEntity;
+import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.card.Spot;
 
 import java.util.List;
@@ -54,6 +55,19 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             @Param("signguCd") String signguCd,
             Pageable pageable);
 
+    @Query("SELECT s FROM BaseSpotEntity s WHERE s.category = :category AND s.regnCd = :regnCd AND s.signguCd = :signguCd ORDER BY s.rating DESC")
+    List<BaseSpotEntity> findByCategoryAndRegnCdAndSignguCdOrderByRatingDesc(
+            @Param("category") String category,
+            @Param("regnCd") String regnCd,
+            @Param("signguCd") String signguCd,
+            Pageable pageable);
+
+    @Query("SELECT s FROM BaseSpotEntity s WHERE s.category = :category AND s.regnCd IN :regnCds AND s.signguCd IN :signguCds ORDER BY s.rating DESC")
+    List<BaseSpotEntity> findByCategoryAndRegnCdInAndSignguCdInOrderByRatingDesc(
+            @Param("category") String category,
+            @Param("regnCds") List<String> regnCds,
+            @Param("signguCds") List<String> signguCds,
+            Pageable pageable);
 
     @Query("SELECT s FROM BaseSpotEntity s WHERE s.labelDepth2 IN :subcategories")
     List<BaseSpotEntity> findByLabelDepth2In(@Param("subcategories") List<String> subcategories);

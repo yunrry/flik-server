@@ -1,5 +1,7 @@
 package yunrry.flik.adapters.out.persistence.mysql.entity;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +11,13 @@ import yunrry.flik.core.domain.model.plan.CourseType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Entity
 @Table(name = "travel_courses")
@@ -35,7 +43,7 @@ public class TravelCourseEntity {
     @Column(name = "total_distance")
     private Double totalDistance;
 
-    @Lob
+
     @Column(name = "course_slots_json", columnDefinition = "TEXT")
     private String courseSlotsJson; // JSON string representation of CourseSlot[][]
 
@@ -62,6 +70,9 @@ public class TravelCourseEntity {
         }
     }
 
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public static TravelCourseEntity from(TravelCourse travelCourse, String courseSlotsJson) {
         return TravelCourseEntity.builder()
                 .id(travelCourse.getId())
@@ -79,18 +90,37 @@ public class TravelCourseEntity {
     }
 
     public TravelCourse toDomain(CourseSlot[][] courseSlots) {
+        List<String> parsedCategories = parseSelectedCategories(this.selectedCategories);
+
         return TravelCourse.builder()
                 .id(this.id)
                 .userId(this.userId)
-                .name(this.name)
                 .days(this.days)
                 .totalDistance(this.totalDistance)
                 .courseSlots(courseSlots)
                 .createdAt(this.createdAt)
                 .courseType(this.courseType)
                 .regionCode(this.regionCode)
-                .selectedCategories(List.of(this.selectedCategories))
+                .selectedCategories(parsedCategories)
                 .isPublic(this.isPublic)
                 .build();
+    }
+
+    private List<String> parseSelectedCategories(String rawCategories) {
+        if (rawCategories == null || rawCategories.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        try {
+            // JSON 배열 형태일 경우
+            if (rawCategories.trim().startsWith("[") && rawCategories.trim().endsWith("]")) {
+                return objectMapper.readValue(rawCategories, new TypeReference<List<String>>() {});
+            }
+
+            // 일반 문자열일 경우
+            return Collections.singletonList(rawCategories.trim());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to parse selectedCategories: " + rawCategories, e);
+        }
     }
 }
