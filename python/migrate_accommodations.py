@@ -16,52 +16,7 @@ class AccommodationsMigrator:
     def __init__(self, db_config: Dict[str, str]):
         self.db_config = db_config
         
-        # 서울 구별 매핑 정보
-        self.district_mapping = {
-            "종로구": "110", "중구": "140", "용산구": "170", "성동구": "200", "광진구": "215",
-            "동대문구": "230", "중랑구": "260", "성북구": "290", "강북구": "305", "도봉구": "320",
-            "노원구": "350", "은평구": "380", "서대문구": "410", "마포구": "440", "양천구": "470",
-            "강서구": "500", "구로구": "530", "금천구": "545", "영등포구": "560", "동작구": "590",
-            "관악구": "620", "서초구": "650", "강남구": "680", "송파구": "710", "강동구": "740"
-        }
     
-    def extract_keywords_from_reviews(self, google_reviews: str) -> List[str]:
-        """Google 리뷰에서 숙박시설 관련 키워드 추출"""
-        if not google_reviews or google_reviews.strip() == '':
-            return []
-        
-        try:
-            reviews_data = json.loads(google_reviews)
-            all_text = ""
-            
-            if isinstance(reviews_data, list):
-                for review in reviews_data:
-                    if isinstance(review, dict) and 'text' in review:
-                        all_text += review['text'] + " "
-            elif isinstance(reviews_data, dict) and 'reviews' in reviews_data:
-                for review in reviews_data['reviews']:
-                    if isinstance(review, dict) and 'text' in review:
-                        all_text += review['text'] + " "
-            
-            # 숙박시설 관련 키워드 추출
-            accommodation_keywords = re.findall(r'[가-힣]{2,4}(?:호텔|모텔|펜션|리조트|게스트하우스|민박|콘도|숙소|숙박|객실|룸|스위트|로비|프런트)', all_text)
-            service_keywords = re.findall(r'[가-힣]{2,4}(?:서비스|직원|체크인|체크아웃|청소|조식|조식|어메니티|와이파이|주차|픽업|예약|취소)', all_text)
-            facility_keywords = re.findall(r'[가-힣]{2,4}(?:시설|편의|수영장|사우나|헬스|스파|라운지|레스토랑|바베큐|노래방|세미나|회의|피트니스|자전거)', all_text)
-            
-            # 모든 키워드 합치기
-            all_keywords = accommodation_keywords + service_keywords + facility_keywords
-            
-            # 빈도수 계산하여 상위 3개 반환
-            keyword_counts = Counter(all_keywords)
-            top_keywords = [word for word, count in keyword_counts.most_common(3)]
-            
-            return top_keywords
-            
-        except (json.JSONDecodeError, TypeError):
-            return []
-        except Exception as e:
-            logger.warning(f"키워드 추출 실패: {e}")
-            return []
     
     def parse_address_to_district(self, addr1: str) -> str:
         """주소에서 구 정보 추출하여 코드 반환"""
@@ -142,7 +97,7 @@ class AccommodationsMigrator:
     
     def convert_cooking_to_bit(self, chkcooking: str) -> int:
         """요리가능 여부를 bit(1) 타입으로 변환"""
-        if chkcooking and chkcooking.strip().lower() in ['1', 'y', 'yes', '가능', 'true']:
+        if chkcooking and chkcooking.strip().lower() in ['1', 'y', 'yes', '가능', 'true']: # TODO null 이 아니면 무조건 1 로 변경하기
             return 1
         return 0
     
@@ -151,12 +106,13 @@ class AccommodationsMigrator:
         spots_data = []
         
         for item in accommodations_data:
+            # area_code로 지역코드 추출
+            regn_cd = self.get_region_code(item.get('area_code', '1'))
+
             # 주소에서 구 코드 추출
             signgu_cd = self.parse_address_to_district(item.get('addr1', ''))
             
-            # 키워드 추출
-            keywords = self.extract_keywords_from_reviews(item.get('google_reviews', ''))
-            
+        
             # 이미지 URL 처리
             image_urls = []
             if item.get('first_image'):
@@ -187,7 +143,7 @@ class AccommodationsMigrator:
                 'parking': item.get('parking', ''),
                 'pet_carriage': item.get('chkpet', ''),
                 'rating': item.get('google_rating', ''),
-                'regn_cd': '11',  # 서울특별시
+                'regn_cd': regn_cd,  # area_code로 추출한 지역코드
                 'review_count': item.get('google_review_count', ''),
                 'signgu_cd': signgu_cd,
                 'tag1': keywords[0] if len(keywords) > 0 else '',

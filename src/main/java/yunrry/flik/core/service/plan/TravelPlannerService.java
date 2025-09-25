@@ -77,7 +77,7 @@ public class TravelPlannerService {
         // 빈 슬롯을 찾아서 숙박 배치 (우선순위: 5번 -> 3번 -> 1번)
         if (daySchedule[5].isEmpty()) {
             daySchedule[5] = "accommodation";
-        } else if (daySchedule[3].isEmpty()) {
+        } else {
             daySchedule[3] = "accommodation";
         }
     }

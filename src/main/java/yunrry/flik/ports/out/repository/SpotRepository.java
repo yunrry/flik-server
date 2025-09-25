@@ -30,6 +30,7 @@ public interface SpotRepository {
     // Slice 형태 (무한스크롤)
     Slice<Spot> findSliceByLabelDepth2InAndRegnCdAndSignguCd(List<String> subcategories, String regionCode, Pageable pageable);
 
+
     List<Spot> findByCategory(MainCategory category, String regionCode, int limit);
 
 

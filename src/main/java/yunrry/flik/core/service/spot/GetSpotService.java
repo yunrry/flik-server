@@ -64,6 +64,7 @@ public class GetSpotService implements GetSpotUseCase {
 
         for (MainCategory category : categories) {
             // 카테고리별 전체 스팟 조회
+            log.info("Category: {}, regionCode: {}, limitPerCategory: {}", category, regionCode, limitPerCategory);
             List<Spot> spots = spotRepository.findByCategory(category, regionCode, limitPerCategory * 2); // 여분 확보
             // 사용자가 저장한 스팟 제외
             List<Spot> filtered = spots.stream()

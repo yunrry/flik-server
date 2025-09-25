@@ -1,5 +1,6 @@
 package yunrry.flik.adapters.out.persistence.mysql.entity;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import yunrry.flik.core.domain.model.plan.CourseType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -79,18 +82,41 @@ public class TravelCourseEntity {
     }
 
     public TravelCourse toDomain(CourseSlot[][] courseSlots) {
+        List<String> parsedCategories = parseSelectedCategories(this.selectedCategories);
+
         return TravelCourse.builder()
                 .id(this.id)
                 .userId(this.userId)
-                .name(this.name)
                 .days(this.days)
                 .totalDistance(this.totalDistance)
                 .courseSlots(courseSlots)
                 .createdAt(this.createdAt)
                 .courseType(this.courseType)
                 .regionCode(this.regionCode)
-                .selectedCategories(List.of(this.selectedCategories))
+                .selectedCategories(parsedCategories)
                 .isPublic(this.isPublic)
                 .build();
+    }
+
+    private List<String> parseSelectedCategories(String rawCategories) {
+        if (rawCategories == null || rawCategories.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        if (rawCategories.startsWith("[") && rawCategories.endsWith("]")) {
+            // "[a, b, c]" 형태의 문자열을 파싱
+            String content = rawCategories.substring(1, rawCategories.length() - 1); // [] 제거
+            String[] items = content.split(",");
+            List<String> result = new ArrayList<>();
+            for (String item : items) {
+                String trimmed = item.trim();
+                if (!trimmed.isEmpty()) {
+                    result.add(trimmed);
+                }
+            }
+            return result;
+        } else {
+            return Arrays.asList(rawCategories);
+        }
     }
 }
