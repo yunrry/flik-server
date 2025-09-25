@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import yunrry.flik.adapters.out.persistence.mysql.entity.UserSavedSpotEntity;
 import yunrry.flik.adapters.out.persistence.mysql.repository.UserSavedSpotJpaRepository;
+import yunrry.flik.core.domain.model.UserSavedSpot;
 import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 
 import java.util.List;
@@ -57,4 +58,16 @@ public class UserSavedSpotAdapter implements UserSavedSpotRepository {
         log.debug("Found {} saved spots for user: {}", spotIds.size(), userId);
         return spotIds;
     }
+
+    @Override
+    public List<UserSavedSpot> findByUserIdOrderByCreatedAtDesc(Long userId) {
+        List<UserSavedSpotEntity> entities = userSavedSpotJpaRepository.findByUserIdOrderByCreatedAtDesc(userId);
+        log.debug("Found {} saved spots for user {} (latest first)", entities.size(), userId);
+
+        return entities.stream()
+                .map(entity -> entity.toDomain())
+                .toList();
+    }
+
+
 }

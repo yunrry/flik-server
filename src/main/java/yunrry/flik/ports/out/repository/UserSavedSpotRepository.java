@@ -1,6 +1,7 @@
 package yunrry.flik.ports.out.repository;
 
 import org.springframework.data.repository.query.Param;
+import yunrry.flik.core.domain.model.UserSavedSpot;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,4 +27,6 @@ public interface UserSavedSpotRepository {
     int countBySpotId(Long spotId);
 
     List<Long> findSpotIdsByUserId(@Param("userId") Long userId);
+
+    List<UserSavedSpot> findByUserIdOrderByCreatedAtDesc(Long userId);
 }

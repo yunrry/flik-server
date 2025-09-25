@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import yunrry.flik.core.domain.model.UserSavedSpot;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,18 +29,35 @@ public class UserSavedSpotEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Builder
-    public UserSavedSpotEntity(Long userId, Long spotId, LocalDateTime createdAt) {
+    public UserSavedSpotEntity(Long id, Long userId, Long spotId, LocalDateTime createdAt) {
+        this.id = id;
         this.userId = userId;
         this.spotId = spotId;
-        this.createdAt = createdAt != null ? createdAt : LocalDateTime.now();
+        this.createdAt = createdAt;
+    }
+
+
+
+    public UserSavedSpot toDomain() {
+        return new UserSavedSpot (
+                this.getId(),
+                this.getUserId(),
+                this.getSpotId(),
+                this.getCreatedAt()
+                );
     }
 
     public static UserSavedSpotEntity of(Long userId, Long spotId) {
-        return UserSavedSpotEntity.builder()
-                .userId(userId)
-                .spotId(spotId)
-                .createdAt(LocalDateTime.now())
-                .build();
+        return new UserSavedSpotEntity(null, userId, spotId, LocalDateTime.now());
     }
+
+    public UserSavedSpotEntity toEntity(UserSavedSpot spot) {
+        return new UserSavedSpotEntity(
+                spot.getId(),
+                spot.getUserId(),
+                spot.getSpotId(),
+                spot.getCreatedAt() != null ? spot.getCreatedAt() : LocalDateTime.now()
+        );
+    }
+
 }
