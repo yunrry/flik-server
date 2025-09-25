@@ -3,6 +3,7 @@ package yunrry.flik.adapters.out.persistence.mysql.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.geo.Point;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +21,10 @@ public class SigunguCoordinate {
 
     @Column(name = "y")
     private Double y;
+
+    // 공간 인덱스용 컬럼 추가
+    @Column(name = "location", columnDefinition = "POINT")
+    private Point location;
 
     @Column(name = "sig_eng_nm")
     private String sigEngNm;

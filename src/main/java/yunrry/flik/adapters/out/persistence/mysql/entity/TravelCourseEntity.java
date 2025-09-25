@@ -1,5 +1,6 @@
 package yunrry.flik.adapters.out.persistence.mysql.entity;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Entity
 @Table(name = "travel_courses")
@@ -38,7 +43,7 @@ public class TravelCourseEntity {
     @Column(name = "total_distance")
     private Double totalDistance;
 
-    @Lob
+
     @Column(name = "course_slots_json", columnDefinition = "TEXT")
     private String courseSlotsJson; // JSON string representation of CourseSlot[][]
 
@@ -64,6 +69,9 @@ public class TravelCourseEntity {
             createdAt = LocalDateTime.now();
         }
     }
+
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public static TravelCourseEntity from(TravelCourse travelCourse, String courseSlotsJson) {
         return TravelCourseEntity.builder()
@@ -103,20 +111,16 @@ public class TravelCourseEntity {
             return new ArrayList<>();
         }
 
-        if (rawCategories.startsWith("[") && rawCategories.endsWith("]")) {
-            // "[a, b, c]" 형태의 문자열을 파싱
-            String content = rawCategories.substring(1, rawCategories.length() - 1); // [] 제거
-            String[] items = content.split(",");
-            List<String> result = new ArrayList<>();
-            for (String item : items) {
-                String trimmed = item.trim();
-                if (!trimmed.isEmpty()) {
-                    result.add(trimmed);
-                }
+        try {
+            // JSON 배열 형태일 경우
+            if (rawCategories.trim().startsWith("[") && rawCategories.trim().endsWith("]")) {
+                return objectMapper.readValue(rawCategories, new TypeReference<List<String>>() {});
             }
-            return result;
-        } else {
-            return Arrays.asList(rawCategories);
+
+            // 일반 문자열일 경우
+            return Collections.singletonList(rawCategories.trim());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to parse selectedCategories: " + rawCategories, e);
         }
     }
 }

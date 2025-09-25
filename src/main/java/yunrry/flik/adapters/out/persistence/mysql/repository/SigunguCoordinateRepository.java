@@ -11,12 +11,10 @@ public interface SigunguCoordinateRepository extends JpaRepository<SigunguCoordi
     SigunguCoordinate findBySigCd(String sigCd);
 
     @Query(value = """
-        SELECT sig_cd 
-        FROM sigungu_coordinate 
-        WHERE (6371 * ACOS(COS(RADIANS(:centerY)) * COS(RADIANS(y)) * 
-               COS(RADIANS(x) - RADIANS(:centerX)) + SIN(RADIANS(:centerY)) * 
-               SIN(RADIANS(y)))) <= :radiusKm
-        """, nativeQuery = true)
+    SELECT sig_cd 
+    FROM sigungu_coordinate 
+    WHERE ST_Distance_Sphere(location, POINT(:centerX, :centerY)) <= :radiusKm * 1000
+    """, nativeQuery = true)
     List<String> findRegionsWithinRadius(@Param("centerX") double centerX,
                                          @Param("centerY") double centerY,
                                          @Param("radiusKm") int radiusKm);
