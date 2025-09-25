@@ -25,6 +25,7 @@ public record SpotDetailResponse(
         String operatingHours,
         String dayOff,
         Boolean isOpen,
+        String labelDepth3,
         List<String> imageUrls,
 
         // 타입별 특수 정보 (Optional)
@@ -69,6 +70,7 @@ public record SpotDetailResponse(
                 operatingHours,
                 spot.getDayOff(),
                 isOpen,
+                spot.getLabelDepth3(),
                 normalizeImageUrls(spot.getImageUrls()),
                 products,
                 expGuide,
