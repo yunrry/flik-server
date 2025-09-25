@@ -145,7 +145,9 @@ public class TravelCourseController {
             @PathVariable Long id,
             @RequestBody CourseVisibilityUpdateRequest request
     ) {
+        log.info("Updating visibility for course: {}, isPublic: {}", id, request.getIsPublic());
         TravelCourse updatedCourse = TravelCourseUseCase.updateCourseVisibility(id, request.getIsPublic());
+        log.info("Course updated successfully");
         return ResponseEntity.ok(Response.success(TravelCourseResponse.from(updatedCourse)));
     }
 
