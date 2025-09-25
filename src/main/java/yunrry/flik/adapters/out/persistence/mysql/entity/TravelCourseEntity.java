@@ -73,7 +73,7 @@ public class TravelCourseEntity {
     @Transient
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static TravelCourseEntity from(TravelCourse travelCourse, String courseSlotsJson) {
+    public static TravelCourseEntity from(TravelCourse travelCourse, String courseSlotsJson, String selectedCategoriesJson) {
         return TravelCourseEntity.builder()
                 .id(travelCourse.getId())
                 .userId(travelCourse.getUserId())
@@ -84,7 +84,7 @@ public class TravelCourseEntity {
                 .createdAt(travelCourse.getCreatedAt())
                 .courseType(travelCourse.getCourseType())
                 .regionCode(travelCourse.getRegionCode())
-                .selectedCategories(travelCourse.getSelectedCategories().toString())
+                .selectedCategories(selectedCategoriesJson)
                 .isPublic(travelCourse.getIsPublic())
                 .build();
     }

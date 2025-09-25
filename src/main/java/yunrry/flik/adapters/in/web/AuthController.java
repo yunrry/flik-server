@@ -266,6 +266,7 @@ public class AuthController {
         String guestEmail = "guest-" + randomId + "@flik.com";
         String guestNickname = "게스트_" + randomId;
 
+
         log.info("Creating guest user: email={}, nickname={}", guestEmail, guestNickname);
 
         // 임시 회원가입 처리
@@ -286,7 +287,8 @@ public class AuthController {
                 .build();
 
         AuthTokens tokens = loginUseCase.login(loginCommand);
-
+        Long userId = extractUserIdFromTokens(tokens); // 토큰에서 userId 추출
+        initializeUserCategoryVectors(userId);
         // 응답 생성
         LoginResponse response = LoginResponse.from(tokens);
 

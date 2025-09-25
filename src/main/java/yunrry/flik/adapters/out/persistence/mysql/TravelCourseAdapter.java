@@ -30,10 +30,11 @@ public class TravelCourseAdapter implements TravelCourseRepository {
     public TravelCourse save(TravelCourse travelCourse) {
         try {
             String courseSlotsJson = objectMapper.writeValueAsString(travelCourse.getCourseSlots());
-
+            String selectedCategoriesJson = objectMapper.writeValueAsString(travelCourse.getSelectedCategories());
             TravelCourseEntity entity = TravelCourseEntity.from(
                     travelCourse,
-                    courseSlotsJson
+                    courseSlotsJson,
+                    selectedCategoriesJson
             );
 
             TravelCourseEntity savedEntity = travelCourseJpaRepository.save(entity);
