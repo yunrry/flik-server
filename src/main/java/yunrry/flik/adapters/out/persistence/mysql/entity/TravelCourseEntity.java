@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -112,13 +114,23 @@ public class TravelCourseEntity {
         }
 
         try {
-            // JSON 배열 형태일 경우
-            if (rawCategories.trim().startsWith("[") && rawCategories.trim().endsWith("]")) {
-                return objectMapper.readValue(rawCategories, new TypeReference<List<String>>() {});
+            String trimmed = rawCategories.trim();
+
+            // JSON 배열 형태 (올바른 형태)
+            if (trimmed.startsWith("[\"") && trimmed.endsWith("\"]")) {
+                return objectMapper.readValue(trimmed, new TypeReference<List<String>>() {});
             }
 
-            // 일반 문자열일 경우
-            return Collections.singletonList(rawCategories.trim());
+            // toString() 결과 형태 [item1, item2, item3] (잘못된 형태)
+            if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+                String content = trimmed.substring(1, trimmed.length() - 1);
+                return Arrays.stream(content.split(","))
+                        .map(String::trim)
+                        .collect(Collectors.toList());
+            }
+
+            return Collections.singletonList(trimmed);
+
         } catch (Exception e) {
             throw new IllegalArgumentException("Failed to parse selectedCategories: " + rawCategories, e);
         }

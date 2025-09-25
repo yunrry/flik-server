@@ -92,7 +92,7 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
                                                                 @Param("regnCd") String regnCd);
 
 
-    @Query(value = "SELECT * FROM spots ORDER BY RAND() LIMIT :limit OFFSET :offset", nativeQuery = true)
+    @Query(value = "SELECT * FROM spots WHERE category != 'STORE' ORDER BY RAND() LIMIT :limit OFFSET :offset", nativeQuery = true)
     List<BaseSpotEntity> findRandomSpots(@Param("offset") int offset, @Param("limit") int limit);
 
 }
