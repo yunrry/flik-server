@@ -97,6 +97,7 @@ public class TravelCourseEntity {
         return TravelCourse.builder()
                 .id(this.id)
                 .userId(this.userId)
+                .name(this.name)
                 .days(this.days)
                 .totalDistance(this.totalDistance)
                 .courseSlots(courseSlots)
