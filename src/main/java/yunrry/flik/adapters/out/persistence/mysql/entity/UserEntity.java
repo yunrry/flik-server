@@ -50,6 +50,9 @@ public class UserEntity {
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
+    @Column(name = "is_guest", nullable = false)
+    private boolean isGuest = false;
+
     public User toDomain() {
         return User.builder()
                 .id(this.id)
@@ -62,6 +65,7 @@ public class UserEntity {
                 .isActive(this.isActive)
                 .createdAt(this.createdAt)
                 .lastLoginAt(this.lastLoginAt)
+                .isGuest(this.isGuest)
                 .build();
     }
 
@@ -77,6 +81,7 @@ public class UserEntity {
                 .isActive(user.isActive())
                 .createdAt(user.getCreatedAt())
                 .lastLoginAt(user.getLastLoginAt())
+                .isGuest(user.isGuest())
                 .build();
     }
 }

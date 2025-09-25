@@ -10,6 +10,7 @@ public class SignupCommand {
     private final String password;
     private final String nickname;
     private final String profileImageUrl;
+    private final boolean isGuest;
 
     public void validate() {
         if (email == null || email.trim().isEmpty()) {

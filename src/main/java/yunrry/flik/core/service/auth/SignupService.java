@@ -34,6 +34,7 @@ public class SignupService implements SignupUseCase {
                 .password(encodedPassword)
                 .nickname(command.getNickname())
                 .profileImageUrl(command.getProfileImageUrl())
+                .isGuest(command.isGuest())
                 .authProvider(AuthProvider.EMAIL)
                 .isActive(true)
                 .createdAt(LocalDateTime.now())
