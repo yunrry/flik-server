@@ -255,4 +255,41 @@ public class AuthController {
         logoutUseCase.logout(request.refreshToken());
         return ResponseEntity.ok(Response.success(null));
     }
+
+
+    @Operation(summary = "임시 유저 로그인", description = "로그인 없이 임시(게스트) 유저로 로그인합니다.")
+    @PostMapping("/guest-login")
+    public ResponseEntity<Response<LoginResponse>> guestLogin() {
+        // 랜덤 값 생성
+        String randomId = UUID.randomUUID().toString().substring(0, 8);
+        String guestEmail = "guest-" + randomId + "@flik.com";
+        String guestNickname = "게스트_" + randomId;
+
+        log.info("Creating guest user: email={}, nickname={}", guestEmail, guestNickname);
+
+        // 임시 회원가입 처리
+        SignupCommand signupCommand = SignupCommand.builder()
+                .email(guestEmail)
+                .password(UUID.randomUUID().toString()) // 랜덤 비밀번호
+                .nickname(guestNickname)
+                .profileImageUrl(null)
+                .isGuest(true) // <- Entity에 추가해야 할 필드
+                .build();
+
+        User guestUser = signupUseCase.signup(signupCommand);
+
+        // 토큰 발급
+        LoginCommand loginCommand = LoginCommand.builder()
+                .email(guestEmail)
+                .password(signupCommand.getPassword())
+                .build();
+
+        AuthTokens tokens = loginUseCase.login(loginCommand);
+
+        // 응답 생성
+        LoginResponse response = LoginResponse.from(tokens);
+
+        return ResponseEntity.ok(Response.success(response));
+    }
+
 }

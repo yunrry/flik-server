@@ -20,6 +20,7 @@ public class User {
     private final boolean isActive;
     private final LocalDateTime createdAt;
     private final LocalDateTime lastLoginAt;
+    private final boolean isGuest;
 
     public User updateLastLogin() {  // void -> User 변경
         return User.builder()
@@ -33,6 +34,7 @@ public class User {
                 .isActive(this.isActive)
                 .createdAt(this.createdAt)
                 .lastLoginAt(LocalDateTime.now())
+                .isGuest(this.isGuest)
                 .build();
     }
 
@@ -48,6 +50,7 @@ public class User {
                 .isActive(this.isActive)
                 .createdAt(this.createdAt)
                 .lastLoginAt(this.lastLoginAt)
+                .isGuest(this.isGuest)
                 .build();
     }
 
@@ -71,6 +74,7 @@ public class User {
                 .isActive(false)
                 .createdAt(this.createdAt)
                 .lastLoginAt(this.lastLoginAt)
+                .isGuest(this.isGuest)
                 .build();
     }
 }
