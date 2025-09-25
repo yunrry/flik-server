@@ -26,6 +26,17 @@ public interface SpotJpaRepository extends JpaRepository<BaseSpotEntity, Long> {
             Pageable pageable
     );
 
+
+    @Query("SELECT s FROM BaseSpotEntity s WHERE " +
+            "(:keyword IS NULL OR s.name LIKE %:keyword% OR s.address LIKE %:keyword% OR s.description LIKE %:keyword%) AND " +
+            "(:category IS NULL OR s.category = :category) AND " +
+            "(:regionCode IS NULL OR s.regnCd LIKE :regionCode%)")
+    Slice<BaseSpotEntity> findByKeywordAndFilters(
+            @Param("keyword") String keyword,
+            @Param("category") String category,
+            @Param("regionCode") String regionCode,
+            Pageable pageable);
+
     List<BaseSpotEntity> findAllById(Iterable<Long> ids);
 
     @Query("SELECT s FROM BaseSpotEntity s WHERE s.labelDepth2 IN :subcategories AND s.regnCd = :regnCd AND s.signguCd = :signguCd")
