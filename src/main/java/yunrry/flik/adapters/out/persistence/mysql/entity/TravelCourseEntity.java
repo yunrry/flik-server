@@ -70,7 +70,7 @@ public class TravelCourseEntity {
         }
     }
 
-
+    @Transient
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public static TravelCourseEntity from(TravelCourse travelCourse, String courseSlotsJson) {
