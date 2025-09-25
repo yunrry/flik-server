@@ -147,7 +147,13 @@ public class RefreshTokenService implements RefreshTokenUseCase {
                 refreshTokenRepository.deleteByUserId(userId);
             }
         }
+
+        @Override
+        public void LogoutById(Long userId) {
+            refreshTokenRepository.deleteByUserId(userId);
+        }
     }
+
 
     @Service
     @RequiredArgsConstructor

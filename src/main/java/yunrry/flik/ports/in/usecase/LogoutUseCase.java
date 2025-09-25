@@ -3,4 +3,5 @@ package yunrry.flik.ports.in.usecase;
 
 public interface LogoutUseCase {
     void logout(String refreshToken);
+    void LogoutById(Long userId);
 }
