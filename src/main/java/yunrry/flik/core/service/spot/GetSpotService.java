@@ -6,11 +6,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import yunrry.flik.adapters.in.dto.spot.CategorySpotsResponse;
+import yunrry.flik.adapters.out.persistence.mysql.entity.UserSavedSpotEntity;
 import yunrry.flik.core.domain.exception.SpotNotFoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import yunrry.flik.core.domain.model.MainCategory;
+import yunrry.flik.core.domain.model.UserSavedSpot;
 import yunrry.flik.core.domain.model.card.Spot;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.ports.in.query.FindSpotsByCategoriesSliceQuery;
@@ -183,22 +185,26 @@ public class GetSpotService implements GetSpotUseCase {
 
     @Override
     public List<Spot> getUserSavedSpots(Long userId) {
-        List<Long> savedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
-        if (savedSpotIds.isEmpty()) {
+        // 1. UserSavedSpotEntity를 createdAt 내림차순으로 가져오기
+        List<UserSavedSpot> saved = userSavedSpotRepository.findByUserIdOrderByCreatedAtDesc(userId);
+        if (saved.isEmpty()) {
             return Collections.emptyList();
         }
-        List<Spot> spots = spotRepository.findAllByIds(savedSpotIds);
-        if (spots.size() != savedSpotIds.size()) {
-            Set<Long> foundIds = spots.stream().map(Spot::getId).collect(Collectors.toSet());
-            List<Long> missingIds = savedSpotIds.stream()
-                    .filter(id -> !foundIds.contains(id))
-                    .collect(Collectors.toList());
-            log.warn("Some saved spots not found for user {}: {}", userId, missingIds);
-            // 필요시 SpotNotFoundException을 던질 수도 있음
-            // throw new SpotNotFoundException("Some saved spots not found: " + missingIds);
-        }
-        return spots;
+
+        // 2. Spot 엔티티 조회
+        List<Long> spotIds = saved.stream()
+                .map(UserSavedSpot::getSpotId)
+                .toList();
+        List<Spot> spots = spotRepository.findAllByIds(spotIds);
+
+        // 3. Spot들을 UserSavedSpot 순서대로 정렬
+        Map<Long, Spot> spotMap = spots.stream().collect(Collectors.toMap(Spot::getId, s -> s));
+        return saved.stream()
+                .map(e -> spotMap.get(e.getSpotId()))
+                .filter(Objects::nonNull)
+                .toList();
     }
+
 
 
     @Override
