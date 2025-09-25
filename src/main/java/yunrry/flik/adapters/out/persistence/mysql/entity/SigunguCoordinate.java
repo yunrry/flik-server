@@ -3,7 +3,7 @@ package yunrry.flik.adapters.out.persistence.mysql.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.geo.Point;
+import org.locationtech.jts.geom.Point;
 
 import java.time.LocalDateTime;
 
