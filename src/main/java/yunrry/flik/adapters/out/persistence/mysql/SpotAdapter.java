@@ -57,11 +57,12 @@ public class SpotAdapter implements SpotRepository {
     @Override
     public Slice<Spot> findByConditions(SearchSpotsQuery query) {
         Pageable pageable = createPageable(query);
+        String categoryStr = query.getCategory() != null ? query.getCategory().toString() : null;
 
-        Slice<? extends BaseSpotEntity> entities = spotJpaRepository.findByConditions(
-                query.getCategory(),
+        Slice<? extends BaseSpotEntity> entities = spotJpaRepository.findByKeywordAndFilters(
                 query.getKeyword(),
-                query.getAddress(),
+                categoryStr,
+                query.getRegionCodePrefix(),
                 pageable
         );
 

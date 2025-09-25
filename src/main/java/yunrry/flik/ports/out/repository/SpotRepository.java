@@ -19,7 +19,10 @@ public interface SpotRepository {
     List<Spot> findAllByIds(Collection<Long> ids);
     // 비동기
     Mono<Spot> findByIdAsync(Long id);
+
     Slice<Spot> findByConditions(SearchSpotsQuery query);
+
+
     void save(Spot spot);
     // List 형태
     List<Spot> findByLabelDepth2InAndRegnCd(List<String> subcategories, String regionCode);

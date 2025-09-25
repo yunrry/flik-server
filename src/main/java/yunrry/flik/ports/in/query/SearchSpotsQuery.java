@@ -8,21 +8,23 @@ public class SearchSpotsQuery {
     private final int page;
     private final int size;
     private final String category;
+    private final String regionCodePrefix;
     private final String sort;
     private final String keyword;
     private final String address;
 
-    public SearchSpotsQuery(int page, int size, String category, String sort, String keyword, String address) {
+    public SearchSpotsQuery(int page, int size, String category, String regionCodePrefix,String sort, String keyword, String address) {
         this.page = Math.max(page, 0);
         this.size = (size <= 0 || size > 50) ? 20 : size;
         this.category = category;
+        this.regionCodePrefix = regionCodePrefix;
         this.sort = sort != null ? sort : "rating";
         this.keyword = validateSearchText(keyword, "검색어");
         this.address = validateSearchText(address, "주소");
     }
 
     private String validateSearchText(String text, String fieldName) {
-        if (text != null && text.trim() != "" &&text.trim().length() < 2) {
+        if (text != null && !text.trim().isEmpty() && text.trim().length() < 2) {
             throw new IllegalArgumentException(fieldName + "는 2글자 이상이어야 합니다.");
         }
         return text;
@@ -34,6 +36,7 @@ public class SearchSpotsQuery {
                 String.valueOf(page),
                 String.valueOf(size),
                 category != null ? category : "",
+                regionCodePrefix != null ? regionCodePrefix : "", // ✅ 추가
                 sort != null ? sort : "",
                 keyword != null ? keyword : "",
                 address != null ? address : ""

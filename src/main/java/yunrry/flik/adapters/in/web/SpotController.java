@@ -235,7 +235,67 @@ public class SpotController {
         }
     }
 
+    @Operation(summary = "키워드로 장소 검색", description = "장소명, 주소, 설명 등에서 키워드를 검색합니다.")
+    @GetMapping("/search")
+    public ResponseEntity<Response<SpotSearchResponsePaged>> searchSpots(
+            @Parameter(description = "검색 키워드", example = "카페")
+            @RequestParam String keyword,
 
+            @Parameter(description = "지역 코드 (선택사항)", example = "11")
+            @RequestParam(required = false) String regionCode,
+
+            @Parameter(description = "카테고리 필터 (선택사항)", example = "CAFE")
+            @RequestParam(required = false) String category,
+
+            @Parameter(description = "페이지 번호", example = "1")
+            @RequestParam(defaultValue = "1") int page,
+
+            @Parameter(description = "페이지 크기", example = "20")
+            @RequestParam(defaultValue = "20") int size,
+
+            @Parameter(description = "정렬 기준", example = "rating")
+            @RequestParam(defaultValue = "rating") String sort
+    ) {
+        try {
+            if (keyword == null || keyword.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body(Response.error("검색 키워드를 입력해주세요"));
+            }
+
+
+            // 검색 쿼리 생성
+            SearchSpotsQuery query = SearchSpotsQuery.builder()
+                    .keyword(keyword.trim())
+                    .category(category)
+                    .regionCodePrefix(regionCode)
+                    .page(page - 1) // 0-based
+                    .size(size)
+                    .sort(sort)
+                    .build();
+
+            // 서비스 호출
+            Slice<Spot> spotSlice = searchSpotsUseCase.searchSpots(query);
+
+            // DTO 변환
+            List<SpotDetailResponse> spots = spotSlice.getContent().stream()
+                    .map(SpotDetailResponse::from)
+                    .toList();
+
+            SpotSearchResponsePaged response = SpotSearchResponsePaged.builder()
+                    .keyword(keyword)
+                    .page(page)
+                    .pageSize(spots.size())
+                    .spots(spots)
+                    .hasNext(spotSlice.hasNext())
+                    .totalElements(spotSlice.getNumberOfElements())
+                    .build();
+
+            return ResponseEntity.ok(Response.success(response));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("검색 중 오류가 발생했습니다"));
+        }
+    }
 
 
 }
