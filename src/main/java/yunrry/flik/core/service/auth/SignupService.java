@@ -43,4 +43,9 @@ public class SignupService implements SignupUseCase {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public void deleteUser(Long userId){
+        userRepository.deleteById(userId);
+    }
 }

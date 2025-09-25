@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.OAuthUserInfoCache;
 import yunrry.flik.adapters.in.dto.Response;
@@ -292,4 +293,19 @@ public class AuthController {
         return ResponseEntity.ok(Response.success(response));
     }
 
+
+    @Operation(summary = "회원 탈퇴", description = "로그인한 사용자를 탈퇴 처리합니다.")
+    @DeleteMapping("/withdraw")
+    public ResponseEntity<Response<Void>> withdrawUser(@AuthenticationPrincipal Long userId) {
+
+            // 2. 탈퇴 처리
+            logoutUseCase.LogoutById(userId);
+            signupUseCase.deleteUser(userId);
+
+//            // 3. Redis 등 임시 데이터 삭제 (선택)
+//            redisTemplate.keys("oauth_signup:*").forEach(redisTemplate::delete);
+
+            return ResponseEntity.ok(Response.success(null));
+
+    }
 }
