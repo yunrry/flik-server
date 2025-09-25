@@ -43,6 +43,8 @@ public class DatabaseConfig {
         Properties props = new Properties();
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         props.setProperty("hibernate.hbm2ddl.auto", "update");
+        props.setProperty("hibernate.cache.use_second_level_cache", "false");
+        props.setProperty("hibernate.cache.use_query_cache", "false");
         factory.setJpaProperties(props);
 
         return factory;
