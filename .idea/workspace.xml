@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/UserSavedSpot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTestAccommodation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTestBasic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTestCategoryChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTestWhenCefe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTestWhenPriority.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTestWhenSpetial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/UserSavedSpotAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/UserSavedSpotAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/UserSavedSpotEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/UserSavedSpotEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/UserSavedSpotJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/UserSavedSpotJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/spot/GetSpotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/spot/GetSpotService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserSavedSpotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserSavedSpotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelPlannerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,117 +97,124 @@
     <option name="sortByType" value="true" />
     <option name="sortKey" value="BY_TYPE" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.AuthControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build flik-server.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CreatePostServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.EventPublishingTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FestivalControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FlikApplicationTests.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GetRestaurantServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GetRestaurantServiceTest.shouldUseCacheOnSecondCall.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GetSpotServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GetSpotServiceTest.shouldFindSpotsByCategoriesWithEvenDistribution.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GetSpotServiceTest.shouldGetSpotSuccessfully.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GoogleOAuth2ClientTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JwtTokenProviderTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.OAuth2ServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.OpenAIEmbeddingServiceIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.OpenAIEmbeddingServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostAdapterTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostControllerTest.shouldGetPostSuccessfully.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostControllerTest.shouldGetPostWithoutAuth.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostControllerTest.shouldSearchPostsWithoutAuth.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostMetadataTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostTest.shouldCreatePostWithRequiredFields.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PostTest.shouldInitializeVisitCountWhenNull.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RecommendationEventListenerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RestaurantControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RestaurantControllerIntegrationTest.shouldGetRestaurantSuccessfully.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RestaurantSearchControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RestaurantTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SearchRestaurantsQueryTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SearchRestaurantsQueryTest.shouldAllowEmptyValues.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SearchRestaurantsServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotAnalyticsEventListenerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotSwipeEventIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_DuplicateSave.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TagServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TagServiceTest.saveKeywords_EmbeddingCreationFails.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TagServiceTest.saveKeywords_ExistingTagWithoutEmbedding_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TagServiceTest.saveKeywords_ExistingTags_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TagServiceTest.saveKeywords_FilterNullAndEmpty_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TagServiceTest.saveKeywords_NewTags_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik.adapters'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik.adapters.in.web'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik.adapters.out'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik.core.domain.model'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik.core.service'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'yunrry.flik.ports'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UpdateSpotServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UpdateSpotServiceTest.updateSpotTags_LogsErrorOnFailure.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UpdateSpotServiceTest.updateSpotTags_SaveFailure.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserAdapterTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserSavedSpotEventListenerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserTest.shouldCreateUserWithRequiredFields.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_PartialTags_ShouldExtractTags.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_SpotNotFound_HandleError.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_TagExtractionFailed_HandleError.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_VectorProcessingFailed_HandleError.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_WithExistingTags_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_WithoutTags_ExtractTagsAndProcess.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.parseVector_InvalidVectorString_ShouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.parseVector_NullVectorString_ShouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VectorEmbeddingEventListenerTest.parseVector_ValidVectorString_ShouldReturnDoubleList.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.FlikApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;57-bug-postsmy&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/nyoung/WorkSpace/flik-server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.filetypes.JAVA&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.AuthControllerIntegrationTest.executor": "Run",
+    "Gradle.Build flik-server.executor": "Run",
+    "Gradle.CreatePostServiceTest.executor": "Run",
+    "Gradle.EventPublishingTest.executor": "Run",
+    "Gradle.FestivalControllerIntegrationTest.executor": "Run",
+    "Gradle.FlikApplicationTests.executor": "Run",
+    "Gradle.GetRestaurantServiceTest.executor": "Run",
+    "Gradle.GetRestaurantServiceTest.shouldGetRestaurantByIdSuccessfully.executor": "Run",
+    "Gradle.GetRestaurantServiceTest.shouldUseCacheOnSecondCall.executor": "Run",
+    "Gradle.GetSpotServiceTest.executor": "Run",
+    "Gradle.GetSpotServiceTest.shouldFindSpotsByCategoriesWithEvenDistribution.executor": "Run",
+    "Gradle.GetSpotServiceTest.shouldGetSpotSuccessfully.executor": "Run",
+    "Gradle.GoogleOAuth2ClientTest.executor": "Run",
+    "Gradle.JwtTokenProviderTest.executor": "Run",
+    "Gradle.OAuth2ServiceTest.executor": "Run",
+    "Gradle.OpenAIEmbeddingServiceIntegrationTest.executor": "Run",
+    "Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success.executor": "Run",
+    "Gradle.OpenAIEmbeddingServiceTest.executor": "Run",
+    "Gradle.PostAdapterTest.executor": "Run",
+    "Gradle.PostControllerTest.executor": "Run",
+    "Gradle.PostControllerTest.shouldGetPostSuccessfully.executor": "Run",
+    "Gradle.PostControllerTest.shouldGetPostWithoutAuth.executor": "Run",
+    "Gradle.PostControllerTest.shouldSearchPostsWithoutAuth.executor": "Run",
+    "Gradle.PostMetadataTest.executor": "Run",
+    "Gradle.PostTest.executor": "Run",
+    "Gradle.PostTest.shouldCreatePostWithRequiredFields.executor": "Run",
+    "Gradle.PostTest.shouldInitializeVisitCountWhenNull.executor": "Run",
+    "Gradle.RecommendationEventListenerTest.executor": "Run",
+    "Gradle.RestaurantControllerIntegrationTest.executor": "Run",
+    "Gradle.RestaurantControllerIntegrationTest.shouldGetRestaurantSuccessfully.executor": "Run",
+    "Gradle.RestaurantSearchControllerTest.executor": "Run",
+    "Gradle.RestaurantTest.executor": "Run",
+    "Gradle.SearchRestaurantsQueryTest.executor": "Run",
+    "Gradle.SearchRestaurantsQueryTest.shouldAllowEmptyValues.executor": "Run",
+    "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenAddressIsBlank.executor": "Run",
+    "Gradle.SearchRestaurantsQueryTest.shouldThrowExceptionWhenKeywordIsBlank.executor": "Run",
+    "Gradle.SearchRestaurantsServiceTest.executor": "Run",
+    "Gradle.SpotAnalyticsEventListenerTest.executor": "Run",
+    "Gradle.SpotControllerIntegrationTest.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_DuplicateSave.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_MultipleUsers.executor": "Run",
+    "Gradle.SpotSwipeEventIntegrationTest.handleSpotSwipeEvent_Success.executor": "Run",
+    "Gradle.SpotTest.executor": "Run",
+    "Gradle.SpotTest.shouldReturnNullWhenSpotDoesntHaveRunningTime.executor": "Run",
+    "Gradle.SpotTest.shouldTrueWhenSpotIsOpenAndNoDayOff.executor": "Run",
+    "Gradle.TagServiceTest.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_EmbeddingCreationFails.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_ExistingTagWithoutEmbedding_Success.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_ExistingTags_Success.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_FilterNullAndEmpty_Success.executor": "Run",
+    "Gradle.TagServiceTest.saveKeywords_NewTags_Success.executor": "Run",
+    "Gradle.Tests in 'yunrry'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.adapters'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.adapters.in.web'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.adapters.out'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.core.domain.model'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.core.service'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.ports'.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayThreeDayTrip.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories.executor": "Run",
+    "Gradle.TravelPlannerServiceTestAccommodation.executor": "Run",
+    "Gradle.TravelPlannerServiceTestBasic.executor": "Run",
+    "Gradle.TravelPlannerServiceTestCategoryChoice.executor": "Run",
+    "Gradle.TravelPlannerServiceTestWhenCefe (1).executor": "Run",
+    "Gradle.TravelPlannerServiceTestWhenCefe.executor": "Run",
+    "Gradle.TravelPlannerServiceTestWhenPriority.executor": "Run",
+    "Gradle.TravelPlannerServiceTestWhenSpetial.executor": "Run",
+    "Gradle.UpdateSpotServiceTest.executor": "Run",
+    "Gradle.UpdateSpotServiceTest.updateSpotTags_LogsErrorOnFailure.executor": "Run",
+    "Gradle.UpdateSpotServiceTest.updateSpotTags_SaveFailure.executor": "Run",
+    "Gradle.UserAdapterTest.executor": "Run",
+    "Gradle.UserSavedSpotEventListenerTest.executor": "Run",
+    "Gradle.UserTest.executor": "Run",
+    "Gradle.UserTest.shouldCreateUserWithRequiredFields.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_PartialTags_ShouldExtractTags.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_SpotNotFound_HandleError.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_TagExtractionFailed_HandleError.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_VectorProcessingFailed_HandleError.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_WithExistingTags_Success.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.handleSpotEmbedding_WithoutTags_ExtractTagsAndProcess.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.parseVector_InvalidVectorString_ShouldReturnEmptyList.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.parseVector_NullVectorString_ShouldReturnEmptyList.executor": "Run",
+    "Gradle.VectorEmbeddingEventListenerTest.parseVector_ValidVectorString_ShouldReturnDoubleList.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.FlikApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "92-refactor-TravelPlannerServiceTest-enforced",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "copyright.filetypes.JAVA",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -240,11 +249,11 @@
       <recent name="yunrry.flik.core.service.card" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="yunrry.flik.core.service.travelPlanner" />
+      <recent name="yunrry.flik.core.service" />
       <recent name="yunrry.flik.adapters.in.dto.post" />
       <recent name="yunrry.flik.core.service.plan" />
       <recent name="yunrry.flik.ports.in.usecase" />
-      <recent name="yunrry.flik.core.domain.model" />
-      <recent name="yunrry.flik.adapters.out.persistence.entity" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -255,8 +264,8 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.FlikApplication">
-    <configuration name="FlikApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.TravelPlannerServiceTest">
+    <configuration name="TravelPlannerServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -269,7 +278,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.FlikApplicationTests&quot;" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -280,7 +289,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="OpenAIEmbeddingServiceIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelPlannerServiceTestWhenCefe" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -293,7 +302,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.OpenAIEmbeddingServiceIntegrationTest&quot;" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTestWhenCefe&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -304,7 +313,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="OpenAIEmbeddingServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelPlannerServiceTestWhenPriority" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -317,44 +326,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.embedding.OpenAIEmbeddingServiceTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
-        <extension name="net.ashald.envfile">
-          <option name="IS_ENABLED" value="true" />
-          <option name="IS_SUBST" value="false" />
-          <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-          <option name="IS_IGNORE_MISSING_FILES" value="false" />
-          <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-          <ENTRIES>
-            <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-            <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
-          </ENTRIES>
-        </extension>
-      </EXTENSION>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'yunrry'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.*&quot;" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTestWhenPriority&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -365,7 +337,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Tests in 'yunrry.flik'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelPlannerServiceTestWhenSpetial" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -378,7 +350,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.*&quot;" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTestWhenSpetial&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="TravelPlannerServiceTest.testLastDayLastSlot" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest.testLastDayLastSlot&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -410,20 +406,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.FlikApplicationTests" />
-      <item itemvalue="Gradle.Tests in 'yunrry'" />
-      <item itemvalue="Gradle.Tests in 'yunrry.flik'" />
-      <item itemvalue="Gradle.OpenAIEmbeddingServiceIntegrationTest" />
-      <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
+      <item itemvalue="Gradle.TravelPlannerServiceTest" />
+      <item itemvalue="Gradle.TravelPlannerServiceTest.testLastDayLastSlot" />
+      <item itemvalue="Gradle.TravelPlannerServiceTestWhenCefe" />
+      <item itemvalue="Gradle.TravelPlannerServiceTestWhenPriority" />
+      <item itemvalue="Gradle.TravelPlannerServiceTestWhenSpetial" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'yunrry.flik'" />
-        <item itemvalue="Gradle.Tests in 'yunrry'" />
-        <item itemvalue="Gradle.FlikApplicationTests" />
-        <item itemvalue="Gradle.OpenAIEmbeddingServiceIntegrationTest" />
-        <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
+        <item itemvalue="Gradle.TravelPlannerServiceTest" />
+        <item itemvalue="Gradle.TravelPlannerServiceTest.testLastDayLastSlot" />
+        <item itemvalue="Gradle.TravelPlannerServiceTestWhenPriority" />
+        <item itemvalue="Gradle.TravelPlannerServiceTestWhenSpetial" />
+        <item itemvalue="Gradle.TravelPlannerServiceTestWhenCefe" />
       </list>
     </recent_temporary>
   </component>
@@ -903,9 +899,9 @@
           <option name="timeStamp" value="40" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelPlannerServiceTest.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java</url>
           <line>710</line>
-          <properties class="yunrry.flik.core.service.TravelPlannerServiceTest" method="testCafeRegularFullDayOneDayTrip">
+          <properties class="yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest" method="testCafeRegularFullDayOneDayTrip">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
