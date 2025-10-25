@@ -60,7 +60,7 @@ public class AuthController {
     @Operation(summary = "이메일 회원가입", description = "이메일과 비밀번호로 회원가입합니다.")
     @PostMapping("/signup")
     public ResponseEntity<Response<SignupResponse>> signup(@RequestBody SignupRequest request) {
-        try {
+
             SignupCommand command = SignupCommand.builder()
                     .email(request.email())
                     .password(request.password())
@@ -71,39 +71,17 @@ public class AuthController {
 
             User user = signupUseCase.signup(command);
             log.debug("User email:{}, userID:{}", user.getEmail(), user.getId());
-            if (user == null) {
-                log.error("Failed to create user: {}", request.email());
-                return ResponseEntity.badRequest()
-                        .body(Response.error("사용자 생성에 실패했습니다."));
-            }
 
-            try {
-                LoginCommand loginCommand = LoginCommand.builder()
-                        .email(request.email())
-                        .password(request.password())
-                        .build();
+            LoginCommand loginCommand = LoginCommand.builder()
+                    .email(request.email())
+                    .password(request.password())
+                    .build();
 
-                AuthTokens tokens = loginUseCase.login(loginCommand);
-                SignupResponse response = SignupResponse.from(tokens);
-                Long userId = extractUserIdFromTokens(tokens);
-                initializeUserCategoryVectors(userId);
-                return ResponseEntity.ok(Response.success(response));
-
-            } catch (Exception e) {
-                log.error("Failed to login after signup: {}", e.getMessage());
-                return ResponseEntity.internalServerError()
-                        .body(Response.error("회원가입 후 로그인 처리에 실패했습니다."));
-            }
-
-        } catch (IllegalArgumentException e) {
-            log.error("Invalid signup request: {}", e.getMessage());
-            return ResponseEntity.badRequest()
-                    .body(Response.error(e.getMessage()));
-        } catch (Exception e) {
-            log.error("Unexpected error during signup: {}", e.getMessage());
-            return ResponseEntity.internalServerError()
-                    .body(Response.error("회원가입 처리 중 오류가 발생했습니다."));
-        }
+            AuthTokens tokens = loginUseCase.login(loginCommand);
+            SignupResponse response = SignupResponse.from(tokens);
+            Long userId = extractUserIdFromTokens(tokens);
+            initializeUserCategoryVectors(userId);
+            return ResponseEntity.ok(Response.success(response));
     }
 
     @Operation(summary = "이메일 로그인", description = "이메일과 비밀번호로 로그인합니다.")

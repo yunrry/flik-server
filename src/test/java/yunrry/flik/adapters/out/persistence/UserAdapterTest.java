@@ -33,8 +33,10 @@ class UserAdapterTest {
         // given
         User user = User.builder()
                 .email("test@example.com")
-                .password("encoded_password")
                 .nickname("테스트사용자")
+                .password("encoded_password")
+                .profileImageUrl(null)
+                .isGuest(false)
                 .authProvider(AuthProvider.EMAIL)
                 .isActive(true)
                 .createdAt(LocalDateTime.now())
