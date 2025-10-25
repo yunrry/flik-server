@@ -1,27 +1,17 @@
 package yunrry.flik.adapters.in.dto.auth;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import yunrry.flik.core.domain.model.User;
-
-import java.time.LocalDateTime;
+import yunrry.flik.ports.in.usecase.AuthTokens;
 
 public record SignupResponse(
-        Long id,
-        String email,
-        String nickname,
-        String profileImageUrl,
-        String provider,
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        LocalDateTime createdAt
+        String accessToken,
+        String refreshToken,
+        UserInfo user
 ) {
-    public static SignupResponse from(User user) {
+    public static SignupResponse from(AuthTokens tokens) {
         return new SignupResponse(
-                user.getId(),
-                user.getEmail(),
-                user.getNickname(),
-                user.getProfileImageUrl(),
-                user.getAuthProvider().getCode(),
-                user.getCreatedAt()
+                tokens.getAccessToken(),
+                tokens.getRefreshToken(),
+                UserInfo.from(tokens.getUser())
         );
     }
 }

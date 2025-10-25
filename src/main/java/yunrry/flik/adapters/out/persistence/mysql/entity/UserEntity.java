@@ -55,7 +55,7 @@ public class UserEntity {
 
     public User toDomain() {
         return User.builder()
-                .id(this.id)
+                .id(null)
                 .email(this.email)
                 .password(this.password)
                 .nickname(this.nickname)
