@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import yunrry.flik.core.domain.exception.EmailAlreadyExistsException;
 import yunrry.flik.core.domain.model.AuthProvider;
 import yunrry.flik.core.domain.model.User;
-import yunrry.flik.ports.in.usecase.SignupCommand;
+import yunrry.flik.ports.in.command.SignupCommand;
 import yunrry.flik.ports.in.usecase.SignupUseCase;
 import yunrry.flik.ports.out.repository.UserRepository;
 

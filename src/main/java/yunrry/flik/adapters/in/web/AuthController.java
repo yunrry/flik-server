@@ -28,7 +28,7 @@ import yunrry.flik.ports.in.command.LoginCommand;
 import yunrry.flik.ports.in.command.OAuthLoginCommand;
 import yunrry.flik.ports.in.command.RefreshTokenCommand;
 import yunrry.flik.ports.in.usecase.*;
-import yunrry.flik.ports.in.usecase.SignupCommand;
+import yunrry.flik.ports.in.command.SignupCommand;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -60,17 +60,28 @@ public class AuthController {
     @Operation(summary = "이메일 회원가입", description = "이메일과 비밀번호로 회원가입합니다.")
     @PostMapping("/signup")
     public ResponseEntity<Response<SignupResponse>> signup(@RequestBody SignupRequest request) {
-        SignupCommand command = SignupCommand.builder()
-                .email(request.email())
-                .password(request.password())
-                .nickname(request.nickname())
-                .profileImageUrl(request.profileImageUrl())
-                .build();
 
-        User user = signupUseCase.signup(command);
-        SignupResponse response = SignupResponse.from(user);
+            SignupCommand command = SignupCommand.builder()
+                    .email(request.email())
+                    .password(request.password())
+                    .nickname(request.nickname())
+                    .profileImageUrl(null)
+                    .isGuest(false)
+                    .build();
 
-        return ResponseEntity.ok(Response.success(response));
+            User user = signupUseCase.signup(command);
+            log.debug("User email:{}, userID:{}", user.getEmail(), user.getId());
+
+            LoginCommand loginCommand = LoginCommand.builder()
+                    .email(request.email())
+                    .password(request.password())
+                    .build();
+
+            AuthTokens tokens = loginUseCase.login(loginCommand);
+            SignupResponse response = SignupResponse.from(tokens);
+            Long userId = extractUserIdFromTokens(tokens);
+            initializeUserCategoryVectors(userId);
+            return ResponseEntity.ok(Response.success(response));
     }
 
     @Operation(summary = "이메일 로그인", description = "이메일과 비밀번호로 로그인합니다.")

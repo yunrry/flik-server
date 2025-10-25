@@ -11,9 +11,6 @@ public record SignupRequest(
         String password,
 
         @Schema(description = "닉네임", example = "사용자닉네임")
-        String nickname,
-
-        @Schema(description = "프로필 이미지 URL")
-        String profileImageUrl
+        String nickname
 ) {
 }
