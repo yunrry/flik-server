@@ -68,24 +68,30 @@ public class TravelPlannerService {
 
             // 숙박 배치 (1박 이상인 경우, 마지막 날 제외)
             if (day > 1 && i < day - 1) {
-                addAccommodation(course[i]);
+                course[i][5] = "accommodation";
             }
         }
     }
 
-    private void addAccommodation(String[] daySchedule) {
-        // 빈 슬롯을 찾아서 숙박 배치 (우선순위: 5번 -> 3번 -> 1번)
-        if (daySchedule[5].isEmpty()) {
-            daySchedule[5] = "accommodation";
-        } else {
-            daySchedule[3] = "accommodation";
-        }
-    }
+//    private void addAccommodation(String[] daySchedule) {
+//        // 빈 슬롯을 찾아서 숙박 배치 (우선순위: 5번 -> 3번 -> 1번)
+//        if (daySchedule[5].isEmpty()) {
+//            daySchedule[5] = "accommodation";
+//        } else {
+//            daySchedule[3] = "accommodation";
+//        }
+//    }
 
 
     /**
      * 모든 카테고리를 빈도순으로 배치 (카페 제외)
      * 특별 카테고리도 일반 카테고리와 동일하게 처리
+     */
+    /**
+     * 모든 카테고리를 빈도순으로 라운드로빈 배치
+     */
+    /**
+     * 모든 카테고리를 빈도순으로 라운드로빈 배치
      */
     private void allocateAllCategories(String[][] course, Map<String, Integer> selected, int day) {
         // 빈도순 정렬
@@ -94,39 +100,70 @@ public class TravelPlannerService {
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .collect(Collectors.toList());
 
-        int dayIndex = 0;
+        // 각 카테고리별 남은 배치 횟수
         Map<String, Integer> remainingCount = new HashMap<>();
-
         for (Map.Entry<String, Integer> entry : sortedEntries) {
             remainingCount.put(entry.getKey(), entry.getValue());
         }
 
-        // 라운드로빈 배치
-        while (!remainingCount.isEmpty()) {
-            boolean placed = false;
+        // 관광 슬롯 인덱스들 (1, 3만 사용, 5는 당일치기일 때만)
+        int currentDay = 0;
+        int currentSlotIdx = 0; // 0: 슬롯1, 1: 슬롯3, 2: 슬롯5(당일치기만)
 
+        // 일정이 꽉 차거나 모든 카테고리가 소진될 때까지 반복
+        while (!remainingCount.isEmpty()) {
+            boolean anyPlaced = false;
+
+            // 빈도순으로 정렬된 카테고리를 순회하며 각각 1개씩 배치
             for (Map.Entry<String, Integer> entry : sortedEntries) {
                 String category = entry.getKey();
 
+                // 이미 모두 배치된 카테고리는 건너뛰기
                 if (!remainingCount.containsKey(category)) {
                     continue;
                 }
 
-                // 배치 가능한 날 찾기
-                boolean placedThisRound = false;
-                for (int attempts = 0; attempts < day; attempts++) {
-                    int currentDay = (dayIndex + attempts) % day;
+                // 빈 슬롯 찾기
+                boolean placed = false;
+                int attempts = day * 3; // 최대 시도 횟수
 
-                    if (hasEmptyTouristSlot(course[currentDay])) {
-                        placeCategoryInDay(course[currentDay], category);
-                        dayIndex = (currentDay + 1) % day;
+                for (int attempt = 0; attempt < attempts; attempt++) {
+                    int tempSlotIdx = (currentSlotIdx + attempt) % 3;
+                    int tempDay = ((currentSlotIdx + attempt) / 3) % day;
+
+                    int slot;
+                    if (tempSlotIdx == 0) {
+                        slot = 1;
+                    } else if (tempSlotIdx == 1) {
+                        slot = 3;
+                    } else {
+                        slot = 5;
+                    }
+
+                    // 5번 슬롯은 당일치기일 때만 사용 가능
+                    if (slot == 5 && day > 1) {
+                        continue;
+                    }
+
+                    // 5번 슬롯이 accommodation이면 건너뛰기
+                    if (slot == 5 && "accommodation".equals(course[tempDay][slot])) {
+                        continue;
+                    }
+
+                    // 빈 슬롯이면 배치
+                    if (course[tempDay][slot].isEmpty()) {
+                        course[tempDay][slot] = category;
+
+                        // 다음 슬롯으로 이동
+                        currentSlotIdx = (currentSlotIdx + attempt + 1) % (day * 3);
                         placed = true;
-                        placedThisRound = true;
+                        anyPlaced = true;
                         break;
                     }
                 }
 
-                if (placedThisRound) {
+                // 배치 성공 시 남은 횟수 감소
+                if (placed) {
                     int remaining = remainingCount.get(category) - 1;
                     if (remaining <= 0) {
                         remainingCount.remove(category);
@@ -136,10 +173,23 @@ public class TravelPlannerService {
                 }
             }
 
-            if (!placed) {
+            // 더 이상 배치할 수 없으면 종료
+            if (!anyPlaced) {
                 break;
             }
         }
+    }
+
+    /**
+     * 전체 일정에 빈 관광 슬롯이 있는지 확인
+     */
+    private boolean hasAnyEmptySlot(String[][] course) {
+        for (String[] daySchedule : course) {
+            if (hasEmptyTouristSlot(daySchedule)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean hasEmptyTouristSlot(String[] daySchedule) {

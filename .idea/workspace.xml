@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/UserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/UserAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/out/persistence/UserAdapterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/adapters/out/persistence/UserAdapterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +70,6 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Override.java" root0="SKIP_INSPECTION" />
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.persistence/jakarta.persistence-api/3.1.0/8d479b8d71750d5c2b8e58034b80231994cba6ec/jakarta.persistence-api-3.1.0-sources.jar!/jakarta/persistence/Convert.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.7/6c380b648c302d67b5eb5a79de867909f7bbd7eb/spring-data-commons-3.3.7.jar!/org/springframework/data/repository/CrudRepository.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/6.1.16/e3a9185be7af644cde2e446787747a4f93ec8ad9/spring-web-6.1.16.jar!/org/springframework/http/ResponseEntity.class" root0="SKIP_INSPECTION" />
   </component>
@@ -151,6 +148,7 @@
     "Gradle.Tests in 'yunrry.flik.adapters.out'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.core.domain.model'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.core.service'.executor": "Run",
+    "Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.ports'.executor": "Run",
     "Gradle.TravelPlannerServiceTest.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin.executor": "Run",
@@ -159,6 +157,7 @@
     "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayTwoDayTrip.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithFullDayActivityAccommodation.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeWithMultipleRegularCategories.executor": "Run",
+    "Gradle.TravelPlannerServiceTest.testMaximumDays.executor": "Run",
     "Gradle.TravelPlannerServiceTestAccommodation.executor": "Run",
     "Gradle.TravelPlannerServiceTestBasic.executor": "Run",
     "Gradle.TravelPlannerServiceTestCategoryChoice.executor": "Run",
@@ -258,7 +257,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.UserAdapterTest.shouldSaveUser">
+  <component name="RunManager" selected="Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'">
     <configuration name="Tests in 'flik.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -271,6 +270,30 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'yunrry.flik.core.service.travelPlanner'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.*&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -305,7 +328,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelPlannerServiceTestWhenPriority" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelPlannerServiceTest.testMaximumDays" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -318,31 +341,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTestWhenPriority&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="TravelPlannerServiceTest.testLastDayLastSlot" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest.testLastDayLastSlot&quot;" />
+            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest.testMaximumDays&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -399,19 +398,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.Tests in 'flik.test'" />
+      <item itemvalue="Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'" />
+      <item itemvalue="Gradle.TravelPlannerServiceTest.testMaximumDays" />
       <item itemvalue="Gradle.UserAdapterTest.shouldSaveUser" />
       <item itemvalue="Gradle.TravelPlannerServiceTest" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest.testLastDayLastSlot" />
-      <item itemvalue="Gradle.TravelPlannerServiceTestWhenPriority" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'" />
+        <item itemvalue="Gradle.TravelPlannerServiceTest.testMaximumDays" />
+        <item itemvalue="Gradle.TravelPlannerServiceTest" />
         <item itemvalue="Gradle.UserAdapterTest.shouldSaveUser" />
         <item itemvalue="Gradle.Tests in 'flik.test'" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest.testLastDayLastSlot" />
-        <item itemvalue="Gradle.TravelPlannerServiceTestWhenPriority" />
       </list>
     </recent_temporary>
   </component>
