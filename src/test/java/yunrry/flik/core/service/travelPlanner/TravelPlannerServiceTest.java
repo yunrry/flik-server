@@ -32,7 +32,8 @@ class TravelPlannerServiceTest {
 
         // When
         String[][] result = travelPlannerService.generateTravelCourse(userSelect, day, saveCount);
-
+        System.out.println("\n=== TC-801: 표준 2박3일 여행 결과 ===");
+        printCourseStructure(result);
         // Then
         // 1. 모든 날 첫 슬롯 카페
         for (int i = 0; i < 3; i++) {
@@ -67,6 +68,8 @@ class TravelPlannerServiceTest {
 
         // When
         String[][] result = travelPlannerService.generateTravelCourse(userSelect, day, saveCount);
+        System.out.println("\n=== TC-802: 액티비티 중심 1박2일 ===");
+        printCourseStructure(result);
 
         // Then
         // 1. DAY1 첫 슬롯 카페
@@ -98,7 +101,8 @@ class TravelPlannerServiceTest {
 
         // When
         String[][] result = travelPlannerService.generateTravelCourse(userSelect, day, saveCount);
-
+        System.out.println("\n=== TC-803: 축제+테마파크 2박3일 ===");
+        printCourseStructure(result);
         // Then
         // 1. 카페 우선 배치
         for (int i = 0; i < 3; i++) {
@@ -148,6 +152,8 @@ class TravelPlannerServiceTest {
 
         // When
         String[][] result = travelPlannerService.generateTravelCourse(userSelect, day, saveCount);
+        System.out.println("\n=== TC-701: 최대 일정 ===");
+        printCourseStructure(result);
 
         // Then
         assertEquals(3, result.length, "3일");
@@ -169,7 +175,8 @@ class TravelPlannerServiceTest {
         for (int day : days) {
             // When
             String[][] result = travelPlannerService.generateTravelCourse(userSelect, day, saveCount);
-
+            System.out.println("\n=== TC-703: 당일치기제외 마지막 날 마지막 슬롯 ===");
+            printCourseStructure(result);
             // Then
             String lastSlot = result[result.length - 1][5];
             assertEquals("", lastSlot,
@@ -190,9 +197,24 @@ class TravelPlannerServiceTest {
 
         // When
         String[][] result = travelPlannerService.generateTravelCourse(userSelect, day, saveCount);
+        System.out.println("\n=== TC-704: 카페 + 특별 카테고리 동시 ===");
+        printCourseStructure(result);
 
         // Then
         assertEquals("cafe", result[0][0], "첫 슬롯 카페");
         assertTrue(Arrays.asList(result[0]).contains("festival"), "축제 배치");
+    }
+
+    private void printCourseStructure(String[][] course) {
+        String[] slotNames = {"카페", "관광1", "점심", "관광2", "저녁", "관광3"};
+
+        for (int day = 0; day < course.length; day++) {
+            System.out.println(String.format("DAY%d:", day + 1));
+            for (int slot = 0; slot < course[day].length; slot++) {
+                String value = course[day][slot].isEmpty() ? "(빈칸)" : course[day][slot];
+                System.out.println(String.format("  [%d] %s: %s", slot, slotNames[slot], value));
+            }
+            System.out.println();
+        }
     }
 }
