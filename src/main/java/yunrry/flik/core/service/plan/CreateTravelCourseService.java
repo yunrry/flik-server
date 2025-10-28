@@ -3,6 +3,7 @@ package yunrry.flik.core.service.plan;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import yunrry.flik.core.domain.model.card.Spot;
@@ -31,39 +32,45 @@ public class CreateTravelCourseService {
      * 여행 코스 생성
      */
     public Mono<TravelCourse> create(CourseQuery query) {
-        return travelCourseRecommendationService.generatePersonalizedTravelCourse(query)
-                .flatMap(travelCourse ->
-                        Mono.fromCallable(() -> {
-                                    int days = travelCourse.getDays();
-                                    Set<Long> globalSelectedSpotIds = new HashSet<>();
+        return new Mono<TravelCourse>() {
+            @Override
+            public void subscribe(CoreSubscriber<? super TravelCourse> coreSubscriber) {
 
-                                    // 일자별 최종 선택된 SpotId를 담을 리스트
-                                    List<List<Long>> allDaysSelectedSpotIds = new java.util.ArrayList<>();
-
-                                    for (int day = 0; day < days; day++) {
-                                        int slotsInDay = (day == days - 1 && days > 1) ? 5 : 6; // 마지막 날은 5칸
-                                        List<Long> daySelectedSpotIds = processDay(travelCourse, day, slotsInDay, globalSelectedSpotIds);
-
-                                        allDaysSelectedSpotIds.add(daySelectedSpotIds);
-                                    }
-
-                                    // 1. 전체 여행의 총 이동 거리 계산
-                                    double totalDistance = calculateTotalDistance(allDaysSelectedSpotIds);
-                                    travelCourse.updateTotalDistance(totalDistance);
-
-                                    return travelCourse;
-                                })
-                                // JPA 호출이 있으므로 별도의 스레드 풀에서 실행
-                                .subscribeOn(Schedulers.boundedElastic())
-                )
-                .flatMap(completedTravelCourse ->
-                        // 2. DB에 저장
-                        Mono.fromCallable(() -> travelCourseRepository.save(completedTravelCourse))
-                                .subscribeOn(Schedulers.boundedElastic())
-                )
-                .doOnSuccess(tc -> log.info("Generated full travel course with id={} totalDistance={} km",
-                        tc.getId(), tc.getTotalDistance()))
-                .doOnError(err -> log.error("Failed to create travel course", err));
+            }
+        };
+//        return travelCourseRecommendationService.generatePersonalizedTravelCourse(query)
+//                .flatMap(travelCourse ->
+//                        Mono.fromCallable(() -> {
+//                                    int days = travelCourse.getDays();
+//                                    Set<Long> globalSelectedSpotIds = new HashSet<>();
+//
+//                                    // 일자별 최종 선택된 SpotId를 담을 리스트
+//                                    List<List<Long>> allDaysSelectedSpotIds = new java.util.ArrayList<>();
+//
+//                                    for (int day = 0; day < days; day++) {
+//                                        int slotsInDay = (day == days - 1 && days > 1) ? 5 : 6; // 마지막 날은 5칸
+//                                        List<Long> daySelectedSpotIds = processDay(travelCourse, day, slotsInDay, globalSelectedSpotIds);
+//
+//                                        allDaysSelectedSpotIds.add(daySelectedSpotIds);
+//                                    }
+//
+//                                    // 1. 전체 여행의 총 이동 거리 계산
+//                                    double totalDistance = calculateTotalDistance(allDaysSelectedSpotIds);
+//                                    travelCourse.updateTotalDistance(totalDistance);
+//
+//                                    return travelCourse;
+//                                })
+//                                // JPA 호출이 있으므로 별도의 스레드 풀에서 실행
+//                                .subscribeOn(Schedulers.boundedElastic())
+//                )
+//                .flatMap(completedTravelCourse ->
+//                        // 2. DB에 저장
+//                        Mono.fromCallable(() -> travelCourseRepository.save(completedTravelCourse))
+//                                .subscribeOn(Schedulers.boundedElastic())
+//                )
+//                .doOnSuccess(tc -> log.info("Generated full travel course with id={} totalDistance={} km",
+//                        tc.getId(), tc.getTotalDistance()))
+//                .doOnError(err -> log.error("Failed to create travel course", err));
     }
 
     /**

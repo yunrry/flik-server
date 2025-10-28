@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 @Service
 public class TravelPlannerService {
 
-    // KEY_LIST = {"nature", "indoor", "history", "cafe", "activity", "festival", "market", "themepark"};
+    // KEY_LIST = {"nature", "indoor", "history_culture", "cafe", "activity", "festival", "market", "themepark"};
     private static final int MAX_PLACES_PER_DAY = 6;
 
     /**

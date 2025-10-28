@@ -21,7 +21,6 @@ public class CourseSlotResponse {
     private String slotName;
     private List<Long> recommendedSpotIds;
     private Long selectedSpotId;
-    private Boolean isContinue;
     private boolean isEmpty;
     private boolean hasRecommendations;
     private boolean hasSelectedSpot;
@@ -35,7 +34,6 @@ public class CourseSlotResponse {
                 .slotName(courseSlot.getSlotName())
                 .recommendedSpotIds(courseSlot.getRecommendedSpotIds())
                 .selectedSpotId(courseSlot.getSelectedSpotId())
-                .isContinue(courseSlot.getIsContinue())
                 .isEmpty(courseSlot.isEmpty())
                 .hasRecommendations(courseSlot.hasRecommendations())
                 .hasSelectedSpot(courseSlot.hasSelectedSpot())

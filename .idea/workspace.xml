@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/RecommendationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception/VectorCalculationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceBasicTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceBatchTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServicePreferenceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceRecommendationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceSlotTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/CourseSlotResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/CourseSlotResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/CacheConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/CacheConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/plan/CourseSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/model/plan/CourseSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseRecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseRecommendationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/VectorSimilarityRecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/VectorSimilarityRecommendationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +60,8 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -150,6 +162,14 @@
     "Gradle.Tests in 'yunrry.flik.core.service'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'.executor": "Run",
     "Gradle.Tests in 'yunrry.flik.ports'.executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceBasicTest.executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceBasicTest.testAllSlotsHaveRecommendations.executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceBatchTest.executor": "Run",
+    "Gradle.TravelCourseRecommendationServicePreferenceTest.executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceRecommendationTest.executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceSlotTest (1).executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceSlotTest.executor": "Run",
+    "Gradle.TravelCourseRecommendationServiceSlotTest.testCreateTouristSlot.executor": "Run",
     "Gradle.TravelPlannerServiceTest.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testAllocateRemainingCategoriesRoundRobin.executor": "Run",
     "Gradle.TravelPlannerServiceTest.testCafeRegularFullDayOneDayTrip.executor": "Run",
@@ -193,7 +213,7 @@
     "Spring Boot.FlikApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "94-fix-signup-dto",
+    "git-widget-placeholder": "97-refactor-TavelCourseRecommendation",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server",
     "node.js.detected.package.eslint": "true",
@@ -257,30 +277,8 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'">
-    <configuration name="Tests in 'flik.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'yunrry.flik.core.service.travelPlanner'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.TravelCourseRecommendationServiceBatchTest">
+    <configuration name="TravelCourseRecommendationServiceBasicTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -293,7 +291,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.travelPlanner.*&quot;" />
+            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceBasicTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -304,7 +302,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelPlannerServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelCourseRecommendationServiceBasicTest.testAllSlotsHaveRecommendations" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -317,7 +315,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest&quot;" />
+            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceBasicTest.testAllSlotsHaveRecommendations&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -328,7 +326,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelPlannerServiceTest.testMaximumDays" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelCourseRecommendationServiceBatchTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -341,7 +339,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest.testMaximumDays&quot;" />
+            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceBatchTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -352,7 +350,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="UserAdapterTest.shouldSaveUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TravelCourseRecommendationServicePreferenceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -365,7 +363,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.adapters.out.persistence.UserAdapterTest.shouldSaveUser&quot;" />
+            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServicePreferenceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="TravelCourseRecommendationServiceRecommendationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceRecommendationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -397,20 +419,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.Tests in 'flik.test'" />
-      <item itemvalue="Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest.testMaximumDays" />
-      <item itemvalue="Gradle.UserAdapterTest.shouldSaveUser" />
-      <item itemvalue="Gradle.TravelPlannerServiceTest" />
+      <item itemvalue="Gradle.TravelCourseRecommendationServiceBasicTest" />
+      <item itemvalue="Gradle.TravelCourseRecommendationServiceBasicTest.testAllSlotsHaveRecommendations" />
+      <item itemvalue="Gradle.TravelCourseRecommendationServiceBatchTest" />
+      <item itemvalue="Gradle.TravelCourseRecommendationServicePreferenceTest" />
+      <item itemvalue="Gradle.TravelCourseRecommendationServiceRecommendationTest" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'yunrry.flik.core.service.travelPlanner'" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest.testMaximumDays" />
-        <item itemvalue="Gradle.TravelPlannerServiceTest" />
-        <item itemvalue="Gradle.UserAdapterTest.shouldSaveUser" />
-        <item itemvalue="Gradle.Tests in 'flik.test'" />
+        <item itemvalue="Gradle.TravelCourseRecommendationServiceBatchTest" />
+        <item itemvalue="Gradle.TravelCourseRecommendationServiceRecommendationTest" />
+        <item itemvalue="Gradle.TravelCourseRecommendationServicePreferenceTest" />
+        <item itemvalue="Gradle.TravelCourseRecommendationServiceBasicTest.testAllSlotsHaveRecommendations" />
+        <item itemvalue="Gradle.TravelCourseRecommendationServiceBasicTest" />
       </list>
     </recent_temporary>
   </component>
