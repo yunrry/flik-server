@@ -1,13 +1,15 @@
 package yunrry.flik.core.service.plan;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class TravelPlannerService {
 
-    // KEY_LIST = {"nature", "indoor", "history", "cafe", "activity", "festival", "market", "themepark"};
+    // KEY_LIST = {"nature", "indoor", "history_culture", "cafe", "activity", "festival", "market", "themepark"};
     private static final int MAX_PLACES_PER_DAY = 6;
 
     /**
@@ -26,11 +28,15 @@ public class TravelPlannerService {
             throw new IllegalArgumentException("최대 4개 카테고리 제한");
         }
 
+
         // 1. 초기화
         Map<String, Integer> selected = new HashMap<>();
         String[][] course = new String[day][MAX_PLACES_PER_DAY];
 
         for (String category : userSelect) {
+            if (category.equals("restaurant") || category.equals("accommodation")) {
+                continue;
+            }
             selected.put(category, saveCount.getOrDefault(category, 1));
         }
 

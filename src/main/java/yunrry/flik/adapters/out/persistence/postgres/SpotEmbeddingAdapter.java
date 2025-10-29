@@ -72,13 +72,14 @@ public class SpotEmbeddingAdapter implements SpotEmbeddingRepository {
                                                                  List<Long> spotIds,
                                                                  int limit) {
         try {
+            // toArray() 제거하고 List 그대로 전달
             List<Object[]> results = spotEmbeddingJpaRepository.findSimilarSpotsByUserPreference(
-                    userId, category, spotIds.toArray(Long[]::new), limit);
+                    userId, category, spotIds, limit);
 
             return results.stream()
                     .map(row -> new SpotSimilarity(
-                            ((Number) row[0]).longValue(),      // spot_id
-                            ((Number) row[1]).doubleValue()     // similarity
+                            ((Number) row[0]).longValue(),
+                            ((Number) row[1]).doubleValue()
                     ))
                     .collect(Collectors.toList());
         } catch (Exception e) {

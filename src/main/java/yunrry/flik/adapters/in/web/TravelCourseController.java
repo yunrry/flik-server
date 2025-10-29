@@ -45,7 +45,7 @@ public class TravelCourseController {
      */
     @Operation(summary = "개인 맞춤 여행 코스 생성", description = "사용자 ID, 선택 카테고리, 여행 기간 등을 기반으로 개인화된 여행 코스를 생성합니다.")
     @PostMapping("/generate")
-    public Mono<ResponseEntity<Response<TravelCourseResponse>>> generateTravelCourse(
+    public ResponseEntity<Response<TravelCourseResponse>> generateTravelCourse(
             @Parameter(description = "카테고리 목록", example = "restaurant,nature,accommodation,indoor,history_culture,cafe,activity,festival,market,themepark")
             @RequestParam @NotEmpty(message = "카테고리는 최소 1개 이상 선택해야 합니다") List<String> categories,
 
@@ -59,8 +59,8 @@ public class TravelCourseController {
             @AuthenticationPrincipal Long userId
     ) {
         if (userId == null) {
-            return Mono.just(ResponseEntity.badRequest()
-                    .body(Response.error("USER_NOT_AUTHENTICATED")));
+            return ResponseEntity.badRequest()
+                    .body(Response.error("USER_NOT_AUTHENTICATED"));
         }
 
         // 카테고리 벡터 존재 여부 확인
@@ -72,20 +72,22 @@ public class TravelCourseController {
                 .allMatch(category -> userCategoryVectorService.hasUserVector(userId, category));
 
         if (!allVectorsExist) {
-            return Mono.just(ResponseEntity.badRequest()
-                    .body(Response.error("USER_CATEGORY_VECTORS_NOT_FOUND")));
+            return ResponseEntity.badRequest()
+                    .body(Response.error("USER_CATEGORY_VECTORS_NOT_FOUND"));
         }
 
-        CourseQuery query = CourseQuery.of(userId, categories, regionCode, tripDuration);
+        try {
+            CourseQuery query = CourseQuery.of(userId, categories, regionCode, tripDuration);
+            TravelCourse travelCourse = createTravelCourseService.create(query);
+            TravelCourseResponse response = TravelCourseResponse.from(travelCourse);
 
-        return createTravelCourseService.create(query)
-                .map(TravelCourseResponse::from)
-                .map(response -> ResponseEntity.ok(Response.success(response)))
-                .onErrorResume(ex -> {
-                    log.error("Error generating travel course for user: {}", userId, ex);
-                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body(Response.error("COURSE_GENERATION_FAILED")));
-                });
+            return ResponseEntity.ok(Response.success(response));
+
+        } catch (Exception ex) {
+            log.error("Error generating travel course for user: {}", userId, ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("COURSE_GENERATION_FAILED"));
+        }
     }
 
     /**

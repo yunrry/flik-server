@@ -283,5 +283,43 @@ public class SpotTestFixture {
         );
     }
 
+    public static TourSpot createTestSpotForDistance(Long id, BigDecimal lat, BigDecimal lon) {
+        return new TourSpot(
+                id, // id
+                "테스트 관광지", // name
+                "12", // contentTypeId
+                "7836561386",// contentId
+                "자연명소", // category
+                "테스트용 관광지입니다", // description
+                "제주도 제주시", // address
+                "50", // regnCd
+                "50110", // signguCd
+                lat,// latitude
+                lon, // longitude
+                List.of("tour1.jpg", "tour2.jpg"), // imageUrls
+                "064-1234-5678", // call
+                BigDecimal.valueOf(4.8), // rating
+                "35436638", // googlePlaceId
+                150, // reviewCount
+                "관광", // tag1
+                "자연", // tag2
+                "명소", // tag3
+                "관광,자연,명소", // tags
+                "문화관광", // labelDepth1
+                "랜드마크관광", // labelDepth2
+                "동상", // labelDepth3
+                "가능", // parking
+                "가능", // petCarriage
+                "가능", // babyCarriage
+                LocalTime.of(8, 0), // openTime
+                LocalTime.of(18, 0), // closeTime
+                "매일 08:00 ~ 18:00", // time
+                "없음", // dayOff
+                "제주도의 아름다운 자연을 만끽할 수 있는 명소입니다", // info
+                "아름다운 자연경관을 감상할 수 있습니다", // expGuide
+                "전체관람가" // ageLimit
+        );
+    }
+
 
 }

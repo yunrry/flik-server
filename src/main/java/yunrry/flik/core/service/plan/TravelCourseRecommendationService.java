@@ -1,24 +1,23 @@
 package yunrry.flik.core.service.plan;
 
-import com.sun.tools.javac.Main;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
+import org.springframework.transaction.annotation.Transactional;
 
+import yunrry.flik.core.domain.exception.RecommendationException;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.*;
-import yunrry.flik.core.domain.model.card.Spot;
-import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.core.domain.model.plan.CourseSlot;
 import yunrry.flik.core.domain.model.plan.SlotType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
+import yunrry.flik.core.service.spot.SpotCacheService;
+import yunrry.flik.core.service.spot.SpotPreloadService;
 import yunrry.flik.core.service.user.UserPreferenceService;
 import yunrry.flik.ports.in.query.CourseQuery;
-import yunrry.flik.ports.out.repository.UserRepository;
-import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 import yunrry.flik.ports.out.repository.SpotRepository;
-
+import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -26,217 +25,346 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class TravelCourseRecommendationService {
 
-    private final TravelPlannerService travelPlannerService;
-    private final VectorSimilarityRecommendationService vectorSimilarityRecommendationService;
-    private final UserSavedSpotRepository userSavedSpotRepository;
-    private final UserPreferenceService userPreferenceService;
-    private final SpotRepository spotRepository;
-    private final CategoryMapper categoryMapper;
+    public static final int DEFAULT_TOURIST_SPOT_LIMIT = 7;
+    public static final int RESTAURANT_LIMIT = 10;
+    public static final int ACCOMMODATION_LIMIT = 5;
+
+    private final SpotPreloadService spotPreloadService;
+    public final TravelPlannerService travelPlannerService;
+    public final VectorSimilarityRecommendationService vectorSimilarityRecommendationService;
+    public final UserSavedSpotRepository userSavedSpotRepository;
+    public final UserPreferenceService userPreferenceService;
+    public final SpotRepository spotRepository;
+    public final CategoryMapper categoryMapper;
 
     /**
-     * 사용자 맞춤 여행 코스 생성
+     * 사용자 맞춤 여행 코스 생성 (동기)
      */
-    public Mono<TravelCourse> generatePersonalizedTravelCourse(CourseQuery query) {
+    public TravelCourse generatePersonalizedTravelCourse(CourseQuery query) {
+        long startTime = System.currentTimeMillis();
+
         String regionCode = query.getSelectedRegion();
         Long userId = query.getUserId();
         List<String> selectedCategoriesList = query.getSelectedCategories();
-        String[] selectedCategories = selectedCategoriesList.toArray(new String[selectedCategoriesList.size()]);
+        String[] selectedCategories = selectedCategoriesList.toArray(new String[0]);
         int days = query.getDays();
 
-        return getUserSelectFrequency(userId, selectedCategories)
-                .flatMap(frequencyMap -> {
-                    // 1. 기본 코스 구조 생성
-                    String[][] courseStructure = travelPlannerService.generateTravelCourse(
-                            selectedCategories,
-                            days,
-                            frequencyMap
-                    );
-                    for(String[] day : courseStructure){
-                        log.info(Arrays.toString(day));
-                    }
+        try {
+            // 1. 사용자 선호도 조회
+            Map<String, Integer> frequencyMap = getUserSelectFrequency(userId, selectedCategories);
 
+            // 2. 기본 코스 구조 생성
+            String[][] courseStructure = travelPlannerService.generateTravelCourse(
+                    selectedCategories,
+                    days,
+                    frequencyMap
+            );
 
-                    // 2. 각 슬롯에 실제 장소 할당
-                    return fillCourseWithRecommendedSpots(userId, courseStructure, regionCode)
-                            .map(filledCourse -> TravelCourse.of(userId, days, filledCourse, selectedCategoriesList, regionCode));
-                })
-                .doOnSuccess(course -> log.info("Generated personalized course for user: {} with {} days", userId, days));
+            logCourseStructure(courseStructure);
+
+            // 3. 필요한 모든 카테고리의 장소를 미리 조회 (N+1 해결)
+            Map<MainCategory, List<Long>> categorySpotCache = spotPreloadService
+                    .preloadAllCategorySpots(courseStructure, userId, regionCode);
+
+            // 4. 각 슬롯에 실제 장소 할당
+            CourseSlot[][] filledCourse = fillCourseWithRecommendedSpots(
+                    userId,
+                    courseStructure,
+                    regionCode,
+                    categorySpotCache
+            );
+
+            TravelCourse result = TravelCourse.of(
+                    userId,
+                    days,
+                    filledCourse,
+                    selectedCategoriesList,
+                    regionCode
+            );
+
+            log.info("Generated personalized course for user: {} with {} days in {}ms",
+                    userId, days, System.currentTimeMillis() - startTime);
+
+            return result;
+
+        } catch (RecommendationException e) {
+            throw e;  // 그대로 전파
+        } catch (Exception e) {
+            log.error("Failed to generate course for user: {}", userId, e);
+            throw new RuntimeException("코스 생성에 실패했습니다.", e);
+        }
     }
 
+    /**
+     * 사용자 선호도 빈도 조회
+     */
+    public Map<String, Integer> getUserSelectFrequency(Long userId, String[] selectedCategories) {
+        Map<String, Integer> frequencyMap = new HashMap<>();
 
-
-    private Mono<Map<String, Integer>> getUserSelectFrequency(Long userId,  String[] selectedCategories) {
-        return Mono.fromCallable(() -> {
-            Map<String, Integer> frequencyMap = new HashMap<>();
-
-            // 선택된 카테고리들에 대해 빈도 설정 (없으면 기본값 1)
-            for (String category : selectedCategories) {
-                String mainCategory = MainCategory.findByCode(category).getDisplayName();
-                int count = userPreferenceService.getUserMainCategoryCount(userId, mainCategory);
-                frequencyMap.put(category, count > 0 ? count : 1);
+        for (String category : selectedCategories) {
+            // restaurant, accommodation 제외
+            if (category.equals("restaurant") || category.equals("accommodation")) {
+                continue;
             }
 
-            return frequencyMap;
-        });
+            MainCategory mainCategory = MainCategory.findByCode(category);
+            int count = userPreferenceService.getUserMainCategoryCount(userId, mainCategory.getDisplayName());
+            frequencyMap.put(category, count > 0 ? count : 1);
+        }
+
+        return frequencyMap;
     }
 
-    private Mono<CourseSlot[][]> fillCourseWithRecommendedSpots(Long userId,
-                                                                String[][] courseStructure, String regionCode) {
-        CourseSlot[][] filledCourse = new CourseSlot[courseStructure.length][courseStructure[0].length];
 
-        return Mono.fromCallable(() -> {
-            for (int day = 0; day < courseStructure.length; day++) {
-                for (int slot = 0; slot < courseStructure[day].length; slot++) {
-                    String slotType = courseStructure[day][slot];
+    /**
+     * 코스 구조에서 필요한 카테고리 추출
+     */
+    public Set<MainCategory> extractRequiredCategories(String[][] courseStructure) {
+        Set<MainCategory> categories = new HashSet<>();
 
-                    if (slotType.isEmpty()) {
-                        filledCourse[day][slot] = CourseSlot.empty(day, slot);
-                    } else {
-                        CourseSlot courseSlot = createCourseSlot(userId, day, slot, slotType, regionCode);
-                        filledCourse[day][slot] = courseSlot;
+        // 필수 카테고리
+        categories.add(MainCategory.RESTAURANT);
+        categories.add(MainCategory.ACCOMMODATION);
+
+        // 관광 카테고리
+        for (String[] day : courseStructure) {
+            for (String slot : day) {
+                if (!slot.isEmpty() &&
+                        !slot.equals("restaurant") &&
+                        !slot.equals("accommodation")) {
+
+                    MainCategory category = MainCategory.findByCode(slot);
+                    if (category != null) {
+                        categories.add(category);
                     }
                 }
             }
-            return filledCourse;
-        });
-    }
-
-
-
-    private CourseSlot createCourseSlot(Long userId, int day, int slot, String slotType, String regionCode) {
-
-        Boolean isContinue = slotType.contains("_continue");
-
-        if (slotType.equals("restaurant")) {
-            return createRestaurantSlot(userId, day, slot, regionCode);
         }
 
-        if (slotType.equals("accommodation")) {
-            return createAccommodationSlot(userId, day, slot, regionCode);
+        return categories;
+    }
+
+    /**
+     * 캐싱을 적용한 카테고리별 장소 조회
+     * Redis 캐시 사용 (TTL: 10분)
+     */
+    @Cacheable(
+            value = "categorySpots",
+            key = "#userId + ':' + #category.code + ':' + #regionCode",
+            unless = "#result == null || #result.isEmpty()"
+    )
+    public List<Long> getCategorySpotsWithCache(
+            Long userId,
+            MainCategory category,
+            String regionCode) {
+
+        log.debug("Cache miss - Loading spots from DB for userId: {}, category: {}, region: {}",
+                userId, category.getCode(), regionCode);
+
+        List<String> subCategories = categoryMapper.getSubCategoryNames(category);
+        List<Long> userSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
+
+        List<Long> spotIds = spotRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(
+                userSavedSpotIds,
+                subCategories,
+                regionCode
+        );
+
+        log.debug("Loaded {} spots for category: {} from DB", spotIds.size(), category.getCode());
+
+        return spotIds;
+    }
+
+    /**
+     * 코스에 추천 장소 채우기
+     */
+    public CourseSlot[][] fillCourseWithRecommendedSpots(
+            Long userId,
+            String[][] courseStructure,
+            String regionCode,
+            Map<MainCategory, List<Long>> categorySpotCache) {
+
+        CourseSlot[][] filledCourse = new CourseSlot[courseStructure.length][courseStructure[0].length];
+
+        for (int day = 0; day < courseStructure.length; day++) {
+            for (int slot = 0; slot < courseStructure[day].length; slot++) {
+                String slotCategory = courseStructure[day][slot];
+                System.out.println("day"+day+"slot"+slot+" = "+courseStructure[day][slot]);
+                if (slotCategory.isEmpty()) {
+                    filledCourse[day][slot] = CourseSlot.empty(day, slot);
+                    System.out.println("filledCourse[day][slot]="+filledCourse[day][slot]+ "-> is empty");
+                } else {
+                    CourseSlot courseSlot = createCourseSlot(
+                            userId,
+                            day,
+                            slot,
+                            slotCategory,
+                            regionCode,
+                            categorySpotCache
+                    );
+                    filledCourse[day][slot] = courseSlot;
+                }
+            }
+        }
+
+        return filledCourse;
+    }
+
+    /**
+     * 슬롯 타입에 따라 CourseSlot 생성
+     */
+    public CourseSlot createCourseSlot(
+            Long userId,
+            int day,
+            int slot,
+            String slotCategory,
+            String regionCode,
+            Map<MainCategory, List<Long>> categorySpotCache) {
+
+        if ("restaurant".equals(slotCategory)) {
+            return createRestaurantSlot(userId, day, slot, regionCode, categorySpotCache);
+        }
+
+        if ("accommodation".equals(slotCategory)) {
+            return createAccommodationSlot(userId, day, slot, regionCode, categorySpotCache);
         }
 
         // 관광 슬롯 처리
-        MainCategory mainCategory = getMainCategoryFromSlotType(slotType);
+        MainCategory mainCategory = getMainCategoryFromSlotType(slotCategory);
+
         if (mainCategory != null) {
+            List<Long> candidateSpotIds = categorySpotCache.getOrDefault(
+                    mainCategory,
+                    Collections.emptyList()
+            );
 
-            List<SpotSimilarity> recommendedSpots = findRecommendedSpotsBySubCategories(userId, 3, mainCategory, regionCode);
+            if (candidateSpotIds.isEmpty()) {
+                log.warn("No candidate spots found for category: {} in region: {}",
+                        mainCategory, regionCode);
+                return CourseSlot.empty(day, slot);
+            }
 
-            log.info("Recommended spots for user {} in category {}: {} - {}", userId, mainCategory.getCode(),
-                    recommendedSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), recommendedSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
+            List<Long> recommendedSpotIds = vectorSimilarityRecommendationService
+                    .findRecommendedSpotIdsByVectorSimilarity(
+                            userId,
+                            candidateSpotIds,
+                            mainCategory,
+                            DEFAULT_TOURIST_SPOT_LIMIT
+                    );
 
+            log.debug("Recommended {} spots for user {} in category {}",
+                    recommendedSpotIds.size(), userId, mainCategory.getCode());
+            System.out.println("Recommended "+recommendedSpotIds.size()+" in category "+mainCategory.getCode());
 
             return CourseSlot.builder()
-                    .day(day+1)
+                    .day(day + 1)
                     .slot(slot)
                     .slotType(SlotType.fromMainCategory(mainCategory))
                     .mainCategory(mainCategory)
-                    .recommendedSpotIds(recommendedSpots.stream()
-                            .map(SpotSimilarity::spotId)
-                            .collect(Collectors.toList()))
-                    .isContinue(isContinue)
+                    .recommendedSpotIds(recommendedSpotIds)
                     .build();
         }
 
         return CourseSlot.empty(day, slot);
     }
 
+    /**
+     * 식당 슬롯 생성
+     */
+    public CourseSlot createRestaurantSlot(
+            Long userId,
+            int day,
+            int slot,
+            String regionCode,
+            Map<MainCategory, List<Long>> categorySpotCache) {
 
+        List<Long> candidateSpotIds = categorySpotCache.getOrDefault(
+                MainCategory.RESTAURANT,
+                Collections.emptyList()
+        );
 
-    private CourseSlot createRestaurantSlot(Long userId, int day, int slot, String reginCode) {
+        if (candidateSpotIds.isEmpty()) {
+            log.warn("No restaurant spots found in region: {}", regionCode);
+            return CourseSlot.empty(day, slot);
+        }
 
+        List<Long> recommendedSpotIds = vectorSimilarityRecommendationService
+                .findRecommendedSpotIdsByVectorSimilarity(
+                        userId,
+                        candidateSpotIds,
+                        MainCategory.RESTAURANT,
+                        RESTAURANT_LIMIT
+                );
 
-        List<SpotSimilarity> restaurantSpots = findRecommendedSpotsBySubCategories(
-                userId, 10, MainCategory.RESTAURANT, reginCode);
-
-        log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.RESTAURANT.getCode(),
-                restaurantSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), restaurantSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
-
+        log.debug("Recommended {} restaurants for user {}", recommendedSpotIds.size(), userId);
 
         return CourseSlot.builder()
-                .day(day+1)
+                .day(day + 1)
                 .slot(slot)
                 .slotType(SlotType.RESTAURANT)
                 .mainCategory(MainCategory.RESTAURANT)
-                .recommendedSpotIds(restaurantSpots.stream()
-                        .map(SpotSimilarity::spotId)
-                        .collect(Collectors.toList()))
+                .recommendedSpotIds(recommendedSpotIds)
                 .build();
     }
 
-    private CourseSlot createAccommodationSlot(Long userId, int day, int slot, String reginCode) {
+    /**
+     * 숙박 슬롯 생성
+     */
+    public CourseSlot createAccommodationSlot(
+            Long userId,
+            int day,
+            int slot,
+            String regionCode,
+            Map<MainCategory, List<Long>> categorySpotCache) {
 
+        List<Long> candidateSpotIds = categorySpotCache.getOrDefault(
+                MainCategory.ACCOMMODATION,
+                Collections.emptyList()
+        );
 
-        List<SpotSimilarity> accommodationSpots = findRecommendedSpotsBySubCategories(
-                userId, 5, MainCategory.ACCOMMODATION, reginCode);
+        if (candidateSpotIds.isEmpty()) {
+            log.warn("No accommodation spots found in region: {}", regionCode);
+            return CourseSlot.empty(day, slot);
+        }
 
-        log.info("Recommended spots for user {} in category {}: {} - {}", userId, MainCategory.ACCOMMODATION.getCode(),
-                accommodationSpots.stream().map(SpotSimilarity::spotId).collect(Collectors.toList()), accommodationSpots.stream().map(SpotSimilarity::similarity).collect(Collectors.toList()) );
+        List<Long> recommendedSpotIds = vectorSimilarityRecommendationService
+                .findRecommendedSpotIdsByVectorSimilarity(
+                        userId,
+                        candidateSpotIds,
+                        MainCategory.ACCOMMODATION,
+                        ACCOMMODATION_LIMIT
+                );
+
+        log.debug("Recommended {} accommodations for user {}", recommendedSpotIds.size(), userId);
 
         return CourseSlot.builder()
-                .day(day+1)
+                .day(day + 1)
                 .slot(slot)
                 .slotType(SlotType.ACCOMMODATION)
                 .mainCategory(MainCategory.ACCOMMODATION)
-                .recommendedSpotIds(accommodationSpots.stream()
-                        .map(SpotSimilarity::spotId)
-                        .collect(Collectors.toList()))
+                .recommendedSpotIds(recommendedSpotIds)
                 .build();
     }
 
-    private MainCategory getMainCategoryFromSlotType(String slotType) {
-        // _continue 제거
-        String cleanType = slotType.replace("_continue", "");
-
-        return MainCategory.findByCode(cleanType);
+    /**
+     * 슬롯 타입에서 메인 카테고리 추출
+     */
+    public MainCategory getMainCategoryFromSlotType(String slotType) {
+        return MainCategory.findByCode(slotType);
     }
 
-
-
-    // 5. Updated findRecommendedSpotsBySubCategories
-    private List<SpotSimilarity> findRecommendedSpotsBySubCategories(Long userId,
-                                                                     int limit,
-                                                                     MainCategory mainCategory,
-                                                                     String regionCode) {
-
-        List<String> subCategories = categoryMapper.getSubCategoryNames(mainCategory);
-
-        // 1. 사용자가 저장한 장소들 조회
-        List<Long> userSavedSpotIds = userSavedSpotRepository.findSpotIdsByUserId(userId);
-//        List<Spot> candidateSpots;
-        List<Long> candidateSpotIds = spotRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(userSavedSpotIds, subCategories, regionCode);
-
-//        if (userSavedSpotIds.isEmpty()) {
-//            // 저장한 장소가 없으면 전체에서 선택
-//            candidateSpots = spotRepository.findByLabelDepth2In(subCategories);
-//        } else {
-//            // 사용자가 저장한 장소들 중 해당 카테고리 우선, 부족하면 전체에서 보충
-//            List<Spot> userSavedSpots = spotRepository.findByIdsAndLabelDepth2In(userSavedSpotIds, subCategories);
-//
-//            if (userSavedSpots.size() >= limit) {
-//                log.info("userSavedSpotsize : {}", userSavedSpots.size());
-//                candidateSpots = userSavedSpots;
-//            } else {
-//                candidateSpots = new ArrayList<>(userSavedSpots);
-//                List<Spot> additionalSpots = spotRepository.findByLabelDepth2In(subCategories);
-//                additionalSpots.removeIf(spot -> userSavedSpots.contains(spot));
-//                candidateSpots.addAll(additionalSpots);
-//            }
-//        }
-
-        if (candidateSpotIds.isEmpty()) {
-            log.warn("No candidate spots found for user: {} in category: {}", userId, mainCategory);
-            return List.of();
+    /**
+     * 코스 구조 로깅
+     */
+    public void logCourseStructure(String[][] courseStructure) {
+        if (log.isDebugEnabled()) {
+            log.debug("=== Course Structure ===");
+            for (int i = 0; i < courseStructure.length; i++) {
+                log.debug("Day {}: {}", i + 1, Arrays.toString(courseStructure[i]));
+            }
         }
-
-
-        log.info("Candidate spot IDs for {}: {}", mainCategory, candidateSpotIds);
-        // 2. 벡터 유사도 기반 추천
-        return vectorSimilarityRecommendationService
-                .findRecommendedSpotsByVectorSimilarity(userId, candidateSpotIds, mainCategory, limit);
     }
-
-
-
 }

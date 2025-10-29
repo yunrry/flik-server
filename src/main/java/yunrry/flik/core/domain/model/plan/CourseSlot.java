@@ -24,7 +24,6 @@ public class CourseSlot {
     private MainCategory mainCategory;
     private List<Long> recommendedSpotIds;
     private Long selectedSpotId;
-    private Boolean isContinue;
 
     public static CourseSlot empty(int day, int slot) {
         return CourseSlot.builder()
