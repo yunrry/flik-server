@@ -1,3 +1,4 @@
+#-test
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -8,9 +9,17 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        # 공간 함수 비활성화
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: false
   h2:
     console:
       enabled: true
+  cache:
+    type: none  # 테스트에서 캐시 비활성화
   
   # Disable batch for tests
   batch:

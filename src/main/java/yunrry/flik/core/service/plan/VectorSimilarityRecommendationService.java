@@ -53,17 +53,10 @@ public class VectorSimilarityRecommendationService {
                 userId, category.getCode(), candidateSpotIds.size(), limit);
 
         try {
-            // 1. 사용자 카테고리 벡터 재계산
-            recalculateUserVectors(userId, category, candidateSpotIds);
 
             // 2. 유사도 기반 장소 추천
             List<SpotSimilarity> recommendations = spotEmbeddingService
-                    .findSimilarSpotsByUserPreference(
-                            userId,
-                            category.getCode(),
-                            candidateSpotIds,
-                            limit
-                    );
+                    .findSimilarSpotsByUserPreference(userId, category.getCode(), candidateSpotIds, limit);
 
             log.info("Found {} recommended spots for userId: {}, category: {}",
                     recommendations.size(), userId, category.getCode());

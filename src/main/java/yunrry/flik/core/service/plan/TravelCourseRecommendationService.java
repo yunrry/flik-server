@@ -6,11 +6,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import yunrry.flik.core.domain.exception.RecommendationException;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.*;
 import yunrry.flik.core.domain.model.plan.CourseSlot;
 import yunrry.flik.core.domain.model.plan.SlotType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
+import yunrry.flik.core.service.spot.SpotCacheService;
+import yunrry.flik.core.service.spot.SpotPreloadService;
 import yunrry.flik.core.service.user.UserPreferenceService;
 import yunrry.flik.ports.in.query.CourseQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
@@ -25,16 +28,17 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class TravelCourseRecommendationService {
 
-    private static final int DEFAULT_TOURIST_SPOT_LIMIT = 7;
-    private static final int RESTAURANT_LIMIT = 10;
-    private static final int ACCOMMODATION_LIMIT = 5;
+    public static final int DEFAULT_TOURIST_SPOT_LIMIT = 7;
+    public static final int RESTAURANT_LIMIT = 10;
+    public static final int ACCOMMODATION_LIMIT = 5;
 
-    private final TravelPlannerService travelPlannerService;
-    private final VectorSimilarityRecommendationService vectorSimilarityRecommendationService;
-    private final UserSavedSpotRepository userSavedSpotRepository;
-    private final UserPreferenceService userPreferenceService;
-    private final SpotRepository spotRepository;
-    private final CategoryMapper categoryMapper;
+    private final SpotPreloadService spotPreloadService;
+    public final TravelPlannerService travelPlannerService;
+    public final VectorSimilarityRecommendationService vectorSimilarityRecommendationService;
+    public final UserSavedSpotRepository userSavedSpotRepository;
+    public final UserPreferenceService userPreferenceService;
+    public final SpotRepository spotRepository;
+    public final CategoryMapper categoryMapper;
 
     /**
      * 사용자 맞춤 여행 코스 생성 (동기)
@@ -62,8 +66,8 @@ public class TravelCourseRecommendationService {
             logCourseStructure(courseStructure);
 
             // 3. 필요한 모든 카테고리의 장소를 미리 조회 (N+1 해결)
-            Map<MainCategory, List<Long>> categorySpotCache =
-                    preloadAllCategorySpots(courseStructure, userId, regionCode);
+            Map<MainCategory, List<Long>> categorySpotCache = spotPreloadService
+                    .preloadAllCategorySpots(courseStructure, userId, regionCode);
 
             // 4. 각 슬롯에 실제 장소 할당
             CourseSlot[][] filledCourse = fillCourseWithRecommendedSpots(
@@ -86,6 +90,8 @@ public class TravelCourseRecommendationService {
 
             return result;
 
+        } catch (RecommendationException e) {
+            throw e;  // 그대로 전파
         } catch (Exception e) {
             log.error("Failed to generate course for user: {}", userId, e);
             throw new RuntimeException("코스 생성에 실패했습니다.", e);
@@ -95,10 +101,15 @@ public class TravelCourseRecommendationService {
     /**
      * 사용자 선호도 빈도 조회
      */
-    private Map<String, Integer> getUserSelectFrequency(Long userId, String[] selectedCategories) {
+    public Map<String, Integer> getUserSelectFrequency(Long userId, String[] selectedCategories) {
         Map<String, Integer> frequencyMap = new HashMap<>();
 
         for (String category : selectedCategories) {
+            // restaurant, accommodation 제외
+            if (category.equals("restaurant") || category.equals("accommodation")) {
+                continue;
+            }
+
             MainCategory mainCategory = MainCategory.findByCode(category);
             int count = userPreferenceService.getUserMainCategoryCount(userId, mainCategory.getDisplayName());
             frequencyMap.put(category, count > 0 ? count : 1);
@@ -107,36 +118,11 @@ public class TravelCourseRecommendationService {
         return frequencyMap;
     }
 
-    /**
-     * 필요한 모든 카테고리의 장소를 미리 조회 (N+1 해결)
-     */
-    private Map<MainCategory, List<Long>> preloadAllCategorySpots(
-            String[][] courseStructure,
-            Long userId,
-            String regionCode) {
-
-        // 1. 코스에 필요한 모든 카테고리 추출
-        Set<MainCategory> requiredCategories = extractRequiredCategories(courseStructure);
-
-        log.debug("Preloading spots for categories: {}", requiredCategories);
-
-        // 2. 카테고리별로 한 번에 조회
-        Map<MainCategory, List<Long>> categorySpotMap = new HashMap<>();
-
-        for (MainCategory category : requiredCategories) {
-            List<Long> spotIds = getCategorySpotsWithCache(userId, category, regionCode);
-            categorySpotMap.put(category, spotIds);
-
-            log.debug("Loaded {} spots for category: {}", spotIds.size(), category);
-        }
-
-        return categorySpotMap;
-    }
 
     /**
      * 코스 구조에서 필요한 카테고리 추출
      */
-    private Set<MainCategory> extractRequiredCategories(String[][] courseStructure) {
+    public Set<MainCategory> extractRequiredCategories(String[][] courseStructure) {
         Set<MainCategory> categories = new HashSet<>();
 
         // 필수 카테고리
@@ -230,7 +216,7 @@ public class TravelCourseRecommendationService {
     /**
      * 슬롯 타입에 따라 CourseSlot 생성
      */
-    private CourseSlot createCourseSlot(
+    public CourseSlot createCourseSlot(
             Long userId,
             int day,
             int slot,
@@ -288,7 +274,7 @@ public class TravelCourseRecommendationService {
     /**
      * 식당 슬롯 생성
      */
-    private CourseSlot createRestaurantSlot(
+    public CourseSlot createRestaurantSlot(
             Long userId,
             int day,
             int slot,
@@ -327,7 +313,7 @@ public class TravelCourseRecommendationService {
     /**
      * 숙박 슬롯 생성
      */
-    private CourseSlot createAccommodationSlot(
+    public CourseSlot createAccommodationSlot(
             Long userId,
             int day,
             int slot,
@@ -366,14 +352,14 @@ public class TravelCourseRecommendationService {
     /**
      * 슬롯 타입에서 메인 카테고리 추출
      */
-    private MainCategory getMainCategoryFromSlotType(String slotType) {
+    public MainCategory getMainCategoryFromSlotType(String slotType) {
         return MainCategory.findByCode(slotType);
     }
 
     /**
      * 코스 구조 로깅
      */
-    private void logCourseStructure(String[][] courseStructure) {
+    public void logCourseStructure(String[][] courseStructure) {
         if (log.isDebugEnabled()) {
             log.debug("=== Course Structure ===");
             for (int i = 0; i < courseStructure.length; i++) {

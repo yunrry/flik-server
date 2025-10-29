@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import org.springframework.context.annotation.Profile;
 import yunrry.flik.core.domain.mapper.CategoryMapper;
 import yunrry.flik.core.domain.model.MainCategory;
 import yunrry.flik.core.domain.model.plan.CourseSlot;
@@ -15,6 +16,8 @@ import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.core.service.plan.TravelCourseRecommendationService;
 import yunrry.flik.core.service.plan.TravelPlannerService;
 import yunrry.flik.core.service.plan.VectorSimilarityRecommendationService;
+import yunrry.flik.core.service.spot.SpotCacheService;
+import yunrry.flik.core.service.spot.SpotPreloadService;
 import yunrry.flik.core.service.user.UserPreferenceService;
 import yunrry.flik.ports.in.query.CourseQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
@@ -26,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+
 @ExtendWith(MockitoExtension.class)
 class TravelCourseRecommendationServiceBasicTest {
 
@@ -34,6 +38,12 @@ class TravelCourseRecommendationServiceBasicTest {
 
     @Mock
     private TravelPlannerService travelPlannerService;
+
+    @Mock
+    private SpotPreloadService spotPreloadService;
+
+    @Mock
+    private SpotCacheService spotCacheService;
 
     @Mock
     private VectorSimilarityRecommendationService vectorSimilarityRecommendationService;
@@ -57,7 +67,11 @@ class TravelCourseRecommendationServiceBasicTest {
     void setUp() {
         userId = 1L;
         regionCode = "11";
+
+        lenient().when(spotPreloadService.preloadAllCategorySpots(any(), anyLong(), anyString()))
+                .thenReturn(createMockSpotCache());
     }
+
 
     @Test
     @DisplayName("TC-001: 당일치기 코스 생성")
@@ -255,26 +269,17 @@ class TravelCourseRecommendationServiceBasicTest {
 
     // ========== Helper Methods ==========
 
+
+
     private void setupCommonMocks() {
-        // 사용자 선호도 Mock
-        when(userPreferenceService.getUserMainCategoryCount(anyLong(), anyString()))
+        lenient().when(userPreferenceService.getUserMainCategoryCount(anyLong(), anyString()))
                 .thenReturn(5);
-
-        // 사용자 저장 장소 Mock
-        when(userSavedSpotRepository.findSpotIdsByUserId(userId))
+        lenient().when(userSavedSpotRepository.findSpotIdsByUserId(userId))
                 .thenReturn(Arrays.asList(1L, 2L, 3L, 4L, 5L));
-
-        // SubCategory Mock
-        when(categoryMapper.getSubCategoryNames(any(MainCategory.class)))
+        lenient().when(categoryMapper.getSubCategoryNames(any(MainCategory.class)))
                 .thenReturn(Arrays.asList("sub1", "sub2"));
-
-        // Spot Repository Mock - 각 카테고리별로 설정
-        when(spotRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(
-                anyList(), anyList(), eq(regionCode)))
-                .thenAnswer(invocation -> {
-                    // 기본 반환값
-                    return Arrays.asList(301L, 302L, 303L, 304L, 305L);
-                });
+        lenient().when(spotRepository.findIdsByIdsAndLabelDepth2InAndRegnCd(anyList(), anyList(), eq(regionCode)))
+                .thenReturn(Arrays.asList(301L, 302L, 303L, 304L, 305L));
     }
 
     private void setupLenientRecommendationMocks() {
@@ -332,5 +337,15 @@ class TravelCourseRecommendationServiceBasicTest {
             }
         }
         return count;
+    }
+
+    private Map<MainCategory, List<Long>> createMockSpotCache() {
+        Map<MainCategory, List<Long>> cache = new HashMap<>();
+        cache.put(MainCategory.CAFE, Arrays.asList(401L, 402L, 403L));
+        cache.put(MainCategory.NATURE, Arrays.asList(301L, 302L, 303L));
+        cache.put(MainCategory.RESTAURANT, Arrays.asList(101L, 102L, 103L, 104L, 105L));
+        cache.put(MainCategory.ACCOMMODATION, Arrays.asList(201L, 202L, 203L));
+        cache.put(MainCategory.HISTORY_CULTURE, Arrays.asList(501L, 502L, 503L));
+        return cache;
     }
 }

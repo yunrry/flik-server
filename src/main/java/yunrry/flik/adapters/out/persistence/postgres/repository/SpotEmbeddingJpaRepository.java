@@ -27,7 +27,7 @@ public interface SpotEmbeddingJpaRepository extends JpaRepository<SpotEmbeddingE
             (1 - (ucv.preference_vector <=> se.tag_embedding)) as similarity
         FROM spot_embeddings se
         JOIN user_category_vectors ucv ON ucv.user_id = :userId AND ucv.category = :category
-        WHERE se.spot_id = ANY(:spotIds)
+        WHERE se.spot_id IN (:spotIds)
           AND se.tag_embedding IS NOT NULL
           AND ucv.preference_vector IS NOT NULL
         ORDER BY similarity DESC
@@ -35,7 +35,7 @@ public interface SpotEmbeddingJpaRepository extends JpaRepository<SpotEmbeddingE
         """, nativeQuery = true)
     List<Object[]> findSimilarSpotsByUserPreference(@Param("userId") Long userId,
                                                     @Param("category") String category,
-                                                    @Param("spotIds") Long[] spotIds,
+                                                    @Param("spotIds") List<Long> spotIds,
                                                     @Param("limit") int limit);
 
     // tag embedding이 있는 spot_id들만 조회
