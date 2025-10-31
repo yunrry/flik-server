@@ -5,27 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/spot/SpotCacheService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/spot/SpotPreloadService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceCacheTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceErrorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/VectorSimilarityRecommendationServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/CreateTravelCourseServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/application-cache-test.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/UserPostIdsReponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/TravelCourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/TravelCourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/postgres/SpotEmbeddingAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/postgres/SpotEmbeddingAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/postgres/repository/SpotEmbeddingJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/postgres/repository/SpotEmbeddingJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/CacheConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/config/CacheConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseRecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseRecommendationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelPlannerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/VectorSimilarityRecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/VectorSimilarityRecommendationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/testfixture/SpotTestFixture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/domain/testfixture/SpotTestFixture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceBasicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceBasicTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceBatchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/TravelCourseRecommendation/TravelCourseRecommendationServiceBatchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/PostAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/PostJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/PostJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/post/GetPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/post/GetPostUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/PostRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,7 +291,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.FlikApplication">
-    <configuration name="TravelCourseRecommendationServiceBasicTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'flik.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -316,8 +303,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceBasicTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -445,20 +430,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.TravelCourseRecommendationServiceBasicTest" />
       <item itemvalue="Gradle.TravelCourseRecommendationServiceBatchTest" />
       <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest" />
       <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testDatabaseQueryFailure" />
       <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testNoCandidateSpots" />
+      <item itemvalue="Gradle.Tests in 'flik.test'" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'flik.test'" />
         <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest" />
         <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testDatabaseQueryFailure" />
         <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testNoCandidateSpots" />
         <item itemvalue="Gradle.TravelCourseRecommendationServiceBatchTest" />
-        <item itemvalue="Gradle.TravelCourseRecommendationServiceBasicTest" />
       </list>
     </recent_temporary>
   </component>
