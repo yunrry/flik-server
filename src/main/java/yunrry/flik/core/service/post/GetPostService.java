@@ -73,6 +73,10 @@ public class GetPostService implements GetPostUseCase {
         return postRepository.findUserPostsAllByConditions(query);
     }
 
+    @Override
+    public List<Long> getAllUserPostIds(Long userId) {
+        return postRepository.findUserPostIdsAll(userId);
+    }
 
     @Override
     public Slice<Post> searchUserPosts(SearchUserPostsQuery query) {

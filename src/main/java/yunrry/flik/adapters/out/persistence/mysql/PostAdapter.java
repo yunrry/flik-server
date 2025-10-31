@@ -62,6 +62,11 @@ public class PostAdapter implements PostRepository {
                 .toList();
     }
 
+    @Override
+    public List<Long> findUserPostIdsAll(Long userId) {
+        return postJpaRepository.findAllIds(userId);
+    }
+
 
     @Override
     public void deleteById(Long id) {
