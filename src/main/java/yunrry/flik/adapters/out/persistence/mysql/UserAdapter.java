@@ -1,5 +1,6 @@
 package yunrry.flik.adapters.out.persistence.mysql;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import yunrry.flik.adapters.out.persistence.mysql.entity.UserEntity;
@@ -49,5 +50,11 @@ public class UserAdapter implements UserRepository {
     @Override
     public void deleteById(Long id) {
         userJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public String findNickNameById(Long id) {
+        return userJpaRepository.findNicknameById(id)
+                .orElseThrow(() -> new EntityNotFoundException("닉네임을 찾을 수 없습니다. id=" + id));
     }
 }

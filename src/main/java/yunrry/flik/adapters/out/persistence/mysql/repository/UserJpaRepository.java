@@ -27,4 +27,8 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
             @Param("email") String email,
             @Param("provider") AuthProvider provider
     );
+
+
+    @Query("SELECT u.nickname FROM UserEntity u WHERE u.id = :id")
+    Optional<String> findNicknameById(@Param("id") Long id);
 }

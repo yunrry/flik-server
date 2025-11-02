@@ -12,4 +12,5 @@ public interface UserRepository {
     Optional<User> findByProviderAndProviderId(AuthProvider provider, String providerId);
     boolean existsByEmail(String email);
     void deleteById(Long id);
+    String findNickNameById(Long id);
 }

@@ -18,4 +18,9 @@ public class GetUserService implements GetUserUseCase {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
     }
+
+    @Override
+    public String getUserNickName(Long userId){
+        return userRepository.findNickNameById(userId);
+    }
 }
