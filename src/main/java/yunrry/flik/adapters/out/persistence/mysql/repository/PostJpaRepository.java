@@ -33,6 +33,13 @@ public interface PostJpaRepository extends JpaRepository<PostEntity, Long> {
             @Param("userId") Long userId
     );
 
+    @Query("SELECT p.id FROM PostEntity p WHERE " +
+            "(p.userId = :userId) " +
+            "ORDER BY p.createdAt DESC")
+    List<Long> findAllIds(
+            @Param("userId") Long userId
+    );
+
     @Query("SELECT p FROM PostEntity p WHERE " +
             "(:type IS NULL OR p.type = :type) AND " +
             "(:regionCode IS NULL OR SUBSTRING(p.regionCode, 1, 2) = :regionCode) " +

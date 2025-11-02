@@ -14,4 +14,5 @@ public interface GetPostUseCase {
     List<Post> getAllUserPosts(Long userId, String typeCode);
     Slice<Post> searchPosts(SearchPostsQuery query);
     Slice<Post> searchUserPosts(SearchUserPostsQuery query);
+    List<Long> getAllUserPostIds(Long userId);
 }

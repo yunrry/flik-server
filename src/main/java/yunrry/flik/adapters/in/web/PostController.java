@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import yunrry.flik.adapters.in.dto.Response;
+import yunrry.flik.adapters.in.dto.UserPostIdsReponse;
 import yunrry.flik.adapters.in.dto.post.*;
 import yunrry.flik.core.domain.model.Post;
 import yunrry.flik.core.domain.model.PostType;
@@ -43,6 +44,7 @@ public class PostController {
     private final DeletePostUseCase deletePostUseCase;
     private final TravelCourseUseCase travelCourseUseCase;
     private final GetSpotUseCase getSpotUseCase;
+
 
 
     @GetMapping
@@ -93,6 +95,17 @@ public class PostController {
 
         return ResponseEntity.ok(Response.success(response));
     }
+
+    @Operation(summary = "유저 게시물 id 조회", description = "유저가 작성한 게시물의 id 목록을 조회합니다.")
+    @GetMapping("/get/my")
+    public ResponseEntity<Response<UserPostIdsReponse>> getMyPost(@AuthenticationPrincipal Long userId) {
+        log.debug("Fetching users post ids user: {}", userId);
+
+        List<Long> ids = getPostUseCase.getAllUserPostIds(userId);
+        UserPostIdsReponse response = UserPostIdsReponse.from(ids);
+        return ResponseEntity.ok(Response.success(response));
+    }
+
 
     @Operation(summary = "게시물 상세 조회", description = "게시물 상세 정보를 조회합니다.")
     @GetMapping("/get/{id}")

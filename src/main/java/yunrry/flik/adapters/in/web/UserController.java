@@ -42,4 +42,11 @@ public class UserController {
 
         return ResponseEntity.ok(Response.success(response));
     }
+
+    @Operation(summary = "닉네임 조회", description = "id로 닉네임을 조회합니다.")
+    @GetMapping("/nickname/{id}")
+    public ResponseEntity<Response<UserNicknameResponse>> getUserNickName(@PathVariable Long id) {
+        UserNicknameResponse response = UserNicknameResponse.from(getUserUseCase.getUserNickName(id));
+        return ResponseEntity.ok(Response.success(response));
+    }
 }
