@@ -43,6 +43,8 @@ application-local.yml
 docker-compose-dev.yml
 docker-compose-local.yml
 
+setup-monitoring.sh
+
 .cursor/rules/**
 python/csv/**
 
