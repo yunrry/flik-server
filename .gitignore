@@ -38,6 +38,7 @@ out/
 
 .env
 *-local.*
+/*-local.*/
 application-local.yml
 
 docker-compose-dev.yml
