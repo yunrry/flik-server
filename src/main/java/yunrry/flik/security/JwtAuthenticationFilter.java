@@ -78,6 +78,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+
+        // Actuator 엔드포인트는 JWT 필터를 거치지 않도록 제외
+        if (path.startsWith("/api/actuator/") || path.startsWith("/actuator/")) {
+            log.debug("[JWT Filter] Skipping JWT filter for actuator endpoint: {}", path);
+            return true;
+        }
+
+        // 인증이 필요없는 공개 엔드포인트들도 제외
+        return path.startsWith("/v1/auth/") ||
+                path.startsWith("/api/v1/auth/") ||
+                path.equals("/error");
+    }
+
     private String getTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

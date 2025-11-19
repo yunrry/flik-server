@@ -41,7 +41,7 @@ services:
       - goormthon-java_dormung-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
       interval: 15s          # 30s → 15s (더 자주 체크)
       timeout: 20s           # 10s → 20s (타임아웃 증가)
       retries: 5             # 3 → 5 (재시도 증가)
@@ -89,7 +89,7 @@ services:
       - goormthon-java_dormung-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
       interval: 15s          # 30s → 15s (더 자주 체크)
       timeout: 20s           # 10s → 20s (타임아웃 증가)
       retries: 5             # 3 → 5 (재시도 증가)

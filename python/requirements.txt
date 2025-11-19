@@ -1,4 +1,0 @@
-aiohttp==3.9.1
-pandas>=2.2.0
-mysql-connector-python==8.2.0
-python-dotenv==1.0.0

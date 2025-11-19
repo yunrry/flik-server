@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/user/UserNicknameResponse.java" afterDir="false" />
+    <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="edit .gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/UserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/UserAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/UserJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/repository/UserJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/user/GetUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/user/GetUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetUserUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/in/usecase/GetUserUseCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose-monitoring.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose-monitoring.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +49,7 @@
         <option value="Enum" />
         <option value="Record" />
         <option value="JUnit5 Test Class" />
+        <option value="CP_TEMPLATE_JAVA" />
         <option value="Class" />
       </list>
     </option>
@@ -226,9 +222,9 @@
     "Spring Boot.FlikApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "#99 on 97-refactor-TavelCourseRecommendation",
+    "git-widget-placeholder": "97-refactor-TavelCourseRecommendation",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server",
+    "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server/prometheus",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -253,6 +249,7 @@
       <recent name="yunrry.flik.adapters.out.persistence" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/prometheus" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/festival" />
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception" />
@@ -290,7 +287,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'flik.test'">
+  <component name="RunManager" selected="Spring Boot.FlikApplication">
     <configuration name="Tests in 'flik.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -477,7 +474,11 @@
       <workItem from="1757640069773" duration="3003000" />
       <workItem from="1758105270843" duration="155673000" />
       <workItem from="1758623390284" duration="54096000" />
-      <workItem from="1762093714409" duration="1551000" />
+      <workItem from="1762093714409" duration="18807000" />
+      <workItem from="1763014432253" duration="2064000" />
+      <workItem from="1763016507286" duration="11000" />
+      <workItem from="1763469565384" duration="6837000" />
+      <workItem from="1763517639032" duration="19405000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -815,7 +816,23 @@
       <option name="project" value="LOCAL" />
       <updated>1757657922408</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="edit .gitignore">
+      <option name="closed" value="true" />
+      <created>1763014621359</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1763014621359</updated>
+    </task>
+    <task id="LOCAL-00044" summary="edit .gitignore">
+      <option name="closed" value="true" />
+      <created>1763015116638</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1763015116638</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -840,7 +857,8 @@
     <MESSAGE value="Archi: init" />
     <MESSAGE value="refactor: domain definition" />
     <MESSAGE value="data: data migration script" />
-    <option name="LAST_COMMIT_MESSAGE" value="data: data migration script" />
+    <MESSAGE value="edit .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -930,7 +948,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/travelPlanner/TravelPlannerServiceTest.java</url>
           <line>710</line>
-          <properties class="yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest" method="testCafeRegularFullDayOneDayTrip">
+          <properties class="yunrry.flik.core.service.travelPlanner.TravelPlannerServiceTest">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

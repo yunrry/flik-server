@@ -37,15 +37,17 @@ out/
 .vscode/
 
 .env
-
+*-local.*
 application-local.yml
 
 docker-compose-dev.yml
+docker-compose-local.yml
 
+setup-monitoring.sh
 
 .cursor/rules/**
 python/csv/**
-
+python/**
 csv/**
 /python/emd.dbf
 /python/emd.json
@@ -61,3 +63,4 @@ note.md
 Prompt.md
 
 logs/
+/.autocp

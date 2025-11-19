@@ -1,0 +1,90 @@
+groups:
+  - name: flik_alerts
+    interval: 30s
+    rules:
+      # 애플리케이션 다운 알림
+      - alert: FlikApplicationDown
+        expr: up{job=~"flik-.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: flik
+        annotations:
+          summary: "Flik application {{ $labels.instance }} is down"
+          description: "{{ $labels.instance }} has been down for more than 1 minute."
+
+      # 높은 메모리 사용률
+      - alert: HighMemoryUsage
+        expr: (jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"}) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: flik
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is above 85% (current: {{ $value }}%)"
+
+      # 높은 CPU 사용률
+      - alert: HighCpuUsage
+        expr: process_cpu_usage * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: flik
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is above 80% (current: {{ $value }}%)"
+
+      # 높은 에러율
+      - alert: HighErrorRate
+        expr: rate(http_server_requests_seconds_count{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          service: flik
+        annotations:
+          summary: "High error rate on {{ $labels.instance }}"
+          description: "Error rate is above 5% (current: {{ $value }})"
+
+      # HikariCP 커넥션 부족
+      - alert: DatabaseConnectionPoolLow
+        expr: (hikaricp_connections_active / hikaricp_connections_max) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: flik
+        annotations:
+          summary: "Database connection pool running low on {{ $labels.instance }}"
+          description: "Connection pool usage is above 80% (current: {{ $value }}%)"
+
+      # 느린 응답 시간
+      - alert: SlowResponseTime
+        expr: histogram_quantile(0.95, rate(http_server_requests_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: flik
+        annotations:
+          summary: "Slow response time on {{ $labels.instance }}"
+          description: "95th percentile response time is above 2 seconds (current: {{ $value }}s)"
+
+      # Redis 연결 실패
+      - alert: RedisConnectionFailed
+        expr: up{job="redis"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: redis
+        annotations:
+          summary: "Redis connection failed"
+          description: "Cannot connect to Redis for more than 2 minutes."
+
+      # 디스크 사용률 높음
+      - alert: HighDiskUsage
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High disk usage"
+          description: "Disk usage is above 85% (current: {{ $value }}%)"

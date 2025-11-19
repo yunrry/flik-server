@@ -1,0 +1,15 @@
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://flik-prometheus:9090
+    basicAuth: true
+    basicAuthUser: ${PROMETHEUS_BASIC_AUTH_USER}
+    secureJsonData:
+      basicAuthPassword: ${PROMETHEUS_BASIC_AUTH_PASSWORD}
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      alertManagerUid: alertmanager
+    isDefault: true

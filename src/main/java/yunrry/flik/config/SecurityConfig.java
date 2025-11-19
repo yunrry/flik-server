@@ -34,23 +34,21 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // 공개 엔드포인트
-                        .requestMatchers(HttpMethod.GET, "/v1/restaurants/**", "/api/v1/restaurants/**").permitAll()
-                        .requestMatchers("/v1/auth/**", "/api/v1/auth/**").permitAll()  // 이 줄 수정
-                        .requestMatchers("/v1/admin/**", "/api/v1/admin/**").permitAll()
-                        .requestMatchers("/error").permitAll()
-                        .requestMatchers("/v1/travel-courses/**", "/api/v1/travel-courses/**").permitAll()
+                        // 모니터링 (가장 먼저 배치)
+                        .requestMatchers("/actuator/**", "/api/actuator/**").permitAll()
 
                         // API 문서화
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
-                        // 모니터링
-                        .requestMatchers("/actuator/health","/api/actuator/health").permitAll()
-                        .requestMatchers("/actuator/**").hasRole("ADMIN")
+                        // 공개 엔드포인트
+                        .requestMatchers(HttpMethod.GET, "/v1/restaurants/**", "/api/v1/restaurants/**").permitAll()
+                        .requestMatchers("/v1/auth/**", "/api/v1/auth/**").permitAll()
+                        .requestMatchers("/v1/admin/**", "/api/v1/admin/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/v1/travel-courses/**", "/api/v1/travel-courses/**").permitAll()
 
                         // 나머지는 인증 필요
                         .anyRequest().authenticated()
-
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
