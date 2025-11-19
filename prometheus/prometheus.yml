@@ -1,0 +1,44 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'flik-monitor'
+    environment: 'production'
+
+rule_files:
+  - "alert.rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+
+  - job_name: 'flik-blue'
+    metrics_path: '/api/actuator/prometheus'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['flik-blue:8080']
+        labels:
+          application: 'flik'
+          environment: 'blue'
+          service: 'flik-backend'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'flik-blue'
+
+  - job_name: 'flik-green'
+    metrics_path: '/api/actuator/prometheus'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['flik-green:8080']
+        labels:
+          application: 'flik'
+          environment: 'green'
+          service: 'flik-backend'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'flik-green'

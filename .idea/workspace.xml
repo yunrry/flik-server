@@ -4,8 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="?">
+    <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="edit .gitignore">
+      <change afterPath="$PROJECT_DIR$/docker-compose-monitoring.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grafana/provisioning/dashboards/dashboard.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prometheus/alert.rules.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prometheus/prometheus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/RegionCode.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/add_detail_columns.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/clean_duplicate_spots.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/collect_detail_intro.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/create_label_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/create_notion_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_accommodations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_cultural_facilities.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_festivals.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_restaurants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_shopping.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_sigungu_coordinate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_sports_recreation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/migrate_tourist_attractions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/response_1757668259132.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/seoul_tourism_backup_20250908_095950.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/seoul_tourism_backup_20250908_095950.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/sigungu_coordinate.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/split_tourism_tables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/tour_api_soeul.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/update_detail_common.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/update_spots_category.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +252,7 @@
     &quot;Spring Boot.FlikApplication.executor&quot;: &quot;Run&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#99 on 97-refactor-TavelCourseRecommendation&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;97-refactor-TavelCourseRecommendation&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/nyoung/WorkSpace/flik-server&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -472,6 +504,9 @@
       <workItem from="1758105270843" duration="155673000" />
       <workItem from="1758623390284" duration="54096000" />
       <workItem from="1762093714409" duration="18807000" />
+      <workItem from="1763014432253" duration="2064000" />
+      <workItem from="1763016507286" duration="11000" />
+      <workItem from="1763469565384" duration="4194000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -809,7 +844,23 @@
       <option name="project" value="LOCAL" />
       <updated>1757657922408</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="edit .gitignore">
+      <option name="closed" value="true" />
+      <created>1763014621359</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1763014621359</updated>
+    </task>
+    <task id="LOCAL-00044" summary="edit .gitignore">
+      <option name="closed" value="true" />
+      <created>1763015116638</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1763015116638</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -834,7 +885,8 @@
     <MESSAGE value="Archi: init" />
     <MESSAGE value="refactor: domain definition" />
     <MESSAGE value="data: data migration script" />
-    <option name="LAST_COMMIT_MESSAGE" value="data: data migration script" />
+    <MESSAGE value="edit .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

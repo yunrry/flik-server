@@ -47,7 +47,7 @@ setup-monitoring.sh
 
 .cursor/rules/**
 python/csv/**
-
+python/**
 csv/**
 /python/emd.dbf
 /python/emd.json
