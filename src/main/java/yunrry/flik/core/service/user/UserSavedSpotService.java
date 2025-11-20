@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.ports.in.usecase.UserSavedSpotUseCase;
 import yunrry.flik.ports.out.repository.UserSavedSpotRepository;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class UserSavedSpotService implements UserSavedSpotUseCase {
     private final UserCategoryVectorService userCategoryVectorService;
     private final UserSavedSpotRepository userSavedSpotRepository;
+    private final MetricsService metricsService;
 
     @Override
     public boolean isAlreadySaved(Long userId, Long spotId) {
@@ -36,6 +38,9 @@ public class UserSavedSpotService implements UserSavedSpotUseCase {
             log.warn("Attempting to save already saved spot - userId: {}, spotId: {}", userId, spotId);
             throw new IllegalStateException("Spot already saved by user");
         }
+
+        // 스팟 저장 메트릭 기록
+        metricsService.incrementSpotSave();
 
         userSavedSpotRepository.save(userId, spotId);
         // 벡터 업데이트

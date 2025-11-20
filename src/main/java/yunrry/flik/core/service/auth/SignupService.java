@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import yunrry.flik.core.domain.exception.EmailAlreadyExistsException;
 import yunrry.flik.core.domain.model.AuthProvider;
 import yunrry.flik.core.domain.model.User;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.ports.in.command.SignupCommand;
 import yunrry.flik.ports.in.usecase.SignupUseCase;
 import yunrry.flik.ports.out.repository.UserRepository;
@@ -18,6 +19,7 @@ public class SignupService implements SignupUseCase {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MetricsService metricsService;
 
     @Override
     public User signup(SignupCommand command) {
@@ -41,7 +43,9 @@ public class SignupService implements SignupUseCase {
                 .lastLoginAt(null)
                 .build();
 
-        return userRepository.save(user);
+        User saved = userRepository.save(user);
+        metricsService.incrementUserRegistration();
+        return saved;
     }
 
     @Override

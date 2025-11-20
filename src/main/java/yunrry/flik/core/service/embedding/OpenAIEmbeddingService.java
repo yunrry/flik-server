@@ -1,11 +1,14 @@
 package yunrry.flik.core.service.embedding;
 
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Timer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import yunrry.flik.core.service.MetricsService;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,11 +21,15 @@ import java.util.Map;
 public class OpenAIEmbeddingService {
 
     private final WebClient openAIWebClient;
+    private final MetricsService metricsService;
 
     @Value("${openai.embedding.model:text-embedding-3-small}")
     private String embeddingModel;
 
     public Mono<List<Double>> createEmbedding(String text) {
+        Timer.Sample sample = metricsService.startEmbeddingTimer();
+        Timer.Sample openAISample = metricsService.startOpenAITimer();
+
         if (text == null || text.trim().isEmpty()) {
             return Mono.just(Collections.nCopies(1536, 0.0));
         }
@@ -44,7 +51,8 @@ public class OpenAIEmbeddingService {
                 .doOnNext(response -> {
                     // 응답 전체 로그 (개발/디버깅용)
                     log.debug("OpenAI Embedding Response: {}", response);
-
+                    metricsService.incrementEmbedding("tag_embedding");
+                    metricsService.recordOpenAIAPITime(openAISample, "embeddings");
                     // 응답 상태 로그
                     if (response.getData() != null && !response.getData().isEmpty()) {
                         log.info("Successfully created embedding - Model: {}, Dimension: {}",
@@ -65,10 +73,19 @@ public class OpenAIEmbeddingService {
                     return response.getData().get(0).getEmbedding();
                 })
                 .onErrorReturn(Collections.nCopies(1536, 0.0))
-                .doOnError(error -> log.error("Failed to create embedding: {}", error.getMessage()));
+                .doOnError(error -> {
+                    log.error("Failed to create tag embedding: {}", error.getMessage());
+                    metricsService.recordOpenAIAPITime(openAISample, "embeddings");
+                })
+                .doFinally(signalType -> {
+                    // 임베딩 생성 시간 측정
+                    metricsService.recordEmbeddingTime(sample, "tag_embedding");
+                });
     }
 
     public Mono<List<String>> extractKeywords(String description, String reviews) {
+        Timer.Sample sample = metricsService.startEmbeddingTimer();
+        Timer.Sample openAISample = metricsService.startOpenAITimer();
         if ((description == null || description.trim().isEmpty()) &&
                 (reviews == null || reviews.trim().isEmpty())) {
             return Mono.just(List.of());
@@ -101,9 +118,11 @@ public class OpenAIEmbeddingService {
                 .retrieve()
                 .bodyToMono(OpenAIChatResponse.class)
                 .doOnNext(response -> {
+                    // 키워드 추출 성공 카운터
+                    metricsService.incrementEmbedding("keyword_extraction");
                     // Chat 응답 로그
                     log.debug("OpenAI Chat Response: {}", response);
-
+                    metricsService.recordOpenAIAPITime(openAISample, "chat_completions");
                     if (response.getChoices() != null && !response.getChoices().isEmpty()) {
                         String content = response.getChoices().get(0).getMessage().getContent();
                         log.info("Extracted keywords response: {}", content);
@@ -124,7 +143,14 @@ public class OpenAIEmbeddingService {
                     return Arrays.asList(keywords);
                 })
                 .onErrorReturn(List.of())
-                .doOnError(error -> log.error("Failed to extract keywords: {}", error.getMessage()));
+                .doOnError(error -> {
+                    log.error("Failed to extract keywords: {}", error.getMessage());
+                    metricsService.recordOpenAIAPITime(openAISample, "chat_completions");
+                })
+                .doFinally(signalType -> {
+                    // 키워드 추출 시간 측정
+                    metricsService.recordEmbeddingTime(sample, "keyword_extraction");
+                });
     }
 
     // Response DTOs

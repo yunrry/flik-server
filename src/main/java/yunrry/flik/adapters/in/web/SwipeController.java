@@ -12,6 +12,7 @@ import yunrry.flik.adapters.in.dto.Response;
 import yunrry.flik.adapters.in.dto.spot.SpotSaveRequest;
 
 import yunrry.flik.adapters.in.dto.swipe.SwipeResponse;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.core.service.SwipeEventService;
 import yunrry.flik.core.service.user.UserSavedSpotService;
 
@@ -26,6 +27,7 @@ public class SwipeController {
     private final ApplicationEventPublisher eventPublisher;
     private final UserSavedSpotService userSavedSpotService;
     private final SwipeEventService swipeEventService;
+    private final MetricsService metricsService;
 
     @PostMapping("/swipe")
     public ResponseEntity<Response<SwipeResponse>> swipe(
@@ -34,7 +36,8 @@ public class SwipeController {
 
         log.info("Swipe request received - userId: {}, spotId: {}", userId, request.getSpotId());
 
-
+        // 스와이프 메트릭 기록
+        metricsService.incrementSwipe();
         // 이벤트 발행
         swipeEventService.publishSwipeEvent(userId, request.getSpotId());
 
