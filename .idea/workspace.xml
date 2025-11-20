@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="edit .gitignore">
-      <change afterPath="$PROJECT_DIR$/grafana/dashboards/flik-ApplicationPerformance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/MetricsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose-monitoring.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose-monitoring.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prometheus/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/prometheus/prometheus.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SwipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SwipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/RefreshTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/SignupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/SignupService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/OpenAIEmbeddingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/OpenAIEmbeddingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/SpotEmbeddingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/SpotEmbeddingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/user/UserSavedSpotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/user/UserSavedSpotService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/embedding/OpenAIEmbeddingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/embedding/OpenAIEmbeddingServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/CreateTravelCourseServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/CreateTravelCourseServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,30 +289,8 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.FlikApplication">
-    <configuration name="Tests in 'flik.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="TravelCourseRecommendationServiceBatchTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.OpenAIEmbeddingServiceTest">
+    <configuration name="OpenAIEmbeddingServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -338,7 +303,53 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceBatchTest&quot;" />
+            <option value="&quot;yunrry.flik.core.service.embedding.OpenAIEmbeddingServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="OpenAIEmbeddingServiceTest.createEmbedding_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;yunrry.flik.core.service.embedding.OpenAIEmbeddingServiceTest.createEmbedding_Success&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'flik.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -397,30 +408,6 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TravelCourseRecommendationServiceErrorTest.testNoCandidateSpots" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;yunrry.flik.core.service.TravelCourseRecommendation.TravelCourseRecommendationServiceErrorTest.testNoCandidateSpots&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="FlikApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" value="local" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -442,20 +429,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.TravelCourseRecommendationServiceBatchTest" />
+      <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
+      <item itemvalue="Gradle.Tests in 'flik.test'" />
+      <item itemvalue="Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success" />
       <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest" />
       <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testDatabaseQueryFailure" />
-      <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testNoCandidateSpots" />
-      <item itemvalue="Gradle.Tests in 'flik.test'" />
       <item itemvalue="Spring Boot.FlikApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testDatabaseQueryFailure" />
+        <item itemvalue="Gradle.OpenAIEmbeddingServiceTest" />
+        <item itemvalue="Gradle.OpenAIEmbeddingServiceTest.createEmbedding_Success" />
         <item itemvalue="Gradle.Tests in 'flik.test'" />
         <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest" />
-        <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testDatabaseQueryFailure" />
-        <item itemvalue="Gradle.TravelCourseRecommendationServiceErrorTest.testNoCandidateSpots" />
-        <item itemvalue="Gradle.TravelCourseRecommendationServiceBatchTest" />
       </list>
     </recent_temporary>
   </component>
@@ -493,7 +480,7 @@
       <workItem from="1763014432253" duration="2064000" />
       <workItem from="1763016507286" duration="11000" />
       <workItem from="1763469565384" duration="6837000" />
-      <workItem from="1763517639032" duration="53208000" />
+      <workItem from="1763517639032" duration="54160000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -994,7 +981,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/yunrry/flik/core/service/plan/CreateTravelCourseServiceTest.java</url>
-          <line>65</line>
+          <line>69</line>
           <properties class="yunrry.flik.core.service.plan.CreateTravelCourseServiceTest" method="testCreateOneDayCourse">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

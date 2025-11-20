@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.core.service.embedding.OpenAIEmbeddingService.*;
 
 import java.util.Arrays;
@@ -42,6 +43,9 @@ class OpenAIEmbeddingServiceTest {
 
     @Mock
     private WebClient.ResponseSpec responseSpec;
+
+    @Mock
+    private MetricsService metricsService;
 
     @InjectMocks
     private OpenAIEmbeddingService openAIEmbeddingService;

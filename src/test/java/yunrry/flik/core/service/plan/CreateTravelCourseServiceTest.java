@@ -16,6 +16,7 @@ import yunrry.flik.core.domain.model.plan.CourseSlot;
 import yunrry.flik.core.domain.model.plan.SlotType;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
 import yunrry.flik.core.domain.testfixture.SpotTestFixture;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.ports.in.query.CourseQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 import yunrry.flik.ports.out.repository.TravelCourseRepository;
@@ -35,6 +36,9 @@ class CreateTravelCourseServiceTest {
 
     @Mock
     private TravelCourseRecommendationService travelCourseRecommendationService;
+
+    @Mock
+    private MetricsService metricsService;
 
     @Mock
     private SpotRepository spotRepository;
