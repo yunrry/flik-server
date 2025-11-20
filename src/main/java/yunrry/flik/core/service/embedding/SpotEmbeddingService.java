@@ -1,5 +1,6 @@
 package yunrry.flik.core.service.embedding;
 
+import io.micrometer.core.instrument.Timer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import yunrry.flik.core.domain.model.embedding.SpotSimilarity;
 import yunrry.flik.core.domain.model.embedding.SpotEmbedding;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.ports.out.repository.SpotEmbeddingRepository;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.Optional;
 public class SpotEmbeddingService {
 
     private final SpotEmbeddingRepository spotEmbeddingRepository;
-
+    private final MetricsService metricsService;
 
     public List<SpotSimilarity> findSimilarSpotsByUserPreference(Long userId,
                                                           String category,
@@ -48,9 +50,28 @@ public class SpotEmbeddingService {
 
 
     public Mono<SpotEmbedding> saveOrUpdateEmbedding(SpotEmbedding spotEmbedding) {
+        Timer.Sample sample = metricsService.startEmbeddingTimer();
+
         return Mono.fromCallable(() -> spotEmbeddingRepository.save(spotEmbedding))
                 .subscribeOn(Schedulers.boundedElastic())
-                .doOnSuccess(saved -> log.info("Saved embedding for spot: {}", saved.getSpotId()));
+                .doOnSuccess(saved -> {
+                    // 임베딩 저장 성공 카운터
+                    metricsService.incrementEmbedding("spot_embedding_save");
+
+                    // 벡터 크기 메트릭 (태그 임베딩이 있는 경우)
+                    if (saved.getTagEmbedding() != null && !saved.getTagEmbedding().isEmpty()) {
+                        double[] vector = saved.getTagEmbedding().stream()
+                                .mapToDouble(Double::doubleValue)
+                                .toArray();
+                        metricsService.recordSpotFeatureVector("save", "tag", vector);
+                    }
+
+                    log.info("Saved embedding for spot: {}", saved.getSpotId());
+                })
+                .doFinally(signalType -> {
+                    // 임베딩 저장 시간 측정
+                    metricsService.recordEmbeddingTime(sample, "embedding_save");
+                });
     }
 
     public Mono<List<SpotEmbedding>> getAsyncEmbeddingsBySpotIds(List<Long> spotIds) {

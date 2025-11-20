@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import yunrry.flik.core.domain.model.card.Spot;
 import yunrry.flik.core.domain.model.plan.CourseSlot;
 import yunrry.flik.core.domain.model.plan.TravelCourse;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.ports.in.query.CourseQuery;
 import yunrry.flik.ports.out.repository.SpotRepository;
 import yunrry.flik.ports.out.repository.TravelCourseRepository;
@@ -24,6 +25,7 @@ public class CreateTravelCourseService {
     private final TravelCourseRecommendationService travelCourseRecommendationService;
     private final SpotRepository spotRepository;
     private final TravelCourseRepository travelCourseRepository;
+    private final MetricsService metricsService;
 
     @Transactional
     public TravelCourse create(CourseQuery query) {
@@ -52,7 +54,10 @@ public class CreateTravelCourseService {
             course.updateTotalDistance(totalDistance);
 
             // 6. 저장
-            return travelCourseRepository.save(course);
+
+            TravelCourse newCourse =  travelCourseRepository.save(course);
+            metricsService.incrementCourseGeneration(newCourse.getRegionCode());
+            return newCourse;
 
         } catch (Exception e) {
             log.error("Failed to create travel course", e);

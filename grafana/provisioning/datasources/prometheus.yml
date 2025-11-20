@@ -3,7 +3,7 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: http://flik-prometheus:9090
+    url: http://flik-prometheus:9090/prometheus
     basicAuth: true
     basicAuthUser: ${PROMETHEUS_BASIC_AUTH_USER}
     secureJsonData:

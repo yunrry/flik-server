@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d528275b-da88-4ec9-93b9-dfc71f166441" name="Changes" comment="edit .gitignore">
+      <change afterPath="$PROJECT_DIR$/grafana/dashboards/flik-ApplicationPerformance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/MetricsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose-monitoring.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose-monitoring.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/grafana/provisioning/datasources/prometheus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prometheus/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/prometheus/prometheus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SwipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/web/SwipeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/RefreshTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/SignupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/auth/SignupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/OpenAIEmbeddingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/OpenAIEmbeddingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/SpotEmbeddingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/embedding/SpotEmbeddingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/CreateTravelCourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/plan/TravelCourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/user/UserSavedSpotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/user/UserSavedSpotService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +86,7 @@
     <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Override.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.7/6c380b648c302d67b5eb5a79de867909f7bbd7eb/spring-data-commons-3.3.7.jar!/org/springframework/data/repository/CrudRepository.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/6.1.16/531d54d94b66362600ab3ecc081e716249b82c32/spring-beans-6.1.16.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/6.1.16/2cf6295ab7d9713902bfd8c123060f3632c19bbe/spring-context-6.1.16.jar!/org/springframework/context/ApplicationEventPublisher.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/6.1.16/e3a9185be7af644cde2e446787747a4f93ec8ad9/spring-web-6.1.16.jar!/org/springframework/http/ResponseEntity.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -222,9 +236,9 @@
     "Spring Boot.FlikApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "97-refactor-TavelCourseRecommendation",
+    "git-widget-placeholder": "101-feat-business-metrics",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server/prometheus",
+    "last_opened_file_path": "/Users/nyoung/WorkSpace/flik-server/grafana/provisioning/datasources-local",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -249,17 +263,18 @@
       <recent name="yunrry.flik.adapters.out.persistence" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/grafana/provisioning/datasources-local" />
+      <recent name="$PROJECT_DIR$/grafana/provisioning/datasources" />
       <recent name="$PROJECT_DIR$/prometheus" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/in/dto/festival" />
-      <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/core/domain/exception" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/grafana/provisioning/datasources-local" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/vector" />
       <recent name="$PROJECT_DIR$/python" />
       <recent name="$PROJECT_DIR$/src/test/java/resources" />
-      <recent name="$PROJECT_DIR$/src/main/java/yunrry/flik/ports/out/repository" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -478,7 +493,7 @@
       <workItem from="1763014432253" duration="2064000" />
       <workItem from="1763016507286" duration="11000" />
       <workItem from="1763469565384" duration="6837000" />
-      <workItem from="1763517639032" duration="19405000" />
+      <workItem from="1763517639032" duration="53208000" />
     </task>
     <task id="LOCAL-00001" summary="init : add gitignore">
       <option name="closed" value="true" />
@@ -932,6 +947,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/yunrry/flik/adapters/out/persistence/mysql/entity/TravelCourseEntity.java</url>
           <line>72</line>
           <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/yunrry/flik/core/service/MetricsService.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="org.opentest4j.AssertionFailedError" package="org.opentest4j" />

@@ -1,0 +1,439 @@
+{
+    "title": "Flik Application Performance",
+    "tags": ["flik", "application", "performance"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "User Registrations",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "user_registration_count_total",
+            "legendFormat": "Total Registrations",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Total Swipes",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "user_swipe_count_total",
+            "legendFormat": "Total Swipes",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 6,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "Spot Saves",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "user_spot_save_count_total",
+            "legendFormat": "Total Saves",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 12,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "Course Generation by Region",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "generation_count_total",
+            "legendFormat": "{{region}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        }
+      },
+      {
+        "id": 5,
+        "title": "User Activity Rate (per minute)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(user_swipe_count_total[5m]) * 60",
+            "legendFormat": "Swipes/min",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(user_spot_save_count_total[5m]) * 60",
+            "legendFormat": "Saves/min",
+            "refId": "B"
+          },
+          {
+            "expr": "rate(user_registration_count_total[5m]) * 60",
+            "legendFormat": "Registrations/min",
+            "refId": "C"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 6
+        },
+        "yAxes": [
+          {
+            "label": "Rate (per minute)",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Course Generation Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(generation_count_total[5m]) * 60",
+            "legendFormat": "{{region}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 6
+        },
+        "yAxes": [
+          {
+            "label": "Generations per minute",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Total Embedding Generation Count",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(embedding_generation_count_total)",
+            "legendFormat": "Total Embeddings",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 0,
+          "y": 14
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "Embedding Generation Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(embedding_generation_time_seconds_sum[5m]) / rate(embedding_generation_time_seconds_count[5m])",
+            "legendFormat": "Average - {{operation}}",
+            "refId": "A"
+          },
+          {
+            "expr": "embedding_generation_time_seconds_max",
+            "legendFormat": "Max - {{operation}}",
+            "refId": "B"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 8,
+          "y": 14
+        },
+        "yAxes": [
+          {
+            "label": "Time (seconds)",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Cache Performance",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(cache_hit_count_total[5m])",
+            "legendFormat": "Cache Hits - {{cache_type}}",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(cache_miss_count_total[5m])",
+            "legendFormat": "Cache Misses - {{cache_type}}",
+            "refId": "B"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 16,
+          "y": 14
+        },
+        "yAxes": [
+          {
+            "label": "Rate (per second)",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Travel Course Modifications",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(travel_course_spot_deletion_count_total[5m])",
+            "legendFormat": "Spot Deletions",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(travel_course_spot_addition_count_total[5m])",
+            "legendFormat": "Spot Additions",
+            "refId": "B"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 20
+        },
+        "yAxes": [
+          {
+            "label": "Rate (per second)",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Cache Hit Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(cache_hit_count_total[5m]) / (rate(cache_hit_count_total[5m]) + rate(cache_miss_count_total[5m])) * 100",
+            "legendFormat": "Hit Rate %",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 12,
+          "y": 20
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "yellow",
+                  "value": 70
+                },
+                {
+                  "color": "green",
+                  "value": 90
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 12,
+        "title": "Feature Vector Magnitude",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "spot_feature_vector_magnitude",
+            "legendFormat": "{{operation}} - {{category}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 18,
+          "y": 20
+        },
+        "yAxes": [
+          {
+            "label": "Vector Magnitude",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Embedding Generation by Category",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "embedding_generation_count_total",
+            "legendFormat": "{{category}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 26
+        }
+      },
+      {
+        "id": 14,
+        "title": "Overall Application Activity",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "increase(user_swipe_count_total[1h])",
+            "legendFormat": "Hourly Swipes",
+            "refId": "A"
+          },
+          {
+            "expr": "increase(user_spot_save_count_total[1h])",
+            "legendFormat": "Hourly Saves",
+            "refId": "B"
+          },
+          {
+            "expr": "increase(generation_count_total[1h])",
+            "legendFormat": "Hourly Generations",
+            "refId": "C"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 26
+        },
+        "yAxes": [
+          {
+            "label": "Count per hour",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "OpenAI API Call Times",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(openai_api_call_time_seconds_sum[5m]) / rate(openai_api_call_time_seconds_count[5m])",
+            "legendFormat": "Average - {{api_type}}",
+            "refId": "A"
+          },
+          {
+            "expr": "openai_api_call_time_seconds_max",
+            "legendFormat": "Max - {{api_type}}",
+            "refId": "B"
+          },
+          {
+            "expr": "rate(openai_api_call_time_seconds_count[5m])",
+            "legendFormat": "Rate/sec - {{api_type}}",
+            "refId": "C"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        },
+        "yAxes": [
+          {
+            "label": "Time (seconds)",
+            "min": 0
+          }
+        ],
+        "tooltip": {
+          "shared": true,
+          "sort": 2,
+          "value_type": "individual"
+        },
+        "legend": {
+          "show": true,
+          "values": true,
+          "avg": true,
+          "max": true,
+          "current": true
+        }
+      }
+    ]
+
+}

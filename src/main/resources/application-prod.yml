@@ -82,11 +82,26 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,metrics,prometheus,info
-      base-path: /actuator
+        include: health,info,metrics,prometheus
   endpoint:
     health:
+      enabled: true
       show-details: always
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles:
+        http.server.requests: 0.5,0.95,0.99
+      percentiles-histogram:
+        http.server.requests: true
+    enable:
+      jvm: true
+      system: true
+      hikaricp: true
+      http: true
 
 logging:
   level:

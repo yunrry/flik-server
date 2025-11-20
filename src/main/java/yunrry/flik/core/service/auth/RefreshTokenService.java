@@ -8,6 +8,7 @@ import yunrry.flik.core.domain.model.AuthProvider;
 import yunrry.flik.core.domain.model.OAuthUserInfo;
 import yunrry.flik.core.domain.model.RefreshToken;
 import yunrry.flik.core.domain.model.User;
+import yunrry.flik.core.service.MetricsService;
 import yunrry.flik.ports.in.command.CompleteOAuthSignupCommand;
 import yunrry.flik.ports.in.command.LoginCommand;
 import yunrry.flik.ports.in.command.OAuthLoginCommand;
@@ -27,6 +28,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+
 
     @Override
     public AuthTokens refreshTokens(RefreshTokenCommand command) {
@@ -184,6 +186,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
     @RequiredArgsConstructor
     public static class OAuthSignupService implements OAuthSignupUseCase {
 
+        private final MetricsService metricsService;
         private final OAuth2Service oAuth2Service;
         private final UserRepository userRepository;
         private final RefreshTokenRepository refreshTokenRepository;
@@ -236,6 +239,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
                     .build();
 
             User savedUser = userRepository.save(newUser);
+            metricsService.incrementUserRegistration();
             return createAuthTokens(savedUser);
         }
 
